@@ -9,7 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculadora-sueldo-neto',
     '/generador-contrasenas',
     '/mayusculas-minusculas',
-    '/generador-qr'
+    '/generador-qr',
+    '/lector-qr'
   ];
 
   return routes.map((route) => ({
