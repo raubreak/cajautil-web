@@ -62,9 +62,9 @@ export default function Home() {
       descripcion: 'Extrae texto y URLs subiendo una imagen de un código QR. 100% privado.',
       ruta: '/lector-qr',
       Icono: ScanLine,
-      color: 'from-violet-400 to-fuchsia-600',
-      shadow: 'shadow-violet-500/20'
-
+      color: 'from-indigo-400 to-violet-500',
+      shadow: 'shadow-indigo-500/20'
+    }
   ];
 
   return (
