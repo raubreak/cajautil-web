@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,14 +30,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${inter.className} bg-slate-50 text-slate-900 min-h-screen flex flex-col`}>
-        <nav className="w-full bg-white border-b border-slate-200 px-6 py-4">
+        <nav className="w-full bg-white border-b border-slate-200 px-6 py-4 shadow-sm z-50 relative">
           <div className="max-w-6xl mx-auto flex justify-between items-center">
             <Link href="/" className="text-xl font-black tracking-tighter text-slate-800 hover:opacity-80 transition-opacity">
               Utilidades<span className="text-blue-600">Web</span>
             </Link>
           </div>
         </nav>
-        <div className="flex-grow flex flex-col">
+        <div className="flex-grow flex flex-col z-10 relative">
           {children}
         </div>
         <footer className="bg-slate-900 text-slate-400 py-12 mt-auto">
