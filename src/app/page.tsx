@@ -57,7 +57,6 @@ export default function Home() {
       color: 'from-cyan-400 to-sky-500',
       shadow: 'shadow-cyan-500/20'
     },
-    },
     {
       titulo: 'Lector de Fotos QR',
       descripcion: 'Extrae texto y URLs subiendo una imagen de un código QR. 100% privado.',
