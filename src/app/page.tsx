@@ -56,7 +56,16 @@ export default function Home() {
       Icono: QrCode,
       color: 'from-cyan-400 to-sky-500',
       shadow: 'shadow-cyan-500/20'
-    }
+    },
+    },
+    {
+      titulo: 'Lector de Fotos QR',
+      descripcion: 'Extrae texto y URLs subiendo una imagen de un código QR. 100% privado.',
+      ruta: '/lector-qr',
+      Icono: ScanLine,
+      color: 'from-violet-400 to-fuchsia-600',
+      shadow: 'shadow-violet-500/20'
+
   ];
 
   return (
