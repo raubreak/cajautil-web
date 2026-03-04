@@ -1,5 +1,12 @@
 import Link from 'next/link';
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Herramientas Útiles Online Gratis | Utilidades Web",
+  description: "Colección de herramientas gratuitas en tu navegador: calculadora de porcentajes, generador de QR, contador de texto y sueldo neto."
+};
+
 export default function Home() {
   const herramientas = [
     {
@@ -12,35 +19,35 @@ export default function Home() {
     {
       titulo: 'Contador de Palabras',
       descripcion: 'Analiza tu texto: palabras, caracteres y tiempo de lectura estimado.',
-      ruta: '#', // TODO: Crear página
+      ruta: '/contador-de-palabras',
       icono: '📝',
       color: 'from-emerald-400 to-teal-500'
     },
     {
       titulo: 'Calculadora de Sueldo Neto',
       descripcion: 'Estima tu sueldo mensual limpio quitando IRPF y retenciones.',
-      ruta: '#', // TODO: Formulario
+      ruta: '/mayusculas-minusculas', // TODO: Formulario
       icono: '💶',
       color: 'from-amber-400 to-orange-500'
     },
     {
       titulo: 'Password Generator',
       descripcion: 'Crea contraseñas seguras y aleatorias imposibles de hackear.',
-      ruta: '#',
+      ruta: '/mayusculas-minusculas',
       icono: '🔐',
       color: 'from-rose-400 to-pink-500'
     },
     {
       titulo: 'Mayúsculas / Minúsculas',
       descripcion: 'Convierte textos entre diferentes formatos con un solo clic.',
-      ruta: '#',
+      ruta: '/mayusculas-minusculas',
       icono: '🔠',
       color: 'from-purple-400 to-fuchsia-500'
     },
     {
       titulo: 'Generador Códigos QR',
       descripcion: 'Convierte cualquier URL o texto en un código QR escaneable.',
-      ruta: '#',
+      ruta: '/mayusculas-minusculas',
       icono: '📱',
       color: 'from-cyan-400 to-sky-500'
     }
