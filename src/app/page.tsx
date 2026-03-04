@@ -1,74 +1,102 @@
-"use client";
-import { useState } from "react";
+import Link from 'next/link';
 
-export default function CalculadoraPorcentajes() {
-  const [cantidad, setCantidad] = useState("");
-  const [porcentaje, setPorcentaje] = useState("");
-
-  const resultado = Number(cantidad) * (Number(porcentaje) / 100);
+export default function Home() {
+  const herramientas = [
+    {
+      titulo: 'Calculadora de Porcentajes',
+      descripcion: 'Calcula rápidadmente el IVA, descuentos o variaciones porcentuales.',
+      ruta: '/calculadora-porcentajes',
+      icono: '💯',
+      color: 'from-blue-400 to-indigo-500'
+    },
+    {
+      titulo: 'Contador de Palabras',
+      descripcion: 'Analiza tu texto: palabras, caracteres y tiempo de lectura estimado.',
+      ruta: '#', // TODO: Crear página
+      icono: '📝',
+      color: 'from-emerald-400 to-teal-500'
+    },
+    {
+      titulo: 'Calculadora de Sueldo Neto',
+      descripcion: 'Estima tu sueldo mensual limpio quitando IRPF y retenciones.',
+      ruta: '#', // TODO: Formulario
+      icono: '💶',
+      color: 'from-amber-400 to-orange-500'
+    },
+    {
+      titulo: 'Password Generator',
+      descripcion: 'Crea contraseñas seguras y aleatorias imposibles de hackear.',
+      ruta: '#',
+      icono: '🔐',
+      color: 'from-rose-400 to-pink-500'
+    },
+    {
+      titulo: 'Mayúsculas / Minúsculas',
+      descripcion: 'Convierte textos entre diferentes formatos con un solo clic.',
+      ruta: '#',
+      icono: '🔠',
+      color: 'from-purple-400 to-fuchsia-500'
+    },
+    {
+      titulo: 'Generador Códigos QR',
+      descripcion: 'Convierte cualquier URL o texto en un código QR escaneable.',
+      ruta: '#',
+      icono: '📱',
+      color: 'from-cyan-400 to-sky-500'
+    }
+  ];
 
   return (
-    <main className="min-h-[100dvh] bg-slate-50 flex flex-col items-center py-6 px-4 sm:py-12 sm:px-6 lg:px-8">
-      
-      {/* Contenedor central adaptable (Responsive) */}
-      <div className="w-full max-w-md bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-slate-100 mb-8">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-6 text-center tracking-tight">
-          Calculadora de <span className="text-blue-600">Porcentajes</span>
-        </h1>
+    <main className="min-h-[100dvh] bg-slate-50 text-slate-800 p-6 sm:p-12">
+      <div className="max-w-6xl mx-auto">
         
-        <div className="space-y-5">
-          {/* Bloque Input 1 */}
-          <div>
-            <label className="block text-sm sm:text-base font-semibold text-slate-700 mb-1.5">
-              ¿Cuánto es el...
-            </label>
-            <div className="relative flex items-center">
-              <input 
-                inputMode="decimal"
-                type="number" 
-                value={porcentaje}
-                onChange={(e) => setPorcentaje(e.target.value)}
-                className="w-full border border-slate-200 rounded-xl p-3 sm:p-4 text-lg text-slate-900 bg-slate-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none"
-                placeholder="Ej: 21"
-              />
-              <span className="absolute right-4 text-slate-400 font-bold text-lg select-none pointer-events-none">%</span>
-            </div>
-          </div>
+        <header className="mb-16 text-center">
+          <h1 className="text-4xl sm:text-6xl font-black mb-4 tracking-tight">
+            Utilidades <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Web</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto font-medium">
+            Tu navaja suiza digital. Herramientas rápidas, gratuitas y directas en tu navegador.
+          </p>
+        </header>
 
-          {/* Bloque Input 2 */}
-          <div>
-            <label className="block text-sm sm:text-base font-semibold text-slate-700 mb-1.5">
-              de esta cantidad?
-            </label>
-            <input 
-              inputMode="decimal"
-              type="number" 
-              value={cantidad}
-              onChange={(e) => setCantidad(e.target.value)}
-              className="w-full border border-slate-200 rounded-xl p-3 sm:p-4 text-lg text-slate-900 bg-slate-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none"
-              placeholder="Ej: 1500"
-            />
-          </div>
-
-          {/* Bloque Resultado */}
-          <div className="mt-8 pt-6 border-t border-slate-100">
-            <p className="text-sm font-medium text-slate-500 text-center mb-2 uppercase tracking-wider">
-              Resultado final
-            </p>
-            <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 flex items-center justify-center min-h-[5rem]">
-              <p className="text-4xl sm:text-5xl font-black text-blue-700 text-center break-all">
-                {!isNaN(resultado) && cantidad && porcentaje ? resultado.toLocaleString('es-ES', { maximumFractionDigits: 2 }) : "0"}
-              </p>
-            </div>
-          </div>
+        {/* Grid Glossy Moderno */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {herramientas.map((herramienta, index) => (
+            <Link 
+              key={index} 
+              href={herramienta.ruta}
+              className="group relative bg-white rounded-3xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-slate-100 overflow-hidden"
+            >
+              {/* Reflejo Glossy (Elemento decorativo) */}
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none rounded-t-3xl"></div>
+              
+              <div className="relative z-20">
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm bg-gradient-to-tr ${herramienta.color} text-white`}>
+                  {herramienta.icono}
+                </div>
+                <h2 className="text-xl font-bold mb-3 text-slate-800 group-hover:text-blue-600 transition-colors">
+                  {herramienta.titulo}
+                </h2>
+                <p className="text-slate-500 font-medium leading-relaxed">
+                  {herramienta.descripcion}
+                </p>
+                
+                <div className="mt-8 flex items-center text-sm font-bold text-blue-600 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">
+                  Usar herramienta 
+                  <span className="ml-2">→</span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </div>
-      
-      {/* Espacio reservado para AdSense (Adaptable cuadrado en móvil, horizontal en PC) */}
-      <div className="w-full max-w-md mt-auto mb-4 bg-slate-200 border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-sm font-medium rounded-xl h-[250px] sm:h-[120px] shadow-inner">
-        Publicidad Automática (AdSense)
-      </div>
 
+        {/* Espacio Publicitario Principal (AdSense) */}
+        <div className="mt-20 w-full bg-slate-200/50 border border-slate-300/50 border-dashed rounded-3xl p-8 flex flex-col items-center justify-center text-slate-400 min-h-[150px]">
+          <span className="text-xs uppercase tracking-widest font-bold mb-2 opacity-50">Anuncio</span>
+          <p className="font-medium">Espacio reservado para AdSense Banner Multiformato</p>
+        </div>
+
+      </div>
     </main>
   );
 }
