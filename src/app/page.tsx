@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight } from 'lucide-react';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,50 +11,56 @@ export default function Home() {
   const herramientas = [
     {
       titulo: 'Calculadora de Porcentajes',
-      descripcion: 'Calcula rápidadmente el IVA, descuentos o variaciones porcentuales.',
+      descripcion: 'Calcula rápidamente el IVA, descuentos o variaciones porcentuales.',
       ruta: '/calculadora-porcentajes',
-      icono: '💯',
-      color: 'from-blue-400 to-indigo-500'
+      Icono: Percent,
+      color: 'from-blue-500 to-indigo-500',
+      shadow: 'shadow-blue-500/20'
     },
     {
       titulo: 'Contador de Palabras',
       descripcion: 'Analiza tu texto: palabras, caracteres y tiempo de lectura estimado.',
       ruta: '/contador-de-palabras',
-      icono: '📝',
-      color: 'from-emerald-400 to-teal-500'
+      Icono: Type,
+      color: 'from-emerald-400 to-teal-500',
+      shadow: 'shadow-emerald-500/20'
     },
     {
       titulo: 'Calculadora de Sueldo Neto',
       descripcion: 'Estima tu sueldo mensual limpio quitando IRPF y retenciones.',
-      ruta: '/mayusculas-minusculas', // TODO: Formulario
-      icono: '💶',
-      color: 'from-amber-400 to-orange-500'
+      ruta: '/calculadora-sueldo-neto',
+      Icono: Calculator,
+      color: 'from-amber-400 to-orange-500',
+      shadow: 'shadow-orange-500/20'
     },
     {
       titulo: 'Password Generator',
       descripcion: 'Crea contraseñas seguras y aleatorias imposibles de hackear.',
-      ruta: '/mayusculas-minusculas',
-      icono: '🔐',
-      color: 'from-rose-400 to-pink-500'
+      ruta: '/generador-contrasenas',
+      Icono: KeyRound,
+      color: 'from-rose-400 to-pink-500',
+      shadow: 'shadow-pink-500/20'
     },
     {
       titulo: 'Mayúsculas / Minúsculas',
       descripcion: 'Convierte textos entre diferentes formatos con un solo clic.',
       ruta: '/mayusculas-minusculas',
-      icono: '🔠',
-      color: 'from-purple-400 to-fuchsia-500'
+      Icono: ArrowDownAZ,
+      color: 'from-purple-400 to-fuchsia-500',
+      shadow: 'shadow-purple-500/20'
     },
     {
       titulo: 'Generador Códigos QR',
       descripcion: 'Convierte cualquier URL o texto en un código QR escaneable.',
-      ruta: '/mayusculas-minusculas',
-      icono: '📱',
-      color: 'from-cyan-400 to-sky-500'
+      ruta: '/generador-qr',
+      Icono: QrCode,
+      color: 'from-cyan-400 to-sky-500',
+      shadow: 'shadow-cyan-500/20'
     }
   ];
 
   return (
-    <main className="min-h-[100dvh] bg-slate-50 text-slate-800 p-6 sm:p-12">
+    <main className="min-h-[100dvh] bg-slate-50/50 text-slate-800 p-6 sm:p-12">
       <div className="max-w-6xl mx-auto">
         
         <header className="mb-16 text-center">
@@ -66,35 +72,38 @@ export default function Home() {
           </p>
         </header>
 
-        {/* Grid Glossy Moderno */}
+        {/* Grid Minimalista sin Emojis */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {herramientas.map((herramienta, index) => (
-            <Link 
-              key={index} 
-              href={herramienta.ruta}
-              className="group relative bg-white rounded-3xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-slate-100 overflow-hidden"
-            >
-              {/* Reflejo Glossy (Elemento decorativo) */}
-              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none rounded-t-3xl"></div>
-              
-              <div className="relative z-20">
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm bg-gradient-to-tr ${herramienta.color} text-white`}>
-                  {herramienta.icono}
-                </div>
-                <h2 className="text-xl font-bold mb-3 text-slate-800 group-hover:text-blue-600 transition-colors">
-                  {herramienta.titulo}
-                </h2>
-                <p className="text-slate-500 font-medium leading-relaxed">
-                  {herramienta.descripcion}
-                </p>
+          {herramientas.map((herramienta, index) => {
+            const IconComponent = herramienta.Icono;
+            return (
+              <Link 
+                key={index} 
+                href={herramienta.ruta}
+                className="group relative bg-white rounded-3xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] border border-slate-100 overflow-hidden flex flex-col"
+              >
+                {/* Reflejo Glossy sutil */}
+                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none"></div>
                 
-                <div className="mt-8 flex items-center text-sm font-bold text-blue-600 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">
-                  Usar herramienta 
-                  <span className="ml-2">→</span>
+                <div className="relative z-20 flex flex-col h-full">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-tr ${herramienta.color} text-white shadow-lg ${herramienta.shadow}`}>
+                    <IconComponent size={28} strokeWidth={2.5} />
+                  </div>
+                  <h2 className="text-xl font-bold mb-3 text-slate-800 group-hover:text-blue-600 transition-colors">
+                    {herramienta.titulo}
+                  </h2>
+                  <p className="text-slate-500 font-medium leading-relaxed flex-grow">
+                    {herramienta.descripcion}
+                  </p>
+                  
+                  <div className="mt-8 flex items-center text-sm font-bold text-slate-400 group-hover:text-blue-600 transition-colors">
+                    <span>Abrir herramienta</span>
+                    <ArrowRight size={16} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            )
+          })}
         </div>
 
         {/* Espacio Publicitario Principal (AdSense) */}
