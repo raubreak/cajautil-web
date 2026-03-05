@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
 import Script from 'next/script';
-import CookieBanner from '@/components/CookieBanner';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -222,7 +221,6 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
-        <CookieBanner />
       </body>
     </html>
   );
