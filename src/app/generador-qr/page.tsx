@@ -1,9 +1,10 @@
 "use client";
 import { useState, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import Link from "next/link";
 
 export default function GeneradorQR() {
-  const [texto, setTexto] = useState("https://utilidades-web.vercel.app");
+  const [texto, setTexto] = useState("https://cajautil.com");
   const [size, setSize] = useState(200);
   const [bgColor, setBgColor] = useState("#ffffff");
   const [fgColor, setFgColor] = useState("#000000");
@@ -38,41 +39,43 @@ export default function GeneradorQR() {
         {/* Controles */}
         <div className="flex-1 space-y-6">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
-            Generador de <span className="text-cyan-500">QR</span>
+            Generador de <span className="text-cyan-500">Códigos QR</span>
           </h1>
-          <p className="text-slate-500 text-sm">Convierte enlaces o textos en códigos listos para imprimir.</p>
+          <p className="text-slate-500 text-sm">Convierte enlaces o textos en códigos QR listos para imprimir o compartir.</p>
           
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">Contenido del QR</label>
+            <label htmlFor="qr-contenido" className="block text-sm font-bold text-slate-700 mb-2">Contenido del QR</label>
             <textarea 
+              id="qr-contenido"
               value={texto}
               onChange={(e) => setTexto(e.target.value)}
               className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-cyan-500 outline-none text-slate-700"
               rows={3}
               placeholder="Introduce la URL o el texto..."
+              aria-label="Contenido a codificar en el QR"
             ></textarea>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">Color Frontal</label>
+              <label htmlFor="color-frontal" className="block text-sm font-bold text-slate-700 mb-2">Color Frontal</label>
               <div className="flex items-center space-x-2">
-                <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="w-10 h-10 rounded cursor-pointer border-0 p-0" />
+                <input id="color-frontal" type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="w-10 h-10 rounded cursor-pointer border-0 p-0" />
                 <span className="text-xs text-slate-500 uppercase">{fgColor}</span>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">Fondo</label>
+              <label htmlFor="color-fondo" className="block text-sm font-bold text-slate-700 mb-2">Fondo</label>
               <div className="flex items-center space-x-2">
-                <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="w-10 h-10 rounded cursor-pointer border-0 p-0" />
+                <input id="color-fondo" type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="w-10 h-10 rounded cursor-pointer border-0 p-0" />
                 <span className="text-xs text-slate-500 uppercase">{bgColor}</span>
               </div>
             </div>
           </div>
           
           <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">Tamaño de descarga: {size}px</label>
-              <input type="range" min="100" max="600" step="50" value={size} onChange={(e) => setSize(Number(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-500" />
+              <label htmlFor="qr-size" className="block text-sm font-bold text-slate-700 mb-2">Tamaño de descarga: {size}px</label>
+              <input id="qr-size" type="range" min="100" max="600" step="50" value={size} onChange={(e) => setSize(Number(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-500" />
           </div>
         </div>
 
@@ -82,7 +85,7 @@ export default function GeneradorQR() {
              <QRCodeSVG 
                 id="qr-code-svg"
                 value={texto || " "} 
-                size={Math.min(size, 200)} // Preview size max 200 for responsive layout
+                size={Math.min(size, 200)}
                 bgColor={bgColor}
                 fgColor={fgColor}
                 level="H"
@@ -93,6 +96,7 @@ export default function GeneradorQR() {
              onClick={downloadQR}
              disabled={!texto}
              className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-300 text-white font-bold rounded-xl shadow-sm transition-all active:scale-95 w-full max-w-[200px]"
+             aria-label="Descargar código QR como imagen PNG"
           >
              Descargar PNG
           </button>
@@ -100,10 +104,38 @@ export default function GeneradorQR() {
 
       </div>
 
-      {/* AdSense Bottom */}
+      {/* AdSense */}
       <div className="w-full max-w-4xl mt-6 bg-slate-200 border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-sm font-medium rounded-xl h-[120px]">
         Espacio Publicitario
       </div>
+
+      {/* Contenido SEO */}
+      <article className="w-full max-w-4xl mt-6 bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
+        <h2 className="text-xl font-bold text-slate-800 mb-4">¿Cómo crear un código QR gratis?</h2>
+        <div className="text-slate-600 text-sm leading-relaxed space-y-3">
+          <p>
+            Con nuestro <strong>generador de códigos QR online</strong>, puedes convertir cualquier <strong>URL, texto o enlace</strong> en 
+            un código QR personalizable en segundos. Elige los <strong>colores</strong>, ajusta el <strong>tamaño</strong> y 
+            descarga tu QR en <strong>PNG de alta resolución</strong>.
+          </p>
+          <p>
+            Los códigos QR son perfectos para <strong>tarjetas de visita</strong>, <strong>menús de restaurante</strong>, 
+            <strong>carteles publicitarios</strong>, <strong>packaging</strong> o compartir enlaces de forma rápida.
+          </p>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-slate-100">
+          <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Herramientas relacionadas</h3>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/lector-qr" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
+              Lector de QR
+            </Link>
+            <Link href="/generador-contrasenas" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
+              Generador de Contraseñas
+            </Link>
+          </div>
+        </div>
+      </article>
 
     </main>
   );
