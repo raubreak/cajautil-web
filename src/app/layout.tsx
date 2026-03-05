@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
 import Script from 'next/script';
+import CookieBanner from '@/components/CookieBanner';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -192,6 +193,14 @@ export default function RootLayout({
                   <li><Link href="/lector-qr" className="text-sm hover:text-white transition-colors">Lector de Códigos QR</Link></li>
                 </ul>
               </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Legal</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/politica-de-privacidad" className="text-sm hover:text-white transition-colors">Política de Privacidad</Link></li>
+                  <li><Link href="/politica-de-cookies" className="text-sm hover:text-white transition-colors">Política de Cookies</Link></li>
+                  <li><Link href="/contacto" className="text-sm hover:text-white transition-colors">Contacto</Link></li>
+                </ul>
+              </div>
             </nav>
             
             <div className="border-t border-slate-800 pt-8 text-center text-sm">
@@ -200,6 +209,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <CookieBanner />
       </body>
     </html>
   );
