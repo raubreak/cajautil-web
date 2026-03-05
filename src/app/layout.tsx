@@ -107,6 +107,7 @@ export default function RootLayout({
   const herramientasNav = [
     { nombre: "Calculadora %", ruta: "/calculadora-porcentajes" },
     { nombre: "Sueldo Neto", ruta: "/calculadora-sueldo-neto" },
+    { nombre: "Calculadora IVA", ruta: "/calculadora-iva" },
     { nombre: "Validador IBAN", ruta: "/validador-iban" },
     { nombre: "Contraseñas", ruta: "/generador-contrasenas" },
     { nombre: "Generador Nombres", ruta: "/generador-nombres" },
@@ -183,6 +184,7 @@ export default function RootLayout({
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Calculadoras</h3>
                 <ul className="space-y-2">
                   <li><Link href="/calculadora-porcentajes" className="text-sm hover:text-white transition-colors">Calculadora de Porcentajes</Link></li>
+                  <li><Link href="/calculadora-iva" className="text-sm hover:text-white transition-colors">Calculadora de IVA</Link></li>
                   <li><Link href="/calculadora-sueldo-neto" className="text-sm hover:text-white transition-colors">Calculadora de Sueldo Neto</Link></li>
                   <li><Link href="/calculadora-dias" className="text-sm hover:text-white transition-colors">Calculadora de Días</Link></li>
                   <li><Link href="/validador-iban" className="text-sm hover:text-white transition-colors">Validador de IBAN</Link></li>

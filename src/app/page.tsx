@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -21,7 +21,8 @@ export const metadata: Metadata = {
     "lector QR online",
     "calculadora días entre fechas",
     "validador iban madrid",
-    "generador de nombres y apellidos"
+    "generador de nombres y apellidos",
+    "calculadora iva"
   ],
   alternates: {
     canonical: SITE_URL,
@@ -34,18 +35,19 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 10,
+  numberOfItems: 11,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Calculadora de Porcentajes", url: `${SITE_URL}/calculadora-porcentajes` },
-    { "@type": "ListItem", position: 2, name: "Contador de Palabras y Caracteres", url: `${SITE_URL}/contador-de-palabras` },
-    { "@type": "ListItem", position: 3, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
-    { "@type": "ListItem", position: 4, name: "Validador de IBAN", url: `${SITE_URL}/validador-iban` },
-    { "@type": "ListItem", position: 5, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
-    { "@type": "ListItem", position: 6, name: "Generador de Nombres", url: `${SITE_URL}/generador-nombres` },
-    { "@type": "ListItem", position: 7, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
-    { "@type": "ListItem", position: 8, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
-    { "@type": "ListItem", position: 9, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
-    { "@type": "ListItem", position: 10, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
+    { "@type": "ListItem", position: 2, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
+    { "@type": "ListItem", position: 3, name: "Contador de Palabras y Caracteres", url: `${SITE_URL}/contador-de-palabras` },
+    { "@type": "ListItem", position: 4, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
+    { "@type": "ListItem", position: 5, name: "Validador de IBAN", url: `${SITE_URL}/validador-iban` },
+    { "@type": "ListItem", position: 6, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
+    { "@type": "ListItem", position: 7, name: "Generador de Nombres", url: `${SITE_URL}/generador-nombres` },
+    { "@type": "ListItem", position: 8, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
+    { "@type": "ListItem", position: 9, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
+    { "@type": "ListItem", position: 10, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
+    { "@type": "ListItem", position: 11, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
   ],
 };
 
@@ -97,6 +99,14 @@ export default function Home() {
       Icono: Percent,
       color: 'from-blue-500 to-indigo-500',
       shadow: 'shadow-blue-500/20'
+    },
+    {
+      titulo: 'Calculadora de IVA',
+      descripcion: 'Calcula sumas, restas y base imponible del IVA con desglose de cuotas en un click.',
+      ruta: '/calculadora-iva',
+      Icono: Landmark,
+      color: 'from-amber-400 to-yellow-500',
+      shadow: 'shadow-yellow-500/20'
     },
     {
       titulo: 'Contador de Palabras',
