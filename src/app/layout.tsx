@@ -135,6 +135,19 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-31YJGFTY4C"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-31YJGFTY4C');
+          `}
+        </Script>
       </head>
       <body className={`${inter.className} bg-slate-50 text-slate-900 min-h-screen flex flex-col`}>
         <nav className="w-full bg-white border-b border-slate-200 px-6 py-4 shadow-sm z-50 relative" aria-label="Navegación principal">
