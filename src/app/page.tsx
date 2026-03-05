@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays } from 'lucide-react';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function Home() {
       shadow: 'shadow-orange-500/20'
     },
     {
-      titulo: 'Password Generator',
+      titulo: 'Generador de Contraseñas',
       descripcion: 'Crea contraseñas seguras y aleatorias imposibles de hackear.',
       ruta: '/generador-contrasenas',
       Icono: KeyRound,
@@ -64,6 +64,14 @@ export default function Home() {
       Icono: ScanLine,
       color: 'from-indigo-400 to-violet-500',
       shadow: 'shadow-indigo-500/20'
+    },
+    {
+      titulo: 'Calculadora de Días',
+      descripcion: 'Calcula días, semanas, meses y años entre dos fechas.',
+      ruta: '/calculadora-dias',
+      Icono: CalendarDays,
+      color: 'from-pink-400 to-purple-500',
+      shadow: 'shadow-pink-500/20'
     }
   ];
 

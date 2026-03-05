@@ -10,7 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/generador-contrasenas',
     '/mayusculas-minusculas',
     '/generador-qr',
-    '/lector-qr'
+    '/lector-qr',
+    '/calculadora-dias'
   ];
 
   return routes.map((route) => ({
