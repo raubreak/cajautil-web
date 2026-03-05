@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -17,8 +17,11 @@ export const metadata: Metadata = {
     "contador de palabras online",
     "calculadora sueldo neto España",
     "conversor mayúsculas minúsculas",
+    "conversor mayúsculas minúsculas",
     "lector QR online",
     "calculadora días entre fechas",
+    "validador iban madrid",
+    "generador de nombres y apellidos"
   ],
   alternates: {
     canonical: SITE_URL,
@@ -31,16 +34,18 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 8,
+  numberOfItems: 10,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Calculadora de Porcentajes", url: `${SITE_URL}/calculadora-porcentajes` },
     { "@type": "ListItem", position: 2, name: "Contador de Palabras y Caracteres", url: `${SITE_URL}/contador-de-palabras` },
     { "@type": "ListItem", position: 3, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
-    { "@type": "ListItem", position: 4, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
-    { "@type": "ListItem", position: 5, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
-    { "@type": "ListItem", position: 6, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
-    { "@type": "ListItem", position: 7, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
-    { "@type": "ListItem", position: 8, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
+    { "@type": "ListItem", position: 4, name: "Validador de IBAN", url: `${SITE_URL}/validador-iban` },
+    { "@type": "ListItem", position: 5, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
+    { "@type": "ListItem", position: 6, name: "Generador de Nombres", url: `${SITE_URL}/generador-nombres` },
+    { "@type": "ListItem", position: 7, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
+    { "@type": "ListItem", position: 8, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
+    { "@type": "ListItem", position: 9, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
+    { "@type": "ListItem", position: 10, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
   ],
 };
 
@@ -110,12 +115,28 @@ export default function Home() {
       shadow: 'shadow-orange-500/20'
     },
     {
+      titulo: 'Validador de IBAN',
+      descripcion: 'Validador algorítmico MOD 97 para cuentas bancarias europeas. Privado y 100% offline.',
+      ruta: '/validador-iban',
+      Icono: ShieldCheck,
+      color: 'from-indigo-400 to-indigo-600',
+      shadow: 'shadow-indigo-500/20'
+    },
+    {
       titulo: 'Generador de Contraseñas',
       descripcion: 'Crea contraseñas seguras y aleatorias con la longitud y complejidad que elijas. 100% offline.',
       ruta: '/generador-contrasenas',
       Icono: KeyRound,
       color: 'from-rose-400 to-pink-500',
       shadow: 'shadow-pink-500/20'
+    },
+    {
+      titulo: 'Generador de Nombres',
+      descripcion: 'Crea identidades, nombres masculinos, femeninos y apellidos al azar para personajes o pruebas.',
+      ruta: '/generador-nombres',
+      Icono: UserPlus,
+      color: 'from-teal-400 to-emerald-500',
+      shadow: 'shadow-teal-500/20'
     },
     {
       titulo: 'Convertidor Mayúsculas / Minúsculas',
