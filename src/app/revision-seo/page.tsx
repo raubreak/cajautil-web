@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 
 
 export default async function RevisionSeoPage() {
-  let articles = [];
+  let articles: any[] = [];
   try {
     articles = await prisma.article.findMany({
       orderBy: { publishedAt: 'desc' },

@@ -1,11 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {
-  return new PrismaClient({
-    datasourceUrl: process.env.NODE_ENV === 'production' 
-      ? process.env.POSTGRES_URL
-      : 'file:./dev.db'
-  })
+  return new PrismaClient()
 }
 
 declare global {
