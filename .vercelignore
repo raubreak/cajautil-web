@@ -1,0 +1,5 @@
+# Vercel Ignore File
+# Prevents uploading these files to Vercel builds or serverless functions
+
+seo-auditor.js
+.agents/
