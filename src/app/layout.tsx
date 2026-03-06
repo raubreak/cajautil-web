@@ -109,6 +109,11 @@ export default function RootLayout({
     { nombre: "Temporizador", ruta: "/temporizador" },
     { nombre: "Descuentos", ruta: "/calculadora-descuentos" },
     { nombre: "Ruleta", ruta: "/ruleta-aleatoria" },
+    { nombre: "Binario/Morse", ruta: "/traductor-binario" },
+    { nombre: "Símbolos", ruta: "/simbolos-copiar" },
+    { nombre: "Texto Invisible", ruta: "/texto-invisible" },
+    { nombre: "CPS Test", ruta: "/cps-test" },
+    { nombre: "Edad Exacta", ruta: "/calculadora-edad" },
     { nombre: "WebP", ruta: "/compresor-webp" },
     { nombre: "Regla de 3", ruta: "/calculadora-regla-de-tres" },
     { nombre: "Hipotecas", ruta: "/calculadora-hipotecas" },
@@ -121,6 +126,7 @@ export default function RootLayout({
     { nombre: "Contraseñas", ruta: "/generador-contrasenas" },
     { nombre: "Generador Nombres", ruta: "/generador-nombres" },
     { nombre: "Contador Palabras", ruta: "/contador-de-palabras" },
+    { nombre: "Letras Raras", ruta: "/generador-letras-raras" },
     { nombre: "Mayúsculas", ruta: "/mayusculas-minusculas" },
     { nombre: "Generador QR", ruta: "/generador-qr" },
     { nombre: "Lector QR", ruta: "/lector-qr" },
@@ -199,6 +205,7 @@ export default function RootLayout({
                   <li><Link href="/calculadora-hipotecas" className="text-sm hover:text-white transition-colors">Calculadora de Hipotecas</Link></li>
                   <li><Link href="/calculadora-imc" className="text-sm hover:text-white transition-colors">Calculadora de IMC</Link></li>
                   <li><Link href="/calculadora-sueldo-neto" className="text-sm hover:text-white transition-colors">Calculadora de Sueldo Neto</Link></li>
+                  <li><Link href="/calculadora-edad" className="text-sm hover:text-white transition-colors">Calculadora de Edad</Link></li>
                   <li><Link href="/calculadora-dias" className="text-sm hover:text-white transition-colors">Calculadora de Días</Link></li>
                   <li><Link href="/validador-iban" className="text-sm hover:text-white transition-colors">Validador de IBAN</Link></li>
                 </ul>
@@ -208,7 +215,10 @@ export default function RootLayout({
                 <ul className="space-y-2">
                   <li><Link href="/temporizador" className="text-sm hover:text-white transition-colors">Temporizador & Alarma</Link></li>
                   <li><Link href="/ruleta-aleatoria" className="text-sm hover:text-white transition-colors">Ruleta Aleatoria</Link></li>
+                  <li><Link href="/cps-test" className="text-sm hover:text-white transition-colors">CPS Test (Clicks)</Link></li>
                   <li><Link href="/generador-letras-raras" className="text-sm hover:text-white transition-colors">Letras Raras para Insta</Link></li>
+                  <li><Link href="/simbolos-copiar" className="text-sm hover:text-white transition-colors">Símbolos para Copiar</Link></li>
+                  <li><Link href="/texto-invisible" className="text-sm hover:text-white transition-colors">Texto Invisible</Link></li>
                   <li><Link href="/generador-enlace-whatsapp" className="text-sm hover:text-white transition-colors">Link de WhatsApp</Link></li>
                   <li><Link href="/generador-nombres" className="text-sm hover:text-white transition-colors">Generador de Nombres</Link></li>
                   <li><Link href="/generador-contrasenas" className="text-sm hover:text-white transition-colors">Generador de Contraseñas</Link></li>
@@ -219,6 +229,7 @@ export default function RootLayout({
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Texto</h3>
                 <ul className="space-y-2">
                   <li><Link href="/contador-de-palabras" className="text-sm hover:text-white transition-colors">Contador de Palabras</Link></li>
+                  <li><Link href="/traductor-binario" className="text-sm hover:text-white transition-colors">Traductor Binario/Morse</Link></li>
                   <li><Link href="/mayusculas-minusculas" className="text-sm hover:text-white transition-colors">Mayúsculas / Minúsculas</Link></li>
                 </ul>
               </div>
