@@ -43,6 +43,20 @@ export default function CompresorWebP() {
     }
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const droppedFile = e.dataTransfer.files?.[0];
+    if (droppedFile && droppedFile.type.startsWith('image/')) {
+        procesarImagen(droppedFile);
+    }
+  };
+
   const convertToWebP = () => {
     if (!imgRef.current || !canvasRef.current) return;
     
@@ -108,7 +122,11 @@ export default function CompresorWebP() {
             
             {!imgUrl ? (
                 /* ESTADO INICIAL -> SUBIDA */
-                <label className="border-2 border-dashed border-sky-200 hover:border-sky-400 bg-sky-50 hover:bg-sky-100/50 transition-colors w-full h-[300px] rounded-2xl flex flex-col items-center justify-center cursor-pointer group">
+                <label 
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
+                  className="border-2 border-dashed border-sky-200 hover:border-sky-400 bg-sky-50 hover:bg-sky-100/50 transition-colors w-full h-[300px] rounded-2xl flex flex-col items-center justify-center cursor-pointer group"
+                >
                     <UploadCloud className="w-16 h-16 text-sky-400 group-hover:text-sky-500 mb-4 transition-transform group-hover:-translate-y-2" />
                     <span className="text-lg font-bold text-slate-700">Haz clic o arrastra tu foto aquí</span>
                     <span className="text-sm font-medium text-slate-400 mt-2">Soporta JPG, PNG o HEIC (Max 50MB)</span>
