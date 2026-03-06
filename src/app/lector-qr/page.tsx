@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import jsQR from "jsqr";
 import Link from "next/link";
+import { ScanSearch } from "lucide-react";
 
 export default function LectorQR() {
   const [resultado, setResultado] = useState<string | null>(null);
@@ -50,40 +51,46 @@ export default function LectorQR() {
   };
 
   return (
-    <main className="min-h-[100dvh] bg-slate-50 flex flex-col items-center py-10 px-4">
-      <div className="w-full max-w-2xl bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-100 mb-8">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-2 text-center tracking-tight">
-          Lector de Códigos <span className="text-indigo-500">QR</span> Online
+    <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
+      {/* HEADER SECTION */}
+      <div className="w-full max-w-2xl text-center mb-10">
+        <div className="inline-flex items-center justify-center p-4 bg-indigo-100/50 rounded-3xl mb-6 border border-indigo-50 shadow-sm">
+          <ScanSearch className="w-10 h-10 text-indigo-600" />
+        </div>
+        <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight mb-4">
+          Lector de Códigos <span className="text-indigo-600">QR</span> Online
         </h1>
-        <p className="text-center text-slate-500 text-sm mb-8">Sube o toma una foto de un código QR y extraemos su contenido al instante. 100% privado.</p>
+        <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto">
+          Sube o toma una foto de un código QR y extraemos su contenido al instante. 100% privado en tu navegador.
+        </p>
+      </div>
 
+      <div className="w-full max-w-3xl bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 flex flex-col gap-6 mb-12">
         <div className="flex flex-col items-center space-y-6">
           
-          <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-slate-300 border-dashed rounded-xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors">
+          <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-slate-300 border-dashed rounded-3xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors focus-within:ring-4 focus-within:ring-indigo-100 focus-within:border-indigo-400">
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <svg className="w-10 h-10 mb-3 text-slate-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-              </svg>
-              <p className="mb-2 text-sm text-slate-500 font-bold">Haz clic o toca para subir la foto del QR</p>
-              <p className="text-xs text-slate-400">Archivos soportados: JPG, PNG, WEBP (Max 10MB)</p>
+              <ScanSearch className="w-12 h-12 mb-3 text-slate-400" />
+              <p className="mb-2 text-slate-700 font-bold text-lg">Haz clic o toca para subir la foto del QR</p>
+              <p className="text-sm text-slate-400">JPG, PNG, WEBP (Max 10MB)</p>
             </div>
             <input type="file" className="hidden" accept="image/*" onChange={manejarSubida} aria-label="Subir imagen con código QR" />
           </label>
 
-          {nombreArchivo && <p className="text-sm font-medium text-indigo-600">Archivo analizado: {nombreArchivo}</p>}
+          {nombreArchivo && <p className="text-sm font-bold bg-indigo-50 items-center justify-center py-2 px-4 rounded-full text-indigo-600">Archivo analizado: {nombreArchivo}</p>}
 
           <canvas ref={canvasRef} className="hidden"></canvas>
 
           {errorDesc && (
-            <div className="w-full p-4 bg-red-50 text-red-800 rounded-xl border border-red-200 text-sm font-medium text-center" role="alert">
+            <div className="w-full p-4 bg-red-50 text-red-800 rounded-2xl border border-red-200 text-sm font-semibold text-center" role="alert">
               🚨 {errorDesc}
             </div>
           )}
 
           {resultado && (
-            <div className="w-full p-6 bg-indigo-50 border border-indigo-200 rounded-xl flex flex-col items-center" role="status">
-               <p className="text-xs uppercase font-bold tracking-wider text-indigo-400 mb-4">Contenido Extraído con Éxito</p>
-               <div className="w-full bg-white p-4 rounded-lg border border-indigo-100 font-mono text-sm break-all text-slate-800 text-center mb-6">
+            <div className="w-full p-8 bg-indigo-50 border border-indigo-100 rounded-3xl flex flex-col items-center" role="status">
+               <p className="text-sm uppercase font-black tracking-widest text-indigo-400 mb-6 drop-shadow-sm">Contenido Extraído con Éxito</p>
+               <div className="w-full bg-white p-6 rounded-2xl border border-indigo-100/50 shadow-inner font-mono text-base break-all text-slate-800 text-center mb-8">
                  {resultado}
                </div>
 
@@ -92,50 +99,41 @@ export default function LectorQR() {
                    href={resultado} 
                    target="_blank" 
                    rel="noopener noreferrer" 
-                   className="w-full py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl text-center shadow-md transition-colors block"
+                   className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-lg rounded-2xl text-center shadow-md transition-colors block"
                   >
                    🌐 Abrir Enlace en nueva pestaña
                  </a>
                ) : (
                  <button 
                    onClick={() => navigator.clipboard.writeText(resultado)}
-                   className="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-center shadow-md transition-colors"
+                   className="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white font-black text-lg rounded-2xl text-center shadow-md transition-colors"
                   >
                    📋 Copiar al Portapapeles
                  </button>
                )}
             </div>
           )}
-
         </div>
       </div>
 
       {/* Contenido SEO */}
-      <article className="w-full max-w-2xl bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
-        <h2 className="text-xl font-bold text-slate-800 mb-4">¿Cómo escanear un QR desde una foto?</h2>
-        <div className="text-slate-600 text-sm leading-relaxed space-y-3">
-          <p>
-            Nuestro <strong>lector de códigos QR online</strong> permite <strong>escanear un QR desde cualquier foto o captura de pantalla</strong>. 
-            Solo tienes que subir la imagen y extraemos el contenido (URL, texto, datos de contacto) al instante.
-          </p>
-          <p>
-            La imagen se procesa <strong>100% en tu navegador</strong> y <strong>nunca se envía a ningún servidor</strong>. 
-            Tu privacidad está garantizada.
-          </p>
-        </div>
+      <section className="w-full max-w-3xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-indigo-600">
+        <h2>¿Cómo escanear un QR desde una foto?</h2>
+        <p>
+          Nuestro <strong>lector de códigos QR online</strong> permite <strong>escanear un QR desde cualquier foto o captura de pantalla</strong>. 
+          Solo tienes que subir la imagen y extraemos el contenido (URL, texto, datos de contacto) al instante.
+        </p>
+        <p>
+          La imagen se procesa <strong>100% localmente en tu navegador</strong> usando JavaScript y <strong>nunca se envía a ningún servidor</strong>. 
+          Tu privacidad e historial de fotos están totalmente garantizados.
+        </p>
 
-        <div className="mt-8 pt-6 border-t border-slate-100">
-          <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Herramientas relacionadas</h3>
-          <div className="flex flex-wrap gap-2">
-            <Link href="/generador-qr" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
-              Generador de QR
-            </Link>
-            <Link href="/contador-de-palabras" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
-              Contador de Palabras
-            </Link>
-          </div>
-        </div>
-      </article>
+        <h3>Herramientas relacionadas</h3>
+        <ul>
+          <li><Link href="/generador-qr">Generador de QR Personalizado</Link></li>
+          <li><Link href="/contador-de-palabras">Contador de Palabras y Caracteres</Link></li>
+        </ul>
+      </section>
     </main>
   );
 }

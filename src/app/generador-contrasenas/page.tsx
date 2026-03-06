@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { KeyRound } from "lucide-react";
 
 export default function GeneradorContrasenas() {
   const [password, setPassword] = useState("");
@@ -43,30 +44,48 @@ export default function GeneradorContrasenas() {
   };
 
   return (
-    <main className="min-h-[100dvh] bg-slate-50 flex flex-col items-center py-6 px-4">
-      <div className="w-full max-w-md bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-2 text-center">
-          Generador de <span className="text-rose-500">Contraseñas</span> Seguras
+    <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
+      {/* HEADER SECTION */}
+      <div className="w-full max-w-2xl text-center mb-10">
+        <div className="inline-flex items-center justify-center p-4 bg-rose-100/50 rounded-3xl mb-6 border border-rose-50 shadow-sm">
+          <KeyRound className="w-10 h-10 text-rose-600" />
+        </div>
+        <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight mb-4">
+          Generador de <span className="text-rose-600">Contraseñas</span> Seguras
         </h1>
-        <p className="text-center text-slate-500 text-sm mb-6">Generadas localmente en tu navegador, nunca enviadas por internet.</p>
+        <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto">
+          Generadas 100% localmente en tu navegador. Nunca se envían por internet.
+        </p>
+      </div>
 
-        <div className="relative mb-6">
-          <div className="w-full bg-slate-100 text-slate-800 p-4 rounded-xl border border-slate-200 font-mono text-xl text-center break-all select-all min-h-[4rem] flex items-center justify-center" role="status" aria-live="polite" aria-label="Contraseña generada">
+      <div className="w-full max-w-2xl bg-white rounded-[40px] shadow-2xl p-8 sm:p-12 border border-slate-100 flex flex-col gap-8 mb-12">
+        <div className="relative">
+          <div 
+            className="w-full bg-slate-50 text-slate-800 p-6 sm:p-8 rounded-3xl border-2 border-slate-200 font-mono text-xl sm:text-2xl text-center break-all select-all min-h-[7rem] flex items-center justify-center transition-all hover:border-slate-300" 
+            role="status" 
+            aria-live="polite" 
+            aria-label="Contraseña generada"
+          >
             {password}
           </div>
           <button 
             onClick={copyToClipboard}
-            className={`absolute -bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-bold shadow-md transition-colors ${copied ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-100 hover:bg-slate-700'}`}
+            className={`absolute -bottom-5 left-1/2 transform -translate-x-1/2 px-6 py-2.5 rounded-full text-sm font-bold shadow-lg transition-all ${
+              copied 
+                ? 'bg-emerald-500 hover:bg-emerald-600 text-white translate-y-0 scale-105' 
+                : 'bg-slate-800 hover:bg-slate-700 text-white hover:-translate-y-1'
+            }`}
             aria-label={copied ? 'Contraseña copiada' : 'Copiar contraseña al portapapeles'}
           >
-            {copied ? '¡Copiado!' : 'Copiar'}
+            {copied ? '¡Copiado!' : 'Copiar Contraseña'}
           </button>
         </div>
 
-        <div className="space-y-5 mt-8">
-          <div>
-            <div className="flex justify-between mb-1">
-              <label htmlFor="longitud-slider" className="text-sm font-semibold text-slate-700">Longitud: {length}</label>
+        <div className="space-y-8 mt-4">
+          <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+            <div className="flex items-center justify-between mb-4">
+              <label htmlFor="longitud-slider" className="text-sm font-bold text-slate-700">Longitud de la Contraseña</label>
+              <span className="bg-rose-100 text-rose-700 px-3 py-1 rounded-lg text-sm font-bold">{length}</span>
             </div>
             <input 
               id="longitud-slider"
@@ -77,70 +96,60 @@ export default function GeneradorContrasenas() {
             />
           </div>
 
-          <fieldset>
+          <fieldset className="bg-slate-50 p-6 rounded-3xl border border-slate-100">
             <legend className="sr-only">Opciones de contraseña</legend>
-            <div className="flex flex-col gap-3">
-              <label className="flex items-center space-x-3 cursor-pointer">
-                <input type="checkbox" checked={includeUppercase} onChange={() => setIncludeUppercase(!includeUppercase)} className="w-5 h-5 rounded text-rose-500 bg-slate-100 border-slate-300 focus:ring-rose-500" />
-                <span className="text-slate-700 font-medium select-none">Mayúsculas (A-Z)</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <label className="flex items-center justify-between sm:justify-start space-x-3 cursor-pointer p-4 sm:p-0 bg-white sm:bg-transparent rounded-xl sm:rounded-none border sm:border-transparent border-slate-200 shadow-sm sm:shadow-none hover:border-rose-200 transition-colors">
+                <span className="text-slate-700 font-bold select-none text-sm">Mayúsculas (A-Z)</span>
+                <input type="checkbox" checked={includeUppercase} onChange={() => setIncludeUppercase(!includeUppercase)} className="w-6 h-6 rounded-md text-rose-500 bg-slate-100 border-slate-300 focus:ring-rose-500" />
               </label>
-              <label className="flex items-center space-x-3 cursor-pointer">
-                <input type="checkbox" checked={includeNumbers} onChange={() => setIncludeNumbers(!includeNumbers)} className="w-5 h-5 rounded text-rose-500 bg-slate-100 border-slate-300 focus:ring-rose-500" />
-                <span className="text-slate-700 font-medium select-none">Números (0-9)</span>
+              <label className="flex items-center justify-between sm:justify-start space-x-3 cursor-pointer p-4 sm:p-0 bg-white sm:bg-transparent rounded-xl sm:rounded-none border sm:border-transparent border-slate-200 shadow-sm sm:shadow-none hover:border-rose-200 transition-colors">
+                <span className="text-slate-700 font-bold select-none text-sm">Números (0-9)</span>
+                <input type="checkbox" checked={includeNumbers} onChange={() => setIncludeNumbers(!includeNumbers)} className="w-6 h-6 rounded-md text-rose-500 bg-slate-100 border-slate-300 focus:ring-rose-500" />
               </label>
-              <label className="flex items-center space-x-3 cursor-pointer">
-                <input type="checkbox" checked={includeSymbols} onChange={() => setIncludeSymbols(!includeSymbols)} className="w-5 h-5 rounded text-rose-500 bg-slate-100 border-slate-300 focus:ring-rose-500" />
-                <span className="text-slate-700 font-medium select-none">Símbolos (@%#...)</span>
+              <label className="flex items-center justify-between sm:justify-start space-x-3 cursor-pointer p-4 sm:p-0 bg-white sm:bg-transparent rounded-xl sm:rounded-none border sm:border-transparent border-slate-200 shadow-sm sm:shadow-none hover:border-rose-200 transition-colors">
+                <span className="text-slate-700 font-bold select-none text-sm">Símbolos (@#...)</span>
+                <input type="checkbox" checked={includeSymbols} onChange={() => setIncludeSymbols(!includeSymbols)} className="w-6 h-6 rounded-md text-rose-500 bg-slate-100 border-slate-300 focus:ring-rose-500" />
               </label>
             </div>
           </fieldset>
 
-          <button onClick={generatePassword} className="w-full mt-4 py-3 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-bold text-lg shadow-sm transition-all active:scale-95">
-            Generar Otra
+          <button onClick={generatePassword} className="w-full py-4 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-black text-lg shadow-md hover:shadow-lg transition-all active:scale-[0.98]">
+            Generar Nueva Aleatoria
           </button>
         </div>
       </div>
       
       {/* Contenido SEO */}
-      <article className="w-full max-w-md mt-6 bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
-        <h2 className="text-xl font-bold text-slate-800 mb-4">¿Cómo crear una contraseña segura?</h2>
-        <div className="text-slate-600 text-sm leading-relaxed space-y-3">
-          <p>
-            Una <strong>contraseña segura</strong> debe tener al menos <strong>12 caracteres</strong>, incluir 
-            <strong>mayúsculas, minúsculas, números y símbolos</strong>. Evita usar palabras del diccionario, 
-            fechas de nacimiento o información personal.
-          </p>
-          <p>
-            Nuestro <strong>generador de contraseñas</strong> crea claves totalmente aleatorias 
-            directamente en tu navegador. <strong>La contraseña nunca se envía por internet</strong>, 
-            garantizando tu privacidad total.
-          </p>
-        </div>
+      <section className="w-full max-w-3xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-rose-600">
+        <h2>¿Cómo crear una contraseña segura?</h2>
+        <p>
+          Una <strong>contraseña segura</strong> debe tener al menos <strong>12 caracteres</strong>, incluir 
+          <strong>mayúsculas, minúsculas, números y símbolos</strong>. Evita usar palabras del diccionario, 
+          fechas de nacimiento o información personal.
+        </p>
+        <p>
+          Nuestro <strong>generador de contraseñas</strong> crea claves totalmente aleatorias 
+          directamente en tu navegador mediante <code>Crypto API</code> o generadores matemáticos del lado del cliente. <strong>La contraseña nunca se envía por internet</strong>, 
+          garantizando tu privacidad total.
+        </p>
 
-        <h2 className="text-xl font-bold text-slate-800 mb-4 mt-8">Preguntas frecuentes</h2>
-        <div className="space-y-3">
-          <details className="border border-slate-100 rounded-xl overflow-hidden">
-            <summary className="p-4 cursor-pointer font-semibold text-slate-700 hover:text-blue-600 text-sm">¿Las contraseñas generadas se guardan en algún servidor?</summary>
-            <p className="px-4 pb-4 text-slate-600 text-sm">No. Las contraseñas se generan 100% en tu navegador usando JavaScript. Nunca se envían, almacenan ni registran en ningún servidor.</p>
-          </details>
-          <details className="border border-slate-100 rounded-xl overflow-hidden">
-            <summary className="p-4 cursor-pointer font-semibold text-slate-700 hover:text-blue-600 text-sm">¿Cuántos caracteres debe tener una contraseña segura?</summary>
-            <p className="px-4 pb-4 text-slate-600 text-sm">Los expertos en seguridad recomiendan un mínimo de 12-16 caracteres. Cuanto más larga, más difícil de descifrar por fuerza bruta.</p>
-          </details>
-        </div>
+        <h2>Preguntas frecuentes</h2>
+        <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Las contraseñas generadas se guardan en algún servidor?</summary>
+          <p className="mt-4 mb-0 text-slate-600">No. Las contraseñas se generan 100% en tu navegador usando JavaScript. Nunca se envían, almacenan ni registran en ningún servidor de CajaUtil ni de terceros.</p>
+        </details>
+        <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Cuántos caracteres debe tener una contraseña segura?</summary>
+          <p className="mt-4 mb-0 text-slate-600">Los expertos en criptografía y seguridad (como el NIST) recomiendan un mínimo de 12-16 caracteres para frenar ataques por fuerza bruta de las computadoras modernas.</p>
+        </details>
 
-        <div className="mt-8 pt-6 border-t border-slate-100">
-          <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Herramientas relacionadas</h3>
-          <div className="flex flex-wrap gap-2">
-            <Link href="/generador-qr" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
-              Generador de QR
-            </Link>
-            <Link href="/mayusculas-minusculas" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
-              Conversor Mayúsculas
-            </Link>
-          </div>
-        </div>
-      </article>
+        <h3>Herramientas relacionadas</h3>
+        <ul>
+          <li><Link href="/generador-qr">Generador de QR</Link></li>
+          <li><Link href="/mayusculas-minusculas">Conversor Mayúsculas y Minúsculas</Link></li>
+        </ul>
+      </section>
     </main>
   );
 }

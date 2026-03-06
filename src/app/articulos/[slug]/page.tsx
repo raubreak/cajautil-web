@@ -29,7 +29,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
   return (
     <article className="min-h-screen bg-slate-50 py-12 px-6">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <Link href="/" className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-1" /> Volver a Herramientas
         </Link>
