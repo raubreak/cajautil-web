@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import GenerateButton from './GenerateButton';
 
 export const metadata: Metadata = {
   title: 'Revisión SEO Interna',
@@ -26,9 +27,12 @@ export default async function RevisionSeoPage() {
   return (
     <main className="min-h-screen bg-slate-50 py-12 px-6">
       <div className="max-w-6xl mx-auto">
-        <header className="mb-10">
-          <h1 className="text-3xl font-black text-slate-800 mb-2">Panel SEO Programático</h1>
-          <p className="text-slate-500">Listado de artículos generados automáticamente por Gemini. Esta página está en <code className="bg-slate-200 px-1 rounded">noindex</code> y no es visible en buscadores.</p>
+        <header className="mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-black text-slate-800 mb-2">Panel SEO Programático</h1>
+            <p className="text-slate-500">Listado de artículos generados automáticamente por Gemini. Esta página está en <code className="bg-slate-200 px-1 rounded">noindex</code> y no es visible en buscadores.</p>
+          </div>
+          <GenerateButton />
         </header>
 
         <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">

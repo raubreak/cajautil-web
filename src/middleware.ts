@@ -13,7 +13,7 @@ export function middleware(req: NextRequest) {
     const [user, pwd] = atob(authValue).split(':');
 
     const validUser = process.env.ADMIN_USER || 'raubreak@gmail.com';
-    const validPassword = process.env.ADMIN_PASSWORD;
+    const validPassword = process.env.ADMIN_PASSWORD || 'CajaUtilSEO*2026';
 
     if (user === validUser && pwd === validPassword) {
       return NextResponse.next();
