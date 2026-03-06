@@ -7,7 +7,14 @@ export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const articles = await prisma.article.findMany({ select: { slug: true, publishedAt: true } });
+  
+  let articles: any[] = [];
+  try {
+    articles = await prisma.article.findMany({ select: { slug: true, publishedAt: true } });
+  } catch (err) {
+    console.error('Error fetching articles for sitemap:', err);
+  }
+
 
   return [
     {

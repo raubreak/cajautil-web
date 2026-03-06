@@ -14,9 +14,14 @@ export const dynamic = 'force-dynamic';
 
 
 export default async function RevisionSeoPage() {
-  const articles = await prisma.article.findMany({
-    orderBy: { publishedAt: 'desc' },
-  });
+  let articles = [];
+  try {
+    articles = await prisma.article.findMany({
+      orderBy: { publishedAt: 'desc' },
+    });
+  } catch (err) {
+    console.error('Error fetching articles:', err);
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 py-12 px-6">

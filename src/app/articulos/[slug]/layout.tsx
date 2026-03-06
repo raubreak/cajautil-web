@@ -3,9 +3,14 @@ import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const article = await prisma.article.findUnique({
-    where: { slug: params.slug },
-  });
+  let article = null;
+  try {
+    article = await prisma.article.findUnique({
+      where: { slug: params.slug },
+    });
+  } catch (err) {
+    console.error('Error fetching layout metadata:', err);
+  }
 
   if (!article) return { title: 'No encontrado' };
 

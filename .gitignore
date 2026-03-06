@@ -44,3 +44,4 @@ next-env.d.ts
 seo-auditor.js
 
 /src/generated/prisma
+.env*.local

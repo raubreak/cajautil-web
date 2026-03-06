@@ -9,9 +9,14 @@ import { ArrowLeft, CalendarDays, ExternalLink, Tag } from 'lucide-react';
 export const revalidate = 3600; // Cache de 1 hora
 
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = await prisma.article.findUnique({
-    where: { slug: params.slug },
-  });
+  let article = null;
+  try {
+    article = await prisma.article.findUnique({
+      where: { slug: params.slug },
+    });
+  } catch (err) {
+    console.error('Error fetching article:', err);
+  }
 
   if (!article) notFound();
 
