@@ -46,3 +46,23 @@ export async function setIntervalDaysAction(days: number) {
     return { success: false, error: error.message };
   }
 }
+
+import { generateToolVariantBatch } from '@/lib/gemini-seo';
+
+export async function generateToolVariantsAction(baseTool: string, keywords: string) {
+  try {
+    const keywordList = keywords.split(',').map(k => k.trim()).filter(Boolean);
+    if (keywordList.length === 0) throw new Error('No hay keywords válidas');
+
+    const results = await generateToolVariantBatch(baseTool, keywordList);
+    
+    revalidatePath('/revision-seo');
+    revalidatePath('/sitemap.xml');
+    
+    return { success: true, count: results.length };
+  } catch (error: any) {
+    console.error('Error generating variants:', error);
+    return { success: false, error: error.message };
+  }
+}
+

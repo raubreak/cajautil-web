@@ -110,3 +110,54 @@ Debes responder ÚNICAMENTE con un JSON válido parseable. Sin markdown decorati
 
   return { skipped: false, article: savedArticle };
 }
+
+/**
+ * SEO Programático: Generación masiva de variantes de herramientas
+ */
+export async function generateToolVariantBatch(baseTool: string, keywords: string[]) {
+  if (!process.env.GEMINI_API_KEY) throw new Error('Falta GEMINI_API_KEY');
+  
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  
+  const results = [];
+
+  for (const kw of keywords) {
+    const prompt = `Eres un experto en SEO y marketing. Genera una variante de la herramienta base '${baseTool}' enfocada a la intención de búsqueda: '${kw}'.
+    
+    Responde ÚNICAMENTE con un JSON (sin markdown):
+    {
+      "seoTitle": "Título SEO optimizado (max 60 caracteres)",
+      "h1": "Título H1 atractivo para la página",
+      "seoDescription": "Meta descripción sugerente (max 155 caracteres)",
+      "topContent": "Breve introducción de 2 párrafos motivadora sobre por qué usar esta calculadora para ${kw}.",
+      "bottomContent": "Texto largo explicativo (800 palabras) en Markdown sobre ${kw}, consejos, FAQ y relevancia de la herramienta."
+    }`;
+
+    try {
+      const result = await model.generateContent(prompt);
+      const text = result.response.text();
+      const cleanJson = text.replace(/```json\n?|```/g, '').trim();
+      const data = JSON.parse(cleanJson);
+
+      let slug = slugify(`${baseTool}-${kw}`, { lower: true, strict: true });
+      
+      const variant = await prisma.toolVariant.upsert({
+        where: { slug },
+        update: {
+          ...data,
+          toolBase: baseTool
+        },
+        create: {
+          ...data,
+          slug,
+          toolBase: baseTool
+        }
+      });
+      results.push(variant);
+    } catch (e) {
+      console.error(`Error generando variante para ${kw}:`, e);
+    }
+  }
+
+  return results;
+}
