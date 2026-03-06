@@ -35,7 +35,29 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Falta GEMINI_API_KEY' }, { status: 500 });
     }
 
-    // 2. Seleccionar una herramienta objetivo al azar para este artículo
+    // 2. Control de Frecuencia mediante Variable de Entorno
+    const intervalDays = parseInt(process.env.POST_INTERVAL_DAYS || '1', 10);
+    
+    if (intervalDays > 0) {
+      const lastArticle = await prisma.article.findFirst({
+        orderBy: { publishedAt: 'desc' },
+      });
+
+      if (lastArticle) {
+        const diffMs = Date.now() - new Date(lastArticle.publishedAt).getTime();
+        const diffDays = diffMs / (1000 * 60 * 60 * 24);
+        
+        // Damos un margen de 2 horas (0.08 días) por posibles desajustes de ejecución cron
+        if (diffDays < (intervalDays - 0.08)) {
+          return NextResponse.json({ 
+            success: true, 
+            message: `Ejecución omitida: Aún no han pasado ${intervalDays} días desde el último post.` 
+          });
+        }
+      }
+    }
+
+    // 3. Seleccionar una herramienta objetivo al azar para este artículo
     const herramientaDestino = HERRAMIENTAS[Math.floor(Math.random() * HERRAMIENTAS.length)];
 
     // 3. Prompt para Gemini
