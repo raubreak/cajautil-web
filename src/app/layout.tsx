@@ -131,6 +131,11 @@ export default function RootLayout({
     { nombre: "Generador QR", ruta: "/generador-qr" },
     { nombre: "Lector QR", ruta: "/lector-qr" },
     { nombre: "Calculadora Días", ruta: "/calculadora-dias" },
+    { nombre: "Corrector", ruta: "/corrector-ortografico" },
+    { nombre: "Lorem Ipsum", ruta: "/generador-lorem-ipsum" },
+    { nombre: "Unidades", ruta: "/conversor-unidades" },
+    { nombre: "Calorías", ruta: "/calculadora-calorias" },
+    { nombre: "Hashtags", ruta: "/generador-hashtags" },
   ];
 
   return (
@@ -206,6 +211,8 @@ export default function RootLayout({
                   <li><Link href="/calculadora-imc" className="text-sm hover:text-white transition-colors">Calculadora de IMC</Link></li>
                   <li><Link href="/calculadora-sueldo-neto" className="text-sm hover:text-white transition-colors">Calculadora de Sueldo Neto</Link></li>
                   <li><Link href="/calculadora-edad" className="text-sm hover:text-white transition-colors">Calculadora de Edad</Link></li>
+                  <li><Link href="/calculadora-calorias" className="text-sm hover:text-white transition-colors">Calculadora de Calorías</Link></li>
+                  <li><Link href="/conversor-unidades" className="text-sm hover:text-white transition-colors">Conversor de Unidades</Link></li>
                   <li><Link href="/calculadora-dias" className="text-sm hover:text-white transition-colors">Calculadora de Días</Link></li>
                   <li><Link href="/validador-iban" className="text-sm hover:text-white transition-colors">Validador de IBAN</Link></li>
                 </ul>
@@ -222,14 +229,17 @@ export default function RootLayout({
                   <li><Link href="/generador-enlace-whatsapp" className="text-sm hover:text-white transition-colors">Link de WhatsApp</Link></li>
                   <li><Link href="/generador-nombres" className="text-sm hover:text-white transition-colors">Generador de Nombres</Link></li>
                   <li><Link href="/generador-contrasenas" className="text-sm hover:text-white transition-colors">Generador de Contraseñas</Link></li>
+                  <li><Link href="/generador-hashtags" className="text-sm hover:text-white transition-colors">Generador de Hashtags</Link></li>
                   <li><Link href="/generador-qr" className="text-sm hover:text-white transition-colors">Generador de QR</Link></li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Texto</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/corrector-ortografico" className="text-sm hover:text-white transition-colors">Corrector Ortográfico</Link></li>
                   <li><Link href="/contador-de-palabras" className="text-sm hover:text-white transition-colors">Contador de Palabras</Link></li>
                   <li><Link href="/traductor-binario" className="text-sm hover:text-white transition-colors">Traductor Binario/Morse</Link></li>
+                  <li><Link href="/generador-lorem-ipsum" className="text-sm hover:text-white transition-colors">Generador Lorem Ipsum</Link></li>
                   <li><Link href="/mayusculas-minusculas" className="text-sm hover:text-white transition-colors">Mayúsculas / Minúsculas</Link></li>
                 </ul>
               </div>

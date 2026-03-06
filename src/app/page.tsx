@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2 } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, SpellCheck, TextCursorInput, ArrowRightLeft, Flame, Hash } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -49,7 +49,7 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 26,
+  numberOfItems: 31,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
     { "@type": "ListItem", position: 2, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
@@ -77,6 +77,11 @@ const itemListJsonLd = {
     { "@type": "ListItem", position: 24, name: "Texto Invisible para WhatsApp", url: `${SITE_URL}/texto-invisible` },
     { "@type": "ListItem", position: 25, name: "CPS Test Online", url: `${SITE_URL}/cps-test` },
     { "@type": "ListItem", position: 26, name: "Calculadora de Edad Exacta", url: `${SITE_URL}/calculadora-edad` },
+    { "@type": "ListItem", position: 27, name: "Corrector Ortográfico Online", url: `${SITE_URL}/corrector-ortografico` },
+    { "@type": "ListItem", position: 28, name: "Generador de Lorem Ipsum", url: `${SITE_URL}/generador-lorem-ipsum` },
+    { "@type": "ListItem", position: 29, name: "Conversor de Unidades", url: `${SITE_URL}/conversor-unidades` },
+    { "@type": "ListItem", position: 30, name: "Calculadora de Calorías y TDEE", url: `${SITE_URL}/calculadora-calorias` },
+    { "@type": "ListItem", position: 31, name: "Generador de Hashtags", url: `${SITE_URL}/generador-hashtags` },
   ],
 };
 
@@ -328,6 +333,46 @@ export default function Home() {
       Icono: Cake,
       color: 'from-amber-400 to-orange-500',
       shadow: 'shadow-amber-500/20'
+    },
+    {
+      titulo: 'Corrector Ortográfico',
+      descripcion: 'Revisa tu texto en español y detecta errores de ortografía, tildes y gramática al instante.',
+      ruta: '/corrector-ortografico',
+      Icono: SpellCheck,
+      color: 'from-red-400 to-rose-500',
+      shadow: 'shadow-red-500/20'
+    },
+    {
+      titulo: 'Conversor de Unidades',
+      descripcion: 'Convierte entre kg, libras, metros, pies, Celsius, Fahrenheit y muchas más unidades.',
+      ruta: '/conversor-unidades',
+      Icono: ArrowRightLeft,
+      color: 'from-sky-400 to-blue-500',
+      shadow: 'shadow-sky-500/20'
+    },
+    {
+      titulo: 'Calculadora de Calorías',
+      descripcion: 'Calcula tu metabolismo basal (BMR) y gasto diario (TDEE) con la fórmula Mifflin-St Jeor.',
+      ruta: '/calculadora-calorias',
+      Icono: Flame,
+      color: 'from-orange-400 to-red-500',
+      shadow: 'shadow-orange-500/20'
+    },
+    {
+      titulo: 'Generador de Hashtags',
+      descripcion: 'Genera los mejores hashtags para Instagram, TikTok y Twitter a partir de una palabra clave.',
+      ruta: '/generador-hashtags',
+      Icono: Hash,
+      color: 'from-pink-400 to-fuchsia-500',
+      shadow: 'shadow-pink-500/20'
+    },
+    {
+      titulo: 'Generador Lorem Ipsum',
+      descripcion: 'Texto de relleno para tus diseños web. Elige párrafos, palabras o listas y copia al instante.',
+      ruta: '/generador-lorem-ipsum',
+      Icono: TextCursorInput,
+      color: 'from-violet-400 to-purple-500',
+      shadow: 'shadow-violet-500/20'
     }
   ];
 
