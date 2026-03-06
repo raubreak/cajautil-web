@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -27,7 +27,12 @@ export const metadata: Metadata = {
     "enlace whatsapp",
     "calculadora imc",
     "letras raras instagram",
-    "compresor webp"
+    "compresor webp",
+    "ruleta aleatoria",
+    "calculadora regla de tres",
+    "extractor colores online",
+    "temporizador online",
+    "calculadora descuentos"
   ],
   alternates: {
     canonical: SITE_URL,
@@ -40,24 +45,29 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 16,
+  numberOfItems: 21,
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Generador de Letras Raras", url: `${SITE_URL}/generador-letras-raras` },
-    { "@type": "ListItem", position: 2, name: "Compresor de Imágenes a WebP", url: `${SITE_URL}/compresor-webp` },
-    { "@type": "ListItem", position: 3, name: "Calculadora de Hipotecas", url: `${SITE_URL}/calculadora-hipotecas` },
-    { "@type": "ListItem", position: 4, name: "Generador Link WhatsApp", url: `${SITE_URL}/generador-enlace-whatsapp` },
-    { "@type": "ListItem", position: 5, name: "Calculadora de IMC", url: `${SITE_URL}/calculadora-imc` },
-    { "@type": "ListItem", position: 6, name: "Calculadora de Porcentajes", url: `${SITE_URL}/calculadora-porcentajes` },
-    { "@type": "ListItem", position: 7, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
-    { "@type": "ListItem", position: 8, name: "Contador de Palabras y Caracteres", url: `${SITE_URL}/contador-de-palabras` },
-    { "@type": "ListItem", position: 9, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
-    { "@type": "ListItem", position: 10, name: "Validador de IBAN", url: `${SITE_URL}/validador-iban` },
-    { "@type": "ListItem", position: 11, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
-    { "@type": "ListItem", position: 12, name: "Generador de Nombres", url: `${SITE_URL}/generador-nombres` },
-    { "@type": "ListItem", position: 13, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
-    { "@type": "ListItem", position: 14, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
-    { "@type": "ListItem", position: 15, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
-    { "@type": "ListItem", position: 16, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
+    { "@type": "ListItem", position: 1, name: "Extractor de Colores de Imagen", url: `${SITE_URL}/extractor-colores` },
+    { "@type": "ListItem", position: 2, name: "Temporizador y Alarma Online", url: `${SITE_URL}/temporizador` },
+    { "@type": "ListItem", position: 3, name: "Calculadora de Descuentos", url: `${SITE_URL}/calculadora-descuentos` },
+    { "@type": "ListItem", position: 4, name: "Ruleta Aleatoria Online", url: `${SITE_URL}/ruleta-aleatoria` },
+    { "@type": "ListItem", position: 5, name: "Generador de Letras Raras", url: `${SITE_URL}/generador-letras-raras` },
+    { "@type": "ListItem", position: 6, name: "Compresor de Imágenes a WebP", url: `${SITE_URL}/compresor-webp` },
+    { "@type": "ListItem", position: 7, name: "Calculadora de Regla de 3", url: `${SITE_URL}/calculadora-regla-de-tres` },
+    { "@type": "ListItem", position: 8, name: "Calculadora de Hipotecas", url: `${SITE_URL}/calculadora-hipotecas` },
+    { "@type": "ListItem", position: 9, name: "Generador Link WhatsApp", url: `${SITE_URL}/generador-enlace-whatsapp` },
+    { "@type": "ListItem", position: 10, name: "Calculadora de IMC", url: `${SITE_URL}/calculadora-imc` },
+    { "@type": "ListItem", position: 11, name: "Calculadora de Porcentajes", url: `${SITE_URL}/calculadora-porcentajes` },
+    { "@type": "ListItem", position: 12, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
+    { "@type": "ListItem", position: 13, name: "Contador de Palabras y Caracteres", url: `${SITE_URL}/contador-de-palabras` },
+    { "@type": "ListItem", position: 14, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
+    { "@type": "ListItem", position: 15, name: "Validador de IBAN", url: `${SITE_URL}/validador-iban` },
+    { "@type": "ListItem", position: 16, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
+    { "@type": "ListItem", position: 17, name: "Generador de Nombres", url: `${SITE_URL}/generador-nombres` },
+    { "@type": "ListItem", position: 18, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
+    { "@type": "ListItem", position: 19, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
+    { "@type": "ListItem", position: 20, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
+    { "@type": "ListItem", position: 21, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
   ],
 };
 
@@ -102,6 +112,46 @@ const faqJsonLd = {
 
 export default function Home() {
   const herramientas = [
+    {
+      titulo: 'Extrayector de Colores',
+      descripcion: 'Saca la paleta HEX y RGB de cualquier imagen de forma privada y rápida en tu navegador.',
+      ruta: '/extractor-colores',
+      Icono: Palette,
+      color: 'from-indigo-400 to-blue-500',
+      shadow: 'shadow-indigo-500/20'
+    },
+    {
+      titulo: 'Temporizador & Alarma',
+      descripcion: 'Reloj de cuenta atrás y cronómetro para tus rutinas de estudio, cocina o ejercicio.',
+      ruta: '/temporizador',
+      Icono: AlarmClock,
+      color: 'from-blue-400 to-indigo-500',
+      shadow: 'shadow-blue-500/20'
+    },
+    {
+      titulo: 'Calculadora de Descuentos',
+      descripcion: 'Averigua el precio final y cuánto te ahorras en las rebajas con un solo clic.',
+      ruta: '/calculadora-descuentos',
+      Icono: Tag,
+      color: 'from-rose-400 to-pink-500',
+      shadow: 'shadow-rose-500/20'
+    },
+    {
+      titulo: 'Ruleta Aleatoria / Sorteos',
+      descripcion: 'Haz sorteos imparciales o toma decisiones rápidas girando esta ruleta vibrante y animada al instante.',
+      ruta: '/ruleta-aleatoria',
+      Icono: RefreshCcw,
+      color: 'from-orange-400 to-rose-500',
+      shadow: 'shadow-orange-500/20'
+    },
+    {
+      titulo: 'Regla de 3 (Matematicas)',
+      descripcion: 'Calcula proporciones directas e inversas. Introduce tres valores y descubre el resultado con la fórmula explicada.',
+      ruta: '/calculadora-regla-de-tres',
+      Icono: ArrowLeftRight,
+      color: 'from-emerald-400 to-teal-500',
+      shadow: 'shadow-emerald-500/20'
+    },
     {
       titulo: 'Letras para Instagram',
       descripcion: 'Transforma palabras en fuentes góticas o estéticas para tu biografía y TikTok.',

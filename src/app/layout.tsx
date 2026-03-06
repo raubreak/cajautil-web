@@ -105,8 +105,12 @@ export default function RootLayout({
 }>) {
 
   const herramientasNav = [
-    { nombre: "Letras Raras", ruta: "/generador-letras-raras" },
-    { nombre: "Convertir a WebP", ruta: "/compresor-webp" },
+    { nombre: "Colores", ruta: "/extractor-colores" },
+    { nombre: "Temporizador", ruta: "/temporizador" },
+    { nombre: "Descuentos", ruta: "/calculadora-descuentos" },
+    { nombre: "Ruleta", ruta: "/ruleta-aleatoria" },
+    { nombre: "WebP", ruta: "/compresor-webp" },
+    { nombre: "Regla de 3", ruta: "/calculadora-regla-de-tres" },
     { nombre: "Hipotecas", ruta: "/calculadora-hipotecas" },
     { nombre: "Link WhatsApp", ruta: "/generador-enlace-whatsapp" },
     { nombre: "IMC", ruta: "/calculadora-imc" },
@@ -188,6 +192,8 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Calculadoras</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/calculadora-descuentos" className="text-sm hover:text-white transition-colors">Calculadora de Descuentos</Link></li>
+                  <li><Link href="/calculadora-regla-de-tres" className="text-sm hover:text-white transition-colors">Calculadora Regla de 3</Link></li>
                   <li><Link href="/calculadora-porcentajes" className="text-sm hover:text-white transition-colors">Calculadora de Porcentajes</Link></li>
                   <li><Link href="/calculadora-iva" className="text-sm hover:text-white transition-colors">Calculadora de IVA</Link></li>
                   <li><Link href="/calculadora-hipotecas" className="text-sm hover:text-white transition-colors">Calculadora de Hipotecas</Link></li>
@@ -200,6 +206,8 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Generadores</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/temporizador" className="text-sm hover:text-white transition-colors">Temporizador & Alarma</Link></li>
+                  <li><Link href="/ruleta-aleatoria" className="text-sm hover:text-white transition-colors">Ruleta Aleatoria</Link></li>
                   <li><Link href="/generador-letras-raras" className="text-sm hover:text-white transition-colors">Letras Raras para Insta</Link></li>
                   <li><Link href="/generador-enlace-whatsapp" className="text-sm hover:text-white transition-colors">Link de WhatsApp</Link></li>
                   <li><Link href="/generador-nombres" className="text-sm hover:text-white transition-colors">Generador de Nombres</Link></li>
@@ -217,6 +225,7 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Imágenes & Escáner</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/extractor-colores" className="text-sm hover:text-white transition-colors">Extractor de Colores</Link></li>
                   <li><Link href="/compresor-webp" className="text-sm hover:text-white transition-colors">Convertir a WebP</Link></li>
                   <li><Link href="/lector-qr" className="text-sm hover:text-white transition-colors">Lector de Códigos QR</Link></li>
                 </ul>
