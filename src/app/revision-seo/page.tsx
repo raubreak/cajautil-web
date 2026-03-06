@@ -25,7 +25,7 @@ export default async function RevisionSeoPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 py-12 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <header className="mb-10">
           <h1 className="text-3xl font-black text-slate-800 mb-2">Panel SEO Programático</h1>
           <p className="text-slate-500">Listado de artículos generados automáticamente por Gemini. Esta página está en <code className="bg-slate-200 px-1 rounded">noindex</code> y no es visible en buscadores.</p>
