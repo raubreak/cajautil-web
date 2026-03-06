@@ -31,7 +31,8 @@ export async function generateProgrammaticArticle(force = false) {
 
   // 1. Control de frecuencia
   if (!force) {
-    const intervalDays = parseInt(process.env.POST_INTERVAL_DAYS || '1', 10);
+    const setting = await prisma.setting.findUnique({ where: { key: 'POST_INTERVAL_DAYS' } });
+    const intervalDays = setting ? parseInt(setting.value, 10) : parseInt(process.env.POST_INTERVAL_DAYS || '1', 10);
     
     if (intervalDays > 0) {
       const lastArticle = await prisma.article.findFirst({

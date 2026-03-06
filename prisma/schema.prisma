@@ -25,3 +25,9 @@ model Article {
   @@index([slug])
   @@index([publishedAt])
 }
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique // e.g., 'POST_INTERVAL_DAYS'
+  value String
+}

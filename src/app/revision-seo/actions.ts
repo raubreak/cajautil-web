@@ -31,3 +31,18 @@ export async function deleteArticleAction(id: string) {
     return { success: false, error: error.message || 'Error deleting' };
   }
 }
+
+export async function setIntervalDaysAction(days: number) {
+  try {
+    await prisma.setting.upsert({
+      where: { key: 'POST_INTERVAL_DAYS' },
+      update: { value: days.toString() },
+      create: { key: 'POST_INTERVAL_DAYS', value: days.toString() },
+    });
+    revalidatePath('/revision-seo');
+    return { success: true };
+  } catch (error: any) {
+    console.error('Error setting interval:', error);
+    return { success: false, error: error.message };
+  }
+}
