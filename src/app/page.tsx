@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail, Timer } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail, Timer, TrendingUp } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -52,7 +52,7 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 33,
+  numberOfItems: 34,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
     { "@type": "ListItem", position: 2, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
@@ -86,6 +86,7 @@ const itemListJsonLd = {
     { "@type": "ListItem", position: 31, name: "Simulador de Préstamos Personales", url: `${SITE_URL}/calculadora-prestamos` },
     { "@type": "ListItem", position: 32, name: "Generador de Firmas de Email", url: `${SITE_URL}/generador-firmas-email` },
     { "@type": "ListItem", position: 33, name: "Cronómetro Online Precisión", url: `${SITE_URL}/cronometro` },
+    { "@type": "ListItem", position: 34, name: "Calculadora de Interés Compuesto", url: `${SITE_URL}/calculadora-interes-compuesto` },
   ],
 };
 
@@ -169,6 +170,14 @@ export default function Home() {
       Icono: HomeIcon,
       color: 'from-sky-500 to-blue-600',
       shadow: 'shadow-sky-500/20'
+    },
+    {
+      titulo: 'Interés Compuesto',
+      descripcion: 'Descubre el poder de la reinversión a lo largo del tiempo con gráficos detallados de tu patrimonio.',
+      ruta: '/calculadora-interes-compuesto',
+      Icono: TrendingUp,
+      color: 'from-emerald-500 to-teal-600',
+      shadow: 'shadow-emerald-500/20'
     },
     {
       titulo: 'Contador de Palabras',

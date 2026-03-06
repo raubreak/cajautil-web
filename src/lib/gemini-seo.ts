@@ -15,6 +15,7 @@ export const HERRAMIENTAS = [
   { nombre: "Extractor de Colores", url: "/extractor-colores" },
   { nombre: "Ruleta Aleatoria", url: "/ruleta-aleatoria" },
   { nombre: "Compresor WebP", url: "/compresor-webp" },
+  { nombre: "Calculadora de Interés Compuesto", url: "/calculadora-interes-compuesto" },
 ];
 
 export async function generateProgrammaticArticle(force = false) {
