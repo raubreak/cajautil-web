@@ -11,3 +11,18 @@ export async function forceGenerateArticle() {
     return { success: false, error: error.message || 'Error interno' };
   }
 }
+
+import prisma from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
+
+export async function deleteArticleAction(id: string) {
+  try {
+    await prisma.article.delete({ where: { id } });
+    revalidatePath('/revision-seo');
+    revalidatePath('/');
+    return { success: true };
+  } catch (error: any) {
+    console.error('Error deleting article:', error);
+    return { success: false, error: error.message || 'Error deleting' };
+  }
+}

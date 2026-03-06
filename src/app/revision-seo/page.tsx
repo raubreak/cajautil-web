@@ -2,9 +2,9 @@ import prisma from '@/lib/prisma';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import GenerateButton from './GenerateButton';
+import DeleteButton from './DeleteButton';
 
 export const metadata: Metadata = {
-  title: 'Revisión SEO Interna',
   robots: {
     index: false,
     follow: false,
@@ -55,13 +55,16 @@ export default async function RevisionSeoPage() {
                       {new Date(article.publishedAt).toLocaleDateString('es-ES')}
                     </td>
                     <td className="px-6 py-4">
-                      <Link 
-                        href={`/articulos/${article.slug}`} 
-                        target="_blank"
-                        className="text-blue-600 hover:text-blue-800 font-semibold"
-                      >
-                        Ver Artículo
-                      </Link>
+                      <div className="flex items-center gap-3">
+                        <Link 
+                          href={`/articulos/${article.slug}`} 
+                          target="_blank"
+                          className="text-blue-600 hover:text-blue-800 font-semibold"
+                        >
+                          Ver Artículo
+                        </Link>
+                        <DeleteButton id={article.id} />
+                      </div>
                     </td>
                   </tr>
                 ))}

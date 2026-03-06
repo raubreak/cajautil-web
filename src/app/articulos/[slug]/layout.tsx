@@ -26,7 +26,6 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
       title: article.title,
       description: article.content.substring(0, 160).replace(/\#|\*/g, '').trim() + '...',
       url: `https://cajautil.com/articulos/${article.slug}`,
-      images: article.coverImageUrl ? [{ url: article.coverImageUrl }] : [],
     }
   };
 }

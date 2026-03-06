@@ -34,17 +34,6 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           <ArrowLeft className="w-4 h-4 mr-1" /> Volver a Herramientas
         </Link>
 
-        {article.coverImageUrl && (
-          <div className="relative w-full h-64 sm:h-96 rounded-3xl overflow-hidden mb-10 shadow-lg border border-slate-200">
-            {/* Usamos img base para no tener que configurar domains en next.config.js dinámicamente */}
-            <img 
-              src={article.coverImageUrl} 
-              alt={article.title} 
-              className="object-cover w-full h-full"
-            />
-          </div>
-        )}
-
         <header className="mb-12">
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">
             {article.title}

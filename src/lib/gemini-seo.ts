@@ -67,8 +67,7 @@ Debes responder ÚNICAMENTE con un JSON válido parseable. Sin markdown decorati
 {
   "title": "El título del artículo atractivo (sin hashtags)",
   "content": "El contenido entero del artículo en Markdown...",
-  "tags": "tag1, tag2, tag3",
-  "image_keyword": "Una sola palabra clave en INGLÉS que describa el artículo para buscar una foto en Unsplash. Ejemplo: 'fitness' o 'money' o 'office'"
+  "tags": "tag1, tag2, tag3"
 }`;
 
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -81,12 +80,9 @@ Debes responder ÚNICAMENTE con un JSON válido parseable. Sin markdown decorati
     title: string;
     content: string;
     tags: string;
-    image_keyword: string;
   }
   
   const articleData: GeneratedArticle = JSON.parse(cleanJsonString);
-
-  const coverUrl = `https://images.unsplash.com/featured/1200x630/?${encodeURIComponent(articleData.image_keyword)},minimalist`;
 
   let baseSlug = slugify(articleData.title, { lower: true, strict: true });
   let finalSlug = baseSlug;
@@ -103,7 +99,6 @@ Debes responder ÚNICAMENTE con un JSON válido parseable. Sin markdown decorati
       slug: finalSlug,
       content: articleData.content,
       tags: articleData.tags,
-      coverImageUrl: coverUrl,
       targetToolUrl: herramientaDestino.url,
     }
   });
