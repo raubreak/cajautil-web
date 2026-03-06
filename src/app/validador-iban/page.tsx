@@ -137,7 +137,7 @@ export default function ValidadorIBAN() {
           <h3 className="text-xl font-bold mt-0 flex items-center gap-2 text-indigo-600">
             <ShieldCheck className="w-5 h-5" /> Privacidad Bancaria 100%
           </h3>
-          <p className="mb-0 text-slate-600">Al tratarse de datos financieros, hemos diseñado esta herramienta para que se ejecute <em>Client-Side</em>. Esto significa que la comprobación algorítmica se procesa utilizando los recursos de tu smartphone u ordenador y **nada** se transmite por internet. En CajaUtil.com no recogemos, no vemos y no almacenamos el IBAN revisado.</p>
+          <p className="mb-0 text-slate-600">Al tratarse de datos financieros, hemos diseñado esta herramienta para que se ejecute <em>Client-Side</em>. Esto significa que la comprobación algorítmica se procesa utilizando los recursos de tu smartphone u ordenador y <strong>nada</strong> se transmite por internet. En CajaUtil.com no recogemos, no vemos y no almacenamos el IBAN revisado.</p>
         </article>
 
         <h3 className="text-xl font-bold">Herramientas relacionadas de CajaUtil</h3>

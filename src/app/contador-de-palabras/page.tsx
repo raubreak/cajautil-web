@@ -19,9 +19,6 @@ export default function ContadorPalabras() {
         <p className="text-center text-slate-500 mb-8 max-w-2xl mx-auto">
           Pega tu texto abajo. Analizaremos instantáneamente las palabras, caracteres y tiempo de lectura de tu ensayo, artículo o post.
         </p>
-        
-        {/* AdSense Top */}
-        <div className="w-full h-[90px] mb-6 bg-slate-100 border border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-sm rounded-xl">Espacio AdSense Leaderboard</div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" role="status" aria-live="polite" aria-label="Estadísticas del texto">
           <div className="bg-emerald-50 p-4 rounded-xl text-center border border-emerald-100">

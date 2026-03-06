@@ -34,9 +34,6 @@ export default function ConvertidorTexto() {
           onChange={(e) => setTexto(e.target.value)}
           aria-label="Zona de texto para convertir mayúsculas y minúsculas"
         ></textarea>
-        
-        {/* AdSense Bottom */}
-        <div className="w-full h-[90px] mt-6 bg-slate-100 border border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-sm rounded-xl">Publicidad AdSense Auto</div>
       </div>
 
       {/* Contenido SEO */}

@@ -105,6 +105,9 @@ export default function RootLayout({
 }>) {
 
   const herramientasNav = [
+    { nombre: "Hipotecas", ruta: "/calculadora-hipotecas" },
+    { nombre: "Link WhatsApp", ruta: "/generador-enlace-whatsapp" },
+    { nombre: "IMC", ruta: "/calculadora-imc" },
     { nombre: "Calculadora %", ruta: "/calculadora-porcentajes" },
     { nombre: "Sueldo Neto", ruta: "/calculadora-sueldo-neto" },
     { nombre: "Calculadora IVA", ruta: "/calculadora-iva" },
@@ -185,6 +188,8 @@ export default function RootLayout({
                 <ul className="space-y-2">
                   <li><Link href="/calculadora-porcentajes" className="text-sm hover:text-white transition-colors">Calculadora de Porcentajes</Link></li>
                   <li><Link href="/calculadora-iva" className="text-sm hover:text-white transition-colors">Calculadora de IVA</Link></li>
+                  <li><Link href="/calculadora-hipotecas" className="text-sm hover:text-white transition-colors">Calculadora de Hipotecas</Link></li>
+                  <li><Link href="/calculadora-imc" className="text-sm hover:text-white transition-colors">Calculadora de IMC</Link></li>
                   <li><Link href="/calculadora-sueldo-neto" className="text-sm hover:text-white transition-colors">Calculadora de Sueldo Neto</Link></li>
                   <li><Link href="/calculadora-dias" className="text-sm hover:text-white transition-colors">Calculadora de Días</Link></li>
                   <li><Link href="/validador-iban" className="text-sm hover:text-white transition-colors">Validador de IBAN</Link></li>
@@ -193,6 +198,7 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Generadores</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/generador-enlace-whatsapp" className="text-sm hover:text-white transition-colors">Link de WhatsApp</Link></li>
                   <li><Link href="/generador-nombres" className="text-sm hover:text-white transition-colors">Generador de Nombres</Link></li>
                   <li><Link href="/generador-contrasenas" className="text-sm hover:text-white transition-colors">Generador de Contraseñas</Link></li>
                   <li><Link href="/generador-qr" className="text-sm hover:text-white transition-colors">Generador de QR</Link></li>
