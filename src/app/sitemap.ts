@@ -169,12 +169,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/corrector-ortografico`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
       url: `${SITE_URL}/generador-lorem-ipsum`,
       lastModified: now,
       changeFrequency: 'monthly',

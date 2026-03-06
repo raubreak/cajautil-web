@@ -31,7 +31,6 @@ const TOOLS = [
   { nombre: "Texto Invisible", ruta: "/texto-invisible", tags: "texto invisible unicode whatsapp vacio caracter" },
   { nombre: "CPS Test", ruta: "/cps-test", tags: "cps clicks por segundo test velocidad gaming" },
   { nombre: "Calculadora de Edad", ruta: "/calculadora-edad", tags: "edad exacta cumpleaños dias vividos horas" },
-  { nombre: "Corrector Ortográfico", ruta: "/corrector-ortografico", tags: "corrector ortografia gramatica tildes español texto" },
   { nombre: "Generador Lorem Ipsum", ruta: "/generador-lorem-ipsum", tags: "lorem ipsum texto relleno prueba dummy parrafo" },
   { nombre: "Conversor de Unidades", ruta: "/conversor-unidades", tags: "unidades convertir kg libras metros pies celsius fahrenheit" },
   { nombre: "Calculadora de Calorías", ruta: "/calculadora-calorias", tags: "calorias tdee metabolismo basal bmr fitness dieta" },

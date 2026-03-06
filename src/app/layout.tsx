@@ -132,7 +132,6 @@ export default function RootLayout({
     { nombre: "Generador QR", ruta: "/generador-qr" },
     { nombre: "Lector QR", ruta: "/lector-qr" },
     { nombre: "Calculadora Días", ruta: "/calculadora-dias" },
-    { nombre: "Corrector", ruta: "/corrector-ortografico" },
     { nombre: "Lorem Ipsum", ruta: "/generador-lorem-ipsum" },
     { nombre: "Unidades", ruta: "/conversor-unidades" },
     { nombre: "Calorías", ruta: "/calculadora-calorias" },
@@ -240,7 +239,6 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Texto</h3>
                 <ul className="space-y-2">
-                  <li><Link href="/corrector-ortografico" className="text-sm hover:text-white transition-colors">Corrector Ortográfico</Link></li>
                   <li><Link href="/contador-de-palabras" className="text-sm hover:text-white transition-colors">Contador de Palabras</Link></li>
                   <li><Link href="/traductor-binario" className="text-sm hover:text-white transition-colors">Traductor Binario/Morse</Link></li>
                   <li><Link href="/generador-lorem-ipsum" className="text-sm hover:text-white transition-colors">Generador Lorem Ipsum</Link></li>
