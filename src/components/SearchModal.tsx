@@ -35,6 +35,7 @@ const TOOLS = [
   { nombre: "Conversor de Unidades", ruta: "/conversor-unidades", tags: "unidades convertir kg libras metros pies celsius fahrenheit" },
   { nombre: "Calculadora de Calorías", ruta: "/calculadora-calorias", tags: "calorias tdee metabolismo basal bmr fitness dieta" },
   { nombre: "Generador de Hashtags", ruta: "/generador-hashtags", tags: "hashtags instagram tiktok twitter redes sociales" },
+  { nombre: "Cronómetro Online", ruta: "/cronometro", tags: "cronometro online stopwatch reloj medir tiempo vueltas" },
   { nombre: "Simulador de Préstamos", ruta: "/calculadora-prestamos", tags: "prestamo cuota mensual amortizacion frances interes banco dinero" },
   { nombre: "Firmas de Email", ruta: "/generador-firmas-email", tags: "firma email firma correo html profesional gmail outlook avatar logo" },
 ];

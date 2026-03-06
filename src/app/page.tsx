@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail, Timer } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -38,7 +38,8 @@ export const metadata: Metadata = {
     "temporizador online",
     "calculadora descuentos",
     "simulador prestamo personal",
-    "firma email profesional"
+    "firma email profesional",
+    "cronometro online gratis"
   ],
   alternates: {
     canonical: SITE_URL,
@@ -51,7 +52,7 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 32,
+  numberOfItems: 33,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
     { "@type": "ListItem", position: 2, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
@@ -84,6 +85,7 @@ const itemListJsonLd = {
     { "@type": "ListItem", position: 29, name: "Calculadora de Calorías y TDEE", url: `${SITE_URL}/calculadora-calorias` },
     { "@type": "ListItem", position: 31, name: "Simulador de Préstamos Personales", url: `${SITE_URL}/calculadora-prestamos` },
     { "@type": "ListItem", position: 32, name: "Generador de Firmas de Email", url: `${SITE_URL}/generador-firmas-email` },
+    { "@type": "ListItem", position: 33, name: "Cronómetro Online Precisión", url: `${SITE_URL}/cronometro` },
   ],
 };
 
@@ -383,6 +385,14 @@ export default function Home() {
       Icono: Mail,
       color: 'from-emerald-400 to-teal-500',
       shadow: 'shadow-emerald-500/20'
+    },
+    {
+      titulo: 'Cronómetro Online',
+      descripcion: 'Mide tiempos con absoluta precisión. Incluye sistema de vueltas y centésimas de segundo.',
+      ruta: '/cronometro',
+      Icono: Timer,
+      color: 'from-indigo-400 to-blue-500',
+      shadow: 'shadow-indigo-500/20'
     }
   ];
 
