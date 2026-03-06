@@ -40,11 +40,11 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           </h1>
           
           <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-slate-500">
-            <span className="flex items-center gap-1.5"><CalendarDays className="w-4 h-4" /> {formattedDate}</span>
-            <div className="flex gap-2">
+            <span className="shrink-0 flex items-center gap-1.5"><CalendarDays className="w-4 h-4" /> {formattedDate}</span>
+            <div className="flex flex-wrap gap-2">
               {tags.map(tag => (
-                <span key={tag} className="flex items-center gap-1 bg-slate-200 px-2 py-1 rounded-md text-slate-700">
-                  <Tag className="w-3 h-3" /> {tag}
+                <span key={tag} className="inline-flex items-center gap-1.5 bg-slate-200 px-2.5 py-1 rounded-md text-slate-700 whitespace-nowrap">
+                  <Tag className="w-3.5 h-3.5 shrink-0" /> {tag.trim()}
                 </span>
               ))}
             </div>

@@ -17,9 +17,14 @@ import { revalidatePath } from 'next/cache';
 
 export async function deleteArticleAction(id: string) {
   try {
-    await prisma.article.delete({ where: { id } });
-    revalidatePath('/revision-seo');
-    revalidatePath('/');
+    const article = await prisma.article.findUnique({ where: { id } });
+    if (article) {
+      await prisma.article.delete({ where: { id } });
+      revalidatePath('/revision-seo');
+      revalidatePath('/');
+      revalidatePath('/sitemap.xml');
+      revalidatePath(`/articulos/${article.slug}`);
+    }
     return { success: true };
   } catch (error: any) {
     console.error('Error deleting article:', error);
