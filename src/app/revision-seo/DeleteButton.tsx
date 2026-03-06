@@ -33,7 +33,7 @@ export default function DeleteButton({ id }: { id: string }) {
       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
         loading 
           ? 'bg-slate-100 text-slate-400 cursor-not-allowed' 
-          : 'bg-red-50 text-red-600 hover:bg-red-600 hover:text-white'
+          : 'bg-red-50 text-red-600 hover:bg-red-600 hover:text-white cursor-pointer'
       }`}
       title="Eliminar Artículo"
     >

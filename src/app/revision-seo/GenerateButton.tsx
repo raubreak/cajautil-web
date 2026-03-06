@@ -34,7 +34,7 @@ export default function GenerateButton() {
       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all ${
         loading 
           ? 'bg-slate-200 text-slate-500 cursor-not-allowed' 
-          : 'bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white shadow-blue-500/20'
+          : 'bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white shadow-blue-500/20 cursor-pointer'
       }`}
     >
       {loading ? (
