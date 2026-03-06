@@ -5,12 +5,13 @@ import { ToolRegistry } from '@/lib/toolRegistry';
 import type { Metadata, ResolvingMetadata } from 'next';
 
 interface PageProps {
-  params: { toolSlug: string };
+  params: Promise<{ toolSlug: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { toolSlug } = await params;
   const variant = await prisma.toolVariant.findUnique({
-    where: { slug: params.toolSlug }
+    where: { slug: toolSlug }
   });
 
   if (!variant) return {};
@@ -23,8 +24,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function DynamicToolPage({ params }: PageProps) {
+  const { toolSlug } = await params;
   const variant = await prisma.toolVariant.findUnique({
-    where: { slug: params.toolSlug }
+    where: { slug: toolSlug }
   });
 
   if (!variant) {
