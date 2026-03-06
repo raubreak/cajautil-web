@@ -74,11 +74,6 @@ export default function CalculadoraDias() {
         </div>
       </div>
       
-      {/* AdSense */}
-      <div className="w-full max-w-xl mt-6 bg-slate-200 border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-sm font-medium rounded-xl h-[120px]">
-        Publicidad AdSense
-      </div>
-
       {/* Contenido SEO */}
       <article className="w-full max-w-xl mt-6 bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
         <h2 className="text-xl font-bold text-slate-800 mb-4">¿Cómo calcular los días entre dos fechas?</h2>

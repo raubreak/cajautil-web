@@ -110,11 +110,6 @@ export default function LectorQR() {
         </div>
       </div>
 
-       {/* Banner AdSense */}
-       <div className="w-full max-w-2xl bg-white border border-slate-200 flex flex-col items-center justify-center text-slate-400 text-sm font-medium rounded-xl h-[120px] shadow-sm mb-8">
-        Publicidad Google AdSense
-      </div>
-
       {/* Contenido SEO */}
       <article className="w-full max-w-2xl bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
         <h2 className="text-xl font-bold text-slate-800 mb-4">¿Cómo escanear un QR desde una foto?</h2>

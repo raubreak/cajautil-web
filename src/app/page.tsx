@@ -265,12 +265,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Espacio Publicitario AdSense */}
-        <div className="mt-20 w-full bg-slate-200/50 border border-slate-300/50 border-dashed rounded-3xl p-8 flex flex-col items-center justify-center text-slate-400 min-h-[150px]">
-          <span className="text-xs uppercase tracking-widest font-bold mb-2 opacity-50">Anuncio</span>
-          <p className="font-medium">Espacio reservado para AdSense Banner Multiformato</p>
-        </div>
-
         {/* Sección SEO — Contenido para posicionamiento */}
         <section className="mt-20 max-w-4xl mx-auto" aria-label="Información sobre nuestras herramientas">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-6 text-center">
