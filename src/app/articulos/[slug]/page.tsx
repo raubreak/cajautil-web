@@ -6,13 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, CalendarDays, ExternalLink, Tag } from 'lucide-react';
 
-export const revalidate = 3600; // Cache de 1 hora
+export const dynamic = 'force-dynamic';
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
+export default async function ArticlePage({ params }: { params: { slug: string } | Promise<{slug: string}> }) {
+  const resolvedParams = await params;
   let article = null;
   try {
     article = await prisma.article.findUnique({
-      where: { slug: params.slug },
+      where: { slug: resolvedParams.slug },
     });
   } catch (err) {
     console.error('Error fetching article:', err);

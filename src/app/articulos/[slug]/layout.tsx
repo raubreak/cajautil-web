@@ -2,11 +2,14 @@ import type { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: { slug: string } | Promise<{slug: string}> }): Promise<Metadata> {
+  const resolvedParams = await params;
   let article = null;
   try {
     article = await prisma.article.findUnique({
-      where: { slug: params.slug },
+      where: { slug: resolvedParams.slug },
     });
   } catch (err) {
     console.error('Error fetching layout metadata:', err);
