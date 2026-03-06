@@ -16,7 +16,7 @@ export default function GeneradorWhatsApp() {
   const formatPrefix = prefijo.replace(/[^0-9]/g, '');
   
   // URL generada
-  const linkGeneral = `https://wa.me/${formatPrefix}${formatPhone}?text=${encodeURIComponent(mensaje)}`;
+  const linkGeneral = `https://api.whatsapp.com/send?phone=${formatPrefix}${formatPhone}&text=${encodeURIComponent(mensaje)}`;
   const isValid = formatPhone.length >= 6;
 
   const handleCopy = () => {
@@ -118,7 +118,7 @@ export default function GeneradorWhatsApp() {
           
           <div className="w-full bg-white border border-slate-200 rounded-xl flex items-stretch overflow-hidden mb-6 tooltip-container relative group">
             <div className="flex-1 px-4 py-3 text-sm sm:text-base font-mono truncate text-green-800 select-all">
-              {isValid ? linkGeneral : 'https://wa.me/xxxxxxxx'}
+              {isValid ? linkGeneral : 'https://api.whatsapp.com/send?phone=...'}
             </div>
             <button 
               onClick={handleCopy}
@@ -153,7 +153,7 @@ export default function GeneradorWhatsApp() {
         
         <p>En el marketing digital, la fricción de obligar a tus clientes a que guarden tu "Teléfono de Contacto" en su agenda antes de poder escribir un mensaje por WhatsApp te hace perder <strong>más del 40% de tus ventas o conversiones.</strong></p>
 
-        <p>Nuestro <strong>Generador del link de WhatsApp corto</strong> (o acortador para Biografías) crea una ruta estándar y limpia autorizada por META inc. a través del dominio oficial universal <code>wa.me/número</code>. Cuando pones esto en tu perfil de TikTok o LinkTree, la aplicación redirige al usuario abriendo la App instalada de WhatsApp e incrustando el mensaje prediseñado en la barra de texto.</p>
+        <p>Nuestro <strong>Generador del link de WhatsApp</strong> (ideal para Biografías o páginas web) crea una ruta estándar y limpia autorizada por META inc. a través de la API oficial <code>api.whatsapp.com</code>. Cuando pones esto en tu perfil de TikTok o LinkTree, la aplicación redirige al usuario e inicia una conversación directamente la App instalada de WhatsApp o en la versión Web incrustando el mensaje prediseñado en la barra.</p>
 
         <h3 className="text-lg font-bold">Sin instalar apps externas, 100% Client-Side Seguro</h3>
         <p>Crear el enlace es inmediato. Esta utilidad web online gratuita solo suma tu Prefijo internacional, tu teléfono y formatea el mensaje (codificándolo según el estándar URI) para que lo puedas copiar y pegar a discreción. No usamos bases de datos para espiarte a ti o a las intenciones de tus clientes.</p>
