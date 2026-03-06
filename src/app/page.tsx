@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -25,7 +25,9 @@ export const metadata: Metadata = {
     "calculadora iva",
     "calcular hipoteca",
     "enlace whatsapp",
-    "calculadora imc"
+    "calculadora imc",
+    "letras raras instagram",
+    "compresor webp"
   ],
   alternates: {
     canonical: SITE_URL,
@@ -38,22 +40,24 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 14,
+  numberOfItems: 16,
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Calculadora de Hipotecas", url: `${SITE_URL}/calculadora-hipotecas` },
-    { "@type": "ListItem", position: 2, name: "Generador Link WhatsApp", url: `${SITE_URL}/generador-enlace-whatsapp` },
-    { "@type": "ListItem", position: 3, name: "Calculadora de IMC", url: `${SITE_URL}/calculadora-imc` },
-    { "@type": "ListItem", position: 4, name: "Calculadora de Porcentajes", url: `${SITE_URL}/calculadora-porcentajes` },
-    { "@type": "ListItem", position: 5, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
-    { "@type": "ListItem", position: 6, name: "Contador de Palabras y Caracteres", url: `${SITE_URL}/contador-de-palabras` },
-    { "@type": "ListItem", position: 7, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
-    { "@type": "ListItem", position: 8, name: "Validador de IBAN", url: `${SITE_URL}/validador-iban` },
-    { "@type": "ListItem", position: 9, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
-    { "@type": "ListItem", position: 10, name: "Generador de Nombres", url: `${SITE_URL}/generador-nombres` },
-    { "@type": "ListItem", position: 11, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
-    { "@type": "ListItem", position: 12, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
-    { "@type": "ListItem", position: 13, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
-    { "@type": "ListItem", position: 14, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
+    { "@type": "ListItem", position: 1, name: "Generador de Letras Raras", url: `${SITE_URL}/generador-letras-raras` },
+    { "@type": "ListItem", position: 2, name: "Compresor de Imágenes a WebP", url: `${SITE_URL}/compresor-webp` },
+    { "@type": "ListItem", position: 3, name: "Calculadora de Hipotecas", url: `${SITE_URL}/calculadora-hipotecas` },
+    { "@type": "ListItem", position: 4, name: "Generador Link WhatsApp", url: `${SITE_URL}/generador-enlace-whatsapp` },
+    { "@type": "ListItem", position: 5, name: "Calculadora de IMC", url: `${SITE_URL}/calculadora-imc` },
+    { "@type": "ListItem", position: 6, name: "Calculadora de Porcentajes", url: `${SITE_URL}/calculadora-porcentajes` },
+    { "@type": "ListItem", position: 7, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
+    { "@type": "ListItem", position: 8, name: "Contador de Palabras y Caracteres", url: `${SITE_URL}/contador-de-palabras` },
+    { "@type": "ListItem", position: 9, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
+    { "@type": "ListItem", position: 10, name: "Validador de IBAN", url: `${SITE_URL}/validador-iban` },
+    { "@type": "ListItem", position: 11, name: "Generador de Contraseñas Seguras", url: `${SITE_URL}/generador-contrasenas` },
+    { "@type": "ListItem", position: 12, name: "Generador de Nombres", url: `${SITE_URL}/generador-nombres` },
+    { "@type": "ListItem", position: 13, name: "Conversor Mayúsculas Minúsculas", url: `${SITE_URL}/mayusculas-minusculas` },
+    { "@type": "ListItem", position: 14, name: "Generador de Códigos QR", url: `${SITE_URL}/generador-qr` },
+    { "@type": "ListItem", position: 15, name: "Lector de Códigos QR", url: `${SITE_URL}/lector-qr` },
+    { "@type": "ListItem", position: 16, name: "Calculadora de Días entre Fechas", url: `${SITE_URL}/calculadora-dias` },
   ],
 };
 
@@ -98,6 +102,22 @@ const faqJsonLd = {
 
 export default function Home() {
   const herramientas = [
+    {
+      titulo: 'Letras para Instagram',
+      descripcion: 'Transforma palabras en fuentes góticas o estéticas para tu biografía y TikTok.',
+      ruta: '/generador-letras-raras',
+      Icono: Sparkles,
+      color: 'from-purple-500 to-fuchsia-600',
+      shadow: 'shadow-purple-500/20'
+    },
+    {
+      titulo: 'Compresor WebP',
+      descripcion: 'Reduce fotos un 80% convirtiendo de JPG/PNG a WebP sin usar servidores.',
+      ruta: '/compresor-webp',
+      Icono: ImageIcon,
+      color: 'from-sky-400 to-indigo-500',
+      shadow: 'shadow-indigo-500/20'
+    },
     {
       titulo: 'Calculadora de Hipotecas',
       descripcion: 'Calcula online la cuota mensual de tu préstamo con el cuadro de amortización completo.',

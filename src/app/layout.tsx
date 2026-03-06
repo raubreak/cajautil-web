@@ -105,6 +105,8 @@ export default function RootLayout({
 }>) {
 
   const herramientasNav = [
+    { nombre: "Letras Raras", ruta: "/generador-letras-raras" },
+    { nombre: "Convertir a WebP", ruta: "/compresor-webp" },
     { nombre: "Hipotecas", ruta: "/calculadora-hipotecas" },
     { nombre: "Link WhatsApp", ruta: "/generador-enlace-whatsapp" },
     { nombre: "IMC", ruta: "/calculadora-imc" },
@@ -198,6 +200,7 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Generadores</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/generador-letras-raras" className="text-sm hover:text-white transition-colors">Letras Raras para Insta</Link></li>
                   <li><Link href="/generador-enlace-whatsapp" className="text-sm hover:text-white transition-colors">Link de WhatsApp</Link></li>
                   <li><Link href="/generador-nombres" className="text-sm hover:text-white transition-colors">Generador de Nombres</Link></li>
                   <li><Link href="/generador-contrasenas" className="text-sm hover:text-white transition-colors">Generador de Contraseñas</Link></li>
@@ -212,8 +215,9 @@ export default function RootLayout({
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Escáner</h3>
+                <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Imágenes & Escáner</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/compresor-webp" className="text-sm hover:text-white transition-colors">Convertir a WebP</Link></li>
                   <li><Link href="/lector-qr" className="text-sm hover:text-white transition-colors">Lector de Códigos QR</Link></li>
                 </ul>
               </div>
