@@ -21,6 +21,12 @@ export async function generateProgrammaticArticle(force = false) {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error('Falta GEMINI_API_KEY');
   }
+  // 0. Pre-flight DB Check: asegurar que conectamos bien a Postgres antes de consumir la API de Google
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+  } catch (dbError) {
+    throw new Error('Error crítico de Base de Datos inalcanzable (o apuntando todavía a SQLite cacheado previo). Por seguridad cancelamos para evitar consumir cuota de Gemini.');
+  }
 
   // 1. Control de frecuencia
   if (!force) {
