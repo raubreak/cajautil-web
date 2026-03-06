@@ -1,9 +1,13 @@
 import { MetadataRoute } from 'next'
+import prisma from '@/lib/prisma'
 
 const SITE_URL = 'https://cajautil.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const articles = await prisma.article.findMany({ select: { slug: true, publishedAt: true } });
 
   return [
     {
@@ -210,5 +214,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    ...articles.map((article) => ({
+      url: `${SITE_URL}/articulos/${article.slug}`,
+      lastModified: article.publishedAt,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ];
 }

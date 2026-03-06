@@ -42,3 +42,5 @@ next-env.d.ts
 
 # Herramientas locales e ignorados
 seo-auditor.js
+
+/src/generated/prisma
