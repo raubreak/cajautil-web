@@ -65,7 +65,7 @@ Debes responder ÚNICAMENTE con un JSON válido parseable. Sin markdown decorati
   "image_keyword": "Una sola palabra clave en INGLÉS que describa el artículo para buscar una foto en Unsplash. Ejemplo: 'fitness' o 'money' o 'office'"
 }`;
 
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   const result = await model.generateContent(systemPrompt);
   const responseText = result.response.text();
 
