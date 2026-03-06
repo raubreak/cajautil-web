@@ -20,25 +20,37 @@ export default function TemporizadorApp() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const stopwatchRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Audio Context for the "Beep"
+  const audioContextRef = useRef<AudioContext | null>(null);
+
+  // Initialize and unlock AudioContext on user gesture
+  const initAudio = () => {
+    if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+    if (audioContextRef.current.state === 'suspended') {
+        audioContextRef.current.resume();
+    }
+  };
+
   const playBeep = () => {
     if (isMuted) return;
     try {
-        const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
+        initAudio();
+        const ctx = audioContextRef.current!;
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
 
         oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
+        gainNode.connect(ctx.destination);
 
         oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch A
-        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.01);
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+        oscillator.frequency.setValueAtTime(880, ctx.currentTime);
+        gainNode.gain.setValueAtTime(0, ctx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1);
 
         oscillator.start();
-        oscillator.stop(audioCtx.currentTime + 1);
+        oscillator.stop(ctx.currentTime + 1);
     } catch (e) {
         console.error("Audio API not supported", e);
     }
@@ -129,7 +141,7 @@ export default function TemporizadorApp() {
         <section className={`lg:col-span-8 bg-white border rounded-[40px] shadow-2xl p-10 flex flex-col items-center justify-center relative overflow-hidden transition-all duration-300 ${isAlarmActive ? 'border-rose-400 ring-4 ring-rose-100' : 'border-slate-100'}`}>
             
             <div className="absolute top-6 right-6">
-                <button onClick={() => setIsMuted(!isMuted)} className="p-3 text-slate-300 hover:text-slate-600 rounded-full hover:bg-slate-50">
+                <button onClick={() => { initAudio(); playBeep(); setIsMuted(!isMuted); }} className="p-3 text-slate-300 hover:text-slate-600 rounded-full hover:bg-slate-50" title="Probar sonido">
                     {isMuted ? <BellOff className="w-6 h-6" /> : <Bell className="w-6 h-6" />}
                 </button>
             </div>
@@ -141,8 +153,8 @@ export default function TemporizadorApp() {
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-4">
                     <button 
-                        onClick={() => setTimerRunning(!timerRunning)}
-                        className={`w-20 h-20 rounded-full flex items-center justify-center text-white shadow-xl transition active:scale-95 ${timerRunning ? 'bg-amber-500 hover:bg-amber-600' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+                        onClick={() => { initAudio(); setTimerRunning(!timerRunning); }}
+                        className={`w-20 h-20 rounded-full flex items-center justify-center text-white shadow-xl transition active:scale-95 ${timerRunning ? 'bg-amber-500 hover:bg-amber-600' : 'bg-indigo-600 hover:bg-indigo-700'} ${isAlarmActive ? 'animate-bounce' : ''}`}
                     >
                         {timerRunning ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 translate-x-1" />}
                     </button>
@@ -161,7 +173,7 @@ export default function TemporizadorApp() {
                 </div>
                 <div className="flex items-center justify-center gap-4">
                     <button 
-                        onClick={() => setStopwatchRunning(!stopwatchRunning)}
+                        onClick={() => { initAudio(); setStopwatchRunning(!stopwatchRunning); }}
                         className={`w-20 h-20 rounded-full flex items-center justify-center text-white shadow-xl transition active:scale-95 ${stopwatchRunning ? 'bg-amber-500 hover:bg-amber-600' : 'bg-emerald-600 hover:bg-emerald-700'}`}
                     >
                         {stopwatchRunning ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 translate-x-1" />}
