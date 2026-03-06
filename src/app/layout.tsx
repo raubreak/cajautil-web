@@ -136,6 +136,8 @@ export default function RootLayout({
     { nombre: "Unidades", ruta: "/conversor-unidades" },
     { nombre: "Calorías", ruta: "/calculadora-calorias" },
     { nombre: "Hashtags", ruta: "/generador-hashtags" },
+    { nombre: "Préstamos", ruta: "/calculadora-prestamos" },
+    { nombre: "Firmas Email", ruta: "/generador-firmas-email" },
   ];
 
   return (
@@ -246,11 +248,27 @@ export default function RootLayout({
                 </ul>
               </div>
               <div>
+                <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Negocios</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/generador-firmas-email" className="text-sm hover:text-white transition-colors">Firmas de Email</Link></li>
+                  <li><Link href="/generador-qr" className="text-sm hover:text-white transition-colors">Generador QR</Link></li>
+                  <li><Link href="/lector-qr" className="text-sm hover:text-white transition-colors">Lector QR</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Finanzas</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/calculadora-sueldo-neto" className="text-sm hover:text-white transition-colors">Sueldo Neto</Link></li>
+                  <li><Link href="/calculadora-iva" className="text-sm hover:text-white transition-colors">Calculadora IVA</Link></li>
+                  <li><Link href="/calculadora-prestamos" className="text-sm hover:text-white transition-colors">Simulador Préstamos</Link></li>
+                  <li><Link href="/validador-iban" className="text-sm hover:text-white transition-colors">Validador IBAN</Link></li>
+                </ul>
+              </div>
+              <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Imágenes & Escáner</h3>
                 <ul className="space-y-2">
                   <li><Link href="/extractor-colores" className="text-sm hover:text-white transition-colors">Extractor de Colores</Link></li>
                   <li><Link href="/compresor-webp" className="text-sm hover:text-white transition-colors">Convertir a WebP</Link></li>
-                  <li><Link href="/lector-qr" className="text-sm hover:text-white transition-colors">Lector de Códigos QR</Link></li>
                 </ul>
               </div>
               <div>

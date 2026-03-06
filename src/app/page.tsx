@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -36,7 +36,9 @@ export const metadata: Metadata = {
     "calculadora regla de tres",
     "extractor colores online",
     "temporizador online",
-    "calculadora descuentos"
+    "calculadora descuentos",
+    "simulador prestamo personal",
+    "firma email profesional"
   ],
   alternates: {
     canonical: SITE_URL,
@@ -49,7 +51,7 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: 30,
+  numberOfItems: 32,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Calculadora de Sueldo Neto", url: `${SITE_URL}/calculadora-sueldo-neto` },
     { "@type": "ListItem", position: 2, name: "Calculadora de IVA", url: `${SITE_URL}/calculadora-iva` },
@@ -80,7 +82,8 @@ const itemListJsonLd = {
     { "@type": "ListItem", position: 27, name: "Generador de Lorem Ipsum", url: `${SITE_URL}/generador-lorem-ipsum` },
     { "@type": "ListItem", position: 28, name: "Conversor de Unidades", url: `${SITE_URL}/conversor-unidades` },
     { "@type": "ListItem", position: 29, name: "Calculadora de Calorías y TDEE", url: `${SITE_URL}/calculadora-calorias` },
-    { "@type": "ListItem", position: 30, name: "Generador de Hashtags", url: `${SITE_URL}/generador-hashtags` },
+    { "@type": "ListItem", position: 31, name: "Simulador de Préstamos Personales", url: `${SITE_URL}/calculadora-prestamos` },
+    { "@type": "ListItem", position: 32, name: "Generador de Firmas de Email", url: `${SITE_URL}/generador-firmas-email` },
   ],
 };
 
@@ -364,6 +367,22 @@ export default function Home() {
       Icono: TextCursorInput,
       color: 'from-violet-400 to-purple-500',
       shadow: 'shadow-violet-500/20'
+    },
+    {
+      titulo: 'Simulador de Préstamos',
+      descripcion: 'Calcula tu cuota mensual y el coste total de intereses de tu préstamo personal con amortización francesa.',
+      ruta: '/calculadora-prestamos',
+      Icono: Landmark,
+      color: 'from-blue-400 to-indigo-500',
+      shadow: 'shadow-blue-500/20'
+    },
+    {
+      titulo: 'Firmas de Email',
+      descripcion: 'Crea firmas de correo profesional en HTML para Gmail, Outlook y Apple Mail con foto y enlaces.',
+      ruta: '/generador-firmas-email',
+      Icono: Mail,
+      color: 'from-emerald-400 to-teal-500',
+      shadow: 'shadow-emerald-500/20'
     }
   ];
 
