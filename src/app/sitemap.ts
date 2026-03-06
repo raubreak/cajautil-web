@@ -9,12 +9,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   
   let articles: any[] = [];
+  let variants: any[] = [];
   try {
     articles = await prisma.article.findMany({ select: { slug: true, publishedAt: true } });
+    variants = await prisma.toolVariant.findMany({ select: { slug: true, updatedAt: true } });
   } catch (err) {
-    console.error('Error fetching articles for sitemap:', err);
+    console.error('Error fetching data for sitemap:', err);
   }
-
 
   return [
     {
@@ -232,6 +233,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: article.publishedAt,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
+    })),
+    ...variants.map((v) => ({
+      url: `${SITE_URL}/${v.slug}`,
+      lastModified: v.updatedAt,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
     })),
   ];
 }
