@@ -1,108 +1,147 @@
 "use client";
 
-import React, { useState, useRef, ChangeEvent } from 'react';
-import { Image as ImageIcon, UploadCloud, Settings, Download, Trash2, ArrowRightCircle, Shield, MoveDown } from 'lucide-react';
+import React, { useState, useRef, useCallback } from 'react';
+import { Image as ImageIcon, UploadCloud, Settings, Download, Trash2, ArrowRightCircle, Shield, CheckCircle2, X } from 'lucide-react';
+
+interface ImageItem {
+  id: string;
+  file: File;
+  previewUrl: string;
+  resultBlob: Blob | null;
+  resultUrl: string | null;
+  status: 'pending' | 'processing' | 'done';
+}
+
+const formatBytes = (bytes: number, decimals = 1) => {
+  if (!+bytes) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(decimals))} ${sizes[i]}`;
+};
 
 export default function CompresorWebP() {
-  const [file, setFile] = useState<File | null>(null);
-  const [imgUrl, setImgUrl] = useState<string | null>(null);
-  
-  const [quality, setQuality] = useState<number>(80);
-  const [resultBlob, setResultBlob] = useState<Blob | null>(null);
-  const [resultUrl, setResultUrl] = useState<string | null>(null);
-  
+  const [images, setImages] = useState<ImageItem[]>([]);
+  const [quality, setQuality] = useState(80);
+  const [isProcessing, setIsProcessing] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
 
-  // Función interna para calcular tamaño humano
-  const formatBytes = (bytes: number, decimals = 2) => {
-    if (!+bytes) return '0 Bytes';
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+  const addFiles = useCallback((files: FileList | File[]) => {
+    const newImages: ImageItem[] = [];
+    Array.from(files).forEach(file => {
+      if (file.type.startsWith('image/')) {
+        newImages.push({
+          id: `${Date.now()}_${Math.random().toString(36).slice(2)}`,
+          file,
+          previewUrl: URL.createObjectURL(file),
+          resultBlob: null,
+          resultUrl: null,
+          status: 'pending',
+        });
+      }
+    });
+    setImages(prev => [...prev, ...newImages]);
+  }, []);
+
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) addFiles(e.target.files);
+    e.target.value = '';
   };
 
-  const procesarImagen = (fileOrBlob: File | Blob) => {
-    // Si ya existe una anterior limpiamos de memoria para no saturar 
-    if (imgUrl) URL.revokeObjectURL(imgUrl);
-    if (resultUrl) URL.revokeObjectURL(resultUrl);
-    setResultBlob(null);
-    setResultUrl(null);
-
-    const objectUrl = URL.createObjectURL(fileOrBlob);
-    setFile(fileOrBlob as File);
-    setImgUrl(objectUrl);
+  const handleDragOver = (e: React.DragEvent) => { e.preventDefault(); e.stopPropagation(); };
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault(); e.stopPropagation();
+    if (e.dataTransfer.files) addFiles(e.dataTransfer.files);
   };
 
-  const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = e.target.files?.[0];
-    if (uploadedFile && uploadedFile.type.startsWith('image/')) {
-        procesarImagen(uploadedFile);
+  const removeImage = (id: string) => {
+    setImages(prev => {
+      const item = prev.find(i => i.id === id);
+      if (item) {
+        URL.revokeObjectURL(item.previewUrl);
+        if (item.resultUrl) URL.revokeObjectURL(item.resultUrl);
+      }
+      return prev.filter(i => i.id !== id);
+    });
+  };
+
+  const clearAll = () => {
+    images.forEach(i => {
+      URL.revokeObjectURL(i.previewUrl);
+      if (i.resultUrl) URL.revokeObjectURL(i.resultUrl);
+    });
+    setImages([]);
+  };
+
+  const compressOne = (item: ImageItem): Promise<ImageItem> => {
+    return new Promise((resolve) => {
+      const img = new window.Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) { resolve({ ...item, status: 'done' }); return; }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { resolve({ ...item, status: 'done' }); return; }
+
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        ctx.drawImage(img, 0, 0);
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve({
+                ...item,
+                resultBlob: blob,
+                resultUrl: URL.createObjectURL(blob),
+                status: 'done',
+              });
+            } else {
+              resolve({ ...item, status: 'done' });
+            }
+          },
+          'image/webp',
+          quality / 100
+        );
+      };
+      img.onerror = () => resolve({ ...item, status: 'done' });
+      img.src = item.previewUrl;
+    });
+  };
+
+  const compressAll = async () => {
+    setIsProcessing(true);
+    const pending = images.filter(i => i.status === 'pending');
+
+    for (const item of pending) {
+      setImages(prev => prev.map(i => i.id === item.id ? { ...i, status: 'processing' } : i));
+      const result = await compressOne(item);
+      setImages(prev => prev.map(i => i.id === item.id ? result : i));
     }
+    setIsProcessing(false);
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const downloadAll = () => {
+    images.forEach((item, idx) => {
+      if (item.resultUrl) {
+        const a = document.createElement('a');
+        a.href = item.resultUrl;
+        const name = item.file.name.replace(/\.[^.]+$/, '');
+        a.download = `${name}_webp_q${quality}.webp`;
+        a.click();
+      }
+    });
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const droppedFile = e.dataTransfer.files?.[0];
-    if (droppedFile && droppedFile.type.startsWith('image/')) {
-        procesarImagen(droppedFile);
-    }
-  };
-
-  const convertToWebP = () => {
-    if (!imgRef.current || !canvasRef.current) return;
-    
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Ajustar resolución del canvas igual al de la imagen original pura
-    canvas.width = imgRef.current.naturalWidth;
-    canvas.height = imgRef.current.naturalHeight;
-
-    // Dibujar la imagen
-    ctx.drawImage(imgRef.current, 0, 0);
-
-    // Extraer en formato WEBP con compresion decimal
-    canvas.toBlob(
-      (blob) => {
-        if (blob) {
-          setResultBlob(blob);
-          const newUrl = URL.createObjectURL(blob);
-          setResultUrl(newUrl);
-        }
-      },
-      'image/webp',
-      quality / 100 // Pasa de 80 -> 0.8
-    );
-  };
-
-  const handleRemove = () => {
-    setFile(null);
-    setImgUrl(null);
-    setResultBlob(null);
-    setResultUrl(null);
-  };
-
-  const calcularReduccion = () => {
-    if(!file || !resultBlob) return 0;
-    const saved = file.size - resultBlob.size;
-    const percent = Math.round((saved / file.size) * 100);
-    return percent > 0 ? percent : 0;
-  };
+  const totalOriginal = images.reduce((s, i) => s + i.file.size, 0);
+  const totalCompressed = images.reduce((s, i) => s + (i.resultBlob?.size ?? 0), 0);
+  const allDone = images.length > 0 && images.every(i => i.status === 'done');
+  const hasPending = images.some(i => i.status === 'pending');
+  const savedPercent = totalOriginal > 0 && totalCompressed > 0 ? Math.round((1 - totalCompressed / totalOriginal) * 100) : 0;
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4 sm:px-6 z-10">
-      
-      {/* HEADER SECTION */}
+
       <div className="w-full max-w-2xl text-center mb-8">
         <div className="inline-flex items-center justify-center p-3 sm:p-4 bg-sky-100/50 rounded-2xl sm:rounded-3xl mb-4 sm:mb-6 shadow-sm border border-sky-50">
           <ImageIcon className="w-8 h-8 sm:w-10 sm:h-10 text-sky-600 fill-sky-600/20" />
@@ -111,128 +150,125 @@ export default function CompresorWebP() {
           Convertir a <span className="text-sky-600">WebP</span>
         </h1>
         <p className="text-base sm:text-lg text-slate-500 font-medium max-w-xl mx-auto leading-relaxed px-2">
-          Comprime tus imágenes pesadas en JPG o PNG pasándolas a la nueva generación (WebP). Reduce un 80% su peso en segundos.
+          Comprime una o varias imágenes a la vez. Arrastra tus fotos y descárgalas en WebP con un solo clic.
         </p>
       </div>
 
       <div className="w-full max-w-4xl flex flex-col items-center mb-12">
-        
-        {/* APP CONTROLES CENTRALES */}
-        <section className="bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 sm:p-8 border border-slate-100 w-full mb-8">
-            
-            {!imgUrl ? (
-                /* ESTADO INICIAL -> SUBIDA */
-                <label 
-                  onDragOver={handleDragOver}
-                  onDrop={handleDrop}
-                  className="border-2 border-dashed border-sky-200 hover:border-sky-400 bg-sky-50 hover:bg-sky-100/50 transition-colors w-full h-[300px] rounded-2xl flex flex-col items-center justify-center cursor-pointer group"
-                >
-                    <UploadCloud className="w-16 h-16 text-sky-400 group-hover:text-sky-500 mb-4 transition-transform group-hover:-translate-y-2" />
-                    <span className="text-lg font-bold text-slate-700">Haz clic o arrastra tu foto aquí</span>
-                    <span className="text-sm font-medium text-slate-400 mt-2">Soporta JPG, PNG o HEIC (Max 50MB)</span>
-                    <input type="file" accept="image/*" className="hidden" onChange={handleUpload} />
-                </label>
-            ) : (
-                /* ESTADO CON IMAGEN */
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* PANEL DE Opciones IZQ */}
-                    <div className="space-y-6 flex flex-col justify-center">
-                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center justify-between">
-                            <div className="max-w-[70%]">
-                                <p className="text-sm font-bold text-slate-800 truncate" title={file?.name}>{file?.name}</p>
-                                <p className="text-xs text-slate-500 font-mono mt-1">Peso Original: {file ? formatBytes(file.size) : '0'}</p>
-                            </div>
-                            <button onClick={handleRemove} className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition"><Trash2 className="w-5 h-5"/></button>
-                        </div>
-                        
-                        <div>
-                            <label className="text-sm font-bold text-slate-700 mb-4 flex items-center justify-between">
-                                <span className="flex items-center gap-2"><Settings className="w-4 h-4 text-sky-500" /> Nivel de Calidad Final</span>
-                                <span className="text-sky-700 bg-sky-100 px-3 py-1 rounded-lg tabular-nums font-mono text-sm">{quality}%</span>
-                            </label>
-                            <input
-                                type="range"
-                                min="10"
-                                max="100"
-                                step="5"
-                                value={quality}
-                                onChange={(e) => setQuality(Number(e.target.value))}
-                                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-500 mt-2"
-                            />
-                            <p className="text-xs text-slate-400 mt-3">(80% es el punto dulce estándar de Google donde el ojo humano no nota compresión).</p>
-                        </div>
+        <section className="bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 sm:p-8 border border-slate-100 w-full">
 
-                        <button
-                            onClick={convertToWebP}
-                            className="w-full py-4 mt-4 bg-slate-900 hover:bg-sky-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors text-lg group shadow-md"
-                        >
-                             Comprimir Píxeles <ArrowRightCircle className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                    </div>
+          {/* Upload area — siempre visible */}
+          <label
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            className={`border-2 border-dashed bg-sky-50 hover:bg-sky-100/50 transition-colors w-full rounded-2xl flex flex-col items-center justify-center cursor-pointer group ${images.length > 0 ? 'h-[120px] border-sky-200 hover:border-sky-400' : 'h-[280px] border-sky-200 hover:border-sky-400'}`}
+          >
+            <UploadCloud className={`text-sky-400 group-hover:text-sky-500 mb-2 transition-transform group-hover:-translate-y-1 ${images.length > 0 ? 'w-8 h-8' : 'w-16 h-16 mb-4'}`} />
+            <span className={`font-bold text-slate-700 ${images.length > 0 ? 'text-sm' : 'text-lg'}`}>
+              {images.length > 0 ? 'Añadir más imágenes' : 'Haz clic o arrastra tus fotos aquí'}
+            </span>
+            {images.length === 0 && <span className="text-sm font-medium text-slate-400 mt-2">Soporta JPG, PNG, HEIC — Múltiples archivos</span>}
+            <input type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
+          </label>
 
-                    {/* PREVIEW IMAGE OCULTA CARGADA */}
-                    {/* La imagen solo debe aparecer o no estorbar -> la ocultamos y usamos objectUrl para pintar */}
-                     <div className="hidden">
-                        <img 
-                            ref={imgRef} 
-                            src={imgUrl} 
-                            alt="Original resource"
-                            crossOrigin="anonymous" 
-                            onLoad={() => {
-                                // Idealmente podríamos forzar un render inicial si queremos que salga a la 1ª
-                            }}
-                        />
-                        <canvas ref={canvasRef} />
-                    </div>
-
-                    {/* PANEL RESULTADOS DERECHA */}
-                    <div className={`p-6 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center transition-all ${resultUrl ? 'border-emerald-300 bg-emerald-50/50' : 'border-slate-200 bg-slate-50'}`}>
-                        {!resultUrl ? (
-                            <div className="text-center opacity-50 flex flex-col items-center">
-                                <ImageIcon className="w-12 h-12 text-slate-400 mb-3" />
-                                <span className="text-sm font-medium">Ajusta tu calidad y dale a procesar para el resultado.</span>
-                            </div>
-                        ) : (
-                            <div className="flex flex-col items-center w-full text-center">
-                                <span className="animate-bounce mb-2"><MoveDown className="w-8 h-8 text-emerald-500" /></span>
-                                <p className="text-emerald-700 font-bold mb-1">¡Éxito Salvaje!</p>
-                                <p className="text-4xl font-black text-slate-800 tabular-nums break-words font-mono mb-4">
-                                     {calcularReduccion()}% Menos
-                                </p>
-                                <p className="text-sm text-slate-500 mb-6">Tu foto ahora pesa <b className="text-emerald-600 bg-emerald-100 px-2 py-1 rounded inline-block mx-1 leading-none">{resultBlob ? formatBytes(resultBlob.size) : '0'}</b> formato ultra rápido WebP.</p>
-                                
-                                <a
-                                    href={resultUrl}
-                                    download={`cajautil_compress_${quality}.webp`}
-                                    className="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors shadow-emerald-500/20 shadow-lg text-lg ring-4 ring-emerald-50"
-                                >
-                                    <Download className="w-5 h-5" /> Descargar 
-                                </a>
-                            </div>
-                        )}
-                    </div>
+          {/* Image list */}
+          {images.length > 0 && (
+            <div className="mt-6 space-y-3">
+              {/* Controls bar */}
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{images.length} {images.length === 1 ? 'imagen' : 'imágenes'}</span>
+                  <button onClick={clearAll} className="text-xs text-rose-400 hover:text-rose-600 font-bold uppercase tracking-widest transition">Limpiar todo</button>
                 </div>
-            )}
+                <div className="flex items-center gap-3">
+                  <Settings className="w-4 h-4 text-sky-500" />
+                  <span className="text-xs font-bold text-slate-500">Calidad:</span>
+                  <input type="range" min="10" max="100" step="5" value={quality} onChange={(e) => setQuality(Number(e.target.value))} className="w-24 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-500" />
+                  <span className="text-sky-700 bg-sky-100 px-2 py-1 rounded-lg text-xs font-mono font-bold tabular-nums">{quality}%</span>
+                </div>
+              </div>
+
+              {/* Files */}
+              <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                {images.map(item => (
+                  <div key={item.id} className="flex items-center gap-4 bg-slate-50 rounded-xl p-3 border border-slate-100">
+                    <img src={item.previewUrl} alt="" className="w-12 h-12 object-cover rounded-lg shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-slate-700 truncate">{item.file.name}</p>
+                      <p className="text-[11px] text-slate-400 font-mono">
+                        {formatBytes(item.file.size)}
+                        {item.resultBlob && (
+                          <> → <span className="text-emerald-600 font-bold">{formatBytes(item.resultBlob.size)}</span> <span className="text-emerald-500">(-{Math.round((1 - item.resultBlob.size / item.file.size) * 100)}%)</span></>
+                        )}
+                      </p>
+                    </div>
+                    {item.status === 'processing' && (
+                      <div className="w-6 h-6 border-2 border-sky-500 border-t-transparent rounded-full animate-spin shrink-0" />
+                    )}
+                    {item.status === 'done' && item.resultUrl && (
+                      <a href={item.resultUrl} download={`${item.file.name.replace(/\.[^.]+$/, '')}_q${quality}.webp`} className="p-2 text-emerald-500 hover:bg-emerald-50 rounded-lg transition shrink-0" title="Descargar">
+                        <Download className="w-5 h-5" />
+                      </a>
+                    )}
+                    {item.status === 'done' && !item.resultUrl && (
+                      <CheckCircle2 className="w-5 h-5 text-slate-300 shrink-0" />
+                    )}
+                    <button onClick={() => removeImage(item.id)} className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition shrink-0">
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                {hasPending && (
+                  <button
+                    onClick={compressAll}
+                    disabled={isProcessing}
+                    className="flex-1 py-4 bg-slate-900 hover:bg-sky-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors text-lg group shadow-md disabled:opacity-50"
+                  >
+                    {isProcessing ? (
+                      <><div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" /> Comprimiendo...</>
+                    ) : (
+                      <>Comprimir {images.filter(i => i.status === 'pending').length} {images.filter(i => i.status === 'pending').length === 1 ? 'imagen' : 'imágenes'} <ArrowRightCircle className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></>
+                    )}
+                  </button>
+                )}
+                {allDone && (
+                  <button
+                    onClick={downloadAll}
+                    className="flex-1 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors text-lg shadow-lg shadow-emerald-500/20"
+                  >
+                    <Download className="w-5 h-5" /> Descargar Todas ({formatBytes(totalCompressed)})
+                  </button>
+                )}
+              </div>
+
+              {/* Summary */}
+              {allDone && savedPercent > 0 && (
+                <div className="mt-4 p-5 bg-emerald-50 border border-emerald-100 rounded-2xl text-center">
+                  <p className="text-3xl font-black text-emerald-700 tabular-nums">{savedPercent}% menos</p>
+                  <p className="text-sm text-emerald-600 mt-1">{formatBytes(totalOriginal)} → {formatBytes(totalCompressed)} total</p>
+                </div>
+              )}
+            </div>
+          )}
         </section>
       </div>
 
-      {/* SEO & CONTENT SECTION */}
+      <canvas ref={canvasRef} className="hidden" />
+
       <section className="w-full max-w-4xl prose prose-slate prose-headings:text-slate-800 mb-16 px-2 text-slate-600">
         <h2 className="text-2xl font-bold flex items-center gap-2 text-slate-800">
           <Shield className="w-6 h-6 text-sky-500" />
           Velocidad WebP sin Servidores Externos.
         </h2>
-        
-        <p>A diferencia de otras gigantescas webs de edición fotográfica, nosotros <strong>no enviamos jamás tu fotografía de la cara, documentos o diseños a ningún servidor oscuro</strong> por internet.</p>
-
-        <p>Todo el algortímo matemático funciona invocando a la API Canvas interna que el Navegador Chrome, Safari o Android ya tiene pre-instalada. El motor gráfico de tu hardware lee los píxeles (RGB), descarta los imperceptibles al ojo en JPG o PNG y re-escribe el encabezado y contenido en el formato binario <code>.WEBP</code> (el estándar libre introducido por Google PageSpeed).</p>
-
+        <p>A diferencia de otras gigantescas webs de edición fotográfica, nosotros <strong>no enviamos jamás tu fotografía a ningún servidor externo</strong>. Todo el procesamiento ocurre íntegramente en tu navegador usando la API Canvas nativa.</p>
+        <p>El motor gráfico de tu hardware lee los píxeles, descarta los imperceptibles al ojo y reescribe el contenido en formato <code>.webp</code> (el estándar libre de Google). Esto significa que tu privacidad está 100% garantizada.</p>
         <h3 className="text-lg font-bold">Por qué deberías subir el 100% como WebP</h3>
-        <p>Especialmente para eCommerce como Woocommerce, PrestaShop o tu portfolio de desarrollo, subir una imagen JPEG sacada pura de tu cámara (7 Megabytes) estampará tu velocidad de carga. Sin embargo, aplicando un WebP en calidad media (Q=75) podemos entregar la misma foto que mantendrá idéntico color por apenas <strong>140 Kilobytes.</strong></p>
-        
+        <p>Una imagen JPEG de cámara puede pesar 7 MB. Aplicando WebP en calidad media (Q=75) la misma foto pesa apenas <strong>140 KB</strong> con idéntica apariencia visual. Ideal para eCommerce, portfolios y cualquier web que necesite velocidad de carga.</p>
       </section>
-      
     </main>
   );
 }
