@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
 import Script from 'next/script';
+import SearchModal from '@/components/SearchModal';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -187,7 +188,10 @@ export default function RootLayout({
                   {item.nombre}
                 </Link>
               ))}
-              <span className="text-xs text-slate-300">+3 más</span>
+              <SearchModal />
+            </div>
+            <div className="md:hidden">
+              <SearchModal />
             </div>
           </div>
         </nav>
