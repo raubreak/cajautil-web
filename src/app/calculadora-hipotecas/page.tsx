@@ -60,7 +60,7 @@ const CalculadoraHipotecas = () => {
         </p>
       </div>
 
-      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-5 gap-6 mb-12">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-5 gap-6 mb-12">
         {/* PANEL IZQUIERDO: CONTROLES */}
         <section className="lg:col-span-2 bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 sm:p-8 border border-slate-100 h-fit">
           <div className="space-y-6">

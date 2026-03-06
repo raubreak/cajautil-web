@@ -162,7 +162,7 @@ export default function ValidadorIBAN() {
       </section>
 
       {/* FAQ SECTION (With rich snippets details) */}
-      <section className="w-full max-w-3xl" aria-label="Preguntas Frecuentes">
+      <section className="w-full max-w-4xl" aria-label="Preguntas Frecuentes">
         <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preguntas Frecuentes sobre IBAN</h2>
         <div className="space-y-4">
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">

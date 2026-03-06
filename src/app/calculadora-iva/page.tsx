@@ -65,7 +65,7 @@ const CalculadoraIVA = () => {
       </div>
 
       {/* CALCULATOR PLATFORM */}
-      <section className="w-full max-w-2xl bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 sm:p-10 border border-slate-100 mb-12">
+      <section className="w-full max-w-4xl bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 sm:p-10 border border-slate-100 mb-12">
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <button
             onClick={() => setModo('sumar')}
@@ -152,7 +152,7 @@ const CalculadoraIVA = () => {
       </section>
 
       {/* SEO & CONTENT SECTION */}
-      <section className="w-full max-w-3xl prose prose-slate prose-headings:text-slate-800 mb-16 px-2">
+      <section className="w-full max-w-4xl prose prose-slate prose-headings:text-slate-800 mb-16 px-2">
         <h2 className="text-2xl font-bold flex items-center gap-2 text-slate-800">
           <Info className="w-6 h-6 text-yellow-500" />
           ¿Cómo se calcula o se extrae el IVA matemáticamente?

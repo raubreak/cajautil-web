@@ -117,7 +117,7 @@ export default function ConversorUnidades() {
         </p>
       </div>
 
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-4xl">
         {/* Tabs de categoría */}
         <div className="flex flex-wrap gap-2 mb-8 justify-center">
           {CATEGORIES.map((cat, i) => (

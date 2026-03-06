@@ -85,7 +85,7 @@ export default function CPSTest() {
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto leading-relaxed">¿Que tan rápido eres? Pon a prueba tu velocidad de clicking en 5 segundos.</p>
       </div>
 
-      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
         
         {/* Lado Izquierdo: Configuración y Stats */}
         <section className="lg:col-span-4 space-y-6 flex flex-col h-full">

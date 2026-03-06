@@ -90,8 +90,8 @@ export default function TextoInvisible() {
                     <Sparkles className="w-8 h-8 text-indigo-600" />
                  </div>
                  <div>
-                    <h3 className="font-black text-slate-800 uppercase tracking-tight">Estadística Viral</h3>
-                    <p className="text-xs text-slate-400 font-medium leading-relaxed">Más de 500.000 búsquedas mensuales en español para el término "texto invisible".</p>
+                    <h3 className="font-black text-slate-800 uppercase tracking-tight">¿Sabías que...?</h3>
+                    <p className="text-xs text-slate-400 font-medium leading-relaxed">El carácter U+3164 proviene del Hangul coreano y es el único signo Unicode realmente invisible que no se recorta automáticamente.</p>
                  </div>
             </div>
         </section>

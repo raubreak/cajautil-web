@@ -60,7 +60,7 @@ export default function SimbolosCopiar() {
         </p>
       </div>
 
-      <div className="w-full max-w-5xl space-y-12 mb-16">
+      <div className="w-full max-w-4xl space-y-12 mb-16">
         {SYMBOLS_DATA.map((group, idx) => (
           <section key={idx} className="bg-white rounded-[40px] shadow-xl shadow-slate-200/40 p-8 border border-slate-100">
              <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-4">

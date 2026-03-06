@@ -115,7 +115,7 @@ export default function CompresorWebP() {
         </p>
       </div>
 
-      <div className="w-full max-w-5xl flex flex-col items-center mb-12">
+      <div className="w-full max-w-4xl flex flex-col items-center mb-12">
         
         {/* APP CONTROLES CENTRALES */}
         <section className="bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 sm:p-8 border border-slate-100 w-full mb-8">

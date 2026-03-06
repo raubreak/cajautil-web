@@ -164,7 +164,7 @@ export default function RuletaAleatoria() {
         </p>
       </div>
 
-      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
         
         {/* PANEL IZQUIERDO: RUEDA 8 Col */}
         <section className="bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 lg:p-8 border border-slate-100 lg:col-span-8 flex flex-col justify-center items-center relative overflow-hidden">

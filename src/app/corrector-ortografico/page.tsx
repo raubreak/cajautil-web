@@ -213,7 +213,7 @@ export default function CorrectorOrtografico() {
         </p>
       </div>
 
-      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
         {/* Área de texto */}
         <section className="lg:col-span-7 bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 flex flex-col">
           <div className="flex items-center justify-between mb-4">

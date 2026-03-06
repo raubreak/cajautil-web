@@ -133,7 +133,7 @@ export default function ExtractorColores() {
         <p className="text-lg text-slate-500 font-medium">Extrae la paleta cromática perfecta o selecciona cualquier color moviendo el cursor sobre tu imagen.</p>
       </div>
 
-      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Lado Izquierdo: Visualizador Imagen */}
         <section className="bg-white lg:col-span-8 rounded-3xl shadow-xl p-4 sm:p-6 border border-slate-100 flex flex-col items-center">
