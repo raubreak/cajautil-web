@@ -63,7 +63,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         </div>
 
         {/* Contenido Markdown */}
-        <div className="prose prose-slate prose-lg max-w-none prose-headings:font-black prose-a:text-blue-600 prose-img:rounded-2xl">
+        <div className="prose prose-slate prose-lg max-w-none prose-headings:font-black prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-a:text-blue-600 prose-img:rounded-2xl">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {article.content}
           </ReactMarkdown>
