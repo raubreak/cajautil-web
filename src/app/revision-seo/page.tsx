@@ -4,7 +4,6 @@ import Link from 'next/link';
 import GenerateButton from './GenerateButton';
 import DeleteButton from './DeleteButton';
 import IntervalSelector from './IntervalSelector';
-import BulkVariantCreator from './BulkVariantCreator';
 
 export const metadata: Metadata = {
   robots: {
@@ -43,8 +42,6 @@ export default async function RevisionSeoPage() {
         <div className="mb-10 w-full xl:w-fit">
           <IntervalSelector currentInterval={intervalDays} />
         </div>
-
-        <BulkVariantCreator />
 
         <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
           {articles.length === 0 ? (
