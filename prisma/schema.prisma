@@ -48,3 +48,10 @@ model ToolVariant {
   @@index([slug])
   @@index([toolBase])
 }
+
+model CronLog {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  status    String   // "SUCCESS", "SKIPPED", "ERROR"
+  message   String
+}
