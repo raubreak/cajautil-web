@@ -97,10 +97,10 @@ Debes responder ÚNICAMENTE con un JSON válido parseable. Sin markdown decorati
 
   const savedArticle = await prisma.article.create({
     data: {
-      title: articleData.title,
+      title: articleData.title || 'Artículo generado',
       slug: finalSlug,
-      content: articleData.content,
-      tags: articleData.tags,
+      content: articleData.content || '',
+      tags: articleData.tags || 'herramientas, utilidades',
       targetToolUrl: herramientaDestino.url,
     }
   });
