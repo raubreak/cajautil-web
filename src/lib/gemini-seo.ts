@@ -43,7 +43,7 @@ export async function generateProgrammaticArticle(force = false) {
         const diffMs = Date.now() - new Date(lastArticle.publishedAt).getTime();
         const diffDays = diffMs / (1000 * 60 * 60 * 24);
         
-        if (diffDays < (intervalDays - 0.08)) {
+        if (diffDays < (intervalDays - 0.5)) { // Margen de 12h para permitir "catch up" al cron si el anterior fue tarde
           return { skipped: true, message: `Omitido: no han pasado ${intervalDays} días.` };
         }
       }
