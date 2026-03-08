@@ -28,8 +28,7 @@ export default function GeneradorWhatsApp() {
 
   const handleOpenDesktop = () => {
     if (!isValid) return;
-    const webLink = `https://web.whatsapp.com/send/?phone=${formatPrefix}${formatPhone}&text=${encodeURIComponent(mensaje)}`;
-    window.open(webLink, '_blank');
+    window.open(linkGeneral, '_blank');
   };
 
   return (
