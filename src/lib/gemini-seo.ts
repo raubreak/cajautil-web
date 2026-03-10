@@ -26,9 +26,8 @@ async function generateArticleImage(imagePrompt: string, slug: string): Promise<
   if (!process.env.GEMINI_API_KEY) return null;
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
   try {
-    // Usando gemini-2.0-flash experimental u otro modelo si tiene soporte. 
-    // De momento lo dejamos mapeado al que ofrezca imagen por defecto
-    const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-image-preview" });
+    // Usando el modelo de imagen explícitamente solicitado para ahorrar tokens
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
     const result = await model.generateContent(imagePrompt);
     const response = result.response;
     
