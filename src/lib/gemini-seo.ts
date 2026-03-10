@@ -112,7 +112,7 @@ REQUISITOS DEL ARTÍCULO:
 - Incluye también un 'image_prompt': una descripción detallada en inglés para generar una imagen de portada fotorrealista y moderna que ilustre el tema.
 
 REQUISITOS ADICIONALES DEL OUTPUT:
-Responde ÚNICAMENTE con un JSON válido:
+Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" para los saltos de línea en lugar de saltos reales para que el JSON no se rompa:
 {
   "title": "Título del artículo",
   "content": "Contenido en Markdown...",
@@ -121,7 +121,10 @@ Responde ÚNICAMENTE con un JSON válido:
 }`;
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ 
+    model: "gemini-2.5-flash",
+    generationConfig: { responseMimeType: "application/json" }
+  });
   const result = await model.generateContent(systemPrompt);
   const responseText = result.response.text();
 
@@ -155,14 +158,17 @@ Responde ÚNICAMENTE con un JSON válido:
 export async function generateToolVariantBatch(baseTool: string, keywords: string[]) {
   if (!process.env.GEMINI_API_KEY) throw new Error('Falta GEMINI_API_KEY');
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ 
+    model: "gemini-2.5-flash",
+    generationConfig: { responseMimeType: "application/json" }
+  });
   
   const results = [];
 
   for (const kw of keywords) {
     const prompt = `Eres un experto en SEO. Genera una variante de '${baseTool}' para: '${kw}'.
     
-    Responde ÚNICAMENTE con JSON:
+    Responde ÚNICAMENTE con JSON válido (escapa saltos de línea con \\n):
     {
       "seoTitle": "...",
       "h1": "...",
