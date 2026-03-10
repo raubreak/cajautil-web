@@ -121,7 +121,7 @@ Responde ÚNICAMENTE con un JSON válido:
 }`;
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   const result = await model.generateContent(systemPrompt);
   const responseText = result.response.text();
 
@@ -155,7 +155,7 @@ Responde ÚNICAMENTE con un JSON válido:
 export async function generateToolVariantBatch(baseTool: string, keywords: string[]) {
   if (!process.env.GEMINI_API_KEY) throw new Error('Falta GEMINI_API_KEY');
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   
   const results = [];
 
