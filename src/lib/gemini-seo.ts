@@ -107,7 +107,7 @@ export async function generateProgrammaticArticle(force = false) {
 Tu misión es escribir UN artículo de blog fascinante, educativo y resolutivo sobre un tema actual relacionado con: ${herramientaDestino.nombre}.
 
 REQUISITOS DEL ARTÍCULO:
-- Formato: EXCLUSIVAMENTE Markdown.
+- Formato: EXCLUSIVAMENTE Markdown. ¡MUY IMPORTANTE!: NO incluyas el título principal (# H1) dentro del contenido del Markdown, empieza directamente por los párrafos introductorios o un H2 (##).
 - Título: Atractivo y clicable.
 - Incluye también un 'image_prompt': una descripción detallada en inglés para generar una imagen de portada fotorrealista y moderna que ilustre el tema.
 
@@ -130,6 +130,11 @@ Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" p
 
   const cleanJsonString = responseText.replace(/```json\n?|```/g, '').trim();
   const articleData = JSON.parse(cleanJsonString);
+
+  // Limpieza defensiva: por si el modelo sigue incrustando el título H1 al principio del markdown
+  if (articleData.content) {
+    articleData.content = articleData.content.replace(/^#\s+.*$/m, '').trim();
+  }
 
   let baseSlug = slugify(articleData.title, { lower: true, strict: true });
   let finalSlug = baseSlug;
