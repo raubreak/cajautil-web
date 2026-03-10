@@ -35,6 +35,17 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         </Link>
 
         <header className="mb-12">
+          {article.coverImageUrl && (
+            <div className="mb-8 w-full aspect-[2/1] relative rounded-3xl overflow-hidden shadow-lg border border-slate-100">
+              <Image 
+                src={article.coverImageUrl}
+                alt={`Imagen de portada de ${article.title}`}
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-700"
+                priority
+              />
+            </div>
+          )}
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">
             {article.title}
           </h1>

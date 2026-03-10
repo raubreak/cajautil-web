@@ -4,8 +4,7 @@ import slugify from 'slugify';
 import { revalidatePath } from 'next/cache';
 import fs from 'fs';
 import path from 'path';
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+import { put } from '@vercel/blob';
 
 export const HERRAMIENTAS = [
   { nombre: "Generador de Firmas de Email", url: "/generador-firmas-email" },
@@ -21,11 +20,15 @@ export const HERRAMIENTAS = [
 ];
 
 /**
- * Genera una imagen para el artículo usando Nano Banana (Gemini 2.5 Flash Image)
+ * Genera una imagen para el artículo usando Gemini Image (Nano Banana 2/Pro según disponibilidad o el que tenga soporte)
  */
 async function generateArticleImage(imagePrompt: string, slug: string): Promise<string | null> {
+  if (!process.env.GEMINI_API_KEY) return null;
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
+    // Usando gemini-2.0-flash experimental u otro modelo si tiene soporte. 
+    // De momento lo dejamos mapeado al que ofrezca imagen por defecto
+    const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-image-preview" });
     const result = await model.generateContent(imagePrompt);
     const response = result.response;
     
@@ -35,6 +38,23 @@ async function generateArticleImage(imagePrompt: string, slug: string): Promise<
 
     const buffer = Buffer.from(part.inlineData.data, 'base64');
     const fileName = `${slug}-${Date.now()}.webp`;
+
+    // Si tenemos configurado Vercel Blob, subimos la imagen al Bucket
+    if (process.env.BLOB_READ_WRITE_TOKEN) {
+      const blob = await put(`articles/${fileName}`, buffer, {
+        access: 'public', // Este Bucket DEBE estar configurado como Público en Vercel
+        contentType: 'image/webp',
+      });
+      return blob.url; // Retorna la URL del CDN
+    }
+
+    // Fallback: Guardado en Local (temporal en Vercel, persistente en Localhost)
+    // Evitar errors de Vercel si intenta ejecutar esto en un entorno sin persistencia
+    if (process.env.VERCEL) {
+       console.warn("Vercel environment detected without BLOB config. Skipping local fs write.");
+       return null; 
+    }
+
     const publicPath = '/images/articles';
     const fullDirPath = path.join(process.cwd(), 'public', publicPath);
     const fullFilePath = path.join(fullDirPath, fileName);
@@ -46,7 +66,7 @@ async function generateArticleImage(imagePrompt: string, slug: string): Promise<
     fs.writeFileSync(fullFilePath, buffer);
     return `${publicPath}/${fileName}`;
   } catch (error) {
-    console.error("Error generando imagen con Gemini:", error);
+    console.error("Error generando/guardando imagen con Gemini o Blob:", error);
     return null;
   }
 }
@@ -101,7 +121,8 @@ Responde ÚNICAMENTE con un JSON válido:
   "image_prompt": "Detailed AI image prompt in English..."
 }`;
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
   const result = await model.generateContent(systemPrompt);
   const responseText = result.response.text();
 
@@ -134,8 +155,8 @@ Responde ÚNICAMENTE con un JSON válido:
 
 export async function generateToolVariantBatch(baseTool: string, keywords: string[]) {
   if (!process.env.GEMINI_API_KEY) throw new Error('Falta GEMINI_API_KEY');
-  
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
   
   const results = [];
 
