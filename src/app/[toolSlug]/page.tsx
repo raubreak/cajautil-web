@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import prisma from '@/lib/prisma';
 import Markdown from 'react-markdown';
 import { ToolRegistry } from '@/lib/toolRegistry';
+import RelatedTools from '@/components/tools/RelatedTools';
 import type { Metadata, ResolvingMetadata } from 'next';
 
 interface PageProps {
@@ -83,6 +84,12 @@ export default async function DynamicToolPage({ params }: PageProps) {
              <Markdown>{variant.bottomContent}</Markdown>
           </section>
         )}
+
+        {/* ENLAZADO INTERNO E INYECCIÓN DE SILO SEMÁNTICO */}
+        <RelatedTools 
+          baseTool={variant.toolBase} 
+          currentSlug={variant.slug} 
+        />
       </main>
     </>
   );

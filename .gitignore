@@ -45,3 +45,8 @@ seo-auditor.js
 
 /src/generated/prisma
 .env*.local
+
+# Analytics y pruebas locales temporales
+ga4-key.json
+test-site.js
+check_schemas.js

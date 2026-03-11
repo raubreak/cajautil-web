@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 import { generateToolVariantBatch } from '../src/lib/gemini-seo';
 import prisma from '../src/lib/prisma';
 
@@ -19,8 +21,6 @@ const SEO_STRATEGY = [
       'reunificación de deudas'
     ]
   },
-  // Cuando abstraigamos la Calculadora de IVA:
-  /*
   {
     baseTool: 'calculadora-iva',
     keywords: [
@@ -30,25 +30,16 @@ const SEO_STRATEGY = [
       'vivienda nueva',
       'obras y reformas',
       'hostelería',
-      'servicios digitales'
-    ]
-  },
-  */
-  // Cuando abstraigamos Sueldo Neto:
-  /*
-  {
-    baseTool: 'calculadora-sueldo-neto',
-    keywords: [
-      'madrid',
-      'cataluña',
-      'andalucía',
-      'galicia',
-      'comunidad valenciana',
-      'funcionario',
-      'media jornada'
+      'servicios digitales',
+      'canarias igic',
+      'productos alimenticios básicos',
+      'alquiler de locales comerciales',
+      'artistas y creadores de contenido',
+      'exportaciones e importaciones',
+      'dietas y gastos de viaje',
+      'vehículos híbridos y eléctricos'
     ]
   }
-  */
 ];
 
 async function main() {
