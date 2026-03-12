@@ -39,6 +39,28 @@ const SEO_STRATEGY = [
       'dietas y gastos de viaje',
       'vehículos híbridos y eléctricos'
     ]
+  },
+  {
+    baseTool: 'calculadora-sueldo-neto',
+    keywords: [
+      'Madrid',
+      'Cataluña',
+      'Andalucía',
+      'Galicia',
+      'Comunidad Valenciana',
+      'País Vasco',
+      'Canarias',
+      'Castilla y León',
+      'Castilla-La Mancha',
+      'Región de Murcia',
+      'Aragón',
+      'Islas Baleares',
+      'Extremadura',
+      'Asturias',
+      'Navarra',
+      'Cantabria',
+      'La Rioja'
+    ]
   }
 ];
 
