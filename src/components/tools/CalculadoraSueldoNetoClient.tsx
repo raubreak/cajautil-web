@@ -6,7 +6,7 @@ import { Coins } from "lucide-react";
 interface Props {
   title?: React.ReactNode;
   subtitle?: string;
-  initialBruto?: number;
+  initialBruto?: number | "";
   initialPagas?: 12 | 14;
 }
 
@@ -16,7 +16,7 @@ export default function CalculadoraSueldoNetoClient({
   initialBruto = "", 
   initialPagas = 12 
 }: Props) {
-  const [brutoAnual, setBrutoAnual] = useState<number | "">(initialBruto as any);
+  const [brutoAnual, setBrutoAnual] = useState<number | "">(initialBruto);
   const [pagas, setPagas] = useState<12 | 14>(initialPagas);
 
   const calcularIRPF = (bruto: number) => {

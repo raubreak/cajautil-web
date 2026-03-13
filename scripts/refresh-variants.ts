@@ -2,7 +2,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 import prisma from '../src/lib/prisma';
-import { generateToolVariantBatch } from '../src/lib/gemini-seo.ts';
+import { generateToolVariantBatch } from '../src/lib/gemini-seo';
 
 async function main() {
   console.log('🚀 Iniciando refresco de contenido de variantes pSEO...');
