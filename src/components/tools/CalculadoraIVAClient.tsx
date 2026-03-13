@@ -6,12 +6,21 @@ import { Landmark, ArrowRightCircle, HandCoins, Info, ArrowLeftRight } from 'luc
 interface Props {
   title?: React.ReactNode;
   subtitle?: string;
+  initialImporte?: string;
+  initialIva?: number;
+  initialModo?: "sumar" | "restar";
 }
 
-const CalculadoraIVAClient = ({ title, subtitle }: Props) => {
-  const [importe, setImporte] = useState<string>('');
-  const [porcentajeIva, setPorcentajeIva] = useState<number>(21);
-  const [modo, setModo] = useState<"sumar" | "restar">("sumar");
+const CalculadoraIVAClient = ({ 
+  title, 
+  subtitle, 
+  initialImporte = '', 
+  initialIva = 21, 
+  initialModo = "sumar" 
+}: Props) => {
+  const [importe, setImporte] = useState<string>(initialImporte);
+  const [porcentajeIva, setPorcentajeIva] = useState<number>(initialIva);
+  const [modo, setModo] = useState<"sumar" | "restar">(initialModo);
   
   const [resultado, setResultado] = useState({
     baseImponible: 0,

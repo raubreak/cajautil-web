@@ -17,12 +17,21 @@ const formatCurrency = (val: number) =>
 interface Props {
   title?: React.ReactNode;
   subtitle?: string;
+  initialAmount?: string;
+  initialInterest?: string;
+  initialYears?: string;
 }
 
-export default function CalculadoraPrestamosClient({ title, subtitle }: Props) {
-  const [amount, setAmount] = useState('10000');
-  const [interest, setInterest] = useState('5.5');
-  const [years, setYears] = useState('5');
+export default function CalculadoraPrestamosClient({ 
+  title, 
+  subtitle, 
+  initialAmount = '10000', 
+  initialInterest = '5.5', 
+  initialYears = '5' 
+}: Props) {
+  const [amount, setAmount] = useState(initialAmount);
+  const [interest, setInterest] = useState(initialInterest);
+  const [years, setYears] = useState(initialYears);
 
   const simulation = useMemo(() => {
     const P = parseFloat(amount);

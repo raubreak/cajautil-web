@@ -195,7 +195,13 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
       "h1": "...",
       "seoDescription": "...",
       "topContent": "...",
-      "bottomContent": "..."
+      "bottomContent": "...",
+      "functionalConfig": {
+         "comentario": "Configuración óptima para la herramienta basada en el contexto",
+         "initialValues": {
+            "key": "valor"
+         }
+      }
     }`;
 
     try {
@@ -207,8 +213,8 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
       
       const variant = await prisma.toolVariant.upsert({
         where: { slug },
-        update: { ...data, toolBase: baseTool },
-        create: { ...data, slug, toolBase: baseTool }
+        update: { ...data, toolBase: baseTool, functionalConfig: data.functionalConfig },
+        create: { ...data, slug, toolBase: baseTool, functionalConfig: data.functionalConfig }
       });
       results.push(variant);
     } catch (e) {

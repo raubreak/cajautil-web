@@ -60,12 +60,72 @@ export default async function DynamicToolPage({ params }: PageProps) {
     }
   };
 
+  // Extraemos FAQs del contenido generado para Schema.org FAQPage
+  const faqs = [];
+  if (variant.bottomContent) {
+    // Regex mejorada para detenerse en el siguiente H3, H2 o final de archivo
+    const faqMatches = Array.from(variant.bottomContent.matchAll(/### P:\s*(.*?)\s*\n\s*R:\s*(.*?)(?=\n### P:|\n##|\n#|$)/gs));
+    for (const match of faqMatches) {
+      faqs.push({
+        "@type": "Question",
+        name: match[1].trim(),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: match[2].trim()
+        }
+      });
+    }
+  }
+
+  const faqJsonLd = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs
+  } : null;
+
+  // Extraemos pasos de "Guía de uso" para HowTo schema
+  const steps = [];
+  if (variant.bottomContent) {
+    const guideSection = variant.bottomContent.match(/## Guía de uso.*?\n([\s\S]*?)(?=\n##|$)/i);
+    if (guideSection) {
+       const stepMatches = Array.from(guideSection[1].matchAll(/^\d\.\s*(.*)/gm));
+       for (const match of stepMatches) {
+         steps.push({
+           "@type": "HowToStep",
+           "text": match[1].trim()
+         });
+       }
+    }
+  }
+
+  const howToJsonLd = steps.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `Cómo usar ${variant.h1}`,
+    "step": steps
+  } : null;
+
+  // Extraemos configuración funcional si existe
+  const config = (variant as any).functionalConfig?.initialValues || {};
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
+      {howToJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+        />
+      )}
       <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
         {variant.topContent && (
           <section className="w-full max-w-4xl prose prose-slate mb-8 px-2 text-slate-600">
@@ -77,6 +137,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
         <ToolComponent 
            title={<span className="text-blue-600">{variant.h1}</span>}
            subtitle={variant.seoDescription}
+           {...config}
         />
 
         {/* RENDERIZAMOS EL CONTENIDO LARGO GENERADO POR GEMINI */}
