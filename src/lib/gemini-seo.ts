@@ -171,7 +171,23 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
   const results = [];
 
   for (const kw of keywords) {
-    const prompt = `Eres un experto en SEO. Genera una variante de '${baseTool}' para: '${kw}'.
+    const prompt = `Eres un experto redactor SEO y especialista en la herramienta: '${baseTool}'. 
+    Tu misión es generar contenido de ALTO VALOR y profundidad para una variante específica: '${kw}'.
+    
+    El contenido debe ser extenso (mínimo 800-1000 palabras de valor real), educativo y diseñado para AYUDAR al usuario, no solo para posicionar.
+    
+    ESTRUCTURA REQUERIDA PARA 'bottomContent' (Markdown):
+    1. Introducción detallada: Por qué esta variante de la herramienta es útil para '${kw}'.
+    2. Guía de uso paso a paso: Cómo obtener el máximo provecho de la herramienta en este escenario.
+    3. Casos de uso prácticos: 3 ejemplos reales de cuándo usar la herramienta para '${kw}'.
+    4. Sección de consejos expertos: 3-5 'pro-tips' que demuestren conocimiento profundo.
+    5. FAQ (Preguntas Frecuentes): Mínimo 5 preguntas y respuestas detalladas que los usuarios suelen tener sobre '${kw}' y '${baseTool}'. Use el formato '### P: ... \n R: ...'.
+    
+    REQUISITOS ADICIONALES:
+    - seoTitle: Atractivo y optimizado (max 60 carac).
+    - h1: Título principal claro y directo.
+    - seoDescription: Resumen que invite al clic (max 155 carac).
+    - topContent: Un párrafo introductorio (2-3 frases) muy directo.
     
     Responde ÚNICAMENTE con JSON válido (escapa saltos de línea con \\n):
     {

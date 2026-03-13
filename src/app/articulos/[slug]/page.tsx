@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, CalendarDays, ExternalLink, Tag } from 'lucide-react';
+import AuthorSection from '@/components/AuthorSection';
 
 export const dynamic = 'force-dynamic';
 
@@ -79,6 +80,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
             {article.content}
           </ReactMarkdown>
         </div>
+
+        {/* E-E-A-T: Sección de Autor */}
+        <AuthorSection />
 
       </div>
     </article>

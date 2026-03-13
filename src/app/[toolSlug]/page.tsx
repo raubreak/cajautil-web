@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma';
 import Markdown from 'react-markdown';
 import { ToolRegistry } from '@/lib/toolRegistry';
 import RelatedTools from '@/components/tools/RelatedTools';
+import AuthorSection from '@/components/AuthorSection';
 import type { Metadata, ResolvingMetadata } from 'next';
 
 interface PageProps {
@@ -84,6 +85,9 @@ export default async function DynamicToolPage({ params }: PageProps) {
              <Markdown>{variant.bottomContent}</Markdown>
           </section>
         )}
+
+        {/* SECCIÓN DE AUTOR Y E-E-A-T */}
+        <AuthorSection />
 
         {/* ENLAZADO INTERNO E INYECCIÓN DE SILO SEMÁNTICO */}
         <RelatedTools 

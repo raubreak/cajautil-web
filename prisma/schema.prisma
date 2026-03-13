@@ -1,26 +1,23 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_URL") // Utiliza el pool connection
+  url      = env("POSTGRES_URL")
 }
 
 model Article {
-  id                String   @id @default(cuid())
-  slug              String   @unique
-  title             String
-  content           String   
-  coverImagePrompt  String?  
-  coverImageUrl     String?
-  targetToolUrl     String
-  tags              String
-  publishedAt       DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  content          String
+  coverImagePrompt String?
+  coverImageUrl    String?
+  targetToolUrl    String
+  tags             String
+  publishedAt      DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   @@index([slug])
   @@index([publishedAt])
@@ -28,22 +25,21 @@ model Article {
 
 model Setting {
   id    String @id @default(cuid())
-  key   String @unique // e.g., 'POST_INTERVAL_DAYS'
+  key   String @unique
   value String
 }
 
-// SEO Programático: Variantes dinámicas de herramientas
 model ToolVariant {
-  id              String   @id @default(cuid())
-  slug            String   @unique // Ej: 'calculadora-prestamos-coche'
-  toolBase        String   // Identificador de la tool original base, Ej: 'calculadora-prestamos'
-  seoTitle        String   // Title tag SEO específico
-  h1              String   // Título principal en la web
-  seoDescription  String   // Meta descripción SEO
-  topContent      String   // Texto HTML/Markdown introductorio (Opcional)
-  bottomContent   String   // Texto HTML/Markdown explicativo largo (SEO)
-  publishedAt     DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  toolBase       String
+  seoTitle       String
+  h1             String
+  seoDescription String
+  topContent     String
+  bottomContent  String
+  publishedAt    DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@index([slug])
   @@index([toolBase])
@@ -52,6 +48,6 @@ model ToolVariant {
 model CronLog {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  status    String   // "SUCCESS", "SKIPPED", "ERROR"
+  status    String
   message   String
 }
