@@ -122,7 +122,7 @@ Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" p
 }`;
 
   const ai = AIProvider.getInstance();
-  const result = await ai.generateText(systemPrompt, { provider: 'openrouter' });
+  const result = await ai.generateText(systemPrompt);
   const responseText = result.text;
 
   const cleanJsonString = responseText.replace(/```json\n?|```/g, '').trim();
@@ -196,7 +196,7 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
 
     try {
       const ai = AIProvider.getInstance();
-      const result = await ai.generateText(prompt, { provider: 'openrouter' });
+      const result = await ai.generateText(prompt);
       const text = result.text;
       const cleanJson = text.replace(/```json\n?|```/g, '').trim();
       const data = JSON.parse(cleanJson);

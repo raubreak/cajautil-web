@@ -18,13 +18,17 @@ export class AIProvider {
   }
 
   async generateText(prompt: string, options: { model?: string, provider?: 'gemini' | 'openrouter' } = {}): Promise<AIResponse> {
-    const provider = options.provider || (process.env.OPENROUTER_API_KEY ? 'openrouter' : 'gemini');
+    const provider = options.provider || (process.env.GEMINI_API_KEY ? 'gemini' : 'openrouter');
     
+    if (provider === 'gemini' && process.env.GEMINI_API_KEY) {
+      return this.generateWithGemini(prompt, options.model || 'gemini-1.5-flash');
+    }
+
     if (provider === 'openrouter' && process.env.OPENROUTER_API_KEY) {
       return this.generateWithOpenRouter(prompt, options.model || 'openrouter/free');
     }
 
-    return this.generateWithGemini(prompt, options.model || 'gemini-1.5-flash');
+    throw new Error("No hay API Key configurada para el proveedor seleccionado.");
   }
 
   private async generateWithOpenRouter(prompt: string, model: string): Promise<AIResponse> {
