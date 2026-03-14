@@ -209,6 +209,7 @@ export default function RootLayout({
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Legal e Info</h3>
                 <ul className="space-y-2">
                   <li><Link href="/sobre-nosotros" className="text-sm hover:text-white transition-colors">Sobre nosotros</Link></li>
+                  <li><Link href="/aviso-legal" className="text-sm hover:text-white transition-colors">Aviso Legal</Link></li>
                   <li><Link href="/politica-de-privacidad" className="text-sm hover:text-white transition-colors">Política de Privacidad</Link></li>
                   <li><Link href="/politica-de-cookies" className="text-sm hover:text-white transition-colors">Política de Cookies</Link></li>
                   <li><Link href="/contacto" className="text-sm hover:text-white transition-colors">Contacto</Link></li>
