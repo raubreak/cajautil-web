@@ -127,16 +127,6 @@ export default async function DynamicToolPage({ params }: PageProps) {
         />
       )}
       <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
-        {variant.coverImageUrl && (
-          <div className="w-full max-w-4xl mb-12 rounded-[40px] overflow-hidden shadow-2xl border-8 border-white">
-            <img 
-              src={variant.coverImageUrl} 
-              alt={variant.h1}
-              className="w-full h-auto object-cover max-h-[500px]"
-            />
-          </div>
-        )}
-
         {variant.topContent && (
           <section className="w-full max-w-4xl prose prose-slate mb-8 px-2 text-slate-600">
              <Markdown>{variant.topContent}</Markdown>
