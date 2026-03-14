@@ -191,7 +191,8 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
          "initialValues": {
             "key": "valor"
          }
-      }
+      },
+      "image_prompt": "Detailed AI image prompt in English for a modern, high-quality cover image illustrating the tool use case"
     }`;
 
     try {
@@ -202,10 +203,12 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
       const data = JSON.parse(cleanJson);
       let slug = slugify(`${baseTool}-${kw}`, { lower: true, strict: true });
       
+      const imageUrl = await generateArticleImage(data.image_prompt, slug);
+      
       const variant = await prisma.toolVariant.upsert({
         where: { slug },
-        update: { ...data, toolBase: baseTool, functionalConfig: data.functionalConfig },
-        create: { ...data, slug, toolBase: baseTool, functionalConfig: data.functionalConfig }
+        update: { ...data, toolBase: baseTool, functionalConfig: data.functionalConfig, coverImagePrompt: data.image_prompt, coverImageUrl: imageUrl },
+        create: { ...data, slug, toolBase: baseTool, functionalConfig: data.functionalConfig, coverImagePrompt: data.image_prompt, coverImageUrl: imageUrl }
       });
       results.push(variant);
     } catch (e) {
