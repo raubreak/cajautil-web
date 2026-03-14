@@ -25,6 +25,11 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
     alternates: {
       canonical: `https://cajautil.com/articulos/${article.slug}`,
     },
+    openGraph: {
+      images: article.coverImageUrl 
+        ? [{ url: article.coverImageUrl, alt: article.title }]
+        : [{ url: 'https://cajautil.com/og-image.png', alt: 'CajaUtil.com' }],
+    }
   };
 }
 
