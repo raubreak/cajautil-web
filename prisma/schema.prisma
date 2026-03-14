@@ -30,17 +30,17 @@ model Setting {
 }
 
 model ToolVariant {
-  id             String   @id @default(cuid())
-  slug           String   @unique
-  toolBase       String
-  seoTitle       String
-  h1             String
-  seoDescription String
-  topContent     String
-  bottomContent  String
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  toolBase         String
+  seoTitle         String
+  h1               String
+  seoDescription   String
+  topContent       String
+  bottomContent    String
+  publishedAt      DateTime @default(now())
+  updatedAt        DateTime @updatedAt
   functionalConfig Json?
-  publishedAt    DateTime @default(now())
-  updatedAt      DateTime @updatedAt
 
   @@index([slug])
   @@index([toolBase])

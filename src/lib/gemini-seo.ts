@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import prisma from '@/lib/prisma';
+import { AIProvider } from './ai-provider';
 import slugify from 'slugify';
 import { revalidatePath } from 'next/cache';
 import fs from 'fs';
@@ -120,13 +121,9 @@ Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" p
   "image_prompt": "Detailed AI image prompt in English..."
 }`;
 
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-  const model = genAI.getGenerativeModel({ 
-    model: "gemini-2.5-flash",
-    generationConfig: { responseMimeType: "application/json" }
-  });
-  const result = await model.generateContent(systemPrompt);
-  const responseText = result.response.text();
+  const ai = AIProvider.getInstance();
+  const result = await ai.generateText(systemPrompt, { provider: 'openrouter' });
+  const responseText = result.text;
 
   const cleanJsonString = responseText.replace(/```json\n?|```/g, '').trim();
   const articleData = JSON.parse(cleanJsonString);
@@ -161,13 +158,6 @@ Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" p
 }
 
 export async function generateToolVariantBatch(baseTool: string, keywords: string[]) {
-  if (!process.env.GEMINI_API_KEY) throw new Error('Falta GEMINI_API_KEY');
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-  const model = genAI.getGenerativeModel({ 
-    model: "gemini-2.5-flash",
-    generationConfig: { responseMimeType: "application/json" }
-  });
-  
   const results = [];
 
   for (const kw of keywords) {
@@ -205,8 +195,9 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
     }`;
 
     try {
-      const result = await model.generateContent(prompt);
-      const text = result.response.text();
+      const ai = AIProvider.getInstance();
+      const result = await ai.generateText(prompt, { provider: 'openrouter' });
+      const text = result.text;
       const cleanJson = text.replace(/```json\n?|```/g, '').trim();
       const data = JSON.parse(cleanJson);
       let slug = slugify(`${baseTool}-${kw}`, { lower: true, strict: true });
