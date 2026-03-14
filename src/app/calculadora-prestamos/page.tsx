@@ -2,8 +2,8 @@ import CalculadoraPrestamosClient from "@/components/tools/CalculadoraPrestamosC
 import React from "react";
 
 export const metadata = {
-  title: 'Simulador de Préstamos Personales con Cuadro de Amortización | CajaUtil',
-  description: 'Calcula online tu cuota mensual, coste total y genera la tabla de amortización de tu préstamo bancario.',
+  title: 'Simulador de Préstamos Personales — Cuadro de Amortización',
+  description: 'Calcula online tu cuota mensual, coste total y genera la tabla de amortización de tu préstamo bancario de forma gratuita.',
 };
 
 export default function CalculadoraPrestamos() {

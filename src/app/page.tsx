@@ -5,8 +5,8 @@ import type { Metadata } from "next";
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: "Herramientas Online Gratis — Calculadoras, Generadores y Utilidades Web",
-  description: "Colección de herramientas gratuitas para tu día a día: calculadora de porcentajes e IVA, generador de QR, contador de palabras, calculadora de sueldo neto y más. Sin registro, directas en tu navegador.",
+  title: "CajaUtil — Herramientas Online Gratis y Utilidades Web",
+  description: "Calculadoras, generadores y utilidades gratuitas: IVA, sueldo neto, porcentajes, QR y más. Rápidas, seguras y directas en tu navegador.",
   keywords: [
     "herramientas online gratis",
     "calculadora online",

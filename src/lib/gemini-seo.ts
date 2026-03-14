@@ -108,15 +108,24 @@ export async function generateProgrammaticArticle(force = false) {
 Tu misión es escribir UN artículo de blog fascinante, educativo y resolutivo sobre un tema actual relacionado con: ${herramientaDestino.nombre}.
 
 REQUISITOS DEL ARTÍCULO:
+- Longitud: Mínimo 1500 palabras de valor real (sin paja).
 - Formato: EXCLUSIVAMENTE Markdown. ¡MUY IMPORTANTE!: NO incluyas el título principal (# H1) dentro del contenido del Markdown, empieza directamente por los párrafos introductorios o un H2 (##).
-- Título: Atractivo y clicable.
-- Incluye también un 'image_prompt': una descripción detallada en inglés para generar una imagen de portada fotorrealista y moderna que ilustre el tema.
+- Estructura: 
+    1. Introducción profunda.
+    2. Mínimo 4 secciones con H2 y H3 detallando el "Cómo", "Por qué" y casos de uso.
+    3. Sección "Consejos de Experto" (E-E-A-T).
+    4. Sección FAQ completa (mínimo 6 preguntas de usuario real).
+    5. Conclusión.
+- Título: Atractivo, clicable y optimizado SEO (max 60 caracteres).
+- Meta Descripción: Un resumen persuasivo que invite al clic (max 155 caracteres).
+- Incluye también un 'image_prompt': una descripción detallada en inglés para generar una imagen de portada fotorrealista y moderna.
 
 REQUISITOS ADICIONALES DEL OUTPUT:
-Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" para los saltos de línea en lugar de saltos reales para que el JSON no se rompa:
+Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" para los saltos de línea:
 {
   "title": "Título del artículo",
-  "content": "Contenido en Markdown...",
+  "metaDescription": "Resumen para Google...",
+  "content": "Contenido extenso en Markdown...",
   "tags": "tag1, tag2",
   "image_prompt": "Detailed AI image prompt in English..."
 }`;
@@ -144,6 +153,7 @@ Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" p
       title: articleData.title || 'Artículo generado',
       slug: finalSlug,
       content: articleData.content || '',
+      metaDescription: articleData.metaDescription || '',
       tags: articleData.tags || 'herramientas, utilidades',
       targetToolUrl: herramientaDestino.url,
       coverImagePrompt: articleData.image_prompt,

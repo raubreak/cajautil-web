@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Aviso Legal | CajaUtil.com',
-  description: 'Información legal, términos de uso y responsabilidad de CajaUtil.com.',
+  title: 'Aviso Legal y Condiciones de Uso | CajaUtil.com',
+  description: 'Información legal, términos y condiciones de uso y responsabilidad de CajaUtil.com.',
   alternates: {
     canonical: 'https://cajautil.com/aviso-legal',
   },
@@ -14,7 +14,7 @@ export default function AvisoLegal() {
   return (
     <main className="min-h-[100dvh] bg-slate-50 py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-100 prose prose-slate max-w-none">
-        <h1 className="text-3xl font-extrabold text-slate-800 mb-6">Aviso Legal</h1>
+        <h1 className="text-3xl font-extrabold text-slate-800 mb-6">Aviso Legal y Condiciones de Uso</h1>
         
         <p className="text-sm text-slate-500 mb-8">Última actualización: {new Date().toLocaleDateString('es-ES')}</p>
 

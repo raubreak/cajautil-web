@@ -7,7 +7,26 @@ import Link from 'next/link';
 import { ArrowLeft, CalendarDays, ExternalLink, Tag } from 'lucide-react';
 import AuthorSection from '@/components/AuthorSection';
 
+import type { Metadata } from 'next';
+
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: { slug: string } | Promise<{slug: string}> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const article = await prisma.article.findUnique({
+    where: { slug: resolvedParams.slug },
+  });
+
+  if (!article) return {};
+
+  return {
+    title: article.title.length > 57 ? `${article.title.substring(0, 57)}...` : article.title,
+    description: article.metaDescription || article.content.substring(0, 155),
+    alternates: {
+      canonical: `https://cajautil.com/articulos/${article.slug}`,
+    },
+  };
+}
 
 export default async function ArticlePage({ params }: { params: { slug: string } | Promise<{slug: string}> }) {
   const resolvedParams = await params;

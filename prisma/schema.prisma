@@ -16,6 +16,7 @@ model Article {
   coverImageUrl    String?
   targetToolUrl    String
   tags             String
+  metaDescription  String?
   publishedAt      DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
