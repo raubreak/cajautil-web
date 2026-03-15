@@ -1,12 +1,16 @@
 
 import { PrismaClient } from '@prisma/client';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { AIProvider } from '../src/lib/ai-provider';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
 
+if (!process.env.POSTGRES_URL) {
+  dotenv.config({ path: '.env' });
+}
+
 const prisma = new PrismaClient();
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const ai = AIProvider.getInstance();
 
 async function deepenArticle(article: any) {
   console.log(`\n🚀 Ampliando: [${article.title}]...`);
@@ -18,7 +22,7 @@ ${article.content}
 
 TU MISIÓN:
 1. Re-escribir y ampliar el contenido para que sea fascinante, educativo y muy profundo.
-2. Mínimo 1500 palabras.
+2. Mínimo 1500 palabras de valor real.
 3. Usa una estructura profesional con H2 y H3.
 4. Incluye:
    - Casos de uso prácticos.
@@ -27,17 +31,15 @@ TU MISIÓN:
    - Una conclusión potente.
 5. Genera una "metaDescription" persuasiva (max 155 caracteres).
 
-Responde ÚNICAMENTE en JSON:
+Responde ÚNICAMENTE en JSON con este formato:
 {
   "metaDescription": "...",
   "content": "Contenido extendido en Markdown..."
 }`;
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const result = await ai.generateText(prompt, { provider: 'openrouter', model: 'google/gemini-2.0-flash-001' });
+    const text = result.text;
     const cleanJson = text.replace(/```json\n?|```/g, '').trim();
     const data = JSON.parse(cleanJson);
 
