@@ -38,7 +38,7 @@ Responde ÚNICAMENTE en JSON con este formato:
 }`;
 
   try {
-    const result = await ai.generateText(prompt, { provider: 'openrouter', model: 'google/gemini-2.0-flash-001' });
+    const result = await ai.generateText(prompt, { provider: 'gemini', model: 'gemini-2.5-flash-lite' });
     const text = result.text;
     const cleanJson = text.replace(/```json\n?|```/g, '').trim();
     const data = JSON.parse(cleanJson);

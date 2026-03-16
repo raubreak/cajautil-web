@@ -21,7 +21,7 @@ export class AIProvider {
     const provider = options.provider || (process.env.GEMINI_API_KEY ? 'gemini' : 'openrouter');
     
     if (provider === 'gemini' && process.env.GEMINI_API_KEY) {
-      return this.generateWithGemini(prompt, options.model || 'gemini-1.5-flash');
+      return this.generateWithGemini(prompt, options.model || 'gemini-2.5-flash-lite');
     }
 
     if (provider === 'openrouter' && process.env.OPENROUTER_API_KEY) {
