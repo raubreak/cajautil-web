@@ -20,7 +20,10 @@ Si se detecta una caída de tráfico o se quiere revisar el estado actual de las
    ```bash
    npx tsx scripts/ga4-audit.ts
    ```
-4. **Análisis:** Esto imprimirá una tabla en consola con las visitas de la última semana. Utiliza estos datos para comparar con semanas anteriores o diagnosticar si un problema es real ("Traffic Drop Incident") o solo una falsa alarma.
+4. **Análisis:** El script ahora devuelve:
+   - Tráfico **orgánico** (`Organic Search`) de los últimos **7 días completos** (sin incluir el día en curso).
+   - Comparativa **Week over Week** (semana actual vs semana anterior) para sesiones y vistas, con variación porcentual.
+   Úsalo para diagnosticar si un problema es real ("Traffic Drop Incident") o solo una falsa alarma.
 
 ## 2. ⚙️ Estrategia de Crecimiento: Motores de SEO Programático (pSEO)
 
