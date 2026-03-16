@@ -121,21 +121,45 @@ REQUISITOS DEL ARTÍCULO:
 - Incluye también un 'image_prompt': una descripción detallada en inglés para generar una imagen de portada fotorrealista y moderna.
 
 REQUISITOS ADICIONALES DEL OUTPUT:
-Responde ÚNICAMENTE con un JSON válido. ESCAPA bien las comillas y usa "\\n" para los saltos de línea:
+- Responde ÚNICAMENTE con un JSON válido. 
+- MUY IMPORTANTE: Escapa perfectamente las comillas dobles (") dentro de las cadenas de texto usando \\".
+- No uses saltos de línea literales dentro de las propiedades, usa la secuencia de escape \\n.
+Estructura obligatoria:
 {
   "title": "Título del artículo",
-  "metaDescription": "Resumen para Google...",
+  "metaDescription": "Resumen persuasivo...",
   "content": "Contenido extenso en Markdown...",
   "tags": "tag1, tag2",
   "image_prompt": "Detailed AI image prompt in English..."
-}`;
+}
+¡Asegúrate de que el JSON sea estrictamente válido antes de terminar!`;
 
   const ai = AIProvider.getInstance();
   const result = await ai.generateText(systemPrompt);
   const responseText = result.text;
 
-  const cleanJsonString = responseText.replace(/```json\n?|```/g, '').trim();
-  const articleData = JSON.parse(cleanJsonString);
+  let articleData;
+  try {
+    // Intento de limpieza de JSON (especialmente para contenidos largos que suelen romper comillas o escapes)
+    const cleanJsonString = responseText
+      .replace(/```json\n?|```/g, '')
+      .trim();
+    
+    articleData = JSON.parse(cleanJsonString);
+  } catch (e) {
+    console.error("Error inicial de JSON. Aplicando parseo robusto...", e);
+    // Parseo robusto: intentamos extraer el primer bloque {} si el modelo añadió texto extra
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      try {
+        articleData = JSON.parse(jsonMatch[0].replace(/\\n/g, "\\n").replace(/\\"/g, "\\\""));
+      } catch (e2) {
+        throw new Error(`Fallo crítico en el formato JSON generado por la IA tras 1500+ palabras: ${responseText.substring(0, 100)}...`);
+      }
+    } else {
+      throw new Error("La IA no devolvió un objeto JSON válido.");
+    }
+  }
 
   // Limpieza defensiva: por si el modelo sigue incrustando el título H1 al principio del markdown
   if (articleData.content) {
