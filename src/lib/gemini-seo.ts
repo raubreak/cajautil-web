@@ -120,10 +120,9 @@ REQUISITOS DEL ARTÍCULO:
 - Meta Descripción: Un resumen persuasivo que invite al clic (max 155 caracteres).
 - Incluye también un 'image_prompt': una descripción detallada en inglés para generar una imagen de portada fotorrealista y moderna.
 
-REQUISITOS ADICIONALES DEL OUTPUT:
-- Responde ÚNICAMENTE con un JSON válido. 
-- MUY IMPORTANTE: Escapa perfectamente las comillas dobles (") dentro de las cadenas de texto usando \\".
-- No uses saltos de línea literales dentro de las propiedades, usa la secuencia de escape \\n.
+- Responde ÚNICAMENTE con un JSON válido y bien estructurado.
+- MUY IMPORTANTE: Si necesitas incluir comillas dentro de un texto, usa comillas simples (') o asegúrate de escaparlas perfectamente como \\".
+- No uses saltos de línea reales dentro de los valores del JSON, sustitúyelos por la secuencia \\n.
 Estructura obligatoria:
 {
   "title": "Título del artículo",
@@ -132,32 +131,48 @@ Estructura obligatoria:
   "tags": "tag1, tag2",
   "image_prompt": "Detailed AI image prompt in English..."
 }
-¡Asegúrate de que el JSON sea estrictamente válido antes de terminar!`;
+¡Verifica que el JSON sea válido antes de enviar la respuesta!`;
 
   const ai = AIProvider.getInstance();
   const result = await ai.generateText(systemPrompt);
   const responseText = result.text;
 
-  let articleData;
+  let articleData: any = null;
+  const cleanJsonString = responseText.replace(/```json\n?|```/g, '').trim();
+
   try {
-    // Intento de limpieza de JSON (especialmente para contenidos largos que suelen romper comillas o escapes)
-    const cleanJsonString = responseText
-      .replace(/```json\n?|```/g, '')
-      .trim();
-    
     articleData = JSON.parse(cleanJsonString);
   } catch (e) {
-    console.error("Error inicial de JSON. Aplicando parseo robusto...", e);
-    // Parseo robusto: intentamos extraer el primer bloque {} si el modelo añadió texto extra
-    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      try {
-        articleData = JSON.parse(jsonMatch[0].replace(/\\n/g, "\\n").replace(/\\"/g, "\\\""));
-      } catch (e2) {
-        throw new Error(`Fallo crítico en el formato JSON generado por la IA tras 1500+ palabras: ${responseText.substring(0, 100)}...`);
-      }
-    } else {
-      throw new Error("La IA no devolvió un objeto JSON válido.");
+    console.error("JSON standard falló. Iniciando recuperación quirúrgica...", e);
+    
+    // Intento 2: Extraer campos individuales mediante Regex (Rescate de Datos)
+    // Buscamos patrones del tipo "llave": "valor" incluso si hay problemas de escapado
+    const extract = (key: string) => {
+      // Esta regex busca la llave y captura todo hasta la siguiente coma seguida de otra llave o el cierre del objeto
+      const regex = new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*,?\\s*"[a-zA-Z0-9]+"\\s*:|\\s*\\}$)`, 'i');
+      const match = cleanJsonString.match(regex);
+      return match ? match[1] : null;
+    };
+
+    articleData = {
+      title: extract('title'),
+      metaDescription: extract('metaDescription'),
+      content: extract('content'),
+      tags: extract('tags'),
+      image_prompt: extract('image_prompt')
+    };
+
+    if (!articleData.title || !articleData.content) {
+      throw new Error(`Fallo total de parseo y recuperación: ${responseText.substring(0, 200)}...`);
+    }
+
+    // Limpieza de caracteres de escape literales que podrían haber quedado si el regex capturó de más
+    if (articleData.content) {
+      articleData.content = articleData.content
+        .replace(/\\"/g, '"')
+        .replace(/\\n/g, '\n')
+        .replace(/\\r/g, '\r')
+        .replace(/\\t/g, '\t');
     }
   }
 
@@ -232,14 +247,40 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
       const ai = AIProvider.getInstance();
       const result = await ai.generateText(prompt);
       const text = result.text;
+      
+      let data;
       const cleanJson = text.replace(/```json\n?|```/g, '').trim();
-      const data = JSON.parse(cleanJson);
+      
+      try {
+        data = JSON.parse(cleanJson);
+      } catch (parseError) {
+        console.warn(`JSON falló para variante ${kw}, rescatando datos...`);
+        const extract = (key: string) => {
+          const regex = new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*,?\\s*"[a-zA-Z0-9]+"\\s*:|\\s*\\}$)`, 'i');
+          const match = cleanJson.match(regex);
+          return match ? match[1] : null;
+        };
+        
+        data = {
+          seoTitle: extract('seoTitle'),
+          h1: extract('h1'),
+          seoDescription: extract('seoDescription'),
+          topContent: extract('topContent'),
+          bottomContent: extract('bottomContent'),
+          functionalConfig: { initialValues: {} } // Fallback básico
+        };
+
+        if (data.bottomContent) {
+          data.bottomContent = data.bottomContent.replace(/\\"/g, '"').replace(/\\n/g, '\n');
+        }
+      }
+
       let slug = slugify(`${baseTool}-${kw}`, { lower: true, strict: true });
       
       const variant = await prisma.toolVariant.upsert({
         where: { slug },
-        update: { ...data, toolBase: baseTool, functionalConfig: data.functionalConfig },
-        create: { ...data, slug, toolBase: baseTool, functionalConfig: data.functionalConfig }
+        update: { ...data, toolBase: baseTool, functionalConfig: data.functionalConfig || {} },
+        create: { ...data, slug, toolBase: baseTool, functionalConfig: data.functionalConfig || {} }
       });
       results.push(variant);
     } catch (e) {
