@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import Link from "next/link";
 
@@ -117,6 +117,19 @@ export default function GeneradorQR() {
             Los códigos QR son perfectos para <strong>tarjetas de visita</strong>, <strong>menús de restaurante</strong>, 
             <strong>carteles publicitarios</strong>, <strong>packaging</strong> o compartir enlaces de forma rápida.
           </p>
+          <p>
+            Antes de imprimir o publicar un QR, conviene probarlo en varios moviles y mantener suficiente contraste entre fondo y primer plano.
+            Los codigos demasiado pequenos o con colores poco legibles pueden dificultar el escaneo.
+          </p>
+        </div>
+
+        <div className="mt-6 text-slate-600 text-sm leading-relaxed space-y-3">
+          <h3 className="text-base font-bold text-slate-800">Buenas practicas al crear un QR</h3>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Usa una URL final correcta y revisa que no tenga errores.</li>
+            <li>Evita fondos oscuros con modulos poco contrastados.</li>
+            <li>Descarga un tamano suficiente si lo vas a imprimir o compartir en gran formato.</li>
+          </ul>
         </div>
 
         <div className="mt-8 pt-6 border-t border-slate-100">
@@ -124,6 +137,9 @@ export default function GeneradorQR() {
           <div className="flex flex-wrap gap-2">
             <Link href="/lector-qr" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
               Lector de QR
+            </Link>
+            <Link href="/generador-enlace-whatsapp" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
+              Generador de enlace WhatsApp
             </Link>
             <Link href="/generador-contrasenas" className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
               Generador de Contraseñas

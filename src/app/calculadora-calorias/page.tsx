@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Flame, TrendingDown, Equal, TrendingUp, Dumbbell } from 'lucide-react';
 
 type Gender = 'male' | 'female';
@@ -157,7 +158,7 @@ export default function CalculadoraCalorias() {
           ) : (
             <div className="bg-white rounded-[40px] shadow-xl border border-slate-100 p-16 flex flex-col items-center justify-center text-center min-h-[400px]">
               <Flame className="w-16 h-16 text-slate-100 mb-6" />
-              <p className="text-slate-300 font-bold text-lg">Completa tus datos y pulsa "Calcular"</p>
+              <p className="text-slate-300 font-bold text-lg">Completa tus datos y pulsa Calcular</p>
               <p className="text-slate-200 text-sm mt-2">Verás tu metabolismo basal y gasto diario al instante.</p>
             </div>
           )}
@@ -172,6 +173,24 @@ export default function CalculadoraCalorias() {
           <li><strong>Para perder grasa:</strong> Consume entre 300-500 kcal menos que tu TDEE.</li>
           <li><strong>Para mantener tu peso:</strong> Tu ingesta debe igualar tu TDEE.</li>
           <li><strong>Para ganar masa muscular:</strong> Añade un superávit de 200-400 kcal a tu TDEE.</li>
+        </ul>
+
+        <h3>Que conviene tener en cuenta</h3>
+        <p>
+          El gasto calorico diario es una estimacion. Factores como composicion corporal, medicacion, descanso, estres o actividad no registrada pueden hacer que tu consumo real sea distinto.
+          Lo recomendable es usar el resultado como punto de partida y ajustar tras observar tu evolucion durante varias semanas.
+        </p>
+
+        <h3>Para quien sirve esta herramienta</h3>
+        <p>
+          Puede ayudarte si quieres perder grasa, mantener peso o planificar una fase de volumen. No sustituye el consejo de un dietista-nutricionista o medico,
+          especialmente si tienes patologias, objetivos deportivos avanzados o necesidades clinicas especificas.
+        </p>
+
+        <h3>Herramientas relacionadas</h3>
+        <ul>
+          <li><Link href="/calculadora-imc">Calculadora de IMC</Link></li>
+          <li><Link href="/calculadora-edad">Calculadora de edad</Link></li>
         </ul>
       </section>
     </main>

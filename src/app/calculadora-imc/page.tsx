@@ -1,43 +1,50 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Activity, Weight, Ruler, ChevronsRight, HeartPulse, ShieldAlert, Heart, Banana } from 'lucide-react';
+import React, { useState } from 'react';
+import { Activity, Weight, Ruler, HeartPulse } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CalculadoraIMC() {
   const [peso, setPeso] = useState<number>(75);
   const [altura, setAltura] = useState<number>(175);
-  const [imc, setImc] = useState<number>(0);
-  const [categoria, setCategoria] = useState<{ id: string; label: string; color: string; desc: string }>({
-    id: 'normal',
-    label: 'Peso Normal',
-    color: 'emerald',
-    desc: 'Tu peso es saludable.'
-  });
 
   const calcularIMC = () => {
-    if (peso <= 0 || altura <= 0) return;
+    if (peso <= 0 || altura <= 0) {
+      return {
+        imc: 0,
+        categoria: {
+          id: 'normal',
+          label: 'Peso Normal',
+          color: 'emerald',
+          desc: 'Tu peso es saludable.'
+        }
+      };
+    }
+
     const alturaMetros = altura / 100;
     const calculo = peso / (alturaMetros * alturaMetros);
-    const resultadoDecimal = Math.round(calculo * 10) / 10;
-    setImc(resultadoDecimal);
+    const imc = Math.round(calculo * 10) / 10;
 
-    if (resultadoDecimal < 18.5) {
-      setCategoria({ id: 'bajo', label: 'Bajo Peso', color: 'blue', desc: 'Estás por debajo del rango saludable.' });
-    } else if (resultadoDecimal >= 18.5 && resultadoDecimal <= 24.9) {
-      setCategoria({ id: 'normal', label: 'Peso Normal', color: 'emerald', desc: '¡Felicidades! Estás en el rango ideal de salud.' });
-    } else if (resultadoDecimal >= 25 && resultadoDecimal <= 29.9) {
-      setCategoria({ id: 'sobrepeso', label: 'Sobrepeso', color: 'amber', desc: 'Tienes algo de sobrepeso respecto a tu estatura.' });
-    } else if (resultadoDecimal >= 30 && resultadoDecimal <= 34.9) {
-      setCategoria({ id: 'obesidad1', label: 'Obesidad I', color: 'orange', desc: 'Se recomienda revisión de actividad física y dieta.' });
-    } else {
-      setCategoria({ id: 'obesidad2', label: 'Obesidad Extrema', color: 'rose', desc: 'Consulta médica recomendada para pautar hábitos.' });
+    if (imc < 18.5) {
+      return { imc, categoria: { id: 'bajo', label: 'Bajo Peso', color: 'blue', desc: 'Estas por debajo del rango saludable.' } };
     }
+
+    if (imc <= 24.9) {
+      return { imc, categoria: { id: 'normal', label: 'Peso Normal', color: 'emerald', desc: 'Estas en el rango orientativo considerado saludable.' } };
+    }
+
+    if (imc <= 29.9) {
+      return { imc, categoria: { id: 'sobrepeso', label: 'Sobrepeso', color: 'amber', desc: 'El resultado orienta a un rango de sobrepeso respecto a tu estatura.' } };
+    }
+
+    if (imc <= 34.9) {
+      return { imc, categoria: { id: 'obesidad1', label: 'Obesidad I', color: 'orange', desc: 'Conviene revisar habitos y valorar asesoramiento profesional.' } };
+    }
+
+    return { imc, categoria: { id: 'obesidad2', label: 'Obesidad Extrema', color: 'rose', desc: 'El resultado sugiere pedir valoracion medica individualizada.' } };
   };
 
-  useEffect(() => {
-    calcularIMC();
-  }, [peso, altura]);
+  const { imc, categoria } = calcularIMC();
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4 sm:px-6 z-10">
@@ -133,8 +140,11 @@ export default function CalculadoraIMC() {
         <p>El <strong>Índice de Masa Corporal (IMC)</strong> es un indicador avalado mundialmente por la Organización Mundial de la Salud (OMS) y la comunidad médica internacional para determinar estadísticamente si una persona joven o adulta se encuentra dentro de las horquillas de salud o, si por el contrario, padece de bajo peso, sobrepeso incipiente y rangos de obesidad.</p>
 
         <h3 className="text-lg font-bold">Limitaciones de este medidor</h3>
-        <p>A pesar de que con dos clics en nuestro recomendador ya ves matemáticamente este parámetro biométrico, hay que entender algo que la mayoría de nutricionistas advierten: <strong>La Máquina no sabe si eres deportista.</strong> Un culturista como The Rock, Arnold (o un jugador de la NFL bajito pero hiper-musculado) tendrá un "exceso de peso" en la báscula frente al estándar de su altura, dándole al sistema matemático un resultado de <i>Obesidad II</i>, cosa que es totalmente falsa porque tiene un 8% de grasa corporal pero muchísima densidad de músculos y huesos.</p>
-      </section>
+         <p>El IMC no distingue entre masa grasa y masa muscular. Deportistas, personas mayores, adolescentes o perfiles con condiciones concretas pueden obtener un resultado poco representativo. Por eso debe interpretarse como una <strong>referencia estadistica</strong>, no como un diagnostico medico.</p>
+
+         <h3 className="text-lg font-bold">Como usar bien el resultado</h3>
+         <p>Puede servirte como punto de partida para seguir tu evolucion o detectar si conviene revisar habitos. Si tienes dudas sobre composicion corporal, salud metabolica o nutricion, lo ideal es complementarlo con otras mediciones y con el criterio de un profesional.</p>
+       </section>
 
       {/* FAQ SECTION */}
       <section className="w-full max-w-4xl px-2 mb-12" aria-label="Preguntas Frecuentes">
@@ -156,9 +166,17 @@ export default function CalculadoraIMC() {
               <span className="text-rose-500 text-xl group-open:rotate-45 transition-transform">+</span>
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>CajaUtil jamás envía tus estadísticas reales (ni tu peso) a ningún servidor, base de datos en la nube de Amazon o Firebase. Esta utilidad trabaja Offline procesándose milimétricamente en el microchip de tu iPhone, iPad o Android.</p>
-            </div>
+               <p>El calculo se realiza en la pagina con los datos que introduces en el formulario. Aun asi, recuerda que el sitio utiliza servicios generales de analitica y publicidad descritos en nuestras politicas, aunque este calculo concreto no requiere crear una cuenta ni enviar un historial medico.</p>
+             </div>
           </details>
+        </div>
+
+        <div className="mt-8 prose prose-slate max-w-none text-slate-600">
+          <h3>Herramientas relacionadas</h3>
+          <ul>
+            <li><Link href="/calculadora-calorias">Calculadora de calorias</Link></li>
+            <li><Link href="/calculadora-edad">Calculadora de edad</Link></li>
+          </ul>
         </div>
       </section>
       

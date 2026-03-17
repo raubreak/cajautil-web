@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Home, Euro, Calendar, Percent, Banknote, Info } from 'lucide-react';
 
 const CalculadoraHipotecasClient = () => {
@@ -8,16 +8,9 @@ const CalculadoraHipotecasClient = () => {
   const [anios, setAnios] = useState<number>(25);
   const [interes, setInteres] = useState<number>(3.5);
 
-  const [resultado, setResultado] = useState({
-    cuotaMensual: 0,
-    totalIntereses: 0,
-    costeTotal: 0
-  });
-
-  const calcularHipoteca = () => {
+  const resultado = (() => {
     if (importe <= 0 || anios <= 0 || interes < 0) {
-      setResultado({ cuotaMensual: 0, totalIntereses: 0, costeTotal: 0 });
-      return;
+      return { cuotaMensual: 0, totalIntereses: 0, costeTotal: 0 };
     }
 
     const meses = anios * 12;
@@ -33,16 +26,12 @@ const CalculadoraHipotecasClient = () => {
     const pagoTotal = cuota * meses;
     const interesesTotales = pagoTotal - importe;
 
-    setResultado({
+    return {
       cuotaMensual: cuota,
       totalIntereses: interesesTotales,
       costeTotal: pagoTotal
-    });
-  };
-
-  useEffect(() => {
-    calcularHipoteca();
-  }, [importe, anios, interes]);
+    };
+  })();
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4 sm:px-6 z-10">
@@ -171,6 +160,15 @@ const CalculadoraHipotecasClient = () => {
         <p>A la hora de comprar un coche o una vivienda, los bancos nos muestran porcentajes (TIN y TAE), pero a menudo es difícil saber en qué se traduce eso mes a mes. Nuestra <strong>calculadora de cuota hipotecaria</strong> te permite descubrir en segundos y sin necesidad de ceder tus datos personales a ninguna entidad qué mensualidad te va a quedar.</p>
 
         <p>El simulador utiliza el sistema de <strong>amortización francés</strong>, el estándar utilizado en España, México, Colombia y casi la totalidad de Europa y América Latina para los préstamos con interés fijo o variable. Este sistema se caracteriza por mantener unas cuotas mensuales constantes de principio a fin del plazo, donde al principio se pagan más intereses y al final se amortiza más capital neto.</p>
+
+        <p>Es una herramienta util para hacer una primera estimacion antes de hablar con un banco, comparar ofertas o entender como cambia la cuota cuando modificas importe, plazo o interes. El resultado no sustituye una FEIN, una oferta vinculante ni el asesoramiento financiero profesional.</p>
+
+        <h3>Que no incluye esta simulacion</h3>
+        <ul>
+          <li><strong>Comisiones y seguros:</strong> la cuota puede variar si el producto incorpora gastos adicionales.</li>
+          <li><strong>Gastos de compra:</strong> notaria, tasacion, impuestos y registro no forman parte del calculo.</li>
+          <li><strong>Escenarios variables complejos:</strong> si tu hipoteca revisa tipo periodicamente, conviene hacer varias simulaciones.</li>
+        </ul>
 
       </section>
 

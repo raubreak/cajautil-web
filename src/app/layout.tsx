@@ -95,7 +95,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
+  logo: `${SITE_URL}/apple-icon`,
   sameAs: [],
 };
 
@@ -107,7 +107,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -116,14 +115,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8447027631025094"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-3Q52JTD2XN"
           strategy="afterInteractive"
@@ -133,7 +130,10 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-3Q52JTD2XN');
+            gtag('config', 'G-3Q52JTD2XN', {
+              anonymize_ip: true,
+              allow_google_signals: false
+            });
           `}
         </Script>
       </head>
@@ -152,7 +152,7 @@ export default function RootLayout({
                   Caja<span className="text-blue-500">Util</span><span className="text-slate-500 text-sm font-medium">.com</span>
                 </Link>
                 <p className="text-sm max-w-xs leading-relaxed">
-                  Utilidades web rápidas, seguras y privadas. Todo el procesamiento ocurre en tu navegador. Sin registro ni instalación.
+                  Utilidades web rapidas, seguras y privadas. Priorizamos el procesamiento local cuando es posible, sin registro ni instalacion.
                 </p>
               </div>
               
@@ -211,12 +211,12 @@ export default function RootLayout({
                   <li><Link href="/articulos" className="text-sm hover:text-white transition-colors">Blog de Utilidades</Link></li>
                   <li><Link href="/sobre-nosotros" className="text-sm hover:text-white transition-colors">Sobre nosotros</Link></li>
                   <li><Link href="/aviso-legal" className="text-sm hover:text-white transition-colors">Aviso Legal</Link></li>
-                  <li><Link href="/politica-de-privacidad" className="text-sm hover:text-white transition-colors">Política de Privacidad</Link></li>
-                  <li><Link href="/politica-de-cookies" className="text-sm hover:text-white transition-colors">Política de Cookies</Link></li>
-                  <li><Link href="/contacto" className="text-sm hover:text-white transition-colors">Contacto</Link></li>
-                </ul>
-              </div>
-            </div>
+                   <li><Link href="/politica-de-privacidad" className="text-sm hover:text-white transition-colors">Política de Privacidad</Link></li>
+                   <li><Link href="/politica-de-cookies" className="text-sm hover:text-white transition-colors">Política de Cookies</Link></li>
+                   <li><Link href="/contacto" className="text-sm hover:text-white transition-colors">Contacto</Link></li>
+                 </ul>
+               </div>
+             </div>
             
             <div className="border-t border-slate-800 pt-8 text-center text-sm">
               <p>© {new Date().getFullYear()} CajaUtil.com — Herramientas online 100% gratuitas.</p>

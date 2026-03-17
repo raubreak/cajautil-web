@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ShieldCheck, Users, Target, Zap } from 'lucide-react';
+import { ShieldCheck, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -29,8 +29,9 @@ const AboutUsPage = () => {
               que no requirieran registro, no estuvieran plagadas de publicidad intrusiva y, sobre todo, que respetaran la privacidad del usuario.
             </p>
             <p>
-              Nuestras herramientas se ejecutan **localmente en tu navegador**. Esto significa que tus datos (como contraseñas generadas o archivos comprimidos) 
-              nunca se envían a nuestros servidores, garantizando una seguridad y velocidad insuperables.
+              Gran parte de nuestras herramientas se ejecutan <strong>localmente en tu navegador</strong>. Cuando el procesamiento puede hacerse en el dispositivo,
+              evitamos enviar tus datos a servidores externos. En los casos en los que usamos servicios de terceros para analítica o publicidad,
+              lo informamos de forma transparente en nuestras políticas.
             </p>
           </div>
         </section>
@@ -59,8 +60,8 @@ const AboutUsPage = () => {
         <section className="text-center">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Nuestro Compromiso Editorial</h2>
           <p className="text-slate-600 max-w-2xl mx-auto mb-8">
-            Todo el contenido y las fórmulas matemáticas utilizadas en nuestras calculadoras son revisados por expertos para asegurar su exactitud. 
-            Nos esforzamos por proporcionar información útil, clara y actualizada.
+            Revisamos de forma periodica las formulas, textos de ayuda y paginas informativas para mantenerlas claras y utiles.
+            Cuando una herramienta ofrece estimaciones orientativas, lo indicamos expresamente para evitar interpretaciones equivocadas.
           </p>
         </section>
       </div>

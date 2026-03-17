@@ -15,7 +15,7 @@ export default function PoliticaPrivacidad() {
       <div className="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-100 prose prose-slate max-w-none">
         <h1 className="text-3xl font-extrabold text-slate-800 mb-6">Política de Privacidad</h1>
         
-        <p className="text-sm text-slate-500 mb-8">Última actualización: {new Date().toLocaleDateString('es-ES')}</p>
+        <p className="text-sm text-slate-500 mb-8">Última actualización: 16/03/2026</p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">1. Introducción</h2>
         <p>
@@ -26,11 +26,19 @@ export default function PoliticaPrivacidad() {
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">2. Herramientas 100% Locales</h2>
         <p>
           La gran mayoría de nuestras herramientas (como la calculadora de sueldo neto, el generador de contraseñas, contador de palabras y generador de códigos QR) 
-          funcionan <strong>exclusivamente en tu navegador (lado del cliente o "client-side")</strong>. 
-          Esto significa que los textos, contraseñas, contraseñas, contraseñas, o imágenes que subes <strong>no se envían, no se almacenan ni se procesan en nuestros servidores</strong>.
+          funcionan <strong>exclusivamente en tu navegador (lado del cliente o client-side)</strong>. 
+          Esto significa que los textos, contraseñas o imágenes que introduces en estas utilidades <strong>no se envían, no se almacenan ni se procesan en nuestros servidores</strong> cuando la funcionalidad puede ejecutarse localmente.
         </p>
 
-        <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">3. Google AdSense y la Cookie de DoubleClick DART</h2>
+        <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">3. Analítica, publicidad y consentimiento</h2>
+        <p>
+          CajaUtil.com utiliza servicios de terceros como <strong>Google Analytics</strong> y <strong>Google AdSense</strong> para medir el uso del sitio y financiar el proyecto.
+          Estas tecnologias pueden recoger identificadores online, datos tecnicos del dispositivo, informacion basica de navegacion y eventos de uso.
+        </p>
+        <p>
+          Cuando sea aplicable, Google puede mostrar un aviso de consentimiento para que puedas <strong>aceptar o rechazar las cookies no esenciales</strong>.
+          La gestion efectiva de esa eleccion depende de la configuracion activa en los servicios de Google que tengamos habilitados.
+        </p>
         <p>
           Google es uno de los proveedores asociados en nuestro sitio. Google utiliza cookies, conocidas como cookies de DART, 
           para publicar anuncios para los visitantes de nuestro sitio web en función de su visita a CajaUtil.com y otros sitios web en Internet.
@@ -63,7 +71,8 @@ export default function PoliticaPrivacidad() {
           Nuestro objetivo en CajaUtil.com es facilitarte tomar medidas razonables para concederte el control, modificación o la capacidad de borrar tus Datos Personales.
         </p>
         <p>
-          En este sitio web <strong>no recogemos datos de carácter personal</strong> (nombres, correos, etc.), dado que no contamos con formularios de registro, comentarios ni boletines de suscripción gestionados directamente por nosotros.
+          No solicitamos cuentas de usuario ni formularios de registro propios para acceder a las herramientas. Aun asi, determinados terceros integrados en la web
+          pueden tratar datos tecnicos o identificadores online conforme a sus propias politicas y a tu estado de consentimiento.
         </p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">7. Consentimiento</h2>

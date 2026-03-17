@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MessageCircle, Link as LinkIcon, Phone, Send, Info, Eye, CheckCircle, Copy, ExternalLink, QrCode } from 'lucide-react';
+import { MessageCircle, Phone, Send, Eye, CheckCircle, Copy, ExternalLink, QrCode } from 'lucide-react';
 import Link from 'next/link';
-import { QRCodeSVG } from 'qrcode.react';
 
 export default function GeneradorWhatsApp() {
   const [telefono, setTelefono] = useState<string>('');
@@ -150,12 +149,18 @@ export default function GeneradorWhatsApp() {
           Descubre el generador de enlaces oficial para negocios
         </h2>
         
-        <p>En el marketing digital, la fricción de obligar a tus clientes a que guarden tu "Teléfono de Contacto" en su agenda antes de poder escribir un mensaje por WhatsApp te hace perder <strong>más del 40% de tus ventas o conversiones.</strong></p>
+        <p>Un enlace directo de WhatsApp reduce pasos y facilita que un visitante pueda escribirte sin guardar el numero manualmente. Es util para perfiles de Instagram, TikTok, fichas de negocio, tarjetas o paginas de contacto.</p>
 
-        <p>Nuestro <strong>Generador del link de WhatsApp</strong> (ideal para Biografías o páginas web) crea una ruta estándar y limpia autorizada por META inc. a través de la API oficial <code>api.whatsapp.com</code>. Cuando pones esto en tu perfil de TikTok o LinkTree, la aplicación redirige al usuario e inicia una conversación directamente la App instalada de WhatsApp o en la versión Web incrustando el mensaje prediseñado en la barra.</p>
+        <p>Nuestro <strong>generador de enlace de WhatsApp</strong> crea una URL lista para copiar, compartir o convertir en QR. Puedes incluir un mensaje inicial para ahorrar tiempo y guiar mejor la conversacion desde el primer clic.</p>
 
-        <h3 className="text-lg font-bold">Sin instalar apps externas, 100% Client-Side Seguro</h3>
-        <p>Crear el enlace es inmediato. Esta utilidad web online gratuita solo suma tu Prefijo internacional, tu teléfono y formatea el mensaje (codificándolo según el estándar URI) para que lo puedas copiar y pegar a discreción. No usamos bases de datos para espiarte a ti o a las intenciones de tus clientes.</p>
+        <h3 className="text-lg font-bold">Buenas practicas al crear tu enlace</h3>
+        <ul>
+          <li><strong>Usa un numero correcto:</strong> revisa prefijo internacional y formato sin espacios ni guiones innecesarios.</li>
+          <li><strong>Escribe un mensaje claro:</strong> por ejemplo, consulta comercial, soporte o reserva.</li>
+          <li><strong>Pruebalo antes de publicarlo:</strong> abre el enlace en movil y escritorio para comprobar que redirige bien.</li>
+        </ul>
+
+        <p>La herramienta genera la URL en la propia pagina. Para medir resultados o atribucion de campañas puedes combinarla despues con UTM o con una landing especifica.</p>
         
       </section>
 
@@ -169,7 +174,7 @@ export default function GeneradorWhatsApp() {
               <span className="text-green-500 text-xl group-open:rotate-45 transition-transform">+</span>
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>Simplemente coge el link verde generado y cópialo. Entra a tu app de Instagram en Móvil, dale a Editar Perfil y colócalo en el campo "Website" o "Sitio Web", verás como se resalta y envía tráfico directo para interactuar.</p>
+               <p>Copia el enlace generado y pegalo en el campo de sitio web de tu perfil, en una biografia con link o en una pagina de contacto. Antes de publicarlo, comprueba que el numero y el mensaje de bienvenida son correctos.</p>
             </div>
           </details>
 
@@ -179,9 +184,17 @@ export default function GeneradorWhatsApp() {
               <span className="text-green-500 text-xl group-open:rotate-45 transition-transform">+</span>
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>Totalmente. El link redirige automáticamente al usuario hacia el programa que tenga configurado. En un Ordenador saltará WhatsApp Web o Desktop. Es una API inter-compatible.</p>
-            </div>
+               <p>Si. En escritorio suele abrir WhatsApp Web o la app de escritorio y en movil redirige a la aplicacion instalada. El comportamiento final depende del dispositivo y de la configuracion del usuario.</p>
+             </div>
           </details>
+        </div>
+
+        <div className="mt-8 prose prose-slate max-w-none text-slate-600">
+          <h3>Herramientas relacionadas</h3>
+          <ul>
+            <li><Link href="/generador-qr">Generador de codigos QR</Link></li>
+            <li><Link href="/lector-qr">Lector de QR</Link></li>
+          </ul>
         </div>
       </section>
       

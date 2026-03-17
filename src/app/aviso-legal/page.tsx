@@ -16,7 +16,7 @@ export default function AvisoLegal() {
       <div className="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-100 prose prose-slate max-w-none">
         <h1 className="text-3xl font-extrabold text-slate-800 mb-6">Aviso Legal y Condiciones de Uso</h1>
         
-        <p className="text-sm text-slate-500 mb-8">Última actualización: {new Date().toLocaleDateString('es-ES')}</p>
+        <p className="text-sm text-slate-500 mb-8">Última actualización: 16/03/2026</p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">1. Datos Identificativos</h2>
         <p>
@@ -34,7 +34,7 @@ export default function AvisoLegal() {
           las Condiciones Generales de Uso aquí reflejadas.
         </p>
         <p>
-          CajaUtil.com proporciona el acceso a multitud de herramientas e informaciones (en adelante, "los contenidos") 
+          CajaUtil.com proporciona el acceso a multitud de herramientas e informaciones (en adelante, los contenidos) 
           en Internet pertenecientes a CajaUtil.com. El USUARIO asume la responsabilidad del uso del portal.
         </p>
 

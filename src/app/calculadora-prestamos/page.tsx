@@ -1,4 +1,5 @@
 import CalculadoraPrestamosClient from "@/components/tools/CalculadoraPrestamosClient";
+import Link from "next/link";
 import React from "react";
 
 export const metadata = {
@@ -23,6 +24,24 @@ export default function CalculadoraPrestamos() {
               <li><strong>Plazo:</strong> A menor plazo, pagas menos intereses totales pero tu cuota mensual será más alta.</li>
               <li><strong>Intereses:</strong> Una variación de solo el 1% en el TIN puede suponer miles de euros de ahorro en la vida del préstamo.</li>
               <li><strong>Amortización:</strong> Realizar pagos extra reduce el capital pendiente y, por tanto, los intereses futuros.</li>
+          </ul>
+
+          <h3>Cuando te conviene usar este simulador</h3>
+          <p>
+            Te ayuda a comparar ofertas de financiacion, decidir si puedes asumir una cuota mensual concreta y anticipar el coste total del prestamo antes de firmar.
+            Tambien sirve para hacer simulaciones rapidas cambiando importe, plazo o interes y ver como afecta cada variable.
+          </p>
+
+          <h3>Importante antes de tomar una decision</h3>
+          <p>
+            El calculo es orientativo y no sustituye la oferta vinculante de una entidad. Comisiones, seguros, carencias o productos asociados pueden cambiar el coste final.
+            Usa esta herramienta como referencia inicial y revisa siempre la documentacion contractual completa.
+          </p>
+
+          <h3>Herramientas relacionadas</h3>
+          <ul>
+            <li><Link href="/calculadora-hipotecas">Calculadora de hipotecas</Link></li>
+            <li><Link href="/calculadora-porcentajes">Calculadora de porcentajes</Link></li>
           </ul>
       </section>
     </main>

@@ -88,6 +88,18 @@ export default function CalculadoraPorcentajes() {
           <strong>incrementos salariales</strong> o el <strong>IVA de cualquier producto</strong>.
         </p>
 
+        <h2>Casos practicos en los que te puede ayudar</h2>
+        <ul>
+          <li><strong>Rebajas:</strong> saber cuanto te descuentan y el precio final.</li>
+          <li><strong>Facturas:</strong> calcular un porcentaje de IVA o de retencion.</li>
+          <li><strong>Finanzas personales:</strong> medir subidas, bajadas o variaciones de ingresos y gastos.</li>
+          <li><strong>Trabajo y ventas:</strong> estimar comisiones, margenes o aumentos porcentuales.</li>
+        </ul>
+
+        <p>
+          Si necesitas operaciones mas concretas, como anadir o quitar IVA con desglose completo, te conviene usar una herramienta especializada.
+        </p>
+
         <h2>Preguntas frecuentes</h2>
         <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
           <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Cómo se calcula el IVA de un producto?</summary>
@@ -100,6 +112,7 @@ export default function CalculadoraPorcentajes() {
 
         <h3>Herramientas relacionadas</h3>
         <ul>
+          <li><Link href="/calculadora-iva">Calculadora de IVA</Link></li>
           <li><Link href="/calculadora-sueldo-neto">Calculadora Sueldo Neto</Link></li>
           <li><Link href="/calculadora-dias">Calculadora de Días Exactos</Link></li>
         </ul>

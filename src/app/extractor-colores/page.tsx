@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { Palette, Upload, Copy, Check, MousePointer2, Image as ImageIcon } from 'lucide-react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
+import { Palette, Upload, Check, MousePointer2, Image as ImageIcon } from 'lucide-react';
 
 interface ColorInfo {
   hex: string;
@@ -43,6 +44,37 @@ export default function ExtractorColores() {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
   };
 
+  const extractMainColors = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
+    const imageData = ctx.getImageData(0, 0, width, height).data;
+    const colorCounts: Record<string, number> = {};
+    const step = 8;
+
+    for (let i = 0; i < imageData.length; i += 4 * step) {
+      const r = imageData[i];
+      const g = imageData[i + 1];
+      const b = imageData[i + 2];
+      const rG = Math.round(r / 20) * 20;
+      const gG = Math.round(g / 20) * 20;
+      const bG = Math.round(b / 20) * 20;
+      const key = `${rG},${gG},${bG}`;
+
+      colorCounts[key] = (colorCounts[key] || 0) + 1;
+    }
+
+    const sortedColors = Object.entries(colorCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([key]) => {
+        const [r, g, b] = key.split(',').map(Number);
+        return {
+          hex: rgbToHex(r, g, b),
+          rgb: `rgb(${r}, ${g}, ${b})`
+        };
+      });
+
+    setColors(sortedColors);
+  }, []);
+
   useEffect(() => {
     if (image && canvasRef.current) {
       const canvas = canvasRef.current;
@@ -63,40 +95,7 @@ export default function ExtractorColores() {
       };
       img.src = image;
     }
-  }, [image]);
-
-  const extractMainColors = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
-    const imageData = ctx.getImageData(0, 0, width, height).data;
-    const colorCounts: Record<string, number> = {};
-    const step = 8; // Faster scanning
-
-    for (let i = 0; i < imageData.length; i += 4 * step) {
-      const r = imageData[i];
-      const g = imageData[i + 1];
-      const b = imageData[i + 2];
-      
-      // Basic grouping (slightly round colors to get clusters)
-      const rG = Math.round(r / 20) * 20;
-      const gG = Math.round(g / 20) * 20;
-      const bG = Math.round(b / 20) * 20;
-      const key = `${rG},${gG},${bG}`;
-      
-      colorCounts[key] = (colorCounts[key] || 0) + 1;
-    }
-
-    const sortedColors = Object.entries(colorCounts)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 8)
-      .map(([key]) => {
-        const [r, g, b] = key.split(',').map(Number);
-        return {
-          hex: rgbToHex(r, g, b),
-          rgb: `rgb(${r}, ${g}, ${b})`
-        };
-      });
-
-    setColors(sortedColors);
-  };
+  }, [extractMainColors, image]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!canvasRef.current) return;
@@ -227,15 +226,28 @@ export default function ExtractorColores() {
         </section>
       </div>
 
-      <section className="w-full max-w-4xl mt-16 prose prose-slate text-slate-600">
-          <h2>Genera Paletas de Colores de forma Profesional</h2>
-          <p>Nuestra herramienta te permite extraer los códigos HEX y RGB de cualquier fotografía. Es ideal para crear identidades visuales coherentes basadas en imágenes reales.</p>
-          <ul>
-              <li><strong>Privacidad Total:</strong> La imagen se procesa en la memoria RAM de tu ordenador a través del navegador. Nunca se sube a nuestros servidores.</li>
-              <li><strong>Precisión:</strong> Puedes mover el ratón sobre la imagen para obtener el color exacto de cualquier píxel.</li>
-              <li><strong>Rápido:</strong> Copia los códigos de color con un solo clic para pegarlos en Photoshop, CSS o Figma.</li>
-          </ul>
-      </section>
-    </main>
-  );
+       <section className="w-full max-w-4xl mt-16 prose prose-slate text-slate-600">
+           <h2>Genera Paletas de Colores de forma Profesional</h2>
+           <p>Nuestra herramienta te permite extraer los codigos HEX y RGB de cualquier fotografia. Es ideal para crear identidades visuales, referencias de interfaz o paletas inspiradas en imagenes reales.</p>
+           <ul>
+               <li><strong>Privacidad:</strong> la lectura de color se realiza en la propia pagina mientras trabajas con la imagen.</li>
+               <li><strong>Precisión:</strong> Puedes mover el ratón sobre la imagen para obtener el color exacto de cualquier píxel.</li>
+               <li><strong>Rápido:</strong> Copia los códigos de color con un solo clic para pegarlos en Photoshop, CSS o Figma.</li>
+           </ul>
+
+           <h3>Cuando usar este extractor</h3>
+           <ul>
+             <li><strong>Branding:</strong> crear una paleta base a partir de una fotografia o referencia visual.</li>
+             <li><strong>Diseño UI:</strong> capturar tonos para botones, fondos y estados.</li>
+             <li><strong>Contenido:</strong> reutilizar colores de producto, moda o decoracion en materiales graficos.</li>
+           </ul>
+
+           <h3>Herramientas relacionadas</h3>
+           <ul>
+             <li><Link href="/compresor-webp">Compresor WebP</Link></li>
+             <li><Link href="/generador-qr">Generador de codigos QR</Link></li>
+           </ul>
+       </section>
+     </main>
+   );
 }

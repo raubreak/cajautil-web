@@ -12,19 +12,21 @@ export default function GeneradorContrasenas() {
   const [copied, setCopied] = useState(false);
 
   const generatePassword = () => {
-    let lower = "abcdefghijklmnopqrstuvwxyz";
-    let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let num = "0123456789";
-    let sym = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+    const lower = "abcdefghijklmnopqrstuvwxyz";
+    const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const num = "0123456789";
+    const sym = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
     
     let chars = lower;
     if (includeUppercase) chars += upper;
     if (includeNumbers) chars += num;
     if (includeSymbols) chars += sym;
     
+    const randomValues = new Uint32Array(length);
+    window.crypto.getRandomValues(randomValues);
     let pass = "";
     for (let i = 0; i < length; i++) {
-        pass += chars.charAt(Math.floor(Math.random() * chars.length));
+        pass += chars.charAt(randomValues[i] % chars.length);
     }
     setPassword(pass);
     setCopied(false);
@@ -129,10 +131,16 @@ export default function GeneradorContrasenas() {
           fechas de nacimiento o información personal.
         </p>
         <p>
-          Nuestro <strong>generador de contraseñas</strong> crea claves totalmente aleatorias 
-          directamente en tu navegador mediante <code>Crypto API</code> o generadores matemáticos del lado del cliente. <strong>La contraseña nunca se envía por internet</strong>, 
-          garantizando tu privacidad total.
+          Nuestro <strong>generador de contraseñas</strong> crea claves aleatorias directamente en tu navegador usando la <code>Crypto API</code> del dispositivo.
+          Esto ayuda a generar resultados mas robustos que una aleatoriedad basica basada en <code>Math.random()</code>.
         </p>
+
+        <h2>Consejos para usar bien una contraseña segura</h2>
+        <ul>
+          <li><strong>Usa una diferente para cada servicio</strong> importante.</li>
+          <li><strong>Activa 2FA</strong> siempre que la plataforma lo permita.</li>
+          <li><strong>Guarda la clave</strong> en un gestor de contraseñas fiable en lugar de reutilizarla.</li>
+        </ul>
 
         <h2>Preguntas frecuentes</h2>
         <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
@@ -147,6 +155,7 @@ export default function GeneradorContrasenas() {
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/generador-qr">Generador de QR</Link></li>
+          <li><Link href="/texto-invisible">Texto invisible</Link></li>
           <li><Link href="/mayusculas-minusculas">Conversor Mayúsculas y Minúsculas</Link></li>
         </ul>
       </section>

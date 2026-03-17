@@ -16,6 +16,8 @@ export const config = {
 export function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const hostname = req.headers.get('host') || '';
+  const validUser = process.env.ADMIN_USER;
+  const validPassword = process.env.ADMIN_PASSWORD;
 
   // 1. Redirección SEO 301 desde dominio Vercel hacia el dominio principal
   if (hostname === 'cajautil-web.vercel.app') {
@@ -24,14 +26,17 @@ export function middleware(req: NextRequest) {
 
   // 2. Protección Auth para el Panel SEO
   if (url.pathname.startsWith('/revision-seo')) {
+    if (!validUser || !validPassword) {
+      return new NextResponse('Panel SEO no configurado.', {
+        status: 503,
+      });
+    }
+
     const basicAuth = req.headers.get('authorization');
 
     if (basicAuth) {
       const authValue = basicAuth.split(' ')[1];
       const [user, pwd] = atob(authValue).split(':');
-
-      const validUser = process.env.ADMIN_USER || 'raubreak@gmail.com';
-      const validPassword = process.env.ADMIN_PASSWORD || 'CajaUtilSEO*2026';
 
       if (user === validUser && pwd === validPassword) {
         return NextResponse.next();

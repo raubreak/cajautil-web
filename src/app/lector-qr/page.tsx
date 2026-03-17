@@ -124,13 +124,21 @@ export default function LectorQR() {
           Solo tienes que subir la imagen y extraemos el contenido (URL, texto, datos de contacto) al instante.
         </p>
         <p>
-          La imagen se procesa <strong>100% localmente en tu navegador</strong> usando JavaScript y <strong>nunca se envía a ningún servidor</strong>. 
-          Tu privacidad e historial de fotos están totalmente garantizados.
+          La imagen se procesa en la propia pagina para leer el codigo QR contenido en la foto.
+          Despues puedes abrir el enlace detectado o copiar el contenido extraido si se trata de texto plano.
         </p>
+
+        <h2>Consejos para mejorar el escaneo</h2>
+        <ul>
+          <li><strong>Usa una imagen nitida</strong> y con el QR centrado.</li>
+          <li><strong>Evita reflejos y desenfoque</strong> para mejorar la deteccion.</li>
+          <li><strong>Si el QR es muy pequeno</strong>, intenta recortarlo antes de subirlo.</li>
+        </ul>
 
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/generador-qr">Generador de QR Personalizado</Link></li>
+          <li><Link href="/generador-enlace-whatsapp">Generador de enlace WhatsApp</Link></li>
           <li><Link href="/contador-de-palabras">Contador de Palabras y Caracteres</Link></li>
         </ul>
       </section>
