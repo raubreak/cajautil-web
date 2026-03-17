@@ -2,14 +2,25 @@ import React from 'react';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CalendarDays, ArrowRight, Tag, BookOpen } from 'lucide-react';
+import { CalendarDays, ArrowRight, BookOpen } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Blog de Utilidades y Guías — CajaUtil.com',
+  title: 'Blog de Utilidades y Guías',
   description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',
   alternates: {
     canonical: 'https://cajautil.com/articulos',
+  },
+  openGraph: {
+    title: 'Blog de Utilidades y Guías | CajaUtil.com',
+    description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',
+    url: 'https://cajautil.com/articulos',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog de Utilidades y Guías | CajaUtil.com',
+    description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',
   },
 };
 

@@ -19,17 +19,30 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
 
   if (!article) return {};
 
+  const canonicalUrl = `https://cajautil.com/articulos/${article.slug}`;
+  const description = (article.metaDescription || article.content.substring(0, 155)).replace(/\s+/g, ' ').trim();
+  const ogTitle = `${article.title} | CajaUtil.com`;
+
   return {
-    title: article.title.length > 57 ? `${article.title.substring(0, 57)}...` : article.title,
-    description: article.metaDescription || article.content.substring(0, 155),
+    title: article.title,
+    description,
     alternates: {
-      canonical: `https://cajautil.com/articulos/${article.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
+      title: ogTitle,
+      description,
+      url: canonicalUrl,
+      type: 'article',
       images: article.coverImageUrl 
         ? [{ url: article.coverImageUrl, alt: article.title }]
         : [{ url: 'https://cajautil.com/og-image.png', alt: 'CajaUtil.com' }],
-    }
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description,
+    },
   };
 }
 
