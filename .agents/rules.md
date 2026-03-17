@@ -20,3 +20,8 @@ Este documento contiene reglas críticas derivadas de errores pasados para asegu
 ## 4. Enlaces Internos con Contexto
 *   **Error:** Enlaces genéricos que no aportan valor funcional.
 *   **Regla:** Cada artículo debe enlazar a una herramienta relevante pasando parámetros iniciales de contexto (ej. `?value=...`) para que la herramienta sea útil de inmediato para el lector.
+
+## 5. Flujo de Despliegue (Prohibido tocar Producción)
+*   **Error:** Cambios aplicados directamente en producción sin trazabilidad.
+*   **Regla Crítica:** **NUNCA** modificar producción de forma directa (hotfix manual, edición en panel, cambios ad-hoc en runtime).
+*   **Procedimiento Obligatorio:** Todo cambio debe realizarse en código, subirse a la rama del repositorio y desplegarse desde Git para mantener historial, revisión y rollback.

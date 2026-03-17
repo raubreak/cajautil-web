@@ -5,6 +5,7 @@ This project applies the following practical rules to improve approval readiness
 ## Applied rules
 
 - Keep public legal pages available and internally linked: privacy, cookies, legal notice, contact, about.
+- Never apply manual hotfixes directly in production; every change must go through code, branch, and Git-based deployment.
 - Avoid absolute privacy claims when analytics or advertising scripts are present.
 - Add useful explanatory content around tools instead of publishing widget-only pages.
 - Include limits, warnings, and intent clarification on finance, health, and other sensitive calculators.
