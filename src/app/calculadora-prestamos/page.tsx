@@ -5,6 +5,9 @@ import React from "react";
 export const metadata = {
   title: 'Simulador de Préstamos Personales — Cuadro de Amortización',
   description: 'Calcula online tu cuota mensual, coste total y genera la tabla de amortización de tu préstamo bancario de forma gratuita.',
+  alternates: {
+    canonical: 'https://cajautil.com/calculadora-prestamos',
+  },
 };
 
 export default function CalculadoraPrestamos() {

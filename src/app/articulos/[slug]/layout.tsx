@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import prisma from '@/lib/prisma';
-import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,16 +16,33 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
 
   if (!article) return { title: 'No encontrado' };
 
+  const cleanExcerpt = article.content
+    .replace(/[#*_`>\-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 160);
+  const canonicalUrl = `https://cajautil.com/articulos/${article.slug}`;
+
   return {
     title: `${article.title} - CajaUtil`,
-    description: article.content.substring(0, 160).replace(/\#|\*/g, '').trim() + '...',
+    description: `${cleanExcerpt}...`,
     keywords: article.tags.split(','),
-    alternates: { canonical: `https://cajautil.com/articulos/${article.slug}` },
+    alternates: { canonical: canonicalUrl },
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       title: article.title,
-      description: article.content.substring(0, 160).replace(/\#|\*/g, '').trim() + '...',
-      url: `https://cajautil.com/articulos/${article.slug}`,
-    }
+      description: `${cleanExcerpt}...`,
+      url: canonicalUrl,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: `${cleanExcerpt}...`,
+    },
   };
 }
 

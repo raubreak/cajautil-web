@@ -1,21 +1,25 @@
 import prisma from '@/lib/prisma';
 import type { Metadata } from 'next';
+import type { Article } from '@prisma/client';
 import Link from 'next/link';
 import GenerateButton from './GenerateButton';
 import DeleteButton from './DeleteButton';
 import IntervalSelector from './IntervalSelector';
 
 export const metadata: Metadata = {
+  title: 'Panel SEO Programático (Privado)',
+  description: 'Panel interno de administración SEO. Acceso restringido.',
   robots: {
     index: false,
     follow: false,
+    nocache: true,
   }
 };
 
 export const dynamic = 'force-dynamic';
 
 export default async function RevisionSeoPage() {
-  let articles: any[] = [];
+  let articles: Article[] = [];
   let intervalDays = 1;
   try {
     articles = await prisma.article.findMany({

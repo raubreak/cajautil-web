@@ -4,7 +4,7 @@ import Markdown from 'react-markdown';
 import { ToolRegistry } from '@/lib/toolRegistry';
 import RelatedTools from '@/components/tools/RelatedTools';
 import AuthorSection from '@/components/AuthorSection';
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 
 interface PageProps {
   params: Promise<{ toolSlug: string }>;
@@ -18,9 +18,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!variant) return {};
 
+  const url = `https://cajautil.com/${variant.slug}`;
+  const title = variant.seoTitle || variant.h1 || `Herramienta online: ${variant.slug}`;
+  const description = (variant.seoDescription || "Herramienta online gratuita en CajaUtil.com")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 160);
+
   return {
-    title: variant.seoTitle,
-    description: variant.seoDescription,
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
     robots: 'index, follow',
   };
 }
@@ -106,7 +127,11 @@ export default async function DynamicToolPage({ params }: PageProps) {
   } : null;
 
   // Extraemos configuración funcional si existe
-  const config = (variant as any).functionalConfig?.initialValues || {};
+  const config = (
+    variant as typeof variant & {
+      functionalConfig?: { initialValues?: Record<string, unknown> } | null;
+    }
+  ).functionalConfig?.initialValues || {};
 
   return (
     <>

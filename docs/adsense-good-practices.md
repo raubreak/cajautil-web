@@ -11,6 +11,7 @@ This project applies the following practical rules to improve approval readiness
 - Prefer practical examples, FAQs, and related links to strengthen page usefulness.
 - Keep structured data consistent with real assets and live URLs.
 - Use canonical URLs, robots, sitemap, and ads.txt as baseline technical signals.
+- Ensure dynamic URLs (tool variants and articles) generate canonical, Open Graph, and Twitter metadata automatically.
 - Reduce internal contradictions between product copy and legal copy.
 - Favor local processing when possible, but describe it accurately.
 - Use stronger client-side randomness for security-related tools when available.

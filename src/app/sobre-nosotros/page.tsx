@@ -6,6 +6,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "Sobre nosotros | CajaUtil.com",
   description: "Conoce nuestra misión, valores y al equipo multidisciplinar detrás de CajaUtil, tu navaja suiza digital de confianza.",
+  alternates: {
+    canonical: 'https://cajautil.com/sobre-nosotros',
+  },
 };
 
 const AboutUsPage = () => {
