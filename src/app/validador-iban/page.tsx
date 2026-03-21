@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { CreditCard, CheckCircle, AlertTriangle, ShieldCheck, Search, Link as LinkIcon } from 'lucide-react';
+import { CreditCard, CheckCircle, AlertTriangle, ShieldCheck, Search, Link as LinkIcon, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ValidadorIBAN() {
@@ -12,7 +12,7 @@ export default function ValidadorIBAN() {
   });
 
   const validateIBAN = (value: string) => {
-    let iban = value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    const iban = value.toUpperCase().replace(/[^A-Z0-9]/g, '');
     if (!iban) {
       setResult({ isValid: null, isSpanish: false, message: 'Introduce un IBAN para validar' });
       return;
@@ -168,17 +168,17 @@ export default function ValidadorIBAN() {
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-indigo-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Cuántos caracteres tiene el número IBAN español?</h3>
-              <span className="text-indigo-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>El formato IBAN en España tiene siempre <strong>24 caracteres</strong>. Comienza con las letras "ES", seguidas de 2 dígitos de control, y a continuación los 20 números tradicionales del CCC (Código Cuenta Cliente: 4 números de la entidad, 4 de la oficina, 2 dígitos de control y 10 números de cuenta bancaria).</p>
+              <p>El formato IBAN en Espana tiene siempre <strong>24 caracteres</strong>. Comienza con las letras &quot;ES&quot;, seguidas de 2 digitos de control, y a continuacion los 20 numeros tradicionales del CCC (Codigo Cuenta Cliente: 4 numeros de la entidad, 4 de la oficina, 2 digitos de control y 10 numeros de cuenta bancaria).</p>
             </div>
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-indigo-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Significa que existe la cuenta si da un resultado válido?</h3>
-              <span className="text-indigo-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
               <p>Ojo con esto: la herramienta valida aritméticamente que el número está bien configurado y no tiene errores de tipeo o formato <strong>pero eso no confirma</strong> que un banco tenga este número de cuenta activo con saldo vigente. Sólo un banco de la zona SEPA puede saber si una cuenta en concreto aún está abierta.</p>

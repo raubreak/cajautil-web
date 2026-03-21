@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Type, Sparkles, Copy, CheckCircle, Smartphone, PenTool, Hash } from 'lucide-react';
+import { Type, Sparkles, Copy, CheckCircle, Plus } from 'lucide-react';
 
 const diccionarios: Record<string, Record<string, string>> = {
   cursiva: {
@@ -129,12 +129,12 @@ export default function GeneradorLetras() {
           ¿Cómo funcionan las letras y fuentes raras de Instagram?
         </h2>
         
-        <p>A pesar de que parezca magia, no estamos "incrustando" fuentes ni imágenes raras en tu teclado. Nuestro Cambia-Letras utiliza algo llamado el <strong>Estándar Internacional Unicode.</strong> </p>
+        <p>A pesar de que parezca magia, no estamos &quot;incrustando&quot; fuentes ni imagenes raras en tu teclado. Nuestro Cambia-Letras utiliza algo llamado el <strong>Estandar Internacional Unicode.</strong> </p>
 
-        <p>Unicode es sistema de programación del lenguaje informático de Internet que tiene miles y miles de variables para los lenguajes de todo el mundo. Existen alfabetos matemáticos extintos o de la familia asiática que, combinados, recrean versiones "dobles", "tachadas" o "góticas" de nuestras letras occidentales habituales. Al copiar ese código unicode, plataformas cerradas como TikTok o WhatsApp lo interpretan a la perfección dejándote lucir una <strong>Bio Aesthetic o Gamer</strong> asombrosa en tu perfil.</p>
+        <p>Unicode es sistema de programacion del lenguaje informatico de Internet que tiene miles y miles de variables para los lenguajes de todo el mundo. Existen alfabetos matematicos extintos o de la familia asiatica que, combinados, recrean versiones &quot;dobles&quot;, &quot;tachadas&quot; o &quot;goticas&quot; de nuestras letras occidentales habituales. Al copiar ese codigo unicode, plataformas cerradas como TikTok o WhatsApp lo interpretan a la perfeccion dejandote lucir una <strong>Bio Aesthetic o Gamer</strong> asombrosa en tu perfil.</p>
 
         <h3 className="text-lg font-bold">100% Cero Lag. Ni Apps ni teclados invasivos.</h3>
-        <p>No tienes que descargarte esos incómodos "Teclados de Android o iPhone" que la mayoría de los casos leen todo lo que pulsas secretamente. Esta aplicación funciona solo en tu navegador cliente (Client-side) de forma instantánea.</p>
+        <p>No tienes que descargarte esos incomodos &quot;Teclados de Android o iPhone&quot; que en la mayoria de los casos leen todo lo que pulsas secretamente. Esta aplicacion funciona solo en tu navegador cliente (Client-side) de forma instantanea.</p>
         
       </section>
 
@@ -145,17 +145,17 @@ export default function GeneradorLetras() {
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-purple-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Estas letras funcionan para mi perfil de FreeFire o Twitch?</h3>
-              <span className="text-purple-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-purple-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>Por supuesto. Tanto los nicks y etiquetas de FreeFire, Call of Duty, Discord, Twitch o League of Legends (además de Insta/Twitter/Facebook) aceptan los caracteres Unicode por lo que el parseo será directo una vez des al botón mágico de "Copiar".</p>
+              <p>Por supuesto. Tanto los nicks y etiquetas de FreeFire, Call of Duty, Discord, Twitch o League of Legends (ademas de Insta/Twitter/Facebook) aceptan los caracteres Unicode por lo que el parseo sera directo una vez des al boton magico de &quot;Copiar&quot;.</p>
             </div>
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-purple-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Por qué algunas letras no llevan Tilde en las raras?</h3>
-              <span className="text-purple-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-purple-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
               <p>Al forzar los conjuntos (Sets) de números Unicode, las vocales con Acentos o Tildes españolas no suelen tener un equivalente matemático dibujado en esa capa pseudo-gótica, así que el software automáticamente la dejará sola para evitar romper toda la palabra y que en vez de tu nombre se vea un cuadrado blanco raro.</p>

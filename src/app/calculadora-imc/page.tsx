@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Activity, Weight, Ruler, HeartPulse } from 'lucide-react';
+import { Activity, Weight, Ruler, HeartPulse, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CalculadoraIMC() {
@@ -153,7 +153,7 @@ export default function CalculadoraIMC() {
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-rose-500 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">Regla y fórmula para calcular Índice de Masa</h3>
-              <span className="text-rose-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
               <p>Tomamos tu peso real expresado en kilogramos y lo dividimos por el cuadrado de tu estatura expresada en sistema métrico internacional (Metros x Metros).</p>
@@ -163,7 +163,7 @@ export default function CalculadoraIMC() {
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-rose-500 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">La seguridad de mis mediciones en la web</h3>
-              <span className="text-rose-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
                <p>El calculo se realiza en la pagina con los datos que introduces en el formulario. Aun asi, recuerda que el sitio utiliza servicios generales de analitica y publicidad descritos en nuestras politicas, aunque este calculo concreto no requiere crear una cuenta ni enviar un historial medico.</p>

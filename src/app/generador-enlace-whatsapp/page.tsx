@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MessageCircle, Phone, Send, Eye, CheckCircle, Copy, ExternalLink, QrCode } from 'lucide-react';
+import { MessageCircle, Phone, Send, Eye, CheckCircle, Copy, ExternalLink, QrCode, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function GeneradorWhatsApp() {
@@ -171,7 +171,7 @@ export default function GeneradorWhatsApp() {
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-green-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Cómo creo mi link de WhatsApp para Instagram?</h3>
-              <span className="text-green-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-green-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
                <p>Copia el enlace generado y pegalo en el campo de sitio web de tu perfil, en una biografia con link o en una pagina de contacto. Antes de publicarlo, comprueba que el numero y el mensaje de bienvenida son correctos.</p>
@@ -181,7 +181,7 @@ export default function GeneradorWhatsApp() {
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-green-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Funciona igual en PC o en MAC?</h3>
-              <span className="text-green-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-green-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
                <p>Si. En escritorio suele abrir WhatsApp Web o la app de escritorio y en movil redirige a la aplicacion instalada. El comportamiento final depende del dispositivo y de la configuracion del usuario.</p>

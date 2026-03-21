@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { UserPlus, Settings2, Copy, RefreshCw, CheckCircle, Search, Link as LinkIcon, BookOpen } from 'lucide-react';
-import Link from 'next/link';
+import { UserPlus, Copy, RefreshCw, CheckCircle, BookOpen, Plus } from 'lucide-react';
 
 // Diccionario de nombres en Español
 const NOMBRES_MASCULINOS = [
@@ -37,7 +36,7 @@ const GeneradorNombres = () => {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const generarNombres = () => {
-    let nuevosNombres: string[] = [];
+    const nuevosNombres: string[] = [];
     for (let i = 0; i < cantidad; i++) {
       let nombreBase = "";
       
@@ -55,7 +54,7 @@ const GeneradorNombres = () => {
       }
 
       // Obtener apellidos
-      let listaApellidos = [];
+      const listaApellidos = [];
       for(let j = 0; j < numApellidos; j++) {
         listaApellidos.push(APELLIDOS[Math.floor(Math.random() * APELLIDOS.length)]);
       }
@@ -180,7 +179,7 @@ const GeneradorNombres = () => {
         
         <ul>
           <li><strong>Papilas Literarias:</strong> Escritores que buscan ideas verosímiles de cómo llamar a los personajes de su próximo libro o guión.</li>
-          <li><strong>Juegos de Rol y Videogames:</strong> Buscar un apodo "RP" o de Real-Play sin ser repetitivo usando opciones masculinas o femeninas.</li>
+          <li><strong>Juegos de Rol y Videogames:</strong> Buscar un apodo &quot;RP&quot; o de Real-Play sin ser repetitivo usando opciones masculinas o femeninas.</li>
           <li><strong>Padres indecisos:</strong> Las mezclas azarosas en nuestra base de datos te pueden inspirar para elegir un nombre de bebé precioso por el que antes nunca te habrías decantado.</li>
           <li><strong>Tests de Programación:</strong> Desarrolladores que necesitan nombres ficticios pero que suenen realistas para poblar tablas de bases de datos `mock`.</li>
         </ul>
@@ -194,20 +193,20 @@ const GeneradorNombres = () => {
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-teal-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Esta web elige el nombre más bonito de Europa o América?</h3>
-              <span className="text-teal-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-teal-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>Nuestra base de datos matemática inyecta nombres 100% de la fonética hispano-latina (ej.: García, España, México). Su funcionamiento garantiza que sea pura suerte el resultado.</p>
+              <p>Nuestra base de datos matematica inyecta nombres 100% de la fonetica hispano-latina (ej.: Garcia, Espana, Mexico). Su funcionamiento garantiza que sea pura suerte el resultado.</p>
             </div>
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-teal-600 transition-colors">
               <h3 className="text-base font-bold m-0 pr-4">¿Puedo copiar masivamente todos los datos?</h3>
-              <span className="text-teal-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-teal-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-               <p>Sí, puedes usar el icono lateral encima de cada resultado, aunque por ahora se debe clicar de forma unitaria en cada uno de ellos a tu lista.</p>
+               <p>Si, puedes usar el icono lateral encima de cada resultado, aunque por ahora se debe clicar de forma unitaria en cada uno de ellos de tu lista.</p>
             </div>
           </details>
         </div>

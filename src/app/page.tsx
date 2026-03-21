@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail, Timer, TrendingUp } from 'lucide-react';
+import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail, Timer, TrendingUp, Plus } from 'lucide-react';
 import type { Metadata } from "next";
 
 const SITE_URL = "https://cajautil.com";
@@ -517,7 +517,7 @@ export default function Home() {
               <details key={index} className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
                 <summary className="flex items-center justify-between p-5 sm:p-6 cursor-pointer font-bold text-slate-800 hover:text-blue-600 transition-colors">
                   <h3 className="text-base font-bold pr-4">{faq.pregunta}</h3>
-                  <span className="text-blue-500 text-xl shrink-0 group-open:rotate-45 transition-transform">+</span>
+                  <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
                 </summary>
                 <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-600 leading-relaxed">
                   <p>{faq.respuesta}</p>
