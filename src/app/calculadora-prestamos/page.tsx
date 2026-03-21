@@ -1,6 +1,7 @@
 import CalculadoraPrestamosClient from "@/components/tools/CalculadoraPrestamosClient";
 import Link from "next/link";
 import React from "react";
+import { Plus } from 'lucide-react';
 
 export const metadata = {
   title: 'Simulador de Préstamos Personales — Cuadro de Amortización',
@@ -84,20 +85,29 @@ export default function CalculadoraPrestamos() {
           </p>
 
           <h3>Preguntas frecuentes</h3>
-          <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-            <summary className="cursor-pointer font-bold text-slate-800">Como calcular la cuota mensual de un prestamo</summary>
+          <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+              <span>Como calcular la cuota mensual de un prestamo</span>
+              <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+            </summary>
             <p className="mt-4 mb-0">
               Introduce el importe solicitado, el plazo en meses y el TIN anual. La herramienta estima tu cuota mensual, el total devuelto y el coste financiero del prestamo.
             </p>
           </details>
-          <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-            <summary className="cursor-pointer font-bold text-slate-800">Que mirar ademas del TIN</summary>
+          <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+              <span>Que mirar ademas del TIN</span>
+              <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+            </summary>
             <p className="mt-4 mb-0">
               Conviene revisar la TAE, las comisiones de apertura, productos vinculados y posibles penalizaciones por amortizacion anticipada para comparar ofertas en igualdad de condiciones.
             </p>
           </details>
-          <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-            <summary className="cursor-pointer font-bold text-slate-800">Sirve para financiar estudios universitarios</summary>
+          <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+              <span>Sirve para financiar estudios universitarios</span>
+              <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+            </summary>
             <p className="mt-4 mb-0">
               Si. Puedes usar esta simulacion general y, si tu caso encaja mejor con financiacion academica, visitar la <Link href="/calculadora-prestamos-estudios-universitarios">landing especifica para estudios universitarios</Link> para mantener la navegacion dentro del mismo tema.
             </p>

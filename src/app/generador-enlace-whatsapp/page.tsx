@@ -169,7 +169,7 @@ export default function GeneradorWhatsApp() {
         <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preguntas Frecuentes FAQ</h2>
         <div className="space-y-4">
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-green-600 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-green-600 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">¿Cómo creo mi link de WhatsApp para Instagram?</h3>
               <Plus className="h-5 w-5 text-green-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
@@ -179,7 +179,7 @@ export default function GeneradorWhatsApp() {
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-green-600 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-green-600 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">¿Funciona igual en PC o en MAC?</h3>
               <Plus className="h-5 w-5 text-green-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>

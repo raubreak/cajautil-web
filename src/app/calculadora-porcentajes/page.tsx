@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Percent } from "lucide-react";
+import { Percent, Plus } from "lucide-react";
 
 export default function CalculadoraPorcentajes() {
   const [cantidad, setCantidad] = useState("");
@@ -101,12 +101,18 @@ export default function CalculadoraPorcentajes() {
         </p>
 
         <h2>Preguntas frecuentes</h2>
-        <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Cómo se calcula el IVA de un producto?</summary>
+        <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
+            <span>¿Cómo se calcula el IVA de un producto?</span>
+            <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0 text-slate-600">Para calcular el IVA, multiplica el precio del producto por 0.21 (para el 21%). Por ejemplo, un producto de 50€ tendrá 10,50€ de IVA, resultando en un precio final de 60,50€.</p>
         </details>
-        <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Cómo calcular un descuento del 20%?</summary>
+        <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
+            <span>¿Cómo calcular un descuento del 20%?</span>
+            <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0 text-slate-600">Introduce 20 en el campo de porcentaje y el precio original en cantidad. El resultado es lo que te descuentan. Réstalo del precio original para saber el precio final.</p>
         </details>
 

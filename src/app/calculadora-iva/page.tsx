@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import CalculadoraIVAClient from '@/components/tools/CalculadoraIVAClient';
 import Link from 'next/link';
+import { Plus } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Calculadora de IVA Online — Añadir o Quitar IVA Fácil',
@@ -35,14 +36,20 @@ export default function CalculadoraIVA() {
         </ul>
 
         <h2>Preguntas frecuentes</h2>
-        <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800">Como quitar el IVA a un precio final</summary>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Como quitar el IVA a un precio final</span>
+            <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0">
             Cambia al modo Quitar IVA, introduce el precio final y selecciona el porcentaje. La calculadora estimara la base imponible y la cuota del impuesto.
           </p>
         </details>
-        <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800">Sirve para facturas y tickets</summary>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Sirve para facturas y tickets</span>
+            <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0">
             Si, es una utilidad orientativa para revisar importes rapidamente. Para documentos oficiales conviene comprobar siempre el tipo aplicable y el redondeo final de la factura.
           </p>

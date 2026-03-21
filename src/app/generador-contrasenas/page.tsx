@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { KeyRound } from "lucide-react";
+import { KeyRound, Plus } from "lucide-react";
 
 export default function GeneradorContrasenas() {
   const [password, setPassword] = useState("");
@@ -143,12 +143,18 @@ export default function GeneradorContrasenas() {
         </ul>
 
         <h2>Preguntas frecuentes</h2>
-        <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Las contraseñas generadas se guardan en algún servidor?</summary>
+        <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
+            <span>¿Las contraseñas generadas se guardan en algún servidor?</span>
+            <Plus className="h-5 w-5 shrink-0 text-cyan-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0 text-slate-600">No. Las contraseñas se generan 100% en tu navegador usando JavaScript. Nunca se envían, almacenan ni registran en ningún servidor de CajaUtil ni de terceros.</p>
         </details>
-        <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Cuántos caracteres debe tener una contraseña segura?</summary>
+        <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
+            <span>¿Cuántos caracteres debe tener una contraseña segura?</span>
+            <Plus className="h-5 w-5 shrink-0 text-cyan-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0 text-slate-600">Los expertos en criptografía y seguridad (como el NIST) recomiendan un mínimo de 12-16 caracteres para frenar ataques por fuerza bruta de las computadoras modernas.</p>
         </details>
 

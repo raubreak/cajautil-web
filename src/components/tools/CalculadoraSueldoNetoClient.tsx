@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Coins } from "lucide-react";
+import { Coins, Plus } from "lucide-react";
 
 interface Props {
   title?: React.ReactNode;
@@ -127,12 +127,18 @@ export default function CalculadoraSueldoNetoClient({
           </p>
 
           <h2>Preguntas frecuentes</h2>
-          <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-            <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Cuánto es el sueldo neto de 30.000€ brutos?</summary>
+          <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
+              <span>¿Cuánto es el sueldo neto de 30.000€ brutos?</span>
+              <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+            </summary>
             <p className="mt-4 mb-0 text-slate-600">Con un salario bruto de 30.000€ anuales, las retenciones aproximadas (IRPF ~15% + SS ~6%) dejarían un neto mensual de aproximadamente 1.966€ en 12 pagas, o 1.685€ en 14 pagas.</p>
           </details>
-          <details className="open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-            <summary className="cursor-pointer font-bold text-slate-800 focus:outline-none">¿Qué diferencia hay entre 12 y 14 pagas?</summary>
+          <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
+              <span>¿Qué diferencia hay entre 12 y 14 pagas?</span>
+              <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+            </summary>
             <p className="mt-4 mb-0 text-slate-600">El neto anual es el mismo. Con 14 pagas cobras menos al mes pero recibes dos pagas extra (generalmente en junio y diciembre). Con 12 pagas cobras más cada mes sin extras.</p>
           </details>
 

@@ -515,7 +515,7 @@ export default function Home() {
               },
             ].map((faq, index) => (
               <details key={index} className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-                <summary className="flex items-center justify-between p-5 sm:p-6 cursor-pointer font-bold text-slate-800 hover:text-blue-600 transition-colors">
+                <summary className="flex list-none items-center justify-between p-5 sm:p-6 cursor-pointer font-bold text-slate-800 hover:text-blue-600 transition-colors [&::-webkit-details-marker]:hidden">
                   <h3 className="text-base font-bold pr-4">{faq.pregunta}</h3>
                   <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
                 </summary>

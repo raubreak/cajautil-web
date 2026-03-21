@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Home, Euro, Calendar, Percent, Banknote, Info } from 'lucide-react';
+import { Home, Euro, Calendar, Percent, Banknote, Info, Plus } from 'lucide-react';
 
 const CalculadoraHipotecasClient = () => {
   const [importe, setImporte] = useState<number>(150000);
@@ -177,9 +177,9 @@ const CalculadoraHipotecasClient = () => {
         <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preguntas Frecuentes sobre el cálculo de préstamos</h2>
         <div className="space-y-4">
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-sky-600 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-sky-600 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">¿Cuál es la fórmula para calcular la cuota de la hipoteca?</h3>
-              <span className="text-sky-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-sky-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
               <p>El código matemático que usamos es el siguiente: <code>Cuota = Importe * (i * (1+i)^n) / ((1+i)^n - 1)</code>, donde <i>i</i> es el interés mensual (Interés anual dividido por 12) y <i>n</i> es el total de cuotas (Años multiplicados por 12 meses).</p>
@@ -187,9 +187,9 @@ const CalculadoraHipotecasClient = () => {
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-sky-600 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-sky-600 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">Si mi hipoteca es de interés variable, ¿sirve esta calculadora?</h3>
-              <span className="text-sky-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-sky-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
               <p>Sí, sirve perfectamente para simular lo que pagarás bajo un escenario u otro. Haz una prueba con el interés Euríbor/Libor actual y vuelve a hacer una simulación sumándole 1 o 2 puntos porcentuales para saber cómo quedaría tu cuota en los peores y mejores escenarios.</p>
@@ -197,9 +197,9 @@ const CalculadoraHipotecasClient = () => {
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-sky-600 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-sky-600 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">¿Guardan un registro de mis simulaciones u opciones de compra?</h3>
-              <span className="text-sky-500 text-xl group-open:rotate-45 transition-transform">+</span>
+              <Plus className="h-5 w-5 text-sky-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
               <p>En absoluto. A diferencia de las calculadoras de los grandes bancos, nuestra utilidad es estricta sobre privacidad. Toda la matemática se resuleve <em>offline</em> de lado cliente en la RAM momentánea de tu teléfono. Al cerrar la página, se pierde todo.</p>

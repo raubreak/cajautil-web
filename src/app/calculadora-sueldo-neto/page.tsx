@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Plus } from 'lucide-react';
 import CalculadoraSueldoNetoClient from "@/components/tools/CalculadoraSueldoNetoClient";
 
 export const metadata: Metadata = {
@@ -162,21 +163,30 @@ export default function CalculadoraSueldo() {
         </ul>
 
         <h2>Preguntas frecuentes</h2>
-        <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800">Como pasar de sueldo bruto a neto</summary>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Como pasar de sueldo bruto a neto</span>
+            <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0">
             Introduce el salario bruto anual, elige si cobras en 12 o 14 pagas y revisa la estimacion de IRPF y cotizaciones.
             Si tambien necesitas calcular una subida o una retencion concreta, puedes apoyarte en la <Link href="/calculadora-porcentajes">calculadora de porcentajes</Link>.
           </p>
         </details>
-        <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800">Que cambia entre 12 y 14 pagas</summary>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Que cambia entre 12 y 14 pagas</span>
+            <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0">
             El salario anual puede ser igual, pero el reparto mensual cambia. Con 14 pagas cobras dos extras y la mensualidad ordinaria suele ser menor que con 12 pagas prorrateadas.
           </p>
         </details>
-        <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-          <summary className="cursor-pointer font-bold text-slate-800">Sirve para negociar una oferta laboral</summary>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Sirve para negociar una oferta laboral</span>
+            <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
           <p className="mt-4 mb-0">
             Si. Te ayuda a comparar bruto anual, neto mensual y diferencias entre varias propuestas antes de aceptar un contrato o pedir una revision salarial.
           </p>

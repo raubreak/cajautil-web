@@ -166,7 +166,7 @@ export default function ValidadorIBAN() {
         <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preguntas Frecuentes sobre IBAN</h2>
         <div className="space-y-4">
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-indigo-600 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-indigo-600 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">¿Cuántos caracteres tiene el número IBAN español?</h3>
               <Plus className="h-5 w-5 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
@@ -176,7 +176,7 @@ export default function ValidadorIBAN() {
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-indigo-600 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-indigo-600 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">¿Significa que existe la cuenta si da un resultado válido?</h3>
               <Plus className="h-5 w-5 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>

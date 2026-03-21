@@ -151,7 +151,7 @@ export default function CalculadoraIMC() {
         <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">FAQs Médicas sobre tu Talla</h2>
         <div className="space-y-4">
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-rose-500 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-rose-500 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">Regla y fórmula para calcular Índice de Masa</h3>
               <Plus className="h-5 w-5 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
@@ -161,7 +161,7 @@ export default function CalculadoraIMC() {
           </details>
 
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-rose-500 transition-colors">
+            <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-rose-500 transition-colors [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-bold m-0 pr-4">La seguridad de mis mediciones en la web</h3>
               <Plus className="h-5 w-5 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
