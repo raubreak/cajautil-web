@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const SITE_URL = "https://cajautil.com";
 const SITE_NAME = "CajaUtil.com";
+const GOOGLE_SITE_VERIFICATION = process.env.GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -70,8 +71,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   verification: {
-    // Sustituir con tu ID real cuando des de alta Google Search Console
-    // google: "tu-codigo-verificacion-google",
+    google: GOOGLE_SITE_VERIFICATION,
   },
   category: "technology",
 };
@@ -83,11 +83,6 @@ const websiteJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: "Herramientas online gratuitas: calculadoras, generadores y conversores.",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${SITE_URL}/?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
 };
 
 const organizationJsonLd = {
@@ -95,7 +90,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/apple-icon`,
+  logo: `${SITE_URL}/og-image.png`,
   sameAs: [],
 };
 
@@ -152,7 +147,7 @@ export default function RootLayout({
                   Caja<span className="text-blue-500">Util</span><span className="text-slate-500 text-sm font-medium">.com</span>
                 </Link>
                 <p className="text-sm max-w-xs leading-relaxed">
-                  Utilidades web rapidas, seguras y privadas. Priorizamos el procesamiento local cuando es posible, sin registro ni instalacion.
+                  Utilidades web rapidas y seguras. Priorizamos el procesamiento local cuando es posible, sin registro ni instalacion.
                 </p>
               </div>
               

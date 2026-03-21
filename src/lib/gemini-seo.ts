@@ -1,11 +1,20 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import prisma from '@/lib/prisma';
 import { AIProvider } from './ai-provider';
+import { getArticleDescription, sanitizeArticleTags, sanitizeMarkdownContent } from './contentSanitizers';
 import slugify from 'slugify';
 import { revalidatePath } from 'next/cache';
 import fs from 'fs';
 import path from 'path';
 import { put } from '@vercel/blob';
+
+interface GeneratedArticlePayload {
+  title: string | null;
+  metaDescription: string | null;
+  content: string | null;
+  tags: string | null;
+  image_prompt: string | null;
+}
 
 export const HERRAMIENTAS = [
   { nombre: "Generador de Firmas de Email", url: "/generador-firmas-email" },
@@ -78,7 +87,7 @@ export async function generateProgrammaticArticle(force = false) {
   
   try {
     await prisma.$queryRaw`SELECT 1`;
-  } catch (dbError) {
+  } catch {
     throw new Error('Error crítico de Base de Datos inalcanzable.');
   }
 
@@ -137,22 +146,22 @@ Estructura obligatoria:
   const result = await ai.generateText(systemPrompt);
   const responseText = result.text;
 
-  let articleData: any = null;
+  let articleData: GeneratedArticlePayload | null = null;
   const cleanJsonString = responseText.replace(/```json\n?|```/g, '').trim();
 
   try {
-    articleData = JSON.parse(cleanJsonString);
+      articleData = JSON.parse(cleanJsonString) as GeneratedArticlePayload;
   } catch (e) {
     console.error("JSON standard falló. Iniciando recuperación quirúrgica...", e);
     
     // Intento 2: Extraer campos individuales mediante Regex (Rescate de Datos)
     // Buscamos patrones del tipo "llave": "valor" incluso si hay problemas de escapado
-    const extract = (key: string) => {
-      // Esta regex busca la llave y captura todo hasta la siguiente coma seguida de otra llave o el cierre del objeto
-      const regex = new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*,?\\s*"[a-zA-Z0-9]+"\\s*:|\\s*\\}$)`, 'i');
-      const match = cleanJsonString.match(regex);
-      return match ? match[1] : null;
-    };
+      const extract = (key: string) => {
+        // Esta regex busca la llave y captura todo hasta la siguiente coma seguida de otra llave o el cierre del objeto
+        const regex = new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*,?\\s*"(?:title|metaDescription|content|tags|image_prompt)"\\s*:|\\s*\\}$)`, 'i');
+        const match = cleanJsonString.match(regex);
+        return match ? match[1] : null;
+      };
 
     articleData = {
       title: extract('title'),
@@ -177,25 +186,39 @@ Estructura obligatoria:
   }
 
   // Limpieza defensiva: por si el modelo sigue incrustando el título H1 al principio del markdown
-  if (articleData.content) {
-    articleData.content = articleData.content.replace(/^#\s+.*$/m, '').trim();
+    if (articleData.content) {
+      articleData.content = sanitizeMarkdownContent(
+        articleData.content
+          .replace(/^#\s+.*$/m, '')
+          .trim(),
+      );
+    }
+
+  if (!articleData) {
+    throw new Error('No se pudo construir el payload del articulo.');
   }
 
-  let baseSlug = slugify(articleData.title, { lower: true, strict: true });
-  let finalSlug = baseSlug;
+  const cleanTitle = articleData.title?.replace(/\s+/g, ' ').trim() || 'Artículo generado';
+  const cleanContent = sanitizeMarkdownContent(articleData.content || '');
+  const cleanTags = sanitizeArticleTags(articleData.tags).join(', ');
+  const cleanMetaDescription = getArticleDescription(articleData.metaDescription, cleanContent);
+  const cleanImagePrompt = articleData.image_prompt?.replace(/\s+/g, ' ').trim() || null;
+
+  const baseSlug = slugify(cleanTitle, { lower: true, strict: true });
+  const finalSlug = baseSlug;
   
   // Generar Imagen
-  const imageUrl = await generateArticleImage(articleData.image_prompt, baseSlug);
+  const imageUrl = cleanImagePrompt ? await generateArticleImage(cleanImagePrompt, baseSlug) : null;
 
   const savedArticle = await prisma.article.create({
     data: {
-      title: articleData.title || 'Artículo generado',
+      title: cleanTitle,
       slug: finalSlug,
-      content: articleData.content || '',
-      metaDescription: articleData.metaDescription || '',
-      tags: articleData.tags || 'herramientas, utilidades',
+      content: cleanContent,
+      metaDescription: cleanMetaDescription,
+      tags: cleanTags || 'herramientas, utilidades',
       targetToolUrl: herramientaDestino.url,
-      coverImagePrompt: articleData.image_prompt,
+      coverImagePrompt: cleanImagePrompt,
       coverImageUrl: imageUrl
     }
   });
@@ -253,7 +276,7 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
       
       try {
         data = JSON.parse(cleanJson);
-      } catch (parseError) {
+      } catch {
         console.warn(`JSON falló para variante ${kw}, rescatando datos...`);
         const extract = (key: string) => {
           const regex = new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*,?\\s*"[a-zA-Z0-9]+"\\s*:|\\s*\\}$)`, 'i');
@@ -275,7 +298,7 @@ export async function generateToolVariantBatch(baseTool: string, keywords: strin
         }
       }
 
-      let slug = slugify(`${baseTool}-${kw}`, { lower: true, strict: true });
+      const slug = slugify(`${baseTool}-${kw}`, { lower: true, strict: true });
       
       const variant = await prisma.toolVariant.upsert({
         where: { slug },

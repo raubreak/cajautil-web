@@ -11,8 +11,44 @@ export const metadata = {
 };
 
 export default function CalculadoraPrestamos() {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Como calcular la cuota de un prestamo personal',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Debes indicar capital, plazo e interes nominal. La calculadora usa esos datos para estimar una cuota mensual constante y el coste total del prestamo.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Que diferencia hay entre TIN y TAE',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'El TIN mide el interes nominal del prestamo, mientras que el TAE incorpora comisiones y otros costes para reflejar mejor el precio real de la financiacion.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Puedo usar esta calculadora para financiar estudios universitarios',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Si. Puedes simular importes y plazos generales o ir directamente a la calculadora de prestamos para estudios universitarios si quieres una landing mas enfocada a ese caso de uso.',
+        },
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
       <CalculadoraPrestamosClient />
       
       <section className="w-full max-w-4xl prose prose-slate prose-headings:text-slate-800 mb-16 px-2 text-slate-600">
@@ -35,15 +71,42 @@ export default function CalculadoraPrestamos() {
             Tambien sirve para hacer simulaciones rapidas cambiando importe, plazo o interes y ver como afecta cada variable.
           </p>
 
+          <p>
+            Si estas valorando pagar una carrera, un master o un curso largo, puedes pasar a la{' '}
+            <Link href="/calculadora-prestamos-estudios-universitarios">calculadora de prestamos para estudios universitarios</Link>{' '}
+            para revisar ese escenario con una intencion mas especifica.
+          </p>
+
           <h3>Importante antes de tomar una decision</h3>
           <p>
             El calculo es orientativo y no sustituye la oferta vinculante de una entidad. Comisiones, seguros, carencias o productos asociados pueden cambiar el coste final.
             Usa esta herramienta como referencia inicial y revisa siempre la documentacion contractual completa.
           </p>
 
+          <h3>Preguntas frecuentes</h3>
+          <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="cursor-pointer font-bold text-slate-800">Como calcular la cuota mensual de un prestamo</summary>
+            <p className="mt-4 mb-0">
+              Introduce el importe solicitado, el plazo en meses y el TIN anual. La herramienta estima tu cuota mensual, el total devuelto y el coste financiero del prestamo.
+            </p>
+          </details>
+          <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="cursor-pointer font-bold text-slate-800">Que mirar ademas del TIN</summary>
+            <p className="mt-4 mb-0">
+              Conviene revisar la TAE, las comisiones de apertura, productos vinculados y posibles penalizaciones por amortizacion anticipada para comparar ofertas en igualdad de condiciones.
+            </p>
+          </details>
+          <details className="open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+            <summary className="cursor-pointer font-bold text-slate-800">Sirve para financiar estudios universitarios</summary>
+            <p className="mt-4 mb-0">
+              Si. Puedes usar esta simulacion general y, si tu caso encaja mejor con financiacion academica, visitar la <Link href="/calculadora-prestamos-estudios-universitarios">landing especifica para estudios universitarios</Link> para mantener la navegacion dentro del mismo tema.
+            </p>
+          </details>
+
           <h3>Herramientas relacionadas</h3>
           <ul>
             <li><Link href="/calculadora-hipotecas">Calculadora de hipotecas</Link></li>
+            <li><Link href="/calculadora-prestamos-estudios-universitarios">Prestamos para estudios universitarios</Link></li>
             <li><Link href="/calculadora-porcentajes">Calculadora de porcentajes</Link></li>
           </ul>
       </section>

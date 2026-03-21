@@ -105,7 +105,7 @@ const faqJsonLd = {
       name: "¿Las herramientas de CajaUtil.com son realmente gratis?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Sí, todas las herramientas son 100% gratuitas, sin registro, sin límites de uso y sin necesidad de instalar nada. Funcionan directamente en tu navegador.",
+        text: "Sí, todas las herramientas son 100% gratuitas, sin registro, sin límites de uso y sin necesidad de instalar nada. Muchas funcionan directamente en tu navegador.",
       },
     },
     {
@@ -235,7 +235,7 @@ export default function Home() {
     },
     {
       titulo: 'Lector de Códigos QR',
-      descripcion: 'Sube una foto de un QR y extrae su contenido al instante. 100% privado, sin enviar nada al servidor.',
+      descripcion: 'Sube una foto de un QR y extrae su contenido al instante. El analisis se hace en tu navegador.',
       ruta: '/lector-qr',
       Icono: ScanLine,
       color: 'from-indigo-400 to-violet-500',
@@ -483,8 +483,9 @@ export default function Home() {
               controlar la extensión de tus textos.
             </p>
             <p>
-              Todas las herramientas son <strong>100% gratuitas</strong>, funcionan <strong>directamente en tu navegador</strong> sin enviar datos a ningún servidor, 
-              y están optimizadas para móvil, tablet y ordenador. No necesitas crear cuenta, instalar nada ni dar tu email.
+              Todas las herramientas son <strong>100% gratuitas</strong> y están optimizadas para móvil, tablet y ordenador.
+              Muchas se ejecutan directamente en tu navegador y, cuando intervienen servicios de analítica o publicidad, lo explicamos en nuestras páginas legales.
+              No necesitas crear cuenta, instalar nada ni dar tu email para usar la web.
             </p>
           </div>
         </section>
@@ -498,7 +499,7 @@ export default function Home() {
             {[
               {
                 pregunta: "¿Las herramientas de CajaUtil.com son realmente gratis?",
-                respuesta: "Sí, todas las herramientas son 100% gratuitas, sin registro, sin límites de uso y sin necesidad de instalar nada. Funcionan directamente en tu navegador."
+                respuesta: "Sí, todas las herramientas son 100% gratuitas, sin registro, sin límites de uso y sin necesidad de instalar nada. Muchas funcionan directamente en tu navegador."
               },
               {
                 pregunta: "¿Es seguro usar el generador de contraseñas online?",

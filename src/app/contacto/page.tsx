@@ -30,12 +30,12 @@ export default function Contacto() {
 
         <div className="mt-12 text-left bg-slate-50 p-6 rounded-xl border border-slate-200">
            <h2 className="text-lg font-bold text-slate-800 mb-2 mt-0">Sobre CajaUtil.com</h2>
-           <p className="text-sm text-slate-600 mb-0">
-             CajaUtil.com es un proyecto independiente creado con el objetivo de ofrecer herramientas web gratuitas, 
-             rápidas y que respeten la privacidad del usuario procesando la información de forma segura en el navegador. 
-             Mantenemos los servidores y el desarrollo gracias a los bloques de publicidad.
-           </p>
-        </div>
+            <p className="text-sm text-slate-600 mb-0">
+              CajaUtil.com es un proyecto independiente creado con el objetivo de ofrecer herramientas web gratuitas, 
+              rápidas y con procesamiento local cuando es posible. 
+              Mantenemos los servidores y el desarrollo gracias a la publicidad y explicamos ese uso en nuestras páginas legales.
+            </p>
+         </div>
       </div>
     </main>
   );

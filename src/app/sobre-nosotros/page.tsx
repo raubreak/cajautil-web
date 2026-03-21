@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { ShieldCheck, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -31,7 +29,7 @@ const AboutUsPage = () => {
             Nuestra <span className="text-blue-600">Misión</span>
           </h1>
           <p className="text-xl text-slate-500 font-medium max-w-2xl mx-auto">
-            Simplificamos tu vida digital ofreciendo herramientas rápidas, gratuitas y 100% privadas.
+            Simplificamos tu vida digital ofreciendo herramientas rapidas, gratuitas y claras de usar.
           </p>
         </header>
 

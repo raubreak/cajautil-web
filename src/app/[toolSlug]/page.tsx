@@ -4,6 +4,7 @@ import Markdown from 'react-markdown';
 import { ToolRegistry } from '@/lib/toolRegistry';
 import RelatedTools from '@/components/tools/RelatedTools';
 import AuthorSection from '@/components/AuthorSection';
+import { assessToolVariantIndexability, getArticleDescription } from '@/lib/contentSanitizers';
 import type { Metadata } from 'next';
 
 interface PageProps {
@@ -20,10 +21,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const url = `https://cajautil.com/${variant.slug}`;
   const title = variant.seoTitle || variant.h1 || `Herramienta online: ${variant.slug}`;
-  const description = (variant.seoDescription || "Herramienta online gratuita en CajaUtil.com")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 160);
+  const { cleanTop, cleanBottom, shouldIndex } = assessToolVariantIndexability(variant.topContent, variant.bottomContent);
+  const description = getArticleDescription(
+    variant.seoDescription,
+    `${cleanTop}\n${cleanBottom}`,
+  );
 
   return {
     title,
@@ -42,7 +44,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
     },
-    robots: 'index, follow',
+    robots: shouldIndex
+      ? {
+          index: true,
+          follow: true,
+        }
+      : {
+          index: false,
+          follow: true,
+          nocache: true,
+        },
   };
 }
 
@@ -61,6 +72,8 @@ export default async function DynamicToolPage({ params }: PageProps) {
   if (!ToolComponent) {
     notFound(); // No se encontró el componente React base
   }
+
+  const { cleanTop, cleanBottom } = assessToolVariantIndexability(variant.topContent, variant.bottomContent);
 
   // Preparamos los títulos dinámicos parseados si se desea, o simplemente
   // enviamos el h1 text al ToolComponent si lo soporta, o lo renderizamos fuera.
@@ -83,9 +96,9 @@ export default async function DynamicToolPage({ params }: PageProps) {
 
   // Extraemos FAQs del contenido generado para Schema.org FAQPage
   const faqs = [];
-  if (variant.bottomContent) {
+  if (cleanBottom) {
     // Regex mejorada para detenerse en el siguiente H3, H2 o final de archivo
-    const faqMatches = Array.from(variant.bottomContent.matchAll(/### P:\s*(.*?)\s*\n\s*R:\s*(.*?)(?=\n### P:|\n##|\n#|$)/gs));
+    const faqMatches = Array.from(cleanBottom.matchAll(/### P:\s*(.*?)\s*\n\s*R:\s*(.*?)(?=\n### P:|\n##|\n#|$)/gs));
     for (const match of faqMatches) {
       faqs.push({
         "@type": "Question",
@@ -106,8 +119,8 @@ export default async function DynamicToolPage({ params }: PageProps) {
 
   // Extraemos pasos de "Guía de uso" para HowTo schema
   const steps = [];
-  if (variant.bottomContent) {
-    const guideSection = variant.bottomContent.match(/## Guía de uso.*?\n([\s\S]*?)(?=\n##|$)/i);
+  if (cleanBottom) {
+    const guideSection = cleanBottom.match(/## Gu[ií]a de uso.*?\n([\s\S]*?)(?=\n##|$)/i);
     if (guideSection) {
        const stepMatches = Array.from(guideSection[1].matchAll(/^\d\.\s*(.*)/gm));
        for (const match of stepMatches) {
@@ -152,11 +165,11 @@ export default async function DynamicToolPage({ params }: PageProps) {
         />
       )}
       <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
-        {variant.topContent && (
+        {cleanTop && (
           <section className="w-full max-w-4xl prose prose-slate mb-8 px-2 text-slate-600">
-             <Markdown>{variant.topContent}</Markdown>
-          </section>
-        )}
+             <Markdown>{cleanTop}</Markdown>
+           </section>
+         )}
 
         {/* RENDERIZAMOS LA HERRAMIENTA ORIGINAL REACT */}
         <ToolComponent 
@@ -166,11 +179,11 @@ export default async function DynamicToolPage({ params }: PageProps) {
         />
 
         {/* RENDERIZAMOS EL CONTENIDO LARGO GENERADO POR GEMINI */}
-        {variant.bottomContent && (
+        {cleanBottom && (
           <section className="w-full max-w-4xl prose prose-slate prose-headings:text-slate-800 mb-16 mt-8 px-2 text-slate-600">
-             <Markdown>{variant.bottomContent}</Markdown>
-          </section>
-        )}
+             <Markdown>{cleanBottom}</Markdown>
+           </section>
+         )}
 
         {/* SECCIÓN DE AUTOR Y E-E-A-T */}
         <AuthorSection />

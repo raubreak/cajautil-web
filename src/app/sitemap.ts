@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next'
+import type { Article, ToolVariant } from '@prisma/client'
 import prisma from '@/lib/prisma'
+import { assessToolVariantIndexability } from '@/lib/contentSanitizers'
 
 const SITE_URL = 'https://cajautil.com';
 
@@ -8,14 +10,20 @@ export const dynamic = 'force-dynamic';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   
-  let articles: any[] = [];
-  let variants: any[] = [];
+  let articles: Pick<Article, 'slug' | 'publishedAt'>[] = [];
+  let variants: Pick<ToolVariant, 'slug' | 'updatedAt' | 'topContent' | 'bottomContent'>[] = [];
   try {
     articles = await prisma.article.findMany({ select: { slug: true, publishedAt: true } });
-    variants = await prisma.toolVariant.findMany({ select: { slug: true, updatedAt: true } });
+    variants = await prisma.toolVariant.findMany({
+      select: { slug: true, updatedAt: true, topContent: true, bottomContent: true },
+    });
   } catch (err) {
     console.error('Error fetching data for sitemap:', err);
   }
+
+  const indexableVariants = variants.filter((variant) =>
+    assessToolVariantIndexability(variant.topContent, variant.bottomContent).shouldIndex,
+  );
 
   return [
     {
@@ -29,6 +37,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/sobre-nosotros`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/contacto`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/politica-de-privacidad`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${SITE_URL}/politica-de-cookies`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${SITE_URL}/aviso-legal`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
     },
     {
       url: `${SITE_URL}/calculadora-interes-compuesto`,
@@ -240,7 +278,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
-    ...variants.map((v) => ({
+    ...indexableVariants.map((v) => ({
       url: `${SITE_URL}/${v.slug}`,
       lastModified: v.updatedAt,
       changeFrequency: 'monthly' as const,

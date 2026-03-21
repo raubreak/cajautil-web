@@ -1,9 +1,9 @@
-import React from 'react';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CalendarDays, ArrowRight, BookOpen } from 'lucide-react';
 import type { Metadata } from 'next';
+import { getArticleDescription, sanitizeArticleTags } from '@/lib/contentSanitizers';
 
 export const metadata: Metadata = {
   title: 'Blog de Utilidades y Guías',
@@ -50,7 +50,11 @@ export default async function BlogIndex() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
+            {articles.map((article) => {
+              const primaryTag = sanitizeArticleTags(article.tags)[0] || 'guia';
+              const description = getArticleDescription(article.metaDescription, article.content);
+
+              return (
               <Link 
                 key={article.id} 
                 href={`/articulos/${article.slug}`}
@@ -69,7 +73,7 @@ export default async function BlogIndex() {
                 <div className="p-6 flex-grow flex flex-col">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md uppercase tracking-wider">
-                      {article.tags.split(',')[0]}
+                      {primaryTag}
                     </span>
                     <span className="text-xs text-slate-400 flex items-center gap-1 font-medium">
                       <CalendarDays className="w-3 h-3" /> 
@@ -80,14 +84,15 @@ export default async function BlogIndex() {
                     {article.title}
                   </h2>
                   <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
-                    {article.metaDescription || "Descubre todo sobre este tema en nuestra guía detallada."}
+                    {description || "Descubre todo sobre este tema en nuestra guia detallada."}
                   </p>
                   <div className="mt-auto pt-4 border-t border-slate-50 flex items-center text-sm font-bold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
                     Leer artículo completo <ArrowRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

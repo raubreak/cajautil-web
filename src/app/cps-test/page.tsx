@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { MousePointer2, Timer, RotateCcw, Award, Rocket, Trophy, Target } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -17,21 +18,6 @@ export default function CPSTest() {
   // Stats Logic
   const cpsValue = isFinished ? (clickCount / duration).toFixed(2) : (isRunning ? (clickCount / (duration - timeLeft)).toFixed(1) : '0.0');
 
-  useEffect(() => {
-    if (isRunning && timeLeft > 0) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft(t => {
-            if(t <= 0.1) {
-                stopTest();
-                return 0;
-            }
-            return Number((t - 0.1).toFixed(1));
-        });
-      }, 100);
-    }
-    return () => { if(timerRef.current) clearInterval(timerRef.current); };
-  }, [isRunning]);
-
   const startTest = () => {
     setClickCount(1);
     setTimeLeft(duration);
@@ -39,7 +25,7 @@ export default function CPSTest() {
     setIsFinished(false);
   };
 
-  const stopTest = () => {
+  const stopTest = useCallback(() => {
     setIsRunning(false);
     setIsFinished(true);
     if(timerRef.current) clearInterval(timerRef.current);
@@ -55,7 +41,22 @@ export default function CPSTest() {
             origin: { y: 0.6 }
         });
     }
-  };
+  }, [clickCount, duration, highScore]);
+
+  useEffect(() => {
+    if (isRunning && timeLeft > 0) {
+      timerRef.current = setInterval(() => {
+        setTimeLeft(t => {
+            if(t <= 0.1) {
+                stopTest();
+                return 0;
+            }
+            return Number((t - 0.1).toFixed(1));
+        });
+      }, 100);
+    }
+    return () => { if(timerRef.current) clearInterval(timerRef.current); };
+  }, [isRunning, stopTest, timeLeft]);
 
   const handleClick = () => {
     if(!isRunning && !isFinished) {
@@ -82,7 +83,9 @@ export default function CPSTest() {
         <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight mb-4">
           Test de <span className="text-emerald-600">CPS</span> (Clicks por Segundo)
         </h1>
-        <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto leading-relaxed">¿Que tan rápido eres? Pon a prueba tu velocidad de clicking en 5 segundos.</p>
+        <p className="text-lg text-slate-500 font-medium max-w-xl mx-auto leading-relaxed">
+          Descubre cuántos clicks por segundo puedes hacer en 1, 5 o 10 segundos y mejora tu velocidad para Minecraft, PvP o cualquier juego competitivo.
+        </p>
       </div>
 
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
@@ -187,25 +190,73 @@ export default function CPSTest() {
       </div>
 
       <section className="w-full max-w-4xl prose prose-slate text-slate-600">
-          <h2>La guía definitiva del CPS Test (Clicks por segundo)</h2>
-          <p>El **CPS Test** es una métrica crucial en el mundo gaming, especialmente en títulos como Minecraft, donde la velocidad de interacción con el ratón determina el éxito en combates (PvP). Nuestra herramienta mide cuántas veces puedes pulsar el botón izquierdo del ratón en un intervalo de tiempo exacto.</p>
+          <h2>Que es un CPS Test y para que sirve</h2>
+          <p>
+            El <strong>CPS Test</strong> mide cuántos clics por segundo puedes hacer durante un tiempo concreto.
+            Se usa mucho en juegos como Minecraft, shooters y aim trainers, donde reaccionar rápido con el ratón puede darte ventaja en combate,
+            construcción o farmeo.
+          </p>
+          <p>
+            Esta herramienta te deja probar en <strong>1, 5 o 10 segundos</strong>, ver tu resultado final y repetir todas las veces que quieras.
+            Si entrenas de forma constante, podrás comparar tu progreso y detectar qué técnica te permite mantener un CPS más estable.
+          </p>
+
+          <h2>Como usar el contador de clicks por segundo</h2>
+          <ol>
+            <li>Elige la duración del test: 1, 5 o 10 segundos.</li>
+            <li>Haz clic dentro del panel grande para iniciar la prueba.</li>
+            <li>Mantén un ritmo constante hasta que el cronómetro llegue a cero.</li>
+            <li>Revisa tu CPS final y repite para intentar superar tu récord.</li>
+          </ol>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
-               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                  <h4 className="font-black text-slate-800 mb-2 uppercase tracking-wide">Rangos de Jugador</h4>
-                  <ul className="text-sm space-y-1">
-                      <li>🐢 <strong>0-5 CPS:</strong> Principiante. Lento para juegos competitivos.</li>
-                      <li>🐰 <strong>5-8 CPS:</strong> Intermedio. Estándar para uso general.</li>
-                      <li>🏎 <strong>8-11 CPS:</strong> Pro. Excelente nivel de reacción.</li>
-                      <li>🚀 <strong>12+ CPS:</strong> Élite. Nivel de campeones de eSports.</li>
-                  </ul>
-               </div>
-               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                  <h4 className="font-black text-slate-800 mb-2 uppercase tracking-wide">Técnicas Comunes</h4>
-                  <p className="text-xs">Existen métodos como el **Jitter Clicking** (hacer vibrar el músculo del antebrazo) o el **Butterfly Clicking** (usar dos dedos alternamente) que pueden disparar tus CP hasta niveles inhumanos.</p>
-               </div>
-          </div>
-          <p>¿Quieres mejorar tu habilidad en los videojuegos? Entrenar tu velocidad de clic de forma regular te ayudará a mejorar la coordinación mano-ojo y la memoria muscular de tus dedos. ¡Marca tu mejor puntuación y compártela!</p>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+                <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
+                  <h3 className="font-black text-slate-800 mb-2 uppercase tracking-wide">Rangos de jugador</h3>
+                   <ul className="text-sm space-y-1">
+                       <li>🐢 <strong>0-5 CPS:</strong> Principiante. Lento para juegos competitivos.</li>
+                       <li>🐰 <strong>5-8 CPS:</strong> Intermedio. Estándar para uso general.</li>
+                       <li>🏎 <strong>8-11 CPS:</strong> Pro. Excelente nivel de reacción.</li>
+                       <li>🚀 <strong>12+ CPS:</strong> Élite. Nivel de campeones de eSports.</li>
+                   </ul>
+                </div>
+                <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
+                  <h3 className="font-black text-slate-800 mb-2 uppercase tracking-wide">Tecnicas comunes</h3>
+                  <p className="text-sm">
+                    Existen metodos como el <strong>jitter clicking</strong> o el <strong>butterfly clicking</strong> que ayudan a subir tu ritmo.
+                    Aun asi, la constancia y la comodidad importan mas que forzar la mano durante pocos segundos.
+                  </p>
+                </div>
+           </div>
+
+          <h2>Cuantos clicks por segundo son buenos</h2>
+          <p>
+            Un resultado de <strong>5 a 8 CPS</strong> ya es normal para la mayoría de usuarios. Si superas los <strong>8 CPS</strong>,
+            tu velocidad está por encima de la media. Llegar a <strong>10 o más CPS</strong> suele requerir práctica y técnica.
+          </p>
+
+          <h2>Consejos para mejorar tu CPS</h2>
+          <ul>
+            <li>Usa un ratón cómodo y con buen rebote en los clics.</li>
+            <li>Relaja la muñeca para evitar tensión y fatiga.</li>
+            <li>Practica sesiones cortas en lugar de intentos largos seguidos.</li>
+            <li>Alterna tests de 1 y 5 segundos para trabajar explosividad y control.</li>
+          </ul>
+
+          <h2>Preguntas frecuentes</h2>
+          <h3>Sirve este CPS test para Minecraft</h3>
+          <p>
+            Sí. Es útil para medir tu velocidad de clic en PvP, bridgings y otras situaciones donde el ritmo de pulsación influye en el rendimiento.
+          </p>
+          <h3>Que duracion conviene elegir</h3>
+          <p>
+            El test de 1 segundo sirve para medir explosividad, el de 5 segundos es el más equilibrado y el de 10 segundos ayuda a comprobar si mantienes el ritmo.
+          </p>
+          <h3>Como seguir entrenando</h3>
+          <p>
+            Puedes combinar esta prueba con nuestro <Link href="/cronometro" className="text-emerald-700 font-semibold hover:underline">cronómetro online</Link>
+            para sesiones de práctica o usar el <Link href="/temporizador" className="text-emerald-700 font-semibold hover:underline">temporizador</Link>
+            si quieres hacer bloques cortos de entrenamiento y descanso.
+          </p>
       </section>
 
     </main>

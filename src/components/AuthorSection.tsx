@@ -1,6 +1,4 @@
-
-import React from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 const AuthorSection = () => {
   return (
@@ -20,6 +18,10 @@ const AuthorSection = () => {
           Cada herramienta y contenido en CajaUtil.com es revisado meticulosamente para asegurar precisión, seguridad y la mejor experiencia de usuario, 
           cumpliendo con altos estándares de transparencia y utilidad.
         </p>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-blue-600 md:justify-start">
+          <Link href="/sobre-nosotros" className="hover:underline">Conoce nuestra metodologia</Link>
+          <Link href="/contacto" className="hover:underline">Contactar con el equipo</Link>
+        </div>
       </div>
     </div>
   );
