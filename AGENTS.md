@@ -59,6 +59,24 @@ Important: No Copilot instructions were found in `.github/copilot-instructions.m
 - Deepen articles: `npx tsx scripts/deepen-articles.ts`
 - Fix stale article title: `npx tsx scripts/fix-stale-article-title.ts`
 
+### Analytics / Search Console access
+
+- Google Analytics 4 access is already wired through the repo script `scripts/ga4-audit.ts` and environment variables loaded from `.env.local` / `.env` at runtime.
+- Google Search Console access uses the same service-account setup referenced by `GOOGLE_APPLICATION_CREDENTIALS`; the service account must already be added as a user in the target Search Console property.
+- When an agent is asked to review GA4 or GSC, it should prefer existing scripts first. If no GSC script exists yet, it may use a local Node one-off that:
+  1. loads env vars via `dotenv`,
+  2. reads the JSON key path from `GOOGLE_APPLICATION_CREDENTIALS`,
+  3. requests an OAuth token for `https://www.googleapis.com/auth/webmasters.readonly`,
+  4. queries the Search Console API for `sc-domain:cajautil.com`.
+- Do not print secrets, private keys, raw credential JSON, or `.env` contents in output.
+- Safe default workflow when analytics are requested:
+  1. run `npx tsx scripts/ga4-audit.ts`,
+  2. verify Search Console site access with the service account,
+  3. query pages and queries for the last 28 days,
+  4. identify high-impression / low-CTR opportunities,
+  5. apply only low-risk on-page fixes backed by the data.
+- If credentials are missing or the property is inaccessible, stop and report the blockage instead of improvising.
+
 ## 4) Testing Status (Read Carefully)
 
 - There is currently no configured unit/integration test framework.
