@@ -5,6 +5,8 @@ import { CalendarDays, ArrowRight, BookOpen } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getArticleDescription, sanitizeArticleTags } from '@/lib/contentSanitizers';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Blog de Utilidades y Guías',
   description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',

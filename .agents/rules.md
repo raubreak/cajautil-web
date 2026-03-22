@@ -21,7 +21,12 @@ Este documento contiene reglas críticas derivadas de errores pasados para asegu
 *   **Error:** Enlaces genéricos que no aportan valor funcional.
 *   **Regla:** Cada artículo debe enlazar a una herramienta relevante pasando parámetros iniciales de contexto (ej. `?value=...`) para que la herramienta sea útil de inmediato para el lector.
 
-## 5. Flujo de Despliegue (Prohibido tocar Producción)
+## 5. Años en Títulos SEO Generados
+*   **Error:** Publicar artículos nuevos con años obsoletos en el título o metadata (ej. `2024` en un contenido generado en 2026).
+*   **Regla:** Los artículos generados no deben incluir años pasados en `title`, `metaDescription` ni `slug` salvo que el contenido sea explícitamente histórico y esté justificado.
+*   **Validación:** Antes de guardar un artículo generado, comprobar cualquier año de cuatro cifras y corregirlo al año actual o eliminarlo si el contenido es evergreen.
+
+## 6. Flujo de Despliegue (Prohibido tocar Producción)
 *   **Error:** Cambios aplicados directamente en producción sin trazabilidad.
 *   **Regla Crítica:** **NUNCA** modificar producción de forma directa (hotfix manual, edición en panel, cambios ad-hoc en runtime).
 *   **Procedimiento Obligatorio:** Todo cambio debe realizarse en código, subirse a la rama del repositorio y desplegarse desde Git para mantener historial, revisión y rollback.

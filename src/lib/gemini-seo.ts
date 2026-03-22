@@ -16,6 +16,21 @@ interface GeneratedArticlePayload {
   image_prompt: string | null;
 }
 
+const CURRENT_YEAR = new Date().getFullYear();
+
+function normalizeStaleYear(text: string | null | undefined): string | null {
+  if (!text) return null;
+
+  return text.replace(/\b(20\d{2})\b/g, (match, rawYear) => {
+    const year = Number.parseInt(rawYear, 10);
+
+    if (Number.isNaN(year)) return match;
+    if (year >= CURRENT_YEAR) return match;
+
+    return String(CURRENT_YEAR);
+  });
+}
+
 export const HERRAMIENTAS = [
   { nombre: "Generador de Firmas de Email", url: "/generador-firmas-email" },
   { nombre: "Calculadora de Calorías", url: "/calculadora-calorias" },
@@ -128,6 +143,7 @@ REQUISITOS DEL ARTÍCULO:
 - Título: Atractivo, clicable y optimizado SEO (max 60 caracteres).
 - Meta Descripción: Un resumen persuasivo que invite al clic (max 155 caracteres).
 - Incluye también un 'image_prompt': una descripción detallada en inglés para generar una imagen de portada fotorrealista y moderna.
+- No uses años pasados en el título ni en la meta descripción. Si el tema necesita un año por contexto, usa solo ${CURRENT_YEAR} y asegúrate de que el contenido lo justifique.
 
 - Responde ÚNICAMENTE con un JSON válido y bien estructurado.
 - MUY IMPORTANTE: Si necesitas incluir comillas dentro de un texto, usa comillas simples (') o asegúrate de escaparlas perfectamente como \\".
@@ -198,10 +214,10 @@ Estructura obligatoria:
     throw new Error('No se pudo construir el payload del articulo.');
   }
 
-  const cleanTitle = articleData.title?.replace(/\s+/g, ' ').trim() || 'Artículo generado';
+  const cleanTitle = normalizeStaleYear(articleData.title)?.replace(/\s+/g, ' ').trim() || 'Artículo generado';
   const cleanContent = sanitizeMarkdownContent(articleData.content || '');
   const cleanTags = sanitizeArticleTags(articleData.tags).join(', ');
-  const cleanMetaDescription = getArticleDescription(articleData.metaDescription, cleanContent);
+  const cleanMetaDescription = getArticleDescription(normalizeStaleYear(articleData.metaDescription), cleanContent);
   const cleanImagePrompt = articleData.image_prompt?.replace(/\s+/g, ' ').trim() || null;
 
   const baseSlug = slugify(cleanTitle, { lower: true, strict: true });
