@@ -73,6 +73,22 @@ export default function CalculadoraSueldo() {
           text: 'No. Sirve como simulacion inicial. El resultado final depende de retenciones reales, convenio, beneficios, reducciones y circunstancias personales del trabajador.',
         },
       },
+      {
+        '@type': 'Question',
+        name: 'Cuanto son 2000 euros brutos al mes en neto',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Depende de si hablas de 12 o 14 pagas y de tu retencion real de IRPF. Como referencia, 2000 euros brutos al mes en 12 pagas equivalen a 24000 euros brutos al ano, que puedes simular aqui para obtener un neto mensual orientativo.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Cuanto son 26000 euros brutos al ano en neto',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'El neto depende sobre todo del IRPF aplicado, de las cotizaciones y del numero de pagas. Con esta calculadora puedes estimar rapidamente cuanto quedaria al mes en 12 o 14 pagas.',
+        },
+      },
     ],
   };
 
@@ -154,6 +170,59 @@ export default function CalculadoraSueldo() {
           Si estas valorando una subida salarial, puedes calcular antes el impacto porcentual en la <Link href="/calculadora-porcentajes">calculadora de porcentajes</Link> y despues volver aqui para estimar el neto final.
         </p>
 
+        <h2>Referencias rapidas para consultas frecuentes</h2>
+        <p>
+          Muchas busquedas de sueldo neto giran en torno a cantidades concretas como <strong>22.000</strong>, <strong>26.000</strong> o <strong>28.000 euros brutos al ano</strong>,
+          asi como dudas del tipo <strong>2000 brutos a netos</strong> o <strong>2400 brutos a netos</strong>. Esta tabla ofrece una referencia inicial con la misma logica orientativa de la calculadora.
+        </p>
+        <div className="not-prose overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <table className="min-w-full text-sm text-slate-700">
+            <thead className="bg-slate-100 text-left text-xs font-bold uppercase tracking-wide text-slate-600">
+              <tr>
+                <th className="px-4 py-3">Busqueda habitual</th>
+                <th className="px-4 py-3">Equivalencia bruta</th>
+                <th className="px-4 py-3">Neto 12 pagas aprox.</th>
+                <th className="px-4 py-3">Neto 14 pagas aprox.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t border-slate-200">
+                <td className="px-4 py-3 font-semibold">22.000 brutos a netos</td>
+                <td className="px-4 py-3">22.000 EUR al ano</td>
+                <td className="px-4 py-3">1.442 EUR aprox.</td>
+                <td className="px-4 py-3">1.236 EUR aprox.</td>
+              </tr>
+              <tr className="border-t border-slate-200 bg-slate-50/70">
+                <td className="px-4 py-3 font-semibold">26.000 brutos a netos</td>
+                <td className="px-4 py-3">26.000 EUR al ano</td>
+                <td className="px-4 py-3">1.704 EUR aprox.</td>
+                <td className="px-4 py-3">1.461 EUR aprox.</td>
+              </tr>
+              <tr className="border-t border-slate-200">
+                <td className="px-4 py-3 font-semibold">28.000 brutos a netos</td>
+                <td className="px-4 py-3">28.000 EUR al ano</td>
+                <td className="px-4 py-3">1.835 EUR aprox.</td>
+                <td className="px-4 py-3">1.573 EUR aprox.</td>
+              </tr>
+              <tr className="border-t border-slate-200 bg-slate-50/70">
+                <td className="px-4 py-3 font-semibold">2000 brutos a netos</td>
+                <td className="px-4 py-3">24.000 EUR al ano si son 12 pagas</td>
+                <td className="px-4 py-3">1.573 EUR aprox.</td>
+                <td className="px-4 py-3">1.348 EUR aprox.</td>
+              </tr>
+              <tr className="border-t border-slate-200">
+                <td className="px-4 py-3 font-semibold">2400 brutos a netos</td>
+                <td className="px-4 py-3">28.800 EUR al ano si son 12 pagas</td>
+                <td className="px-4 py-3">1.888 EUR aprox.</td>
+                <td className="px-4 py-3">1.618 EUR aprox.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Ten en cuenta que estas cifras son orientativas. Si tu empresa aplica otro IRPF, tienes pagas extra prorrateadas o trabajas con complementos, conviene introducir tu caso exacto en la calculadora para afinar mejor.
+        </p>
+
         <h2>Que revisar si usas el neto para tomar decisiones</h2>
         <ul>
           <li><strong>Oferta laboral:</strong> compara el neto mensual real y no solo el bruto anual anunciado.</li>
@@ -189,6 +258,24 @@ export default function CalculadoraSueldo() {
           </summary>
           <p className="mt-4 mb-0">
             Si. Te ayuda a comparar bruto anual, neto mensual y diferencias entre varias propuestas antes de aceptar un contrato o pedir una revision salarial.
+          </p>
+        </details>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Cuanto son 2000 euros brutos al mes en neto</span>
+            <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mt-4 mb-0">
+            Si cobras 2000 EUR brutos al mes en 12 pagas, partes de 24.000 EUR brutos al ano. El neto final depende del IRPF y de tu situacion personal, pero la tabla superior te da una referencia rapida y la calculadora te permite ajustar el caso.
+          </p>
+        </details>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Cuanto son 26000 o 28000 brutos al ano en neto</span>
+            <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mt-4 mb-0">
+            Son dos de las consultas mas habituales cuando comparas ofertas. Puedes usar las referencias orientativas de esta pagina para una respuesta rapida y despues simular 12 o 14 pagas para acercarte mas a tu situacion real.
           </p>
         </details>
 
