@@ -44,16 +44,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
     },
-    robots: shouldIndex
-      ? {
-          index: true,
-          follow: true,
-        }
-      : {
-          index: false,
-          follow: true,
-          nocache: true,
-        },
+    // NOTE: All pSEO variants noindexed during AdSense review.
+    // Restore shouldIndex logic after approval.
+    robots: {
+      index: false,
+      follow: true,
+      nocache: true,
+    },
   };
 }
 

@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
     keywords,
     alternates: { canonical: canonicalUrl },
     robots: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
     },
     openGraph: {
       title: article.title,

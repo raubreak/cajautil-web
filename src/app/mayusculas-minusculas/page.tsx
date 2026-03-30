@@ -49,21 +49,43 @@ export default function ConvertidorTexto() {
 
       {/* Contenido SEO */}
       <section className="w-full max-w-4xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-purple-600">
-        <h2>¿Cómo cambiar texto de mayúsculas a minúsculas online?</h2>
+        <h2>Como cambiar texto de mayusculas a minusculas online</h2>
         <p>
-          Nuestro <strong>convertidor de mayúsculas y minúsculas</strong> transforma cualquier texto de forma instantánea. 
-          Elige entre 4 formatos: <strong>TODO MAYÚSCULAS</strong>, <strong>todo minúsculas</strong>, 
-          <strong>Cada Palabra Capitalizada</strong> o <strong>Formato tipo oración</strong>.
+          Nuestro <strong>convertidor de mayusculas y minusculas</strong> transforma cualquier texto de forma instantanea
+          sin necesidad de registro ni instalacion. Elige entre 4 formatos disponibles:
         </p>
+        <ul>
+          <li><strong>TODO MAYUSCULAS:</strong> convierte cada caracter a su version en mayuscula. Util para titulos, siglas o para dar enfasis.</li>
+          <li><strong>todo minusculas:</strong> pasa todo el texto a minusculas. Ideal para normalizar texto copiado de documentos con formato inconsistente.</li>
+          <li><strong>Cada Palabra Capitalizada:</strong> la primera letra de cada palabra se convierte en mayuscula. Perfecto para titulos de articulos, nombres propios o encabezados.</li>
+          <li><strong>Formato tipo oracion:</strong> solo la primera letra despues de un punto, signo de exclamacion o interrogacion se pone en mayuscula. Es el formato mas natural para textos largos.</li>
+        </ul>
+
+        <h2>Casos de uso habituales</h2>
         <p>
-          Es perfecto para corregir textos que escribiste con Bloq Mayús activado, 
-          formatear títulos, o preparar contenido para blogs y redes sociales. Al procesarse en tu dispositivo, es 100% privado.
+          Esta herramienta es especialmente util para:
+        </p>
+        <ul>
+          <li>Corregir textos escritos accidentalmente con el <strong>Bloq Mayus</strong> activado.</li>
+          <li>Formatear titulos y encabezados para blogs, newsletters o documentos profesionales.</li>
+          <li>Preparar contenido para redes sociales como Instagram, Twitter o LinkedIn.</li>
+          <li>Normalizar datos importados de hojas de calculo o bases de datos con formatos mixtos.</li>
+          <li>Limpiar texto copiado de PDFs o imagenes donde el formato original se ha perdido.</li>
+        </ul>
+
+        <h2>Privacidad y procesamiento local</h2>
+        <p>
+          Todo el procesamiento se realiza directamente en tu navegador. El texto que introduces no se envia
+          a ningun servidor externo ni se almacena en ninguna base de datos. Puedes usar la herramienta con
+          total tranquilidad, incluso para textos confidenciales o datos sensibles.
         </p>
 
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/contador-de-palabras">Contador de Palabras y Caracteres</Link></li>
-          <li><Link href="/generador-contrasenas">Generador de Contraseñas Seguras</Link></li>
+          <li><Link href="/generador-contrasenas">Generador de Contrasenas Seguras</Link></li>
+          <li><Link href="/generador-lorem-ipsum">Generador de Lorem Ipsum</Link></li>
+          <li><Link href="/traductor-binario">Traductor Binario y Morse</Link></li>
         </ul>
       </section>
     </main>

@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from 'next/link';
 import Script from 'next/script';
 import Header from "@/components/Header";
+import CookieConsent from "@/components/CookieConsent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -110,6 +111,20 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        {/* Google Consent Mode v2 - must load BEFORE gtag/AdSense */}
+        <Script id="consent-mode-defaults" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              wait_for_update: 500,
+            });
+          `}
+        </Script>
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8447027631025094"
@@ -138,6 +153,8 @@ export default function RootLayout({
         <div className="flex-grow flex flex-col z-10 relative">
           {children}
         </div>
+
+        <CookieConsent />
 
         <footer className="bg-slate-900 text-slate-400 py-12 px-6 mt-auto relative z-10" aria-label="Pie de página">
           <div className="max-w-6xl mx-auto flex flex-col gap-10">
@@ -203,7 +220,6 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Legal e Info</h3>
                 <ul className="space-y-2">
-                  <li><Link href="/articulos" className="text-sm hover:text-white transition-colors">Blog de Utilidades</Link></li>
                   <li><Link href="/sobre-nosotros" className="text-sm hover:text-white transition-colors">Sobre nosotros</Link></li>
                   <li><Link href="/aviso-legal" className="text-sm hover:text-white transition-colors">Aviso Legal</Link></li>
                    <li><Link href="/politica-de-privacidad" className="text-sm hover:text-white transition-colors">Política de Privacidad</Link></li>

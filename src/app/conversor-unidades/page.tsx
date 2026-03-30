@@ -193,7 +193,43 @@ export default function ConversorUnidades() {
 
       <section className="w-full max-w-4xl mt-16 prose prose-slate text-slate-600">
         <h2>Conversor de Unidades Universal</h2>
-        <p>Nuestro <strong>conversor de unidades online</strong> soporta las categorías más buscadas: <strong>longitud</strong> (metros, pies, millas), <strong>peso</strong> (kg, libras, onzas), <strong>temperatura</strong> (Celsius, Fahrenheit, Kelvin), <strong>volumen</strong> (litros, galones), <strong>velocidad</strong> (km/h, mph) y <strong>tiempo</strong> (segundos a horas, días). La conversión se realiza en tiempo real sin recargar la página.</p>
+        <p>
+          Nuestro <strong>conversor de unidades online</strong> soporta las categorias mas buscadas:
+          <strong> longitud</strong> (metros, pies, millas, pulgadas), <strong>peso</strong> (kg, libras, onzas, toneladas),
+          <strong> temperatura</strong> (Celsius, Fahrenheit, Kelvin), <strong>volumen</strong> (litros, galones, tazas),
+          <strong> velocidad</strong> (km/h, mph, nudos) y <strong>tiempo</strong> (segundos, minutos, horas, dias, semanas).
+          La conversion se realiza en tiempo real sin recargar la pagina.
+        </p>
+
+        <h2>Como funciona la conversion</h2>
+        <p>
+          Cada unidad se convierte primero a una unidad base del Sistema Internacional (metros para longitud, 
+          kilogramos para peso, etc.) y despues se transforma a la unidad de destino. Este metodo de dos pasos
+          garantiza precision matematica y permite anadrir nuevas unidades facilmente.
+        </p>
+        <p>
+          Un caso especial es la <strong>temperatura</strong>, donde la conversion no es proporcional: la formula
+          de Celsius a Fahrenheit es <code>F = C x 9/5 + 32</code>, mientras que para Kelvin es <code>K = C + 273,15</code>.
+          Nuestro conversor aplica las formulas exactas en cada caso.
+        </p>
+
+        <h2>Casos de uso habituales</h2>
+        <ul>
+          <li><strong>Cocina internacional:</strong> convertir tazas a mililitros, onzas a gramos o Fahrenheit a Celsius para seguir recetas de otros paises.</li>
+          <li><strong>Viajes:</strong> pasar de millas a kilometros, libras a kilos o galones a litros al conducir o comprar en el extranjero.</li>
+          <li><strong>Estudios y trabajo:</strong> resolver ejercicios de fisica, ingenieria o quimica que requieren cambiar entre sistemas de medida.</li>
+          <li><strong>Deporte:</strong> comparar velocidades en km/h y mph, o tiempos en segundos y minutos.</li>
+        </ul>
+
+        <h2>Precision y limitaciones</h2>
+        <p>
+          Los resultados se muestran con hasta 8 decimales para valores muy pequenos y 4 decimales para valores
+          grandes, lo que cubre la gran mayoria de necesidades practicas. Para calculos cientificos de alta
+          precision, es recomendable verificar los resultados con software especializado.
+        </p>
+        <p>
+          Todo el procesamiento se realiza localmente en tu navegador. No se envia ningun dato a servidores externos.
+        </p>
       </section>
     </main>
   );

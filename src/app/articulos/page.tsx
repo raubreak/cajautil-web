@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://cajautil.com/articulos',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: 'Blog de Utilidades y Guías | CajaUtil.com',
     description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',

@@ -1,7 +1,4 @@
 import { MetadataRoute } from 'next'
-import type { Article, ToolVariant } from '@prisma/client'
-import prisma from '@/lib/prisma'
-import { assessToolVariantIndexability } from '@/lib/contentSanitizers'
 
 const SITE_URL = 'https://cajautil.com';
 
@@ -9,21 +6,25 @@ export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  
-  let articles: Pick<Article, 'slug' | 'publishedAt'>[] = [];
-  let variants: Pick<ToolVariant, 'slug' | 'updatedAt' | 'topContent' | 'bottomContent'>[] = [];
-  try {
-    articles = await prisma.article.findMany({ select: { slug: true, publishedAt: true } });
-    variants = await prisma.toolVariant.findMany({
-      select: { slug: true, updatedAt: true, topContent: true, bottomContent: true },
-    });
-  } catch (err) {
-    console.error('Error fetching data for sitemap:', err);
-  }
 
-  const indexableVariants = variants.filter((variant) =>
-    assessToolVariantIndexability(variant.topContent, variant.bottomContent).shouldIndex,
-  );
+  // NOTE: Articles and pSEO tool variants are temporarily excluded from the
+  // sitemap while AdSense approval is pending. They are also noindexed via
+  // their metadata. Uncomment the code below once AdSense is approved.
+  //
+  // let articles: Pick<Article, 'slug' | 'publishedAt'>[] = [];
+  // let variants: Pick<ToolVariant, 'slug' | 'updatedAt' | 'topContent' | 'bottomContent'>[] = [];
+  // try {
+  //   articles = await prisma.article.findMany({ select: { slug: true, publishedAt: true } });
+  //   variants = await prisma.toolVariant.findMany({
+  //     select: { slug: true, updatedAt: true, topContent: true, bottomContent: true },
+  //   });
+  // } catch (err) {
+  //   console.error('Error fetching data for sitemap:', err);
+  // }
+  //
+  // const indexableVariants = variants.filter((variant) =>
+  //   assessToolVariantIndexability(variant.topContent, variant.bottomContent).shouldIndex,
+  // );
 
   return [
     {
@@ -32,12 +33,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 1.0,
     },
-    {
-      url: `${SITE_URL}/articulos`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
+    // NOTE: /articulos excluded during AdSense review
+    // {
+    //   url: `${SITE_URL}/articulos`,
+    //   lastModified: now,
+    //   changeFrequency: 'weekly',
+    //   priority: 0.9,
+    // },
     {
       url: `${SITE_URL}/sobre-nosotros`,
       lastModified: now,
@@ -272,17 +274,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    ...articles.map((article) => ({
-      url: `${SITE_URL}/articulos/${article.slug}`,
-      lastModified: article.publishedAt,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    })),
-    ...indexableVariants.map((v) => ({
-      url: `${SITE_URL}/${v.slug}`,
-      lastModified: v.updatedAt,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    })),
+    // NOTE: Articles and pSEO variants excluded during AdSense review.
+    // Uncomment after approval:
+    //
+    // ...articles.map((article) => ({
+    //   url: `${SITE_URL}/articulos/${article.slug}`,
+    //   lastModified: article.publishedAt,
+    //   changeFrequency: 'monthly' as const,
+    //   priority: 0.7,
+    // })),
+    // ...indexableVariants.map((v) => ({
+    //   url: `${SITE_URL}/${v.slug}`,
+    //   lastModified: v.updatedAt,
+    //   changeFrequency: 'monthly' as const,
+    //   priority: 0.8,
+    // })),
   ];
 }
