@@ -1,106 +1,88 @@
-import prisma from '@/lib/prisma';
 import Link from 'next/link';
-import Image from 'next/image';
-import { CalendarDays, ArrowRight, BookOpen } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays } from 'lucide-react';
 import type { Metadata } from 'next';
-import { getArticleDescription, sanitizeArticleTags } from '@/lib/contentSanitizers';
 
-export const dynamic = 'force-dynamic';
+import { editorialArticles } from '@/lib/editorialArticles';
 
 export const metadata: Metadata = {
-  title: 'Blog de Utilidades y Guías',
-  description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',
+  title: 'Guias y articulos practicos',
+  description:
+    'Guias editoriales sobre salario, prestamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
   alternates: {
     canonical: 'https://cajautil.com/articulos',
   },
-  robots: {
-    index: false,
-    follow: false,
-  },
   openGraph: {
-    title: 'Blog de Utilidades y Guías | CajaUtil.com',
-    description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',
+    title: 'Guias y articulos practicos | CajaUtil.com',
+    description:
+      'Guias editoriales sobre salario, prestamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
     url: 'https://cajautil.com/articulos',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog de Utilidades y Guías | CajaUtil.com',
-    description: 'Aprende a sacar el máximo provecho de nuestras herramientas con guías detalladas, consejos financieros y tutoriales tecnológicos.',
+    title: 'Guias y articulos practicos | CajaUtil.com',
+    description:
+      'Guias editoriales sobre salario, prestamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
   },
 };
 
-export default async function BlogIndex() {
-  const articles = await prisma.article.findMany({
-    orderBy: { publishedAt: 'desc' },
-  });
+export default function BlogIndex() {
+  const articles = [...editorialArticles].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
 
   return (
     <main className="min-h-screen bg-slate-50 py-12 px-6">
       <div className="max-w-6xl mx-auto">
         <header className="mb-16 text-center">
-          <div className="inline-flex items-center justify-center p-4 bg-blue-100 rounded-3xl mb-6 shadow-sm">
+          <div className="inline-flex items-center justify-center rounded-3xl bg-blue-100 p-4 shadow-sm mb-6">
             <BookOpen className="w-10 h-10 text-blue-600" />
           </div>
           <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight mb-6">
-            Blog de <span className="text-blue-600">Utilidades</span>
+            Guias y <span className="text-blue-600">articulos</span>
           </h1>
-          <p className="text-lg sm:text-xl text-slate-500 font-medium max-w-2xl mx-auto">
-            Guías profundas, consejos prácticos y todo lo que necesitas para dominar tus finanzas y tareas digitales.
+          <p className="text-lg sm:text-xl text-slate-500 font-medium max-w-3xl mx-auto">
+            Contenido editorial util para entender mejor como funcionan nuestras calculadoras,
+            simuladores y utilidades: conceptos, errores comunes, ejemplos practicos y decisiones
+            que conviene tomar con contexto.
           </p>
         </header>
 
-        {articles.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
-            <p className="text-slate-400 font-medium italic">Próximamente publicaremos nuestro primer artículo de experto.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => {
-              const primaryTag = sanitizeArticleTags(article.tags)[0] || 'guia';
-              const description = getArticleDescription(article.metaDescription, article.content);
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/articulos/${article.slug}`}
+              className="group flex flex-col rounded-3xl border border-slate-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <span className="rounded-md bg-blue-50 px-2 py-1 text-xs font-bold uppercase tracking-wider text-blue-700">
+                  {article.tags[0] ?? 'guia'}
+                </span>
+                <span className="flex items-center gap-1 text-xs font-medium text-slate-400">
+                  <CalendarDays className="w-3 h-3" />
+                  {new Date(article.publishedAt).toLocaleDateString('es-ES', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                </span>
+              </div>
 
-              return (
-              <Link 
-                key={article.id} 
-                href={`/articulos/${article.slug}`}
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col"
-              >
-                {article.coverImageUrl && (
-                  <div className="aspect-[16/9] relative overflow-hidden">
-                    <Image 
-                      src={article.coverImageUrl} 
-                      alt={article.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                )}
-                <div className="p-6 flex-grow flex flex-col">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md uppercase tracking-wider">
-                      {primaryTag}
-                    </span>
-                    <span className="text-xs text-slate-400 flex items-center gap-1 font-medium">
-                      <CalendarDays className="w-3 h-3" /> 
-                      {new Date(article.publishedAt).toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </span>
-                  </div>
-                  <h2 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-                    {article.title}
-                  </h2>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
-                    {description || "Descubre todo sobre este tema en nuestra guia detallada."}
-                  </p>
-                  <div className="mt-auto pt-4 border-t border-slate-50 flex items-center text-sm font-bold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Leer artículo completo <ArrowRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
-              );
-            })}
-          </div>
-        )}
+              <h2 className="text-xl font-bold text-slate-900 mb-3 transition-colors group-hover:text-blue-700 line-clamp-2">
+                {article.title}
+              </h2>
+              <p className="text-sm leading-relaxed text-slate-500 mb-6 line-clamp-4">
+                {article.description}
+              </p>
+
+              <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-4 text-sm font-bold text-blue-700">
+                <span>Leer guia</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </main>
   );

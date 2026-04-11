@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import Header from "@/components/Header";
 import CookieConsent from "@/components/CookieConsent";
+import ToolEditorialRouterSection from "@/components/ToolEditorialRouterSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -154,6 +155,8 @@ export default function RootLayout({
           {children}
         </div>
 
+        <ToolEditorialRouterSection />
+
         <CookieConsent />
 
         <footer className="bg-slate-900 text-slate-400 py-12 px-6 mt-auto relative z-10" aria-label="Pie de página">
@@ -220,6 +223,7 @@ export default function RootLayout({
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Legal e Info</h3>
                 <ul className="space-y-2">
+                  <li><Link href="/articulos" className="text-sm hover:text-white transition-colors">Guias y articulos</Link></li>
                   <li><Link href="/sobre-nosotros" className="text-sm hover:text-white transition-colors">Sobre nosotros</Link></li>
                   <li><Link href="/aviso-legal" className="text-sm hover:text-white transition-colors">Aviso Legal</Link></li>
                    <li><Link href="/politica-de-privacidad" className="text-sm hover:text-white transition-colors">Política de Privacidad</Link></li>

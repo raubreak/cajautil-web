@@ -1,11 +1,39 @@
 import type { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import { getArticleDescription, sanitizeArticleTags, sanitizeMarkdownContent } from '@/lib/contentSanitizers';
+import { getEditorialArticleBySlug } from '@/lib/editorialArticles';
 
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: { slug: string } | Promise<{slug: string}> }): Promise<Metadata> {
   const resolvedParams = await params;
+  const editorialArticle = getEditorialArticleBySlug(resolvedParams.slug);
+
+  if (editorialArticle) {
+    const canonicalUrl = `https://cajautil.com/articulos/${editorialArticle.slug}`;
+    return {
+      title: editorialArticle.title,
+      description: editorialArticle.description,
+      keywords: editorialArticle.tags,
+      alternates: { canonical: canonicalUrl },
+      robots: {
+        index: true,
+        follow: true,
+      },
+      openGraph: {
+        title: editorialArticle.title,
+        description: editorialArticle.description,
+        url: canonicalUrl,
+        type: 'article',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: editorialArticle.title,
+        description: editorialArticle.description,
+      },
+    };
+  }
+
   let article = null;
   try {
     article = await prisma.article.findUnique({
@@ -29,7 +57,7 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
     alternates: { canonical: canonicalUrl },
     robots: {
       index: false,
-      follow: false,
+      follow: true,
     },
     openGraph: {
       title: article.title,
