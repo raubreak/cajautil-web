@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 
+import { isLowValueTool } from '@/lib/adsenseReadiness';
 import { editorialArticles } from '@/lib/editorialArticles';
 
 const SITE_URL = 'https://cajautil.com';
@@ -8,50 +9,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-
-  return [
-    {
-      url: SITE_URL,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${SITE_URL}/articulos`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/sobre-nosotros`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/contacto`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/politica-de-privacidad`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
-    {
-      url: `${SITE_URL}/politica-de-cookies`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
-    {
-      url: `${SITE_URL}/aviso-legal`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
+  const toolEntries = ([
     {
       url: `${SITE_URL}/calculadora-interes-compuesto`,
       lastModified: now,
@@ -256,6 +214,52 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+  ] satisfies MetadataRoute.Sitemap).filter((entry) => !isLowValueTool(entry.url.replace(`${SITE_URL}/`, '')));
+
+  return [
+    {
+      url: SITE_URL,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${SITE_URL}/articulos`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/sobre-nosotros`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/contacto`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/politica-de-privacidad`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${SITE_URL}/politica-de-cookies`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${SITE_URL}/aviso-legal`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    ...toolEntries,
     ...editorialArticles.map((article) => ({
       url: `${SITE_URL}/articulos/${article.slug}`,
       lastModified: new Date(article.updatedAt),

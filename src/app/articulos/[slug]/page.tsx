@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, CalendarDays, Clock3, ExternalLink, RefreshCw, Tag } from 'lucide-react';
 import AuthorSection from '@/components/AuthorSection';
+import { AUTHOR_PROFILE } from '@/lib/authorProfile';
 import { getEditorialArticleBySlug } from '@/lib/editorialArticles';
 import {
   estimateReadingTimeMinutes,
@@ -108,7 +109,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
       articleBody: stripMarkdownToText(editorialArticle.content),
       author: {
         '@type': 'Person',
-        name: 'Raul B.',
+        name: AUTHOR_PROFILE.fullName,
+        image: AUTHOR_PROFILE.avatarUrl,
+        sameAs: AUTHOR_PROFILE.githubUrl,
       },
       publisher: {
         '@type': 'Organization',
@@ -218,7 +221,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     articleBody: stripMarkdownToText(cleanContent),
     author: {
       '@type': 'Person',
-      name: 'Raúl B.',
+      name: AUTHOR_PROFILE.fullName,
+      image: AUTHOR_PROFILE.avatarUrl,
+      sameAs: AUTHOR_PROFILE.githubUrl,
     },
     publisher: {
       '@type': 'Organization',

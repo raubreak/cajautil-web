@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -21,7 +23,8 @@ export const metadata: Metadata = {
     title: 'Texto Invisible y Espacio en Blanco para Copiar',
     description: 'Envía mensajes vacíos o crea nicks con espacios invisibles fácilmente con nuestra herramienta gratuita.',
     url: `${SITE_URL}/texto-invisible`,
-  }
+  },
+  robots: LOW_VALUE_TOOL_ROBOTS,
 };
 
 const jsonLd = {

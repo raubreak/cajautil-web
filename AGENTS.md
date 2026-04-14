@@ -38,6 +38,7 @@ Important: No Copilot instructions were found in `.github/copilot-instructions.m
 ### Lint
 
 - Full lint: `npm run lint`
+- Repo-wide lint fallback: `npx eslint .`
 - Single file lint: `npx eslint src/app/some-page/page.tsx`
 - Multi-file lint: `npx eslint "src/app/**/page.tsx"`
 
@@ -48,6 +49,8 @@ Important: No Copilot instructions were found in `.github/copilot-instructions.m
 ### Prisma
 
 - Generate client: `npx prisma generate`
+- Create/apply local migration: `npx prisma migrate dev`
+- Apply production migrations: `npx prisma migrate deploy`
 - `postinstall` already runs Prisma generate.
 
 ### Data/SEO scripts
@@ -57,18 +60,46 @@ Important: No Copilot instructions were found in `.github/copilot-instructions.m
 - Refresh thin variants: `npx tsx scripts/refresh-variants.ts`
 - Seed variants: `npx tsx scripts/seedVariants.ts`
 - Deepen articles: `npx tsx scripts/deepen-articles.ts`
+- Repair generated content: `npx tsx scripts/repair-generated-content.ts`
 - Fix stale article title: `npx tsx scripts/fix-stale-article-title.ts`
 
 ### Analytics / Search Console access
 
 - Google Analytics 4 access is already wired through the repo script `scripts/ga4-audit.ts` and environment variables loaded from `.env.local` / `.env` at runtime.
 - Google Search Console access uses the same service-account setup referenced by `GOOGLE_APPLICATION_CREDENTIALS`; the service account must already be added as a user in the target Search Console property.
+- Exact connection method for any LLM/agent using the service account:
+  1. load env vars with `dotenv` from `.env.local` first and `.env` as fallback,
+  2. read the service-account JSON path from `GOOGLE_APPLICATION_CREDENTIALS`,
+  3. parse that JSON locally to obtain `client_email`, `private_key` and `token_uri`,
+  4. build a signed JWT with `RS256`,
+  5. exchange that JWT at `token_uri` for an OAuth access token,
+  6. call the target Google API with `Authorization: Bearer <token>`.
+- Required OAuth scopes by service:
+  - GA4 Data API: `https://www.googleapis.com/auth/analytics.readonly`
+  - Search Console API: `https://www.googleapis.com/auth/webmasters.readonly`
+- Required API targets by service:
+  - GA4 Data API base: `https://analyticsdata.googleapis.com/v1beta/`
+  - Search Console API base: `https://www.googleapis.com/webmasters/v3/`
+- Required property identifiers in this repo:
+  - Search Console site: `sc-domain:cajautil.com`
+  - GA4 property: use the property ID already referenced by repo scripts/env; prefer `scripts/ga4-audit.ts` instead of hardcoding a new one.
+- Minimal Search Console flow:
+  1. get bearer token with scope `webmasters.readonly`,
+  2. verify access with `GET /sites`,
+  3. query `POST /sites/sc-domain:cajautil.com/searchAnalytics/query`,
+  4. request dimensions like `page`, `query`, or `page,query` for the last 28 days.
+- Minimal GA4 flow:
+  1. prefer running `npx tsx scripts/ga4-audit.ts`,
+  2. if a one-off is needed, get bearer token with scope `analytics.readonly`,
+  3. call the GA4 Data API `runReport` endpoint for the configured property,
+  4. request metrics such as sessions, screenPageViews, totalUsers and dimensions such as date or pagePath when relevant.
 - When an agent is asked to review GA4 or GSC, it should prefer existing scripts first. If no GSC script exists yet, it may use a local Node one-off that:
   1. loads env vars via `dotenv`,
   2. reads the JSON key path from `GOOGLE_APPLICATION_CREDENTIALS`,
   3. requests an OAuth token for `https://www.googleapis.com/auth/webmasters.readonly`,
   4. queries the Search Console API for `sc-domain:cajautil.com`.
 - Do not print secrets, private keys, raw credential JSON, or `.env` contents in output.
+- Never paste the full service-account JSON, raw JWT, bearer token, or credential file contents into logs, commits, or chat output.
 - Safe default workflow when analytics are requested:
   1. run `npx tsx scripts/ga4-audit.ts`,
   2. verify Search Console site access with the service account,
@@ -174,7 +205,8 @@ If you add a real test framework later, update this file with exact single-test 
 ## 8) Git & Deployment Workflow (Mandatory)
 
 - Never patch production manually.
-- All changes must go through code + commit + push.
+- All production changes must go through code + Git history + deploy from Vercel/Git.
+- Do not create commits or push automatically; only do so when the user explicitly requests it.
 - Production deploys must be traceable to Git history.
 - Keep commits focused; avoid mixing unrelated concerns.
 
@@ -191,3 +223,37 @@ Before finishing:
 - Run `npm run build` for substantial changes.
 - Verify metadata/canonical correctness when touching pages.
 - Summarize risks, follow-ups, and any skipped validation.
+
+## 10) Errores Conocidos y Soluciones
+
+> Esta sección es mantenida automáticamente por la tarea diaria `daily-seo-review-ga4-gsc`.
+> Cuando un agente encuentre un error durante la revisión de GA4 / GSC o en cualquier script SEO,
+> DEBE registrarlo aquí antes de terminar la sesión. El objetivo es que ningún error se repita.
+
+| Fecha | Script / Paso | Error | Causa raíz | Solución aplicada | Estado |
+|-------|--------------|-------|------------|-------------------|--------|
+| 2026-03-24 | `npx tsx scripts/ga4-audit.ts` — PASO 1 | `EPERM: operation not permitted /tmp/tsx-*/pipe` | El sandbox bloquea la creación de pipes IPC que usa tsx para su modo watch/IPC | Workaround: compilar con `tsc --module commonjs` + ejecutar el `.js` resultante con `NODE_PATH=./node_modules node` | ✅ Workaround activo |
+| 2026-03-24 | `npm install @esbuild/linux-x64` | `403 Forbidden` en npm registry | Los `node_modules` del proyecto fueron instalados en macOS (`darwin-x64`); el sandbox corre Linux y el registro npm rechaza el paquete | Requiere `npm ci` ejecutado en entorno Linux nativo (máquina local o CI). No solucionable desde el sandbox automáticamente. | ⚠️ Pendiente — intervención manual |
+| 2026-03-24 | GA4 API — PASO 1 | `Error: 14 UNAVAILABLE: Name resolution failed for dns:analyticsdata.googleapis.com:443` | El sandbox tiene proxy `socks5h://` configurada pero `@grpc/grpc-js` no soporta ese esquema. El DNS externo está bloqueado. | La tarea no puede consultar GA4 desde el sandbox. Ejecutar en entorno con red externa (local/CI). Ver recomendaciones en reporte diario. | ⚠️ Pendiente — limitación de red del sandbox |
+| 2026-03-24 | GSC REST API — PASO 2 | `getaddrinfo EAI_AGAIN www.googleapis.com` | DNS externo bloqueado en el sandbox para conexiones HTTP/HTTPS directas | Ídem que GA4 — ejecutar fuera del sandbox | ⚠️ Pendiente — limitación de red del sandbox |
+
+### Protocolo de registro de errores
+
+1. Detectar el error con su mensaje completo (sin exponer secrets ni claves).
+2. Identificar la causa raíz (credenciales, dependencia faltante, cambio de API, etc.).
+3. Aplicar la solución o documentar los pasos necesarios si requiere intervención manual.
+4. Actualizar la tabla anterior con la fila correspondiente.
+5. Si el error es crítico y bloquea la tarea, notificar en el reporte diario y marcar como ⚠️ Pendiente.
+
+## 11) Tarea Programada SEO Diaria
+
+- **ID de tarea:** `daily-seo-review-ga4-gsc`
+- **Horario:** Todos los días a las 09:00 (hora local)
+- **Propósito:** Revisar métricas de GA4 y Google Search Console, detectar oportunidades SEO y aplicar mejoras de bajo riesgo de forma automática.
+- **Reportes generados:** `docs/seo-reports/YYYY-MM-DD-seo-daily.md`
+- **Flujo de la tarea:**
+  1. Ejecuta `npx tsx scripts/ga4-audit.ts`
+  2. Consulta GSC para `sc-domain:cajautil.com` (últimos 28 días)
+  3. Identifica páginas con alto potencial (altas impresiones, bajo CTR, posición 4–15)
+  4. Aplica mejoras on-page seguras (solo metadata/JSON-LD) con lint + tsc verificados
+  5. Guarda reporte diario y registra errores en la sección 10 de este archivo

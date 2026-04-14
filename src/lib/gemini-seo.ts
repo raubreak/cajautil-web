@@ -96,6 +96,13 @@ async function generateArticleImage(imagePrompt: string, slug: string): Promise<
 }
 
 export async function generateProgrammaticArticle(force = false) {
+  if (process.env.DISABLE_PROGRAMMATIC_CONTENT !== 'false') {
+    return {
+      skipped: true,
+      message: 'Generacion programatica desactivada para proteger la revision de AdSense.',
+    };
+  }
+
   if (!process.env.GEMINI_API_KEY) {
     throw new Error('Falta GEMINI_API_KEY');
   }
@@ -246,6 +253,10 @@ Estructura obligatoria:
 }
 
 export async function generateToolVariantBatch(baseTool: string, keywords: string[]) {
+  if (process.env.DISABLE_PROGRAMMATIC_CONTENT !== 'false') {
+    throw new Error('Las variantes programaticas estan desactivadas para proteger la revision de AdSense.');
+  }
+
   const results = [];
 
   for (const kw of keywords) {

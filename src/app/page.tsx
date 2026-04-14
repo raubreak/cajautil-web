@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Percent, Type, Calculator, KeyRound, ArrowDownAZ, QrCode, ArrowRight, ScanLine, CalendarDays, UserPlus, ShieldCheck, Landmark, MessageCircle, Activity, Home as HomeIcon, Image as ImageIcon, Sparkles, RefreshCcw, ArrowLeftRight, AlarmClock, Palette, Tag, Binary, Cake, Heart, Ghost, MousePointer2, TextCursorInput, Flame, Hash, Mail, Timer, TrendingUp, Plus } from 'lucide-react';
 import type { Metadata } from "next";
 
+import { isLowValueTool } from '@/lib/adsenseReadiness';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -18,14 +20,10 @@ export const metadata: Metadata = {
     "calculadora sueldo neto España",
     "conversor mayúsculas minúsculas",
     "traductor binario",
-    "simbolos para copiar",
-    "texto invisible whatsapp",
-    "cps test gratis",
     "calculadora edad exacta",
     "lector QR online",
     "calculadora días entre fechas",
     "validador iban madrid",
-    "generador de nombres y apellidos",
     "calculadora iva",
     "calcular hipoteca",
     "enlace whatsapp",
@@ -88,8 +86,8 @@ const itemListJsonLd = {
   "@type": "ItemList",
   name: "Herramientas Online Gratis",
   description: "Colección de herramientas web gratuitas: calculadoras, generadores y conversores.",
-  numberOfItems: itemListItems.length,
-  itemListElement: itemListItems.map((item, index) => ({
+  numberOfItems: itemListItems.filter((item) => !isLowValueTool(new URL(item.url).pathname.slice(1))).length,
+  itemListElement: itemListItems.filter((item) => !isLowValueTool(new URL(item.url).pathname.slice(1))).map((item, index) => ({
     "@type": "ListItem",
     position: index + 1,
     ...item,

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -19,7 +21,8 @@ export const metadata: Metadata = {
     title: 'Generador de Lorem Ipsum — Texto de Prueba para Diseño',
     description: 'Genera texto de relleno personalizable para tus proyectos de diseño o desarrollo.',
     url: `${SITE_URL}/generador-lorem-ipsum`,
-  }
+  },
+  robots: LOW_VALUE_TOOL_ROBOTS,
 };
 
 const jsonLd = {

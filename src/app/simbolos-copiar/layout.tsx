@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -21,7 +23,8 @@ export const metadata: Metadata = {
     title: 'Colección de Símbolos y Signos para Copiar y Pegar',
     description: 'Encuentra todos los símbolos que necesites para tus perfiles sociales en un solo lugar.',
     url: `${SITE_URL}/simbolos-copiar`,
-  }
+  },
+  robots: LOW_VALUE_TOOL_ROBOTS,
 };
 
 const jsonLd = {

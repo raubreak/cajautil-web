@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -21,7 +23,8 @@ export const metadata: Metadata = {
     title: 'Generador de Nombres y Apellidos Online',
     description: 'Encuentra y genera nombres masculinos, femeninos y apellidos realistas al azar en un clic.',
     url: `${SITE_URL}/generador-nombres`,
-  }
+  },
+  robots: LOW_VALUE_TOOL_ROBOTS,
 };
 
 const jsonLd = {

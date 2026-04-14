@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function BlogIndex() {
   const articles = [...editorialArticles].sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
   );
 
   return (
@@ -49,7 +49,14 @@ export default function BlogIndex() {
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.map((article) => (
+          {articles.map((article) => {
+            const publishedAt = new Date(article.publishedAt);
+            const updatedAt = new Date(article.updatedAt);
+            const hasEditorialReview = updatedAt.getTime() > publishedAt.getTime();
+            const dateLabel = hasEditorialReview ? 'Actualizado' : 'Publicado';
+            const dateValue = hasEditorialReview ? updatedAt : publishedAt;
+
+            return (
             <Link
               key={article.slug}
               href={`/articulos/${article.slug}`}
@@ -61,7 +68,8 @@ export default function BlogIndex() {
                 </span>
                 <span className="flex items-center gap-1 text-xs font-medium text-slate-400">
                   <CalendarDays className="w-3 h-3" />
-                  {new Date(article.publishedAt).toLocaleDateString('es-ES', {
+                  {dateLabel}{' '}
+                  {dateValue.toLocaleDateString('es-ES', {
                     day: 'numeric',
                     month: 'short',
                     year: 'numeric',
@@ -81,7 +89,8 @@ export default function BlogIndex() {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </main>

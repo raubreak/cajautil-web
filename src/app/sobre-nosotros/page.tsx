@@ -1,6 +1,9 @@
+import Image from 'next/image';
 import { ShieldCheck, Zap, BookOpen, Scale, Mail } from 'lucide-react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+
+import { AUTHOR_PROFILE } from '@/lib/authorProfile';
 
 export const metadata: Metadata = {
   title: "Sobre nosotros",
@@ -144,12 +147,16 @@ const AboutUsPage = () => {
           <h2 className="text-2xl font-bold text-slate-900 mb-6">El equipo detras de CajaUtil</h2>
           <div className="flex flex-col md:flex-row items-start gap-8">
             <div className="relative w-24 h-24 rounded-full overflow-hidden flex-shrink-0 border-4 border-blue-50/50">
-              <div className="w-full h-full bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-black">
-                RB
-              </div>
+              <Image
+                src={AUTHOR_PROFILE.avatarUrl}
+                alt={`Foto de perfil de ${AUTHOR_PROFILE.fullName}`}
+                fill
+                sizes="96px"
+                className="object-cover"
+              />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Raul B. - Fundador y desarrollador principal</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">{AUTHOR_PROFILE.name} - Fundador y desarrollador principal</h3>
               <p className="text-slate-600 leading-relaxed text-sm mb-3">
                 Ingeniero de software con mas de 10 anos de experiencia en desarrollo web y automatizacion.
                 Creo CajaUtil con la vision de reunir en un solo lugar las herramientas online que el mismo necesitaba

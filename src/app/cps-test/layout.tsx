@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -27,6 +29,7 @@ export const metadata: Metadata = {
     title: 'CPS Test Online Gratis | Clicks por Segundo',
     description: 'Prueba tu velocidad de clic en 1, 5 o 10 segundos con este CPS test interactivo y gratis.',
   },
+  robots: LOW_VALUE_TOOL_ROBOTS,
 };
 
 const webApplicationJsonLd = {
