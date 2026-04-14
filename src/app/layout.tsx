@@ -106,12 +106,6 @@ export default function RootLayout({
       <head>
         <meta name="monetag" content="bda98a4f7815b78b4105e11fafe02a7c" />
         <script
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="229851"
-          async
-          data-cfasync="false"
-        ></script>
-        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
