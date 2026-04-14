@@ -104,6 +104,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        <meta name="monetag" content="bda98a4f7815b78b4105e11fafe02a7c" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
