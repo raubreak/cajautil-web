@@ -129,6 +129,17 @@ export default function CalculadoraSueldo() {
           conviene contrastar el resultado con un profesional laboral o con los datos fiscales actualizados de tu caso.
         </p>
 
+        <h2>Caso real: comparar una oferta que parecia mejor de lo que era</h2>
+        <p>
+          Un uso muy comun de esta herramienta es comparar dos ofertas que en bruto parecen parecidas pero en la practica cambian bastante tu liquidez.
+          Por ejemplo, una propuesta de <strong>28.000 EUR en 14 pagas</strong> frente a otra de <strong>31.000 EUR en 12 pagas</strong> puede dar una sensacion distinta
+          cuando conviertes ambas a neto mensual y anades gastos de transporte, comida o teletrabajo perdido.
+        </p>
+        <p>
+          En ese tipo de decision, esta calculadora sirve para aterrizar la conversacion. El objetivo no es acertar el ultimo euro, sino evitar negociar a ciegas.
+          Cuando ya ves el neto mensual aproximado, resulta mucho mas facil decidir si una subida realmente mejora tu situacion o solo suena bien en el titular.
+        </p>
+
         <h2>Ejemplos orientativos de sueldo bruto a neto</h2>
         <p>
           Si buscas una referencia rapida para salarios como 25.000, 30.000 o 40.000 euros brutos al ano, estas estimaciones usan la misma logica que la calculadora principal.
@@ -229,6 +240,14 @@ export default function CalculadoraSueldo() {
           <li><strong>Hipoteca o alquiler:</strong> usa el neto aproximado como base antes de pasar a la <Link href="/calculadora-hipotecas">calculadora de hipotecas</Link>.</li>
           <li><strong>Pagas extra:</strong> comprueba si te conviene ver el dinero mas repartido o concentrado en dos extras.</li>
           <li><strong>Revision salarial:</strong> estima el efecto de una subida del 3%, 5% o 10% antes de negociarla.</li>
+        </ul>
+
+        <h2>Errores habituales al interpretar el resultado</h2>
+        <ul>
+          <li><strong>Tomar el neto como definitivo:</strong> la retencion real puede cambiar por situacion familiar, comunidad autonoma o ajustes de empresa.</li>
+          <li><strong>Olvidar variables y bonus:</strong> una parte del paquete puede no llegar todos los meses.</li>
+          <li><strong>Comparar 12 pagas con 14 sin convertir:</strong> el impacto psicologico y de tesoreria no es el mismo.</li>
+          <li><strong>No mirar el coste total del cambio:</strong> transporte, guarderia o mudanza pueden comerse la mejora.</li>
         </ul>
 
         <h2>Preguntas frecuentes</h2>

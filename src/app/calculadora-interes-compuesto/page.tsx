@@ -227,7 +227,7 @@ export default function CalculadoraInteresCompuesto() {
                         width={60}
                       />
                       <Tooltip 
-                        formatter={(value: any) => formatCurrency(Number(value))}
+                        formatter={(value: unknown) => formatCurrency(Number(Array.isArray(value) ? value[0] : value ?? 0))}
                         labelFormatter={(label) => `Año ${label}`}
                         contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)', fontWeight: 'bold' }}
                         itemStyle={{ color: '#1e293b', fontSize: '14px' }}
@@ -250,21 +250,39 @@ export default function CalculadoraInteresCompuesto() {
       </div>
 
       {/* SEO SECTION */}
-      <section className="w-full max-w-4xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 mb-16 px-4 text-slate-600 prose-a:text-emerald-600">
-          <h2>¿Qué es el Interés Compuesto y por qué lo llaman "magia"?</h2>
-          <p>El interés compuesto es el principio financiero responsable de generar un crecimiento exponencial en el patrimonio de un inversor a largo plazo. Albert Einstein solía referirse a él como "la octava maravilla del mundo".</p>
-          <p>La mecánica es sencilla pero profunda: <strong>los intereses que genera tu inversión inicial se reinvierten para generar, a su vez, nuevos intereses</strong>. Con el paso del tiempo, la curva de tu riqueza (como puedes ver en la gráfica de color verde) empieza a dispararse agresivamente hacia arriba creando el llamado efecto "bola de nieve".</p>
-          
-          <h3>Fórmula Matemática del Interés Compuesto</h3>
-          <p>La fórmula clásica matemática es <code>A = P (1 + r/n)^(nt)</code>. Sin embargo, en nuestra calculadora gratuita hemos incorporado los aportes mensuales (que es como la mayoría de los mortales invierten), un cálculo mucho más complejo que suma el rendimiento mensual al capital aportado hasta esa fecha y lo vuelve a componer infinitamente cada 30 días.</p>
+       <section className="w-full max-w-4xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 mb-16 px-4 text-slate-600 prose-a:text-emerald-600">
+           <h2>¿Qué es el Interés Compuesto y por qué lo llaman &quot;magia&quot;?</h2>
+           <p>El interés compuesto es el principio financiero responsable de generar un crecimiento exponencial en el patrimonio de un inversor a largo plazo. Albert Einstein solía referirse a él como &quot;la octava maravilla del mundo&quot;.</p>
+           <p>La mecánica es sencilla pero profunda: <strong>los intereses que genera tu inversión inicial se reinvierten para generar, a su vez, nuevos intereses</strong>. Con el paso del tiempo, la curva de tu riqueza (como puedes ver en la gráfica de color verde) empieza a dispararse agresivamente hacia arriba creando el llamado efecto &quot;bola de nieve&quot;.</p>
 
-          <h3>Tips para Maximizar tu Rendimiento</h3>
+          <h3>Un ejemplo muy humano: empezar antes pesa mas que afinar el producto perfecto</h3>
+          <p>
+            Una de las lecciones mas repetidas al usar esta calculadora es que empezar con 150 o 200 EUR al mes durante muchos anos suele tener mas impacto que esperar &quot;al momento ideal&quot;
+            para invertir mas cantidad. La intuicion empuja a posponer; la simulacion suele demostrar justo lo contrario.
+          </p>
+          <p>
+            Por eso esta herramienta no esta pensada para vender una promesa de rentabilidad exacta, sino para ayudarte a visualizar decisiones: que cambia si empiezas hoy,
+            si retrasas cinco anos el plan o si aumentas una pequena aportacion mensual. Ese tipo de comparacion es mucho mas util que una cifra aislada.
+          </p>
+           
+           <h3>Fórmula Matemática del Interés Compuesto</h3>
+           <p>La fórmula clásica matemática es <code>A = P (1 + r/n)^(nt)</code>. Sin embargo, en nuestra calculadora gratuita hemos incorporado los aportes mensuales (que es como la mayoría de los mortales invierten), un cálculo mucho más complejo que suma el rendimiento mensual al capital aportado hasta esa fecha y lo vuelve a componer de nuevo cada 30 días.</p>
+
+           <h3>Tips para Maximizar tu Rendimiento</h3>
+           <ul>
+               <li><strong>Empieza Temprano:</strong> El tiempo es el factor multiplicador en esta ecuación matemática (<code className="bg-slate-100 px-1 rounded">t</code>). El dinero de una persona en la veintena crece infinitamente más que el de una de cuarenta con el mismo interés porque los intereses tienen más décadas de rodaje.</li>
+               <li><strong>Sé Constante:</strong> Ingresar de 200€ a 400€ al mes habitualmente como un &quot;gasto fijo&quot; hacia tus fondos indexados (aportaciones periódicas) es el pilar de la libertad financiera y el movimiento FIRE.</li>
+               <li><strong>Evita Sacar el Dinero:</strong> Cada vez que retiras el capital para comprar un coche o un capricho asestas un golpe mortal a la base de la bola de nieve. Cortas de raíz cientos de ramificaciones futuras de intereses.</li>
+           </ul>
+
+          <h3>Como usar la simulacion sin enganarte</h3>
           <ul>
-              <li><strong>Empieza Temprano:</strong> El tiempo es el factor multiplicador en esta ecuación matemática (<code className="bg-slate-100 px-1 rounded">t</code>). El dinero de una persona en la veintena crece infinitamente más que el de una de cuarenta con el mismo interés porque los intereses tienen más décadas de rodaje.</li>
-              <li><strong>Sé Constante:</strong> Ingresar de 200€ a 400€ al mes habitualmente como un "gasto fijo" hacia tus fondos indexados (aportaciones periódicas) es el pilar de la libertad financiera y el movimiento FIRE.</li>
-              <li><strong>Evita Sacar el Dinero:</strong> Cada vez que retiras el capital para comprar un coche o un capricho asestas un golpe mortal a la base de la bola de nieve. Cortas de raíz cientos de ramificaciones futuras de intereses.</li>
+            <li><strong>Prueba varios escenarios:</strong> uno prudente, uno central y uno optimista.</li>
+            <li><strong>No ignores comisiones:</strong> una pequena diferencia anual erosiona mucho a largo plazo.</li>
+            <li><strong>Piensa en constancia real:</strong> mejor una aportacion sostenible que una cifra brillante pero imposible de mantener.</li>
+            <li><strong>Recuerda que es una herramienta de decision:</strong> no una prediccion exacta del mercado.</li>
           </ul>
-      </section>
+       </section>
 
     </main>
   );

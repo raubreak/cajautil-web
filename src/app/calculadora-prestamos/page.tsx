@@ -72,6 +72,15 @@ export default function CalculadoraPrestamos() {
             Tambien sirve para hacer simulaciones rapidas cambiando importe, plazo o interes y ver como afecta cada variable.
           </p>
 
+          <h3>Caso real: bajar 40 EUR de cuota puede salir muy caro</h3>
+          <p>
+            Un escenario muy habitual es alargar el plazo para que la cuota &quot;entre mejor&quot; en el presupuesto. A corto plazo parece una buena noticia,
+            pero cuando comparas el total devuelto descubres que esa rebaja mensual puede costarte cientos o miles de euros extra durante la vida del prestamo.
+          </p>
+          <p>
+            Por eso esta calculadora no se queda solo en la cuota. Sirve para ver el precio real de ganar comodidad mensual y decidir si ese intercambio te compensa o no.
+          </p>
+
           <p>
             Si estas valorando pagar una carrera, un master o un curso largo, puedes pasar a la{' '}
             <Link href="/calculadora-prestamos-estudios-universitarios">calculadora de prestamos para estudios universitarios</Link>{' '}
@@ -83,6 +92,14 @@ export default function CalculadoraPrestamos() {
             El calculo es orientativo y no sustituye la oferta vinculante de una entidad. Comisiones, seguros, carencias o productos asociados pueden cambiar el coste final.
             Usa esta herramienta como referencia inicial y revisa siempre la documentacion contractual completa.
           </p>
+
+          <h3>Checklist minima antes de aceptar un prestamo</h3>
+          <ul>
+            <li><strong>Compara el total devuelto:</strong> no solo la cuota mensual.</li>
+            <li><strong>Revisa TAE y comisiones:</strong> es donde suelen esconderse diferencias importantes.</li>
+            <li><strong>Prueba dos o tres plazos:</strong> para ver el coste de comprar una cuota mas baja.</li>
+            <li><strong>Calcula tu margen mensual real:</strong> mejor sobre ingresos netos y no sobre un escenario optimista.</li>
+          </ul>
 
           <h3>Preguntas frecuentes</h3>
           <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">

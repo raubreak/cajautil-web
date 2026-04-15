@@ -4,6 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
+import { isLowValueTool } from '@/lib/adsenseReadiness';
+
 const SearchModal = dynamic(() => import('./SearchModal'), {
   ssr: false,
   loading: () => <div className="w-24 h-8 bg-slate-100 animate-pulse rounded-xl" />
@@ -43,7 +45,7 @@ const herramientasNav = [
   { nombre: "Préstamos", ruta: "/calculadora-prestamos" },
   { nombre: "Firmas Email", ruta: "/generador-firmas-email" },
   { nombre: "Cronómetro", ruta: "/cronometro" },
-];
+].filter((item) => !isLowValueTool(item.ruta.slice(1)));
 
 export default function Header() {
   return (

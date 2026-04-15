@@ -46,6 +46,17 @@ export default function CalculadoraHipotecas() {
           <li><strong>Amortizacion anticipada:</strong> revisa si hay penalizacion por devolver capital antes de plazo.</li>
         </ul>
 
+        <h2>Caso real: cuando una cuota asumible no significa una compra comoda</h2>
+        <p>
+          Mucha gente llega a esta calculadora con una pregunta sencilla: &quot;si el banco me deja una cuota de 850 EUR, puedo permitirmela?&quot;.
+          La simulacion ayuda, pero la respuesta real casi siempre exige mirar mas cosas: ahorro restante despues de la entrada, gastos de comunidad,
+          IBI, reformas iniciales y margen mensual si suben tipos o baja un ingreso.
+        </p>
+        <p>
+          Una forma util de usarla es probar primero un escenario ideal y luego otro mas conservador. Si en el escenario prudente la cuota ya te aprieta,
+          probablemente no te interese centrarte solo en que &quot;el banco me la concede&quot;. Lo importante es que la hipoteca encaje en tu vida real durante anos.
+        </p>
+
         <h2>Tipo fijo, variable o mixto</h2>
         <p>
           Las hipotecas a <strong>tipo fijo</strong> mantienen la cuota constante durante toda la vida del prestamo,
@@ -53,6 +64,14 @@ export default function CalculadoraHipotecas() {
           lo que la cuota puede subir o bajar. Las <strong>mixtas</strong> combinan un periodo inicial fijo (normalmente
           entre 5 y 15 anos) con un periodo variable posterior.
         </p>
+
+        <h2>Preguntas utiles antes de tomarte en serio una oferta</h2>
+        <ul>
+          <li><strong>Que pasa con la cuota si el tipo sube:</strong> especialmente importante en hipotecas variables o mixtas.</li>
+          <li><strong>Cuanto efectivo te queda tras firmar:</strong> comprar sin colchon complica cualquier imprevisto.</li>
+          <li><strong>Cuanto cuestan las vinculaciones:</strong> una bonificacion puede salir cara si obliga a seguros o productos poco competitivos.</li>
+          <li><strong>Que parte del ingreso familiar comprometes:</strong> conviene mirar el esfuerzo sobre ingresos netos y no solo sobre el bruto.</li>
+        </ul>
 
         <h2>Uso orientativo, no vinculante</h2>
         <p>
