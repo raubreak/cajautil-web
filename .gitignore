@@ -50,3 +50,9 @@ seo-auditor.js
 ga4-key.json
 test-site.js
 check_schemas.js
+
+# OpenCode local artifacts
+.opencode/node_modules/
+.opencode/secrets/
+.opencode/bun.lock
+.opencode/package-lock.json
