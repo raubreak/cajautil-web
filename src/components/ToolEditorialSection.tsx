@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 
+import { AUTHOR_PROFILE } from '@/lib/authorProfile';
+import { isLowValueTool } from '@/lib/adsenseReadiness';
 import { toolEditorialContent } from '@/lib/toolEditorialContent';
 
 interface ToolEditorialSectionProps {
@@ -26,6 +28,7 @@ export default function ToolEditorialSection({ slug }: ToolEditorialSectionProps
       },
     })),
   };
+  const relatedTools = entry.relatedTools.filter((link) => !isLowValueTool(link.href.replace(/^\//, '')));
 
   return (
     <section className="mx-auto w-full max-w-4xl px-4 pb-16">
@@ -36,7 +39,7 @@ export default function ToolEditorialSection({ slug }: ToolEditorialSectionProps
 
       <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
         <div className="prose prose-slate max-w-none text-slate-600 prose-headings:text-slate-900 prose-headings:font-black prose-p:leading-relaxed prose-li:leading-relaxed">
-          <h2>Guia practica y contexto</h2>
+          <h2>Guía práctica y contexto</h2>
           {entry.summary.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -78,10 +81,11 @@ export default function ToolEditorialSection({ slug }: ToolEditorialSectionProps
         </div>
 
         <div className="mt-8 grid gap-6 border-t border-slate-100 pt-8 md:grid-cols-2">
+          {relatedTools.length ? (
           <div>
             <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">Herramientas relacionadas</h3>
             <div className="flex flex-wrap gap-2">
-              {entry.relatedTools.map((link) => (
+              {relatedTools.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -92,10 +96,11 @@ export default function ToolEditorialSection({ slug }: ToolEditorialSectionProps
               ))}
             </div>
           </div>
+          ) : null}
 
           {entry.relatedArticles?.length ? (
             <div>
-              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">Guias relacionadas</h3>
+              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">Guías relacionadas</h3>
               <div className="flex flex-wrap gap-2">
                 {entry.relatedArticles.map((link) => (
                   <Link
@@ -109,6 +114,25 @@ export default function ToolEditorialSection({ slug }: ToolEditorialSectionProps
               </div>
             </div>
           ) : null}
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
+          <p className="font-bold text-slate-900">Revisado editorialmente por {AUTHOR_PROFILE.fullName}</p>
+          <p className="mt-2 leading-relaxed">
+            {AUTHOR_PROFILE.role}. Este contenido se mantiene como guia practica de apoyo a la herramienta, con enfoque en claridad,
+            contexto de uso y enlaces a referencias oficiales cuando aplica.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-3 text-sm font-medium">
+            <Link href="/sobre-nosotros" className="text-blue-700 hover:underline">
+              Metodologia editorial
+            </Link>
+            <Link href="/contacto" className="text-blue-700 hover:underline">
+              Contactar con el equipo
+            </Link>
+            <a href={AUTHOR_PROFILE.githubUrl} target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline">
+              Perfil profesional
+            </a>
+          </div>
         </div>
 
         {entry.references?.length ? (

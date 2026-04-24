@@ -255,14 +255,14 @@ export default function CalculadoraInteresCompuesto() {
            <p>El interés compuesto es el principio financiero responsable de generar un crecimiento exponencial en el patrimonio de un inversor a largo plazo. Albert Einstein solía referirse a él como &quot;la octava maravilla del mundo&quot;.</p>
            <p>La mecánica es sencilla pero profunda: <strong>los intereses que genera tu inversión inicial se reinvierten para generar, a su vez, nuevos intereses</strong>. Con el paso del tiempo, la curva de tu riqueza (como puedes ver en la gráfica de color verde) empieza a dispararse agresivamente hacia arriba creando el llamado efecto &quot;bola de nieve&quot;.</p>
 
-          <h3>Un ejemplo muy humano: empezar antes pesa mas que afinar el producto perfecto</h3>
+          <h3>Un ejemplo muy humano: empezar antes pesa más que afinar el producto perfecto</h3>
           <p>
-            Una de las lecciones mas repetidas al usar esta calculadora es que empezar con 150 o 200 EUR al mes durante muchos anos suele tener mas impacto que esperar &quot;al momento ideal&quot;
-            para invertir mas cantidad. La intuicion empuja a posponer; la simulacion suele demostrar justo lo contrario.
+            Una de las lecciones más repetidas al usar esta calculadora es que empezar con 150 o 200 EUR al mes durante muchos años suele tener más impacto que esperar &quot;al momento ideal&quot;
+            para invertir más cantidad. La intuición empuja a posponer; la simulación suele demostrar justo lo contrario.
           </p>
           <p>
-            Por eso esta herramienta no esta pensada para vender una promesa de rentabilidad exacta, sino para ayudarte a visualizar decisiones: que cambia si empiezas hoy,
-            si retrasas cinco anos el plan o si aumentas una pequena aportacion mensual. Ese tipo de comparacion es mucho mas util que una cifra aislada.
+            Por eso esta herramienta no está pensada para vender una promesa de rentabilidad exacta, sino para ayudarte a visualizar decisiones: qué cambia si empiezas hoy,
+            si retrasas cinco años el plan o si aumentas una pequeña aportación mensual. Ese tipo de comparación es mucho más útil que una cifra aislada.
           </p>
            
            <h3>Fórmula Matemática del Interés Compuesto</h3>
@@ -275,12 +275,12 @@ export default function CalculadoraInteresCompuesto() {
                <li><strong>Evita Sacar el Dinero:</strong> Cada vez que retiras el capital para comprar un coche o un capricho asestas un golpe mortal a la base de la bola de nieve. Cortas de raíz cientos de ramificaciones futuras de intereses.</li>
            </ul>
 
-          <h3>Como usar la simulacion sin enganarte</h3>
+          <h3>Cómo usar la simulación sin engañarte</h3>
           <ul>
             <li><strong>Prueba varios escenarios:</strong> uno prudente, uno central y uno optimista.</li>
-            <li><strong>No ignores comisiones:</strong> una pequena diferencia anual erosiona mucho a largo plazo.</li>
-            <li><strong>Piensa en constancia real:</strong> mejor una aportacion sostenible que una cifra brillante pero imposible de mantener.</li>
-            <li><strong>Recuerda que es una herramienta de decision:</strong> no una prediccion exacta del mercado.</li>
+            <li><strong>No ignores comisiones:</strong> una pequeña diferencia anual erosiona mucho a largo plazo.</li>
+            <li><strong>Piensa en constancia real:</strong> mejor una aportación sostenible que una cifra brillante pero imposible de mantener.</li>
+            <li><strong>Recuerda que es una herramienta de decisión:</strong> no una predicción exacta del mercado.</li>
           </ul>
        </section>
 

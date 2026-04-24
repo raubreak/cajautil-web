@@ -3,8 +3,8 @@ import { Home, Search } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Pagina no encontrada | CajaUtil.com',
-  description: 'La pagina que buscas no existe o ha sido movida. Vuelve al inicio y encuentra las herramientas online gratuitas de CajaUtil.',
+  title: 'Página no encontrada | CajaUtil.com',
+  description: 'La página que buscas no existe o ha sido movida. Vuelve al inicio y encuentra las herramientas online gratuitas de CajaUtil.',
   robots: { index: false, follow: true },
 };
 
@@ -17,11 +17,11 @@ export default function NotFound() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4">
-          Pagina no encontrada
+          Página no encontrada
         </h1>
 
         <p className="text-slate-500 text-lg mb-10 leading-relaxed">
-          La pagina que buscas no existe, ha sido movida o la direccion es incorrecta. 
+          La página que buscas no existe, ha sido movida o la dirección es incorrecta. 
           Pero no te preocupes, puedes volver al inicio y encontrar todas nuestras herramientas gratuitas.
         </p>
 
@@ -53,7 +53,7 @@ export default function NotFound() {
               { nombre: 'Generador QR', ruta: '/generador-qr' },
               { nombre: 'Contador Palabras', ruta: '/contador-de-palabras' },
               { nombre: 'Calculadora %', ruta: '/calculadora-porcentajes' },
-              { nombre: 'Generador Contrasenas', ruta: '/generador-contrasenas' },
+              { nombre: 'Generador Contraseñas', ruta: '/generador-contrasenas' },
             ].map((tool) => (
               <Link
                 key={tool.ruta}

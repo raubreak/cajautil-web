@@ -21,12 +21,12 @@ const AuthorSection = () => {
           {AUTHOR_PROFILE.role}
         </p>
         <p className="text-slate-600 leading-relaxed text-sm">
-          Raul cuenta con mas de 10 anos de experiencia desarrollando utilidades web que simplifican la vida digital.
-          Cada herramienta y contenido en CajaUtil.com es revisado meticulosamente para asegurar precision, seguridad y la mejor experiencia de usuario,
-          cumpliendo con altos estandares de transparencia y utilidad.
+          Raúl cuenta con más de 10 años de experiencia desarrollando utilidades web que simplifican la vida digital.
+          Cada herramienta y contenido en CajaUtil.com es revisado meticulosamente para asegurar precisión, seguridad y la mejor experiencia de usuario,
+          cumpliendo con altos estándares de transparencia y utilidad.
         </p>
         <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-blue-600 md:justify-start">
-          <Link href="/sobre-nosotros" className="hover:underline">Conoce nuestra metodologia</Link>
+          <Link href="/sobre-nosotros" className="hover:underline">Conoce nuestra metodología</Link>
           <Link href={AUTHOR_PROFILE.githubUrl} className="hover:underline" target="_blank" rel="noreferrer">GitHub de Raubreak</Link>
           <Link href="/contacto" className="hover:underline">Contactar con el equipo</Link>
         </div>

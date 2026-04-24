@@ -12,9 +12,9 @@ export interface EditorialArticle {
 export const editorialArticles: EditorialArticle[] = [
   {
     slug: 'como-negociar-tu-sueldo-bruto-sin-perder-neto',
-    title: 'Como negociar tu sueldo bruto sin perder de vista el neto',
+    title: 'Cómo negociar tu sueldo bruto sin perder de vista el neto',
     description:
-      'Guia practica para evaluar ofertas salariales, traducir bruto a neto y negociar una subida con argumentos concretos.',
+      'Guía práctica para evaluar ofertas salariales, traducir bruto a neto y negociar una subida con argumentos concretos.',
     targetToolUrl: '/calculadora-sueldo-neto',
     tags: ['salario', 'nomina', 'empleo'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -79,9 +79,9 @@ Antes de responder a una empresa, simula varios escenarios con la **calculadora 
   },
   {
     slug: 'tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad',
-    title: 'TIN, TAE y cuota mensual: como comparar prestamos de verdad',
+    title: 'TIN, TAE y cuota mensual: cómo comparar préstamos de verdad',
     description:
-      'Aprende a diferenciar TIN, TAE, plazo y coste total para no elegir un prestamo solo por la cuota mensual.',
+      'Aprende a diferenciar TIN, TAE, plazo y coste total para no elegir un préstamo solo por la cuota mensual.',
     targetToolUrl: '/calculadora-prestamos',
     tags: ['prestamos', 'finanzas', 'tae'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -145,9 +145,9 @@ Usa un simulador para comparar escenarios con el mismo capital y distintos plazo
   },
   {
     slug: 'como-calcular-el-iva-correctamente-en-facturas-y-presupuestos',
-    title: 'Como calcular el IVA correctamente en facturas y presupuestos',
+    title: 'Cómo calcular el IVA correctamente en facturas y presupuestos',
     description:
-      'Repaso practico de base imponible, cuota, tipos del IVA y errores tipicos al preparar facturas o presupuestos.',
+      'Repaso práctico de base imponible, cuota, tipos del IVA y errores típicos al preparar facturas o presupuestos.',
     targetToolUrl: '/calculadora-iva',
     tags: ['iva', 'facturacion', 'autonomos'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -211,9 +211,9 @@ Usa la calculadora para presupuestos rapidos, revision de tickets o comprobacion
   },
   {
     slug: 'webp-cuando-conviene-convertir-imagenes-y-cuando-no',
-    title: 'WebP: cuando conviene convertir imagenes y cuando no',
+    title: 'WebP: cuándo conviene convertir imágenes y cuándo no',
     description:
-      'Ventajas, limitaciones y buenas practicas para usar WebP sin perder calidad ni romper compatibilidad.',
+      'Ventajas, limitaciones y buenas prácticas para usar WebP sin perder calidad ni romper compatibilidad.',
     targetToolUrl: '/compresor-webp',
     tags: ['imagenes', 'webp', 'rendimiento'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -270,9 +270,9 @@ WebP suele ser una mejora clara para contenido web, pero no sustituye una estrat
   },
   {
     slug: 'como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo',
-    title: 'Como crear codigos QR utiles y evitar errores de escaneo',
+    title: 'Cómo crear códigos QR útiles y evitar errores de escaneo',
     description:
-      'Guia practica para generar codigos QR legibles, utiles y preparados para movil, impresion y carteleria.',
+      'Guía práctica para generar códigos QR legibles, útiles y preparados para móvil, impresión y cartelería.',
     targetToolUrl: '/generador-qr',
     tags: ['qr', 'marketing', 'movil'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -337,9 +337,9 @@ Genera el QR, descargalo, imprimelo si hace falta y pruebalo con varios disposit
   },
   {
     slug: 'por-que-las-contrasenas-largas-suelen-ser-mejores-que-las-complejas',
-    title: 'Por que las contrasenas largas suelen ser mejores que las complejas',
+    title: 'Por qué las contraseñas largas suelen ser mejores que las complejas',
     description:
-      'Que hace fuerte a una contrasena, cuantos caracteres convienen y como combinar longitud, aleatoriedad y gestores.',
+      'Qué hace fuerte a una contraseña, cuántos caracteres convienen y cómo combinar longitud, aleatoriedad y gestores.',
     targetToolUrl: '/generador-contrasenas',
     tags: ['seguridad', 'contrasenas', 'privacidad'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -391,9 +391,9 @@ Usa un generador local, guarda las claves en un gestor y reserva la memoria solo
   },
   {
     slug: 'iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero',
-    title: 'IBAN, BIC y transferencias: como evitar errores antes de enviar dinero',
+    title: 'IBAN, BIC y transferencias: cómo evitar errores antes de enviar dinero',
     description:
-      'Que comprueba un IBAN, que no comprueba y que deberias revisar antes de confirmar una transferencia.',
+      'Qué comprueba un IBAN, qué no comprueba y qué deberías revisar antes de confirmar una transferencia.',
     targetToolUrl: '/validador-iban',
     tags: ['iban', 'banca', 'transferencias'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -445,9 +445,9 @@ El validador te ayuda a evitar fallos mecanicos. La comprobacion de identidad de
   },
   {
     slug: 'interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde',
-    title: 'Interes compuesto: la diferencia entre aportar pronto y aportar tarde',
+    title: 'Interés compuesto: la diferencia entre aportar pronto y aportar tarde',
     description:
-      'Guia para entender como crece el capital con el tiempo y por que el plazo suele importar mas que la aportacion puntual.',
+      'Guía para entender cómo crece el capital con el tiempo y por qué el plazo suele importar más que la aportación puntual.',
     targetToolUrl: '/calculadora-interes-compuesto',
     tags: ['ahorro', 'inversion', 'interes compuesto'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -496,9 +496,9 @@ El interes compuesto no es magia. Es matematicas aplicadas a la constancia. Cuan
   },
   {
     slug: 'imc-calorias-y-tdee-como-leer-estas-metricas-sin-obsesionarte',
-    title: 'IMC, calorias y TDEE: como leer estas metricas sin obsesionarte',
+    title: 'IMC, calorías y TDEE: cómo leer estas métricas sin obsesionarte',
     description:
-      'Guia para entender que mide cada calculadora de salud, cuando sirve y cuando conviene no sacar conclusiones rapidas.',
+      'Guía para entender qué mide cada calculadora de salud, cuándo sirve y cuándo conviene no sacar conclusiones rápidas.',
     targetToolUrl: '/calculadora-calorias',
     tags: ['salud', 'imc', 'calorias'],
     publishedAt: '2026-04-11T09:00:00.000Z',

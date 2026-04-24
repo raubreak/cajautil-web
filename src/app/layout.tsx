@@ -7,6 +7,8 @@ import Header from "@/components/Header";
 import CookieConsent from "@/components/CookieConsent";
 import ToolEditorialRouterSection from "@/components/ToolEditorialRouterSection";
 
+import { AUTHOR_PROFILE } from '@/lib/authorProfile';
+
 const inter = Inter({ subsets: ["latin"] });
 
 const SITE_URL = "https://cajautil.com";
@@ -93,7 +95,23 @@ const organizationJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.png`,
-  sameAs: [],
+  sameAs: [AUTHOR_PROFILE.githubUrl],
+};
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR_PROFILE.fullName,
+  alternateName: AUTHOR_PROFILE.name,
+  jobTitle: AUTHOR_PROFILE.role,
+  url: `${SITE_URL}/sobre-nosotros`,
+  image: AUTHOR_PROFILE.avatarUrl,
+  sameAs: [AUTHOR_PROFILE.githubUrl],
+  worksFor: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+  },
 };
 
 export default function RootLayout({
@@ -112,6 +130,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         {/* Google Consent Mode v2 - must load BEFORE gtag/AdSense */}
         <Script id="consent-mode-defaults" strategy="beforeInteractive">
@@ -177,18 +199,14 @@ export default function RootLayout({
                 <ul className="space-y-2">
                   <li><Link href="/temporizador" className="text-sm hover:text-white transition-colors">Temporizador / Alarma</Link></li>
                   <li><Link href="/cronometro" className="text-sm hover:text-white transition-colors">Cronómetro Online</Link></li>
-                  <li><Link href="/ruleta-aleatoria" className="text-sm hover:text-white transition-colors">Ruleta Aleatoria</Link></li>
-                  <li><Link href="/generador-letras-raras" className="text-sm hover:text-white transition-colors">Letras Raras para Insta</Link></li>
                   <li><Link href="/generador-enlace-whatsapp" className="text-sm hover:text-white transition-colors">Link de WhatsApp</Link></li>
                   <li><Link href="/generador-contrasenas" className="text-sm hover:text-white transition-colors">Generador de Contraseñas</Link></li>
-                  <li><Link href="/generador-hashtags" className="text-sm hover:text-white transition-colors">Generador de Hashtags</Link></li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-200 mb-3 uppercase tracking-wider">Texto</h3>
                 <ul className="space-y-2">
                   <li><Link href="/contador-de-palabras" className="text-sm hover:text-white transition-colors">Contador de Palabras</Link></li>
-                  <li><Link href="/traductor-binario" className="text-sm hover:text-white transition-colors">Traductor Binario/Morse</Link></li>
                   <li><Link href="/mayusculas-minusculas" className="text-sm hover:text-white transition-colors">Mayúsculas / Minúsculas</Link></li>
                 </ul>
               </div>

@@ -122,13 +122,13 @@ export default function CalculadoraDescuentosClient() {
       </div>
 
       <section className="w-full max-w-4xl mt-16 prose prose-slate text-slate-600">
-        <h2 className="text-2xl font-black text-slate-800 mb-6">Como funciona el calculo del descuento</h2>
-        <p>Para obtener el precio rebajado de forma manual, multiplica el precio original por el porcentaje de la rebaja y divide el resultado entre 100 para obtener el ahorro bruto. Despues, resta esa cifra al precio inicial.</p>
+        <h2 className="text-2xl font-black text-slate-800 mb-6">Cómo funciona el cálculo del descuento</h2>
+        <p>Para obtener el precio rebajado de forma manual, multiplica el precio original por el porcentaje de la rebaja y divide el resultado entre 100 para obtener el ahorro bruto. Después, resta esa cifra al precio inicial.</p>
         <div className="bg-white border rounded-3xl p-6 shadow-sm flex items-center gap-6">
           <CornerRightDown className="w-8 h-8 text-rose-500 shrink-0" />
-          <p className="text-sm font-medium italic">Ejemplo: una chaqueta de 60 EUR con un 15% de descuento se calcula asi: (60 x 15) / 100 = 9 EUR. Su precio final seria de 51 EUR.</p>
+          <p className="text-sm font-medium italic">Ejemplo: una chaqueta de 60 EUR con un 15% de descuento se calcula así: (60 x 15) / 100 = 9 EUR. Su precio final sería de 51 EUR.</p>
         </div>
-        <p className="mt-8">Nuestra herramienta agiliza este proceso para que no cometas errores matematicos y puedas comparar rapidamente entre varios articulos en periodos como Navidad o Black Friday.</p>
+        <p className="mt-8">Nuestra herramienta agiliza este proceso para que no cometas errores matemáticos y puedas comparar rápidamente entre varios artículos en periodos como Navidad o Black Friday.</p>
       </section>
     </>
   );

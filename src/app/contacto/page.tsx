@@ -70,11 +70,11 @@ export default function Contacto() {
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-              <h2 className="text-lg font-bold text-slate-800 mb-4">Que tipo de consultas atendemos</h2>
+              <h2 className="text-lg font-bold text-slate-800 mb-4">Qué tipo de consultas atendemos</h2>
               <ul className="space-y-3 text-sm text-slate-600">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-500 font-bold mt-0.5">-</span>
-                  <span><strong>Errores</strong> en alguna herramienta o calculo incorrecto</span>
+                  <span><strong>Errores</strong> en alguna herramienta o cálculo incorrecto</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-500 font-bold mt-0.5">-</span>
@@ -99,8 +99,8 @@ export default function Contacto() {
               <h2 className="text-lg font-bold text-slate-800 mb-2">Sobre CajaUtil.com</h2>
               <p className="text-sm text-slate-600 mb-4">
                 CajaUtil.com es un proyecto independiente creado con el objetivo de ofrecer herramientas web gratuitas,
-                rapidas y con procesamiento local cuando es posible.
-                Mantenemos los servidores y el desarrollo gracias a la publicidad y explicamos ese uso en nuestras paginas legales.
+                 rápidas y con procesamiento local cuando es posible.
+                 Mantenemos los servidores y el desarrollo gracias a la publicidad y explicamos ese uso en nuestras páginas legales.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/sobre-nosotros" className="text-sm font-semibold text-blue-600 hover:underline">
@@ -119,7 +119,7 @@ export default function Contacto() {
           {/* Formulario de contacto */}
           <div className="lg:col-span-3">
             <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100">
-              <h2 className="text-xl font-bold text-slate-800 mb-6">Envianos un mensaje</h2>
+              <h2 className="text-xl font-bold text-slate-800 mb-6">Envíanos un mensaje</h2>
               <form action={`mailto:hola@cajautil.com`} method="POST" encType="text/plain" className="space-y-5">
                 <div>
                   <label htmlFor="nombre" className="block text-sm font-bold text-slate-700 mb-1.5">
@@ -130,14 +130,14 @@ export default function Contacto() {
                     id="nombre"
                     name="nombre"
                     required
-                    placeholder="Ej: Maria Garcia"
+                    placeholder="Ej: María García"
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-1.5">
-                    Tu correo electronico
+                    Tu correo electrónico
                   </label>
                   <input
                     type="email"
@@ -192,8 +192,8 @@ export default function Contacto() {
                 <p className="text-xs text-slate-400 text-center">
                   Al enviar este formulario, aceptas nuestra{' '}
                   <Link href="/politica-de-privacidad" className="text-blue-500 hover:underline">
-                    politica de privacidad
-                  </Link>. No almacenamos tus datos en ningun servidor.
+                    política de privacidad
+                  </Link>. No almacenamos tus datos en ningún servidor.
                 </p>
               </form>
             </div>

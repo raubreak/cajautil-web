@@ -407,7 +407,7 @@ export default function Home() {
       color: 'from-indigo-400 to-blue-500',
       shadow: 'shadow-indigo-500/20'
     }
-  ];
+  ].filter((herramienta) => !isLowValueTool(herramienta.ruta.slice(1)));
 
   return (
     <main className="min-h-[100dvh] bg-slate-50/50 text-slate-800 p-6 sm:p-12">

@@ -89,7 +89,7 @@ export default function CalculadoraPorcentajesClient() {
           <strong>incrementos salariales</strong> o el <strong>IVA de cualquier producto</strong>.
         </p>
 
-        <h2>Casos practicos en los que te puede ayudar</h2>
+        <h2>Casos prácticos en los que te puede ayudar</h2>
         <ul>
           <li><strong>Rebajas:</strong> saber cuanto te descuentan y el precio final.</li>
           <li><strong>Facturas:</strong> calcular un porcentaje de IVA o de retencion.</li>
@@ -98,24 +98,24 @@ export default function CalculadoraPorcentajesClient() {
         </ul>
 
         <p>
-          Si necesitas operaciones mas concretas, como anadir o quitar IVA con desglose completo o calcular el precio final de unas rebajas,
+          Si necesitas operaciones más concretas, como añadir o quitar IVA con desglose completo o calcular el precio final de unas rebajas,
           te conviene usar una herramienta especializada.
         </p>
 
         <h2>Preguntas frecuentes</h2>
         <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
           <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
-            <span>Como se calcula el IVA de un producto</span>
+            <span>Cómo se calcula el IVA de un producto</span>
             <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
-          <p className="mt-4 mb-0 text-slate-600">Para calcular el IVA, multiplica el precio del producto por 0.21 para el 21%. Por ejemplo, un producto de 50 EUR tendra 10,50 EUR de IVA y un precio final de 60,50 EUR.</p>
+          <p className="mt-4 mb-0 text-slate-600">Para calcular el IVA, multiplica el precio del producto por 0.21 para el 21%. Por ejemplo, un producto de 50 EUR tendrá 10,50 EUR de IVA y un precio final de 60,50 EUR.</p>
         </details>
         <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
           <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
-            <span>Como calcular un descuento del 20 por ciento</span>
+            <span>Cómo calcular un descuento del 20 por ciento</span>
             <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
-          <p className="mt-4 mb-0 text-slate-600">Introduce 20 en el campo de porcentaje y el precio original en cantidad. El resultado es lo que te descuentan. Restalo del precio original para saber el precio final.</p>
+          <p className="mt-4 mb-0 text-slate-600">Introduce 20 en el campo de porcentaje y el precio original en cantidad. El resultado es lo que te descuentan. Réstalo del precio original para saber el precio final.</p>
         </details>
 
         <h3>Herramientas relacionadas</h3>

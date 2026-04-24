@@ -132,7 +132,7 @@ export default function GeneradorContrasenas() {
         </p>
         <p>
           Nuestro <strong>generador de contraseñas</strong> crea claves aleatorias directamente en tu navegador usando la <code>Crypto API</code> del dispositivo.
-          Esto ayuda a generar resultados mas robustos que una aleatoriedad basica basada en <code>Math.random()</code>.
+          Esto ayuda a generar resultados más robustos que una aleatoriedad básica basada en <code>Math.random()</code>.
         </p>
 
         <h2>Consejos para usar bien una contraseña segura</h2>
@@ -161,7 +161,7 @@ export default function GeneradorContrasenas() {
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/generador-qr">Generador de QR</Link></li>
-          <li><Link href="/texto-invisible">Texto invisible</Link></li>
+          <li><Link href="/contador-de-palabras">Contador de palabras</Link></li>
           <li><Link href="/mayusculas-minusculas">Conversor Mayúsculas y Minúsculas</Link></li>
         </ul>
       </section>

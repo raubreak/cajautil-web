@@ -78,7 +78,7 @@ export default function ContadorPalabras() {
           <strong>meta descriptions para SEO</strong> (150-160 caracteres) o <strong>ensayos académicos</strong> con requisitos de extensión.
         </p>
 
-        <h2>Cuando resulta especialmente util</h2>
+        <h2>Cuándo resulta especialmente útil</h2>
         <ul>
           <li><strong>SEO y contenidos:</strong> revisar titulos, descripciones y longitud de articulos.</li>
           <li><strong>Estudios:</strong> cumplir minimos y maximos de palabras en trabajos o redacciones.</li>
@@ -87,14 +87,14 @@ export default function ContadorPalabras() {
         </ul>
 
         <p>
-          El recuento se realiza directamente en la pagina y se actualiza al instante mientras escribes o pegas contenido,
+          El recuento se realiza directamente en la página y se actualiza al instante mientras escribes o pegas contenido,
           lo que facilita revisiones rapidas sin depender de editores externos.
         </p>
 
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/mayusculas-minusculas">Convertir Mayúsculas a Minúsculas</Link></li>
-          <li><Link href="/generador-lorem-ipsum">Generador de Lorem Ipsum</Link></li>
+          <li><Link href="/mayusculas-minusculas">Convertidor de mayúsculas y minúsculas</Link></li>
           <li><Link href="/generador-contrasenas">Generador de Contraseñas Seguras</Link></li>
         </ul>
       </section>

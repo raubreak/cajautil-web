@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Search, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+import { isLowValueTool } from '@/lib/adsenseReadiness';
+
 const TOOLS = [
   { nombre: "Calculadora de Sueldo Neto", ruta: "/calculadora-sueldo-neto", tags: "sueldo neto bruto irpf seguridad social salario nomina" },
   { nombre: "Calculadora de IVA", ruta: "/calculadora-iva", tags: "iva impuestos base imponible cuota" },
@@ -38,7 +40,7 @@ const TOOLS = [
   { nombre: "Cronómetro Online", ruta: "/cronometro", tags: "cronometro online stopwatch reloj medir tiempo vueltas" },
   { nombre: "Simulador de Préstamos", ruta: "/calculadora-prestamos", tags: "prestamo cuota mensual amortizacion frances interes banco dinero" },
   { nombre: "Firmas de Email", ruta: "/generador-firmas-email", tags: "firma email firma correo html profesional gmail outlook avatar logo" },
-];
+].filter((tool) => !isLowValueTool(tool.ruta.slice(1)));
 
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,10 +55,6 @@ export default function SearchModal() {
       const haystack = `${t.nombre} ${t.tags}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       return haystack.includes(q);
     });
-  }, [query]);
-
-  useEffect(() => {
-    setSelectedIdx(0);
   }, [query]);
 
   // Cmd+K / Ctrl+K shortcut
@@ -126,15 +124,18 @@ export default function SearchModal() {
             {/* Search input */}
             <div className="flex items-center gap-3 px-5 py-4 border-b border-slate-100">
               <Search className="w-5 h-5 text-slate-400 shrink-0" />
-              <input
-                ref={inputRef}
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Buscar herramienta..."
-                className="flex-1 text-base font-medium text-slate-800 placeholder:text-slate-300 focus:outline-none bg-transparent"
-              />
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setSelectedIdx(0);
+                  }}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Buscar herramienta..."
+                  className="flex-1 text-base font-medium text-slate-800 placeholder:text-slate-300 focus:outline-none bg-transparent"
+                />
               {query && (
                 <button onClick={() => setQuery('')} className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 transition">
                   <X className="w-4 h-4" />
@@ -149,7 +150,7 @@ export default function SearchModal() {
             <div className="max-h-[50vh] overflow-y-auto py-2">
               {results.length === 0 ? (
                 <div className="px-5 py-10 text-center text-slate-400 text-sm">
-                  No se encontraron herramientas para "<span className="font-bold text-slate-600">{query}</span>"
+                  No se encontraron herramientas para &quot;<span className="font-bold text-slate-600">{query}</span>&quot;
                 </div>
               ) : (
                 results.map((tool, i) => (

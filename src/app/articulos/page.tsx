@@ -5,24 +5,24 @@ import type { Metadata } from 'next';
 import { editorialArticles } from '@/lib/editorialArticles';
 
 export const metadata: Metadata = {
-  title: 'Guias y articulos practicos',
+  title: 'Guías y artículos prácticos',
   description:
-    'Guias editoriales sobre salario, prestamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
+    'Guías editoriales sobre salario, préstamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
   alternates: {
     canonical: 'https://cajautil.com/articulos',
   },
   openGraph: {
-    title: 'Guias y articulos practicos | CajaUtil.com',
+    title: 'Guías y artículos prácticos | CajaUtil.com',
     description:
-      'Guias editoriales sobre salario, prestamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
+      'Guías editoriales sobre salario, préstamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
     url: 'https://cajautil.com/articulos',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Guias y articulos practicos | CajaUtil.com',
+    title: 'Guías y artículos prácticos | CajaUtil.com',
     description:
-      'Guias editoriales sobre salario, prestamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
+      'Guías editoriales sobre salario, préstamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
   },
 };
 
@@ -39,11 +39,11 @@ export default function BlogIndex() {
             <BookOpen className="w-10 h-10 text-blue-600" />
           </div>
           <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight mb-6">
-            Guias y <span className="text-blue-600">articulos</span>
+            Guías y <span className="text-blue-600">artículos</span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-500 font-medium max-w-3xl mx-auto">
-            Contenido editorial util para entender mejor como funcionan nuestras calculadoras,
-            simuladores y utilidades: conceptos, errores comunes, ejemplos practicos y decisiones
+            Contenido editorial útil para entender mejor cómo funcionan nuestras calculadoras,
+            simuladores y utilidades: conceptos, errores comunes, ejemplos prácticos y decisiones
             que conviene tomar con contexto.
           </p>
         </header>
@@ -64,7 +64,7 @@ export default function BlogIndex() {
             >
               <div className="flex items-center gap-2 mb-4">
                 <span className="rounded-md bg-blue-50 px-2 py-1 text-xs font-bold uppercase tracking-wider text-blue-700">
-                  {article.tags[0] ?? 'guia'}
+                  {article.tags[0] ?? 'guía'}
                 </span>
                 <span className="flex items-center gap-1 text-xs font-medium text-slate-400">
                   <CalendarDays className="w-3 h-3" />

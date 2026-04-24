@@ -49,7 +49,7 @@ export default function ConvertidorTexto() {
 
       {/* Contenido SEO */}
       <section className="w-full max-w-4xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-purple-600">
-        <h2>Como cambiar texto de mayusculas a minusculas online</h2>
+        <h2>Cómo cambiar texto de mayúsculas a minúsculas online</h2>
         <p>
           Nuestro <strong>convertidor de mayusculas y minusculas</strong> transforma cualquier texto de forma instantanea
           sin necesidad de registro ni instalacion. Elige entre 4 formatos disponibles:
@@ -58,12 +58,12 @@ export default function ConvertidorTexto() {
           <li><strong>TODO MAYUSCULAS:</strong> convierte cada caracter a su version en mayuscula. Util para titulos, siglas o para dar enfasis.</li>
           <li><strong>todo minusculas:</strong> pasa todo el texto a minusculas. Ideal para normalizar texto copiado de documentos con formato inconsistente.</li>
           <li><strong>Cada Palabra Capitalizada:</strong> la primera letra de cada palabra se convierte en mayuscula. Perfecto para titulos de articulos, nombres propios o encabezados.</li>
-          <li><strong>Formato tipo oracion:</strong> solo la primera letra despues de un punto, signo de exclamacion o interrogacion se pone en mayuscula. Es el formato mas natural para textos largos.</li>
+          <li><strong>Formato tipo oración:</strong> solo la primera letra después de un punto, signo de exclamación o interrogación se pone en mayúscula. Es el formato más natural para textos largos.</li>
         </ul>
 
         <h2>Casos de uso habituales</h2>
         <p>
-          Esta herramienta es especialmente util para:
+          Esta herramienta es especialmente útil para:
         </p>
         <ul>
           <li>Corregir textos escritos accidentalmente con el <strong>Bloq Mayus</strong> activado.</li>
@@ -83,9 +83,9 @@ export default function ConvertidorTexto() {
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/contador-de-palabras">Contador de Palabras y Caracteres</Link></li>
-          <li><Link href="/generador-contrasenas">Generador de Contrasenas Seguras</Link></li>
-          <li><Link href="/generador-lorem-ipsum">Generador de Lorem Ipsum</Link></li>
-          <li><Link href="/traductor-binario">Traductor Binario y Morse</Link></li>
+          <li><Link href="/generador-contrasenas">Generador de Contraseñas Seguras</Link></li>
+          <li><Link href="/contador-de-palabras">Contador de palabras</Link></li>
+          <li><Link href="/generador-contrasenas">Generador de contraseñas</Link></li>
         </ul>
       </section>
     </main>

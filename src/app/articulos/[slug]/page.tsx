@@ -158,7 +158,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 p-6 rounded-2xl mb-12 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-lg font-bold text-slate-800 mb-2">Herramienta recomendada</h3>
-              <p className="text-slate-600 text-sm">Pon en practica esta guia con la herramienta relacionada.</p>
+              <p className="text-slate-600 text-sm">Pon en práctica esta guía con la herramienta relacionada.</p>
             </div>
             <Link href={editorialArticle.targetToolUrl} className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 transition-transform hover:scale-105 shadow-md shadow-blue-500/20">
               Probar herramienta <ExternalLink className="w-4 h-4" />
@@ -172,10 +172,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           </div>
 
           <section className="mt-8 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-slate-900 mb-3">Metodologia editorial</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">Metodología editorial</h2>
             <p className="text-sm leading-relaxed text-slate-600">
-              Estas guias se redactan para complementar el uso de las herramientas con contexto, ejemplos y limites de interpretacion.
-              El objetivo es que el contenido siga siendo util incluso aunque el lector no utilice la calculadora en ese momento.
+              Estas guías se redactan para complementar el uso de las herramientas con contexto, ejemplos y límites de interpretación.
+              El objetivo es que el contenido siga siendo útil incluso aunque el lector no utilice la calculadora en ese momento.
             </p>
           </section>
 
@@ -293,7 +293,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         {isFinanceArticle && (
           <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-relaxed text-amber-950">
             Este contenido es informativo y orientativo. No sustituye el asesoramiento financiero, fiscal o legal profesional ni la oferta vinculante de una entidad.
-            Antes de contratar un producto, revisa siempre la documentacion oficial y confirma comisiones, TAE, plazos y condiciones reales.
+            Antes de contratar un producto, revisa siempre la documentación oficial y confirma comisiones, TAE, plazos y condiciones reales.
           </section>
         )}
 
@@ -307,8 +307,8 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         <section className="mt-8 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-bold text-slate-900 mb-3">Metodología editorial</h2>
           <p className="text-sm leading-relaxed text-slate-600">
-            En CajaUtil revisamos este tipo de guias para que la explicacion sea clara, coherente con la herramienta enlazada y util antes de tomar decisiones.
-            Cuando una pagina trata temas de dinero, impuestos o credito, la informacion se presenta como apoyo informativo y no como recomendacion personalizada.
+            En CajaUtil revisamos este tipo de guías para que la explicación sea clara, coherente con la herramienta enlazada y útil antes de tomar decisiones.
+            Cuando una página trata temas de dinero, impuestos o crédito, la información se presenta como apoyo informativo y no como recomendación personalizada.
           </p>
         </section>
 

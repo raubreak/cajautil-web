@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Calculadora de Porcentajes Online - IVA, Descuentos y Subidas",
     description:
-      "Resuelve porcentajes, descuentos y variaciones en segundos con una calculadora rapida y gratuita.",
+      "Resuelve porcentajes, descuentos y variaciones en segundos con una calculadora rápida y gratuita.",
     url: canonical,
     type: "website",
   },
@@ -32,7 +32,7 @@ export default function CalculadoraPorcentajes() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "Como calcular un porcentaje de una cantidad",
+        name: "Cómo calcular un porcentaje de una cantidad",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Multiplica la cantidad por el porcentaje y divide el resultado entre 100. Esta calculadora automatiza ese proceso para descuentos, IVA, comisiones o subidas.",
@@ -40,7 +40,7 @@ export default function CalculadoraPorcentajes() {
       },
       {
         "@type": "Question",
-        name: "Como saber el descuento de un precio",
+        name: "Cómo saber el descuento de un precio",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Introduce el porcentaje y el precio base para obtener el importe descontado. Si quieres ver directamente el precio final, puedes usar tambien la calculadora de descuentos.",
@@ -52,7 +52,7 @@ export default function CalculadoraPorcentajes() {
   const howToJsonLd = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: "Como usar la calculadora de porcentajes",
+    name: "Cómo usar la calculadora de porcentajes",
     step: [
       {
         "@type": "HowToStep",

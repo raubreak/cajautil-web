@@ -31,105 +31,105 @@ function buildEntry(entry: ToolEditorialEntry): ToolEditorialEntry {
 export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
   'calculadora-sueldo-neto': buildEntry({
     summary: [
-      'Entender el sueldo neto es clave para comparar ofertas, revisar una subida salarial o planificar tus gastos fijos con una base mas realista que el salario bruto anual.',
-      'Aunque la nomina final depende de circunstancias personales, esta guia te ayuda a interpretar que parte del salario corresponde a IRPF, cotizaciones y reparto en 12 o 14 pagas.',
+      'Entender el sueldo neto es clave para comparar ofertas, revisar una subida salarial o planificar tus gastos fijos con una base más realista que el salario bruto anual.',
+      'Aunque la nómina final depende de circunstancias personales, esta guía te ayuda a interpretar qué parte del salario corresponde a IRPF, cotizaciones y reparto en 12 o 14 pagas.',
     ],
     sections: [
       {
-        title: 'Que calcula exactamente un sueldo neto',
+        title: 'Qué calcula exactamente un sueldo neto',
         paragraphs: [
-          'El neto mensual es la cantidad aproximada que queda despues de descontar cotizaciones sociales y retenciones de IRPF sobre el salario bruto. Es el dato que mejor refleja el dinero disponible para gasto o ahorro.',
-          'A igualdad de bruto, el neto puede cambiar por el numero de pagas, la situacion familiar, la comunidad autonoma o determinados complementos incluidos en la nomina.',
+          'El neto mensual es la cantidad aproximada que queda después de descontar cotizaciones sociales y retenciones de IRPF sobre el salario bruto. Es el dato que mejor refleja el dinero disponible para gasto o ahorro.',
+          'A igualdad de bruto, el neto puede cambiar por el número de pagas, la situación familiar, la comunidad autónoma o determinados complementos incluidos en la nómina.',
         ],
       },
       {
-        title: 'Como interpretar el resultado sin caer en errores',
+        title: 'Cómo interpretar el resultado sin caer en errores',
         bullets: [
           'No compares una oferta en 12 pagas con otra en 14 sin pasar ambas a neto mensual y anual.',
-          'Una retencion distinta de IRPF puede mover el neto aunque el bruto no cambie.',
+          'Una retención distinta de IRPF puede mover el neto aunque el bruto no cambie.',
           'Las dietas, bonus o variables no siempre deben tratarse como salario fijo recurrente.',
-          'La calculadora sirve para una estimacion inicial, no para sustituir una nomina real o un calculo laboral individualizado.',
+          'La calculadora sirve para una estimación inicial, no para sustituir una nómina real o un cálculo laboral individualizado.',
         ],
       },
       {
-        title: 'Cuando conviene usarla',
+        title: 'Cuándo conviene usarla',
         paragraphs: [
-          'Resulta especialmente util al negociar un contrato, comparar una propuesta nueva con tu situacion actual o decidir si una subida compensa realmente despues de impuestos.',
-          'Tambien es una buena base para calcular capacidad de ahorro, cuota hipotecaria asumible o impacto de un cambio de pagas extraordinarias.',
+          'Resulta especialmente útil al negociar un contrato, comparar una propuesta nueva con tu situación actual o decidir si una subida compensa realmente después de impuestos.',
+          'También es una buena base para calcular capacidad de ahorro, cuota hipotecaria asumible o impacto de un cambio de pagas extraordinarias.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'Por que dos personas con el mismo bruto pueden cobrar netos distintos',
-        answer: 'Porque el IRPF y algunas circunstancias de cotizacion dependen de la situacion personal, familiar y contractual. El bruto por si solo no determina el neto exacto.',
+        question: 'Por qué dos personas con el mismo bruto pueden cobrar netos distintos',
+        answer: 'Porque el IRPF y algunas circunstancias de cotización dependen de la situación personal, familiar y contractual. El bruto por sí solo no determina el neto exacto.',
       },
       {
-        question: 'Que es mejor, 12 o 14 pagas',
-        answer: 'No hay una respuesta universal. El total anual puede ser igual, pero cambia el reparto de liquidez durante el ano. La mejor opcion depende de tu forma de organizar gastos y ahorro.',
+        question: 'Qué es mejor, 12 o 14 pagas',
+        answer: 'No hay una respuesta universal. El total anual puede ser igual, pero cambia el reparto de liquidez durante el año. La mejor opción depende de tu forma de organizar gastos y ahorro.',
       },
       {
         question: 'Puedo usar este resultado para pedir una hipoteca',
-        answer: 'Te sirve como referencia inicial para estimar capacidad de pago, pero el banco revisara ingresos netos reales, estabilidad laboral y otras deudas.',
+        answer: 'Te sirve como referencia inicial para estimar capacidad de pago, pero el banco revisará ingresos netos reales, estabilidad laboral y otras deudas.',
       },
     ],
     relatedTools: [
       { href: '/calculadora-porcentajes', label: 'Calculadora de porcentajes' },
       { href: '/calculadora-hipotecas', label: 'Calculadora de hipotecas' },
-      { href: '/calculadora-prestamos', label: 'Simulador de prestamos' },
+      { href: '/calculadora-prestamos', label: 'Simulador de préstamos' },
     ],
     relatedArticles: [
-      { href: '/articulos/como-negociar-tu-sueldo-bruto-sin-perder-neto', label: 'Como negociar tu sueldo bruto sin perder de vista el neto' },
+      { href: '/articulos/como-negociar-tu-sueldo-bruto-sin-perder-neto', label: 'Cómo negociar tu sueldo bruto sin perder de vista el neto' },
     ],
     references: [
       { href: 'https://sede.agenciatributaria.gob.es/', label: 'Agencia Tributaria' },
       { href: 'https://www.seg-social.es/', label: 'Seguridad Social' },
     ],
     disclaimer:
-      'Informacion orientativa para planificacion personal. No sustituye una nomina, un certificado de retenciones ni asesoramiento laboral o fiscal individual.',
+      'Información orientativa para planificación personal. No sustituye una nómina, un certificado de retenciones ni asesoramiento laboral o fiscal individual.',
   }),
   'calculadora-iva': buildEntry({
     summary: [
-      'Calcular IVA con rapidez es util para presupuestos, revision de tickets, facturacion y comprobacion de importes finales antes de emitir o pagar un documento.',
-      'La dificultad habitual no esta en anadir el impuesto, sino en quitarlo correctamente cuando solo tienes el total final y necesitas recuperar la base imponible.',
+      'Calcular IVA con rapidez es útil para presupuestos, revisión de tickets, facturación y comprobación de importes finales antes de emitir o pagar un documento.',
+      'La dificultad habitual no está en añadir el impuesto, sino en quitarlo correctamente cuando solo tienes el total final y necesitas recuperar la base imponible.',
     ],
     sections: [
       {
-        title: 'Como se calcula de verdad el IVA',
+        title: 'Cómo se calcula de verdad el IVA',
         paragraphs: [
-          'Para anadir IVA se multiplica la base imponible por el tipo correspondiente y se suma la cuota resultante al precio base. Para quitarlo, no basta con restar el porcentaje: hay que dividir el total entre el factor adecuado.',
-          'Ese detalle evita uno de los errores mas habituales cuando se revisan facturas antiguas o precios ya impuestos incluidos.',
+          'Para añadir IVA se multiplica la base imponible por el tipo correspondiente y se suma la cuota resultante al precio base. Para quitarlo, no basta con restar el porcentaje: hay que dividir el total entre el factor adecuado.',
+          'Ese detalle evita uno de los errores más habituales cuando se revisan facturas antiguas o precios ya impuestos incluidos.',
         ],
       },
       {
-        title: 'Situaciones practicas donde mas se usa',
+        title: 'Situaciones prácticas donde más se usa',
         bullets: [
           'Preparar presupuestos de servicios y conocer el total antes de enviarlo al cliente.',
           'Revisar tickets o compras online para separar base imponible y cuota.',
           'Comprobar facturas de proveedores o simulaciones de margen comercial.',
-          'Contrastar rapidamente si el tipo aplicado parece razonable en un caso concreto.',
+          'Contrastar rápidamente si el tipo aplicado parece razonable en un caso concreto.',
         ],
       },
       {
         title: 'Errores comunes y normativa',
         paragraphs: [
-          'El tipo aplicable depende del bien o servicio. En Espana conviven el tipo general, el reducido y el superreducido segun los supuestos previstos en la normativa del IVA.',
-          'Antes de emitir documentos oficiales conviene revisar el tratamiento correcto con la Agencia Tributaria o con asesoria si el caso no es estandar.',
+          'El tipo aplicable depende del bien o servicio. En España conviven el tipo general, el reducido y el superreducido según los supuestos previstos en la normativa del IVA.',
+          'Antes de emitir documentos oficiales conviene revisar el tratamiento correcto con la Agencia Tributaria o con asesoría si el caso no es estándar.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'Como quitar el IVA de un precio final sin equivocarme',
-        answer: 'Debes dividir el total entre 1,21, 1,10 o 1,04 segun el tipo aplicable. Restar el porcentaje directamente suele dar un resultado incorrecto.',
+        question: 'Cómo quitar el IVA de un precio final sin equivocarme',
+        answer: 'Debes dividir el total entre 1,21, 1,10 o 1,04 según el tipo aplicable. Restar el porcentaje directamente suele dar un resultado incorrecto.',
       },
       {
         question: 'Sirve para tickets y facturas oficiales',
         answer: 'Sirve para revisar y estimar importes. Para emitir documentos oficiales debes verificar tipo, redondeos y criterio fiscal aplicable.',
       },
       {
-        question: 'Que diferencia hay entre base imponible y total',
-        answer: 'La base imponible es el importe antes de impuestos. El total es la base mas la cuota de IVA.',
+        question: 'Qué diferencia hay entre base imponible y total',
+        answer: 'La base imponible es el importe antes de impuestos. El total es la base más la cuota de IVA.',
       },
     ],
     relatedTools: [
@@ -151,36 +151,36 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     ],
     sections: [
       {
-        title: 'Que es el sistema de amortizacion frances',
+        title: 'Qué es el sistema de amortización francés',
         paragraphs: [
-          'Es el modelo mas habitual en prestamos personales en Espana. La cuota se mantiene estable si el tipo no cambia, pero la composicion interna varia: al inicio pagas mas intereses y menos capital, y al final sucede lo contrario.',
-          'Por eso una amortizacion anticipada temprana suele tener mas impacto en el ahorro de intereses que la misma amortizacion realizada al final del prestamo.',
+          'Es el modelo más habitual en préstamos personales en España. La cuota se mantiene estable si el tipo no cambia, pero la composición interna varía: al inicio pagas más intereses y menos capital, y al final sucede lo contrario.',
+          'Por eso una amortización anticipada temprana suele tener más impacto en el ahorro de intereses que la misma amortización realizada al final del préstamo.',
         ],
       },
       {
-        title: 'Variables que mas cambian el resultado',
+        title: 'Variables que más cambian el resultado',
         bullets: [
-          'Capital solicitado: cuanto mayor sea, mayor sera el coste financiero acumulado.',
+          'Capital solicitado: cuanto mayor sea, mayor será el coste financiero acumulado.',
           'Plazo: baja la cuota cuando se alarga, pero eleva los intereses totales.',
           'TIN y TAE: el primero sirve para el calculo base; la segunda ayuda a comparar el coste real.',
           'Comisiones o productos vinculados: pueden volver menos competitiva una oferta aparentemente barata.',
         ],
       },
       {
-        title: 'Como comparar dos ofertas sin autoenganarte',
+        title: 'Cómo comparar dos ofertas sin autoengañarte',
         paragraphs: [
-          'Conviene simular el mismo capital con distintos plazos y observar no solo la cuota, sino el total devuelto. Es frecuente elegir un plazo comodo y descubrir despues que el coste adicional ha sido muy elevado.',
-          'Si el prestamo financia un gasto no imprescindible, la simulacion tambien sirve para valorar si compensa esperar y ahorrar antes de endeudarte.',
+          'Conviene simular el mismo capital con distintos plazos y observar no solo la cuota, sino el total devuelto. Es frecuente elegir un plazo cómodo y descubrir después que el coste adicional ha sido muy elevado.',
+          'Si el préstamo financia un gasto no imprescindible, la simulación también sirve para valorar si compensa esperar y ahorrar antes de endeudarte.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'Que deberia mirar ademas de la cuota',
-        answer: 'La TAE, el coste total devuelto, las comisiones y la posibilidad de amortizar anticipadamente sin penalizacion relevante.',
+        question: 'Qué debería mirar además de la cuota',
+        answer: 'La TAE, el coste total devuelto, las comisiones y la posibilidad de amortizar anticipadamente sin penalización relevante.',
       },
       {
-        question: 'Un plazo mas largo siempre es mejor porque baja la cuota',
+        question: 'Un plazo más largo siempre es mejor porque baja la cuota',
         answer: 'No. Baja la cuota mensual, pero normalmente sube bastante el total de intereses pagados.',
       },
       {
@@ -190,49 +190,49 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     ],
     relatedTools: [
       { href: '/calculadora-hipotecas', label: 'Calculadora de hipotecas' },
-      { href: '/calculadora-interes-compuesto', label: 'Calculadora de interes compuesto' },
+      { href: '/calculadora-interes-compuesto', label: 'Calculadora de interés compuesto' },
       { href: '/calculadora-porcentajes', label: 'Calculadora de porcentajes' },
     ],
     relatedArticles: [
-      { href: '/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad', label: 'TIN, TAE y cuota mensual: como comparar prestamos de verdad' },
+      { href: '/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad', label: 'TIN, TAE y cuota mensual: cómo comparar préstamos de verdad' },
     ],
-    references: [{ href: 'https://www.bde.es/', label: 'Banco de Espana' }],
+    references: [{ href: 'https://www.bde.es/', label: 'Banco de España' }],
     disclaimer:
       'Simulacion informativa. No sustituye la FEIN, la oferta vinculante ni el analisis individual del contrato.',
   }),
   'calculadora-hipotecas': buildEntry({
     summary: [
       'La cuota hipotecaria es solo una parte de la foto. Antes de comprar vivienda conviene entender capital, plazo, TIN, TAE, gastos iniciales y margen real de endeudamiento.',
-      'Una buena simulacion no sirve solo para ver cuanto pagarias al mes, sino para comparar escenarios y detectar cuando una hipoteca empieza a tensionar demasiado tus finanzas.',
+      'Una buena simulación no sirve solo para ver cuánto pagarías al mes, sino para comparar escenarios y detectar cuándo una hipoteca empieza a tensionar demasiado tus finanzas.',
     ],
     sections: [
       {
-        title: 'Que deberias mirar ademas de la cuota',
+        title: 'Qué deberías mirar además de la cuota',
         bullets: [
           'Entrada necesaria y porcentaje financiado por la entidad.',
-          'Gastos iniciales de tasacion, notaria o gestiones adicionales.',
-          'Diferencia entre interes fijo, variable o mixto.',
+          'Gastos iniciales de tasación, notaría o gestiones adicionales.',
+          'Diferencia entre interés fijo, variable o mixto.',
           'Impacto de productos vinculados sobre el coste total.',
         ],
       },
       {
-        title: 'Como se usa la simulacion para tomar decisiones mejores',
+        title: 'Cómo se usa la simulación para tomar decisiones mejores',
         paragraphs: [
-          'Lo mas util es comparar el mismo inmueble con distintos plazos o distintos porcentajes de entrada. A veces una entrada mayor reduce mucho el riesgo financiero a largo plazo.',
-          'Tambien sirve para fijar un presupuesto maximo de compra antes de empezar a visitar viviendas y evitar enamorarte de un precio que luego no encaja con tu neto real.',
+          'Lo más útil es comparar el mismo inmueble con distintos plazos o distintos porcentajes de entrada. A veces una entrada mayor reduce mucho el riesgo financiero a largo plazo.',
+          'También sirve para fijar un presupuesto máximo de compra antes de empezar a visitar viviendas y evitar enamorarte de un precio que luego no encaja con tu neto real.',
         ],
       },
       {
         title: 'Errores que encarecen una hipoteca',
         paragraphs: [
-          'Centrarse solo en la cuota del primer ano, ignorar la TAE o asumir que el Euribor siempre sera benigno son errores frecuentes. Otro fallo habitual es no reservar colchones para imprevistos una vez firmada la compra.',
+          'Centrarse solo en la cuota del primer año, ignorar la TAE o asumir que el Euribor siempre será benigno son errores frecuentes. Otro fallo habitual es no reservar colchones para imprevistos una vez firmada la compra.',
           'Si la cuota proyectada deja tu margen mensual demasiado justo, el problema no es solo bancario: es de estabilidad financiera personal.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'Que porcentaje del sueldo neto deberia ir a la hipoteca',
+        question: 'Qué porcentaje del sueldo neto debería ir a la hipoteca',
         answer: 'Como regla prudente, muchas personas intentan no superar aproximadamente un tercio del neto mensual, aunque depende del resto de gastos y estabilidad de ingresos.',
       },
       {
@@ -240,19 +240,19 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
         answer: 'Depende de tu tolerancia al riesgo, del momento del mercado y de la previsibilidad que necesites. La fija da estabilidad; la variable puede abaratar o encarecer la cuota con el tiempo.',
       },
       {
-        question: 'La simulacion incluye todos los gastos de compra',
+        question: 'La simulación incluye todos los gastos de compra',
         answer: 'No siempre. La cuota refleja el prestamo, pero debes sumar entrada, tasacion y otros costes iniciales para tener la foto completa.',
       },
     ],
     relatedTools: [
       { href: '/calculadora-sueldo-neto', label: 'Calculadora de sueldo neto' },
-      { href: '/calculadora-prestamos', label: 'Simulador de prestamos' },
+      { href: '/calculadora-prestamos', label: 'Simulador de préstamos' },
       { href: '/calculadora-porcentajes', label: 'Calculadora de porcentajes' },
     ],
     relatedArticles: [
-      { href: '/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad', label: 'TIN, TAE y cuota mensual: como comparar prestamos de verdad' },
+      { href: '/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad', label: 'TIN, TAE y cuota mensual: cómo comparar préstamos de verdad' },
     ],
-    references: [{ href: 'https://www.bde.es/', label: 'Guia hipotecaria del Banco de Espana' }],
+    references: [{ href: 'https://www.bde.es/', label: 'Guía hipotecaria del Banco de España' }],
     disclaimer:
       'Estimacion orientativa. La oferta final depende de tasacion, perfil financiero, vinculaciones y documentacion precontractual.',
   }),

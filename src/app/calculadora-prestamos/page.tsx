@@ -18,26 +18,26 @@ export default function CalculadoraPrestamos() {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'Como calcular la cuota de un prestamo personal',
+        name: 'Cómo calcular la cuota de un préstamo personal',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Debes indicar capital, plazo e interes nominal. La calculadora usa esos datos para estimar una cuota mensual constante y el coste total del prestamo.',
+          text: 'Debes indicar capital, plazo e interés nominal. La calculadora usa esos datos para estimar una cuota mensual constante y el coste total del préstamo.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Que diferencia hay entre TIN y TAE',
+        name: 'Qué diferencia hay entre TIN y TAE',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'El TIN mide el interes nominal del prestamo, mientras que el TAE incorpora comisiones y otros costes para reflejar mejor el precio real de la financiacion.',
+          text: 'El TIN mide el interés nominal del préstamo, mientras que el TAE incorpora comisiones y otros costes para reflejar mejor el precio real de la financiación.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Puedo usar esta calculadora para financiar estudios universitarios',
+        name: '¿Puedo usar esta calculadora para financiar estudios universitarios?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Si. Puedes simular importes y plazos generales o ir directamente a la calculadora de prestamos para estudios universitarios si quieres una landing mas enfocada a ese caso de uso.',
+          text: 'Sí. Puedes simular importes y plazos generales o ir directamente a la calculadora de préstamos para estudios universitarios si quieres una landing más enfocada a ese caso de uso.',
         },
       },
     ],
@@ -66,58 +66,58 @@ export default function CalculadoraPrestamos() {
               <li><strong>Amortización:</strong> Realizar pagos extra reduce el capital pendiente y, por tanto, los intereses futuros.</li>
           </ul>
 
-          <h3>Cuando te conviene usar este simulador</h3>
+          <h3>Cuándo te conviene usar este simulador</h3>
           <p>
-            Te ayuda a comparar ofertas de financiacion, decidir si puedes asumir una cuota mensual concreta y anticipar el coste total del prestamo antes de firmar.
-            Tambien sirve para hacer simulaciones rapidas cambiando importe, plazo o interes y ver como afecta cada variable.
+            Te ayuda a comparar ofertas de financiación, decidir si puedes asumir una cuota mensual concreta y anticipar el coste total del préstamo antes de firmar.
+            También sirve para hacer simulaciones rápidas cambiando importe, plazo o interés y ver cómo afecta cada variable.
           </p>
 
           <h3>Caso real: bajar 40 EUR de cuota puede salir muy caro</h3>
           <p>
             Un escenario muy habitual es alargar el plazo para que la cuota &quot;entre mejor&quot; en el presupuesto. A corto plazo parece una buena noticia,
-            pero cuando comparas el total devuelto descubres que esa rebaja mensual puede costarte cientos o miles de euros extra durante la vida del prestamo.
+            pero cuando comparas el total devuelto descubres que esa rebaja mensual puede costarte cientos o miles de euros extra durante la vida del préstamo.
           </p>
           <p>
             Por eso esta calculadora no se queda solo en la cuota. Sirve para ver el precio real de ganar comodidad mensual y decidir si ese intercambio te compensa o no.
           </p>
 
           <p>
-            Si estas valorando pagar una carrera, un master o un curso largo, puedes pasar a la{' '}
-            <Link href="/calculadora-prestamos-estudios-universitarios">calculadora de prestamos para estudios universitarios</Link>{' '}
-            para revisar ese escenario con una intencion mas especifica.
+            Si estás valorando pagar una carrera, un máster o un curso largo, puedes pasar a la{' '}
+            <Link href="/calculadora-prestamos-estudios-universitarios">calculadora de préstamos para estudios universitarios</Link>{' '}
+            para revisar ese escenario con una intención más específica.
           </p>
 
-          <h3>Importante antes de tomar una decision</h3>
+          <h3>Importante antes de tomar una decisión</h3>
           <p>
-            El calculo es orientativo y no sustituye la oferta vinculante de una entidad. Comisiones, seguros, carencias o productos asociados pueden cambiar el coste final.
-            Usa esta herramienta como referencia inicial y revisa siempre la documentacion contractual completa.
+            El cálculo es orientativo y no sustituye la oferta vinculante de una entidad. Comisiones, seguros, carencias o productos asociados pueden cambiar el coste final.
+            Usa esta herramienta como referencia inicial y revisa siempre la documentación contractual completa.
           </p>
 
-          <h3>Checklist minima antes de aceptar un prestamo</h3>
+          <h3>Checklist mínima antes de aceptar un préstamo</h3>
           <ul>
             <li><strong>Compara el total devuelto:</strong> no solo la cuota mensual.</li>
             <li><strong>Revisa TAE y comisiones:</strong> es donde suelen esconderse diferencias importantes.</li>
-            <li><strong>Prueba dos o tres plazos:</strong> para ver el coste de comprar una cuota mas baja.</li>
+            <li><strong>Prueba dos o tres plazos:</strong> para ver el coste de comprar una cuota más baja.</li>
             <li><strong>Calcula tu margen mensual real:</strong> mejor sobre ingresos netos y no sobre un escenario optimista.</li>
           </ul>
 
           <h3>Preguntas frecuentes</h3>
           <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
             <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
-              <span>Como calcular la cuota mensual de un prestamo</span>
+              <span>Cómo calcular la cuota mensual de un préstamo</span>
               <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <p className="mt-4 mb-0">
-              Introduce el importe solicitado, el plazo en meses y el TIN anual. La herramienta estima tu cuota mensual, el total devuelto y el coste financiero del prestamo.
+              Introduce el importe solicitado, el plazo en meses y el TIN anual. La herramienta estima tu cuota mensual, el total devuelto y el coste financiero del préstamo.
             </p>
           </details>
           <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
             <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
-              <span>Que mirar ademas del TIN</span>
+              <span>Qué mirar además del TIN</span>
               <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <p className="mt-4 mb-0">
-              Conviene revisar la TAE, las comisiones de apertura, productos vinculados y posibles penalizaciones por amortizacion anticipada para comparar ofertas en igualdad de condiciones.
+              Conviene revisar la TAE, las comisiones de apertura, productos vinculados y posibles penalizaciones por amortización anticipada para comparar ofertas en igualdad de condiciones.
             </p>
           </details>
           <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
@@ -126,14 +126,14 @@ export default function CalculadoraPrestamos() {
               <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <p className="mt-4 mb-0">
-              Si. Puedes usar esta simulacion general y, si tu caso encaja mejor con financiacion academica, visitar la <Link href="/calculadora-prestamos-estudios-universitarios">landing especifica para estudios universitarios</Link> para mantener la navegacion dentro del mismo tema.
+              Sí. Puedes usar esta simulación general y, si tu caso encaja mejor con financiación académica, visitar la <Link href="/calculadora-prestamos-estudios-universitarios">landing específica para estudios universitarios</Link> para mantener la navegación dentro del mismo tema.
             </p>
           </details>
 
           <h3>Herramientas relacionadas</h3>
           <ul>
             <li><Link href="/calculadora-hipotecas">Calculadora de hipotecas</Link></li>
-            <li><Link href="/calculadora-prestamos-estudios-universitarios">Prestamos para estudios universitarios</Link></li>
+            <li><Link href="/calculadora-prestamos-estudios-universitarios">Préstamos para estudios universitarios</Link></li>
             <li><Link href="/calculadora-porcentajes">Calculadora de porcentajes</Link></li>
           </ul>
       </section>

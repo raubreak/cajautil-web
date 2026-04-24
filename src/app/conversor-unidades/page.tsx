@@ -194,17 +194,17 @@ export default function ConversorUnidades() {
       <section className="w-full max-w-4xl mt-16 prose prose-slate text-slate-600">
         <h2>Conversor de Unidades Universal</h2>
         <p>
-          Nuestro <strong>conversor de unidades online</strong> soporta las categorias mas buscadas:
+          Nuestro <strong>conversor de unidades online</strong> soporta las categorías más buscadas:
           <strong> longitud</strong> (metros, pies, millas, pulgadas), <strong>peso</strong> (kg, libras, onzas, toneladas),
           <strong> temperatura</strong> (Celsius, Fahrenheit, Kelvin), <strong>volumen</strong> (litros, galones, tazas),
           <strong> velocidad</strong> (km/h, mph, nudos) y <strong>tiempo</strong> (segundos, minutos, horas, dias, semanas).
-          La conversion se realiza en tiempo real sin recargar la pagina.
+          La conversión se realiza en tiempo real sin recargar la página.
         </p>
 
-        <h2>Como funciona la conversion</h2>
+        <h2>Cómo funciona la conversión</h2>
         <p>
           Cada unidad se convierte primero a una unidad base del Sistema Internacional (metros para longitud, 
-          kilogramos para peso, etc.) y despues se transforma a la unidad de destino. Este metodo de dos pasos
+          kilogramos para peso, etc.) y después se transforma a la unidad de destino. Este método de dos pasos
           garantiza precision matematica y permite anadrir nuevas unidades facilmente.
         </p>
         <p>

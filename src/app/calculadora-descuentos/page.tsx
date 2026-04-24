@@ -34,7 +34,7 @@ export default function DescuentosApp() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "Como calcular el precio final con descuento",
+        name: "Cómo calcular el precio final con descuento",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Multiplica el precio original por el porcentaje de descuento, divide entre 100 para obtener el ahorro y resta ese importe al precio inicial.",
@@ -78,7 +78,7 @@ export default function DescuentosApp() {
         <h2>Preguntas frecuentes</h2>
         <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
           <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
-            <span>Como sacar el descuento de un precio</span>
+            <span>Cómo sacar el descuento de un precio</span>
             <Plus className="h-5 w-5 shrink-0 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
           <p className="mt-4 mb-0">
@@ -87,7 +87,7 @@ export default function DescuentosApp() {
         </details>
         <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
           <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
-            <span>Que hago si la tienda muestra el porcentaje pero no el ahorro</span>
+            <span>Qué hago si la tienda muestra el porcentaje pero no el ahorro</span>
             <Plus className="h-5 w-5 shrink-0 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
           <p className="mt-4 mb-0">
@@ -99,7 +99,7 @@ export default function DescuentosApp() {
         <ul>
           <li><Link href="/calculadora-porcentajes">Calculadora de porcentajes</Link></li>
           <li><Link href="/calculadora-iva">Calculadora de IVA</Link></li>
-          <li><Link href="/calculadora-prestamos">Simulador de prestamos</Link></li>
+          <li><Link href="/calculadora-prestamos">Simulador de préstamos</Link></li>
         </ul>
       </section>
     </main>

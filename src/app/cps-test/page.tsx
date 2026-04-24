@@ -190,7 +190,7 @@ export default function CPSTest() {
       </div>
 
       <section className="w-full max-w-4xl prose prose-slate text-slate-600">
-          <h2>Que es un CPS Test y para que sirve</h2>
+          <h2>Qué es un CPS Test y para qué sirve</h2>
           <p>
             El <strong>CPS Test</strong> mide cuántos clics por segundo puedes hacer durante un tiempo concreto.
             Se usa mucho en juegos como Minecraft, shooters y aim trainers, donde reaccionar rápido con el ratón puede darte ventaja en combate,
@@ -201,7 +201,7 @@ export default function CPSTest() {
             Si entrenas de forma constante, podrás comparar tu progreso y detectar qué técnica te permite mantener un CPS más estable.
           </p>
 
-          <h2>Como usar el contador de clicks por segundo</h2>
+          <h2>Cómo usar el contador de clicks por segundo</h2>
           <ol>
             <li>Elige la duración del test: 1, 5 o 10 segundos.</li>
             <li>Haz clic dentro del panel grande para iniciar la prueba.</li>
@@ -223,7 +223,7 @@ export default function CPSTest() {
                   <h3 className="font-black text-slate-800 mb-2 uppercase tracking-wide">Tecnicas comunes</h3>
                   <p className="text-sm">
                     Existen metodos como el <strong>jitter clicking</strong> o el <strong>butterfly clicking</strong> que ayudan a subir tu ritmo.
-                    Aun asi, la constancia y la comodidad importan mas que forzar la mano durante pocos segundos.
+                    Aun así, la constancia y la comodidad importan más que forzar la mano durante pocos segundos.
                   </p>
                 </div>
            </div>
@@ -247,11 +247,11 @@ export default function CPSTest() {
           <p>
             Sí. Es útil para medir tu velocidad de clic en PvP, bridgings y otras situaciones donde el ritmo de pulsación influye en el rendimiento.
           </p>
-          <h3>Que duracion conviene elegir</h3>
+          <h3>Qué duración conviene elegir</h3>
           <p>
             El test de 1 segundo sirve para medir explosividad, el de 5 segundos es el más equilibrado y el de 10 segundos ayuda a comprobar si mantienes el ritmo.
           </p>
-          <h3>Como seguir entrenando</h3>
+          <h3>Cómo seguir entrenando</h3>
           <p>
             Puedes combinar esta prueba con nuestro <Link href="/cronometro" className="text-emerald-700 font-semibold hover:underline">cronómetro online</Link>
             para sesiones de práctica o usar el <Link href="/temporizador" className="text-emerald-700 font-semibold hover:underline">temporizador</Link>

@@ -161,13 +161,13 @@ const CalculadoraHipotecasClient = () => {
 
         <p>El simulador utiliza el sistema de <strong>amortización francés</strong>, el estándar utilizado en España, México, Colombia y casi la totalidad de Europa y América Latina para los préstamos con interés fijo o variable. Este sistema se caracteriza por mantener unas cuotas mensuales constantes de principio a fin del plazo, donde al principio se pagan más intereses y al final se amortiza más capital neto.</p>
 
-        <p>Es una herramienta util para hacer una primera estimacion antes de hablar con un banco, comparar ofertas o entender como cambia la cuota cuando modificas importe, plazo o interes. El resultado no sustituye una FEIN, una oferta vinculante ni el asesoramiento financiero profesional.</p>
+        <p>Es una herramienta útil para hacer una primera estimación antes de hablar con un banco, comparar ofertas o entender cómo cambia la cuota cuando modificas importe, plazo o interés. El resultado no sustituye una FEIN, una oferta vinculante ni el asesoramiento financiero profesional.</p>
 
-        <h3>Que no incluye esta simulacion</h3>
+        <h3>Qué no incluye esta simulación</h3>
         <ul>
           <li><strong>Comisiones y seguros:</strong> la cuota puede variar si el producto incorpora gastos adicionales.</li>
-          <li><strong>Gastos de compra:</strong> notaria, tasacion, impuestos y registro no forman parte del calculo.</li>
-          <li><strong>Escenarios variables complejos:</strong> si tu hipoteca revisa tipo periodicamente, conviene hacer varias simulaciones.</li>
+          <li><strong>Gastos de compra:</strong> notaría, tasación, impuestos y registro no forman parte del cálculo.</li>
+          <li><strong>Escenarios variables complejos:</strong> si tu hipoteca revisa tipo periódicamente, conviene hacer varias simulaciones.</li>
         </ul>
 
       </section>

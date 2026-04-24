@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -14,6 +16,7 @@ export const metadata: Metadata = {
     "ruleta de la suerte",
     "ruleta sorteo"
   ],
+  robots: LOW_VALUE_TOOL_ROBOTS,
   alternates: {
     canonical: `${SITE_URL}/ruleta-aleatoria`,
   },

@@ -149,7 +149,7 @@ export default function GeneradorWhatsApp() {
           Descubre el generador de enlaces oficial para negocios
         </h2>
         
-        <p>Un enlace directo de WhatsApp reduce pasos y facilita que un visitante pueda escribirte sin guardar el numero manualmente. Es util para perfiles de Instagram, TikTok, fichas de negocio, tarjetas o paginas de contacto.</p>
+        <p>Un enlace directo de WhatsApp reduce pasos y facilita que un visitante pueda escribirte sin guardar el número manualmente. Es útil para perfiles de Instagram, TikTok, fichas de negocio, tarjetas o páginas de contacto.</p>
 
         <p>Nuestro <strong>generador de enlace de WhatsApp</strong> crea una URL lista para copiar, compartir o convertir en QR. Puedes incluir un mensaje inicial para ahorrar tiempo y guiar mejor la conversacion desde el primer clic.</p>
 
@@ -157,10 +157,10 @@ export default function GeneradorWhatsApp() {
         <ul>
           <li><strong>Usa un numero correcto:</strong> revisa prefijo internacional y formato sin espacios ni guiones innecesarios.</li>
           <li><strong>Escribe un mensaje claro:</strong> por ejemplo, consulta comercial, soporte o reserva.</li>
-          <li><strong>Pruebalo antes de publicarlo:</strong> abre el enlace en movil y escritorio para comprobar que redirige bien.</li>
+          <li><strong>Pruébalo antes de publicarlo:</strong> abre el enlace en móvil y escritorio para comprobar que redirige bien.</li>
         </ul>
 
-        <p>La herramienta genera la URL en la propia pagina. Para medir resultados o atribucion de campañas puedes combinarla despues con UTM o con una landing especifica.</p>
+        <p>La herramienta genera la URL en la propia página. Para medir resultados o atribución de campañas puedes combinarla después con UTM o con una landing específica.</p>
         
       </section>
 
@@ -174,7 +174,7 @@ export default function GeneradorWhatsApp() {
               <Plus className="h-5 w-5 text-green-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-               <p>Copia el enlace generado y pegalo en el campo de sitio web de tu perfil, en una biografia con link o en una pagina de contacto. Antes de publicarlo, comprueba que el numero y el mensaje de bienvenida son correctos.</p>
+               <p>Copia el enlace generado y pégalo en el campo de sitio web de tu perfil, en una biografía con link o en una página de contacto. Antes de publicarlo, comprueba que el número y el mensaje de bienvenida son correctos.</p>
             </div>
           </details>
 
@@ -184,7 +184,7 @@ export default function GeneradorWhatsApp() {
               <Plus className="h-5 w-5 text-green-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-               <p>Si. En escritorio suele abrir WhatsApp Web o la app de escritorio y en movil redirige a la aplicacion instalada. El comportamiento final depende del dispositivo y de la configuracion del usuario.</p>
+               <p>Sí. En escritorio suele abrir WhatsApp Web o la app de escritorio y en móvil redirige a la aplicación instalada. El comportamiento final depende del dispositivo y de la configuración del usuario.</p>
              </div>
           </details>
         </div>

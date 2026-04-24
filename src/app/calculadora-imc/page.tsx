@@ -142,7 +142,7 @@ export default function CalculadoraIMC() {
         <h3 className="text-lg font-bold">Limitaciones de este medidor</h3>
          <p>El IMC no distingue entre masa grasa y masa muscular. Deportistas, personas mayores, adolescentes o perfiles con condiciones concretas pueden obtener un resultado poco representativo. Por eso debe interpretarse como una <strong>referencia estadistica</strong>, no como un diagnostico medico.</p>
 
-         <h3 className="text-lg font-bold">Como usar bien el resultado</h3>
+         <h3 className="text-lg font-bold">Cómo usar bien el resultado</h3>
          <p>Puede servirte como punto de partida para seguir tu evolucion o detectar si conviene revisar habitos. Si tienes dudas sobre composicion corporal, salud metabolica o nutricion, lo ideal es complementarlo con otras mediciones y con el criterio de un profesional.</p>
        </section>
 
@@ -166,7 +166,7 @@ export default function CalculadoraIMC() {
               <Plus className="h-5 w-5 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-               <p>El calculo se realiza en la pagina con los datos que introduces en el formulario. Aun asi, recuerda que el sitio utiliza servicios generales de analitica y publicidad descritos en nuestras politicas, aunque este calculo concreto no requiere crear una cuenta ni enviar un historial medico.</p>
+               <p>El cálculo se realiza en la página con los datos que introduces en el formulario. Aun así, recuerda que el sitio utiliza servicios generales de analítica y publicidad descritos en nuestras políticas, aunque este cálculo concreto no requiere crear una cuenta ni enviar un historial médico.</p>
              </div>
           </details>
         </div>
