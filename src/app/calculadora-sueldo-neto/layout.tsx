@@ -4,7 +4,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: "Calculadora de Sueldo Neto 2026 España — De Bruto a Neto",
-  description: "Calcula tu sueldo neto mensual a partir del salario bruto anual en España 2026. Incluye estimaciones de IRPF, Seguridad Social y retenciones. 12 o 14 pagas. Gratis y al instante.",
+  description: "Calcula tu sueldo neto mensual desde el salario bruto anual. Ajusta IRPF, cotización y 12 o 14 pagas para una estimación transparente.",
   keywords: [
     "calcular sueldo neto",
     "calculadora sueldo neto",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Calculadora de Sueldo Neto 2026 — España",
-    description: "Calcula cuánto cobrarás de neto al mes a partir de tu bruto anual. IRPF y SS incluidos.",
+    description: "Calcula cuánto cobrarás de neto al mes desde tu bruto anual con IRPF y cotización ajustables.",
     url: `${SITE_URL}/calculadora-sueldo-neto`,
     type: "website",
   },
@@ -31,7 +31,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de Sueldo Neto España 2026",
   url: `${SITE_URL}/calculadora-sueldo-neto`,
-  description: "Calculadora gratuita de sueldo neto mensual con retenciones IRPF y Seguridad Social en España.",
+  description: "Calculadora gratuita de sueldo neto mensual con IRPF, cotización y número de pagas ajustables.",
   applicationCategory: "FinanceApplication",
   operatingSystem: "All",
   offers: {

@@ -5,14 +5,14 @@ import CalculadoraSueldoNetoClient from "@/components/tools/CalculadoraSueldoNet
 
 export const metadata: Metadata = {
   title: 'Calculadora de Sueldo Neto 2026 — Calcular Salario Mensual',
-  description: 'Calcula tu sueldo neto mensual y anual a partir del bruto. Incluye una estimación orientativa de IRPF y Seguridad Social para España en 2026.',
+  description: 'Calcula tu sueldo neto mensual y anual desde el bruto. Ajusta IRPF, cotización y 12 o 14 pagas para obtener una estimación transparente.',
   alternates: {
     canonical: 'https://cajautil.com/calculadora-sueldo-neto',
   },
   openGraph: {
     title: 'Calculadora de Sueldo Neto 2026 — Calcular Salario Mensual',
     description:
-      'Calcula tu sueldo neto mensual y anual a partir del bruto con una estimación orientativa de IRPF y Seguridad Social en España.',
+      'Calcula tu sueldo neto mensual y anual desde el bruto ajustando IRPF, cotización y número de pagas.',
     url: 'https://cajautil.com/calculadora-sueldo-neto',
     type: 'website',
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Calculadora de Sueldo Neto 2026 — Calcular Salario Mensual',
     description:
-      'Simula tu salario neto mensual en 12 o 14 pagas con una estimación orientativa de IRPF y Seguridad Social.',
+      'Simula tu salario neto mensual en 12 o 14 pagas con IRPF y cotización ajustables.',
   },
 };
 
@@ -54,7 +54,7 @@ export default function CalculadoraSueldo() {
         name: 'Cómo pasar de sueldo bruto a neto en España',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Debes restar al salario bruto las cotizaciones a la Seguridad Social y la retención de IRPF. Esta calculadora ofrece una estimación orientativa para 12 o 14 pagas.',
+          text: 'Debes restar al salario bruto las cotizaciones del trabajador y la retención de IRPF. Esta calculadora permite ajustar ambos porcentajes y repartir el resultado en 12 o 14 pagas.',
         },
       },
       {
@@ -159,20 +159,20 @@ export default function CalculadoraSueldo() {
               <tr className="border-t border-slate-200">
                 <td className="px-4 py-3 font-semibold">25.000 EUR</td>
                 <td className="px-4 py-3">15%</td>
-                <td className="px-4 py-3">1.639 EUR aprox.</td>
-                <td className="px-4 py-3">1.404 EUR aprox.</td>
+                <td className="px-4 py-3">1.635 EUR aprox.</td>
+                <td className="px-4 py-3">1.401 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200 bg-slate-50/70">
                 <td className="px-4 py-3 font-semibold">30.000 EUR</td>
                 <td className="px-4 py-3">15%</td>
-                <td className="px-4 py-3">1.966 EUR aprox.</td>
-                <td className="px-4 py-3">1.685 EUR aprox.</td>
+                <td className="px-4 py-3">1.963 EUR aprox.</td>
+                <td className="px-4 py-3">1.682 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200">
                 <td className="px-4 py-3 font-semibold">40.000 EUR</td>
                 <td className="px-4 py-3">20%</td>
-                <td className="px-4 py-3">2.455 EUR aprox.</td>
-                <td className="px-4 py-3">2.104 EUR aprox.</td>
+                <td className="px-4 py-3">2.450 EUR aprox.</td>
+                <td className="px-4 py-3">2.100 EUR aprox.</td>
               </tr>
             </tbody>
           </table>
@@ -200,38 +200,38 @@ export default function CalculadoraSueldo() {
               <tr className="border-t border-slate-200">
                 <td className="px-4 py-3 font-semibold">22.000 brutos a netos</td>
                 <td className="px-4 py-3">22.000 EUR al año</td>
-                <td className="px-4 py-3">1.442 EUR aprox.</td>
-                <td className="px-4 py-3">1.236 EUR aprox.</td>
+                <td className="px-4 py-3">1.439 EUR aprox.</td>
+                <td className="px-4 py-3">1.234 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200 bg-slate-50/70">
                 <td className="px-4 py-3 font-semibold">26.000 brutos a netos</td>
                 <td className="px-4 py-3">26.000 EUR al año</td>
-                <td className="px-4 py-3">1.704 EUR aprox.</td>
-                <td className="px-4 py-3">1.461 EUR aprox.</td>
+                <td className="px-4 py-3">1.701 EUR aprox.</td>
+                <td className="px-4 py-3">1.458 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200">
                 <td className="px-4 py-3 font-semibold">28.000 brutos a netos</td>
                 <td className="px-4 py-3">28.000 EUR al año</td>
-                <td className="px-4 py-3">1.835 EUR aprox.</td>
-                <td className="px-4 py-3">1.573 EUR aprox.</td>
+                <td className="px-4 py-3">1.832 EUR aprox.</td>
+                <td className="px-4 py-3">1.570 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200 bg-slate-50/70">
                 <td className="px-4 py-3 font-semibold">2000 brutos a netos</td>
                 <td className="px-4 py-3">24.000 EUR al año si son 12 pagas</td>
-                <td className="px-4 py-3">1.573 EUR aprox.</td>
-                <td className="px-4 py-3">1.348 EUR aprox.</td>
+                <td className="px-4 py-3">1.570 EUR aprox.</td>
+                <td className="px-4 py-3">1.346 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200">
                 <td className="px-4 py-3 font-semibold">2400 brutos a netos</td>
                 <td className="px-4 py-3">28.800 EUR al año si son 12 pagas</td>
-                <td className="px-4 py-3">1.888 EUR aprox.</td>
-                <td className="px-4 py-3">1.618 EUR aprox.</td>
+                <td className="px-4 py-3">1.884 EUR aprox.</td>
+                <td className="px-4 py-3">1.615 EUR aprox.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p>
-          Ten en cuenta que estas cifras son orientativas. Si tu empresa aplica otro IRPF, tienes pagas extra prorrateadas o trabajas con complementos, conviene introducir tu caso exacto en la calculadora para afinar mejor.
+          Estas referencias usan un IRPF del 15% y una cotización del 6,50%. Ajusta ambos porcentajes con los datos de tu nómina para evitar tomar una cifra genérica como resultado personal.
         </p>
 
         <h2>Qué revisar si usas el neto para tomar decisiones</h2>

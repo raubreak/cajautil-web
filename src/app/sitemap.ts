@@ -4,11 +4,10 @@ import { isLowValueTool } from '@/lib/adsenseReadiness';
 import { editorialArticles } from '@/lib/editorialArticles';
 
 const SITE_URL = 'https://cajautil.com';
+const CONTENT_LAST_MODIFIED = new Date('2026-08-20T00:00:00.000Z');
 
-export const dynamic = 'force-dynamic';
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = CONTENT_LAST_MODIFIED;
   const toolEntries = ([
     {
       url: `${SITE_URL}/calculadora-interes-compuesto`,

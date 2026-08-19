@@ -18,20 +18,10 @@ export default function CalculadoraSueldoNetoClient({
 }: Props) {
   const [brutoAnual, setBrutoAnual] = useState<number | "">(initialBruto);
   const [pagas, setPagas] = useState<12 | 14>(initialPagas);
+  const [irpf, setIrpf] = useState(15);
+  const [retencionSS, setRetencionSS] = useState(6.5);
 
-  const calcularIRPF = (bruto: number) => {
-    if (bruto <= 15000) return 0;
-    if (bruto <= 20000) return 10;
-    if (bruto <= 30000) return 15;
-    if (bruto <= 45000) return 20;
-    if (bruto <= 60000) return 25;
-    return 30;
-  };
-
-  const irpfEstimado = brutoAnual ? calcularIRPF(Number(brutoAnual)) : 0;
-  const retencionSS = 6.35;
-
-  const totalDeducciones = irpfEstimado + retencionSS;
+  const totalDeducciones = irpf + retencionSS;
   const netoAnual = brutoAnual 
     ? Number(brutoAnual) * (1 - totalDeducciones / 100) 
     : 0;
@@ -89,6 +79,37 @@ export default function CalculadoraSueldoNetoClient({
             </div>
           </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="irpf" className="block text-sm font-bold text-slate-700 mb-2">Retención de IRPF (%)</label>
+              <input
+                id="irpf"
+                type="number"
+                min="0"
+                max="55"
+                step="0.1"
+                value={irpf}
+                onChange={(event) => setIrpf(Math.min(55, Math.max(0, Number(event.target.value))))}
+                className="w-full border-2 border-slate-200 rounded-2xl p-4 text-xl font-bold bg-white focus:ring-4 focus:ring-amber-100 focus:border-amber-400 outline-none transition-all text-slate-900"
+              />
+              <p className="mt-2 text-xs text-slate-500">Usa el porcentaje de tu nómina o de la simulación de la AEAT.</p>
+            </div>
+            <div>
+              <label htmlFor="seguridad-social" className="block text-sm font-bold text-slate-700 mb-2">Cotización del trabajador (%)</label>
+              <input
+                id="seguridad-social"
+                type="number"
+                min="0"
+                max="15"
+                step="0.01"
+                value={retencionSS}
+                onChange={(event) => setRetencionSS(Math.min(15, Math.max(0, Number(event.target.value))))}
+                className="w-full border-2 border-slate-200 rounded-2xl p-4 text-xl font-bold bg-white focus:ring-4 focus:ring-amber-100 focus:border-amber-400 outline-none transition-all text-slate-900"
+              />
+              <p className="mt-2 text-xs text-slate-500">Valor inicial editable: comprueba el porcentaje aplicado en tu nómina.</p>
+            </div>
+          </div>
+
           <div className="mt-8 p-8 bg-amber-50 rounded-[32px] border border-amber-100 shadow-inner transform transition hover:scale-[1.01]" role="status" aria-live="polite">
             <p className="text-sm font-extrabold text-amber-800/80 uppercase tracking-widest text-center mb-4">Tu Sueldo Mensual (Neto)</p>
             <p className="text-6xl font-black text-amber-600 text-center mb-8 drop-shadow-sm">
@@ -97,15 +118,15 @@ export default function CalculadoraSueldoNetoClient({
             
             <div className="space-y-3 mt-4 pt-6 text-sm text-slate-600">
               <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-amber-100/50">
-                <span className="font-bold text-slate-700">Retención IRPF (Estimada)</span>
-                <span className="font-black text-rose-500 bg-rose-100 px-3 py-1 rounded-lg">-{irpfEstimado}%</span>
+                <span className="font-bold text-slate-700">Retención de IRPF</span>
+                <span className="font-black text-rose-500 bg-rose-100 px-3 py-1 rounded-lg">-{irpf.toLocaleString('es-ES')}%</span>
               </div>
               <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-amber-100/50">
                 <span className="font-bold text-slate-700">Seguridad Social</span>
-                <span className="font-black text-rose-500 bg-rose-100 px-3 py-1 rounded-lg">-{retencionSS}%</span>
+                <span className="font-black text-rose-500 bg-rose-100 px-3 py-1 rounded-lg">-{retencionSS.toLocaleString('es-ES')}%</span>
               </div>
               <p className="text-xs text-amber-700/60 mt-4 leading-tight italic font-medium px-4">
-                *Nota: Es un cálculo base que da una idea rápida aproximada. Variables de estado civil o CCAA no aplicadas.
+                *Estimación aritmética basada en los porcentajes que indiques. No calcula automáticamente tu retención fiscal personal.
               </p>
             </div>
           </div>
@@ -119,11 +140,11 @@ export default function CalculadoraSueldoNetoClient({
           <h2>¿Cómo calcular el sueldo neto en España?</h2>
           <p>
             Para calcular tu <strong>sueldo neto</strong> a partir del <strong>salario bruto anual</strong>, se restan las <strong>retenciones de IRPF</strong> y 
-            la <strong>cotización a la Seguridad Social</strong> (6,35% para trabajadores por cuenta ajena en España).
+            la <strong>cotización del trabajador a la Seguridad Social</strong>. Ambos porcentajes son editables para que puedas reproducir los datos de tu nómina.
           </p>
           <p>
-            El <strong>tipo de IRPF</strong> depende de tus ingresos totales, situación familiar y comunidad autónoma. 
-            Nuestra calculadora aplica una estimación general orientativa para darte una idea rápida.
+            El <strong>tipo de IRPF</strong> depende de tus ingresos totales, situación familiar y comunidad autónoma.
+            Para un resultado útil, introduce la retención de tu nómina o la obtenida con el servicio oficial de la Agencia Tributaria.
           </p>
 
           <h2>Preguntas frecuentes</h2>
@@ -132,7 +153,7 @@ export default function CalculadoraSueldoNetoClient({
               <span>¿Cuánto es el sueldo neto de 30.000€ brutos?</span>
               <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
-            <p className="mt-4 mb-0 text-slate-600">Con un salario bruto de 30.000€ anuales, las retenciones aproximadas (IRPF ~15% + SS ~6%) dejarían un neto mensual de aproximadamente 1.966€ en 12 pagas, o 1.685€ en 14 pagas.</p>
+            <p className="mt-4 mb-0 text-slate-600">Con un salario bruto de 30.000€ anuales, un IRPF del 15% y una cotización del 6,50%, el cálculo deja unos 1.963€ netos en 12 pagas o 1.682€ en 14 pagas.</p>
           </details>
           <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
             <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
