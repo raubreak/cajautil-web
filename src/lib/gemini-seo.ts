@@ -99,7 +99,7 @@ export async function generateProgrammaticArticle(force = false) {
   if (process.env.DISABLE_PROGRAMMATIC_CONTENT !== 'false') {
     return {
       skipped: true,
-      message: 'Generacion programatica desactivada para proteger la revision de AdSense.',
+      message: 'Generacion programatica desactivada para proteger la calidad editorial.',
     };
   }
 
@@ -254,7 +254,7 @@ Estructura obligatoria:
 
 export async function generateToolVariantBatch(baseTool: string, keywords: string[]) {
   if (process.env.DISABLE_PROGRAMMATIC_CONTENT !== 'false') {
-    throw new Error('Las variantes programaticas estan desactivadas para proteger la revision de AdSense.');
+    throw new Error('Las variantes programaticas estan desactivadas para proteger la calidad editorial.');
   }
 
   const results = [];

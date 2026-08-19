@@ -15,7 +15,7 @@ export default function PoliticaPrivacidad() {
       <div className="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-100 prose prose-slate max-w-none">
         <h1 className="text-3xl font-extrabold text-slate-800 mb-6">Política de Privacidad</h1>
         
-        <p className="text-sm text-slate-500 mb-8">Última actualización: 16/03/2026</p>
+        <p className="text-sm text-slate-500 mb-8">Última actualización: 20/08/2026</p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">1. Introducción</h2>
         <p>
@@ -32,21 +32,16 @@ export default function PoliticaPrivacidad() {
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">3. Analítica, publicidad y consentimiento</h2>
         <p>
-          CajaUtil.com utiliza servicios de terceros como <strong>Google Analytics</strong> y <strong>Google AdSense</strong> para medir el uso del sitio y financiar el proyecto.
+          CajaUtil.com utiliza <strong>Google Analytics</strong> para medir el uso del sitio y <strong>Monetag</strong> para financiar el proyecto mediante publicidad.
           Estas tecnologias pueden recoger identificadores online, datos tecnicos del dispositivo, informacion basica de navegacion y eventos de uso.
         </p>
         <p>
-          Cuando sea aplicable, Google puede mostrar un aviso de consentimiento para que puedas <strong>aceptar o rechazar las cookies no esenciales</strong>.
-          La gestion efectiva de esa eleccion depende de la configuracion activa en los servicios de Google que tengamos habilitados.
+          Puedes <strong>aceptar o rechazar las tecnologías no esenciales</strong> mediante el aviso de consentimiento de CajaUtil.
+          El tag publicitario de Monetag solo se carga después de aceptar.
         </p>
         <p>
-          Google es uno de los proveedores asociados en nuestro sitio. Google utiliza cookies, conocidas como cookies de DART, 
-          para publicar anuncios para los visitantes de nuestro sitio web en función de su visita a CajaUtil.com y otros sitios web en Internet.
-        </p>
-        <p>
-          Sin embargo, los usuarios pueden optar por rechazar el uso de las cookies de DART 
-          visitando la Política de privacidad de la red de contenido y de anuncios de Google en la siguiente URL: 
-          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline"> https://policies.google.com/technologies/ads</a>.
+          Monetag puede tratar identificadores online, dirección IP, información del navegador, dispositivo y actividad publicitaria para servir anuncios,
+          medir resultados y prevenir fraude conforme a su propia política de privacidad.
         </p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">4. Nuestros socios publicitarios</h2>
@@ -55,7 +50,8 @@ export default function PoliticaPrivacidad() {
           Cada uno de ellos tiene su propia Política de Privacidad para sus políticas sobre los datos de los usuarios.
         </p>
         <ul className="list-disc pl-6 mb-4">
-          <li><strong>Google:</strong> <a href="https://policies.google.com/privacy" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
+          <li><strong>Google Analytics:</strong> <a href="https://policies.google.com/privacy" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
+          <li><strong>Monetag:</strong> <a href="https://monetag.com/privacy-policy/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://monetag.com/privacy-policy/</a></li>
         </ul>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">5. Enlaces de terceros</h2>
@@ -77,7 +73,7 @@ export default function PoliticaPrivacidad() {
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">7. Consentimiento</h2>
         <p>
-          Al utilizar nuestro sitio web, usted acepta por la presente nuestra Política de Privacidad y sus términos y condiciones.
+          El uso de tecnologías no esenciales depende de la elección realizada en el aviso de consentimiento. Rechazarlas no impide utilizar las herramientas de CajaUtil.
         </p>
         
         <div className="mt-12 pt-6 border-t border-slate-200 text-center">

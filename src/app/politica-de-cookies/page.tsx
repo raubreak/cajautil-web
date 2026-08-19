@@ -15,7 +15,7 @@ export default function PoliticaCookies() {
       <div className="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-100 prose prose-slate max-w-none">
         <h1 className="text-3xl font-extrabold text-slate-800 mb-6">Política de Cookies</h1>
         
-        <p className="text-sm text-slate-500 mb-8">Última actualización: 16/03/2026</p>
+        <p className="text-sm text-slate-500 mb-8">Última actualización: 20/08/2026</p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">1. ¿Qué son las cookies?</h2>
         <p>
@@ -32,33 +32,34 @@ export default function PoliticaCookies() {
         </p>
         
         <p>
-          Sin embargo, <strong>CajaUtil.com usa cookies de terceros con fines publicitarios y de analítica web</strong>, más en concreto, para publicar anuncios personalizados a través de Google AdSense.
+          Sin embargo, <strong>CajaUtil.com usa tecnologías de terceros con fines publicitarios y de analítica web</strong>,
+          concretamente Google Analytics para medición y Monetag para publicidad.
         </p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">3. Tipos de Cookies que utilizamos</h2>
         <p>
-          Actualmente trabajamos con tecnologias de Google sujetas a sus propias politicas de tratamiento de datos.
+          Actualmente trabajamos con Google Analytics y Monetag, sujetos a sus propias políticas de tratamiento de datos.
         </p>
         <ul className="list-disc pl-6 mb-4">
           <li><strong>Cookies de medicion y analitica:</strong> Google Analytics puede utilizar almacenamiento para medir visitas, paginas vistas y eventos de uso.</li>
-          <li><strong>Cookies publicitarias:</strong> Google AdSense puede utilizar cookies o identificadores para mostrar anuncios y limitar fraude publicitario, segun tu consentimiento y la configuracion aplicable.</li>
+          <li><strong>Cookies publicitarias:</strong> Monetag puede utilizar cookies, identificadores y datos técnicos para servir anuncios, medir su rendimiento y limitar el fraude, según tu consentimiento.</li>
           <li><strong>Almacenamiento tecnico:</strong> la plataforma de consentimiento o los servicios integrados pueden almacenar la eleccion realizada para respetarla en visitas posteriores.</li>
         </ul>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">4. Gestion del consentimiento</h2>
         <p>
-          En las regiones donde sea aplicable, Google puede mostrar un aviso de consentimiento para que puedas aceptar o rechazar las cookies no esenciales.
-          La gestion final del consentimiento depende de la configuracion activa en Google AdSense y de la normativa aplicable a tu ubicacion.
+          CajaUtil muestra un aviso de consentimiento para aceptar o rechazar las tecnologías no esenciales.
+          El tag publicitario de Monetag solo se carga después de aceptar.
         </p>
         <p>
-          Si Google muestra su plataforma de gestion del consentimiento, esa capa sera la encargada de trasladar tu preferencia a los servicios de Google compatibles.
+          Tu elección se guarda localmente en el navegador para respetarla en visitas posteriores. Puedes eliminarla borrando los datos del sitio.
         </p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">5. ¿Cómo rechazar y eliminar las Cookies?</h2>
         <p>
-          Tienes derecho a decidir si deseas aceptar o rechazar las cookies no esenciales. Ademas del banner de consentimiento, puedes revisar tus preferencias de anuncios en:
+          Tienes derecho a decidir si deseas aceptar o rechazar las cookies no esenciales. Puedes consultar más información sobre el tratamiento publicitario en:
           <br />
-          <a href="https://adssettings.google.es/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline"><strong>Controlar la Configuración de Anuncios de Google (Ad Settings)</strong></a>
+          <a href="https://monetag.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline"><strong>Política de privacidad de Monetag</strong></a>
         </p>
         <p className="mt-4">
           Casi cualquier navegador te ofrece opciones avanzadas para borrar y gestionar cookies. Consulta siempre la documentacion oficial del navegador que utilices.

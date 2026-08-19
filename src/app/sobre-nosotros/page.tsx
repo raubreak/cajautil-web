@@ -177,13 +177,13 @@ const AboutUsPage = () => {
           <div className="prose prose-slate max-w-none text-slate-600 space-y-4">
             <p>
               CajaUtil.com es un proyecto independiente. Mantenemos los servidores, el desarrollo y las actualizaciones
-              gracias a la <strong>publicidad no intrusiva</strong> gestionada por Google AdSense. Este modelo nos permite
+              gracias a formatos publicitarios gestionados por <strong>Monetag</strong>, que se cargan después del consentimiento. Este modelo nos permite
               ofrecer todas las herramientas de forma completamente gratuita y sin necesidad de cobrar suscripciones ni
               pedir datos personales a los usuarios.
             </p>
             <p>
                No vendemos datos de usuario, no tenemos programas de afiliados ocultos y cualquier relación comercial
-              con terceros se limita a la publicidad contextual gestionada por Google. Puedes consultar los detalles en
+              con terceros se limita a los servicios declarados en nuestra política. Puedes consultar los detalles en
                nuestra <Link href="/politica-de-privacidad" className="text-blue-600 font-semibold hover:underline">política de privacidad</Link>.
             </p>
           </div>
