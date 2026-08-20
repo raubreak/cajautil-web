@@ -1,34 +1,66 @@
 "use client";
-import { useState } from "react";
-import { QRCodeSVG } from "qrcode.react";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
+
+const DEFAULT_QR_CONTENT = "https://cajautil.com";
+const MAX_QR_BYTES = 1200;
 
 export default function GeneradorQR() {
-  const [texto, setTexto] = useState("https://cajautil.com");
+  const [texto, setTexto] = useState(DEFAULT_QR_CONTENT);
   const [size, setSize] = useState(200);
   const [bgColor, setBgColor] = useState("#ffffff");
   const [fgColor, setFgColor] = useState("#000000");
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sharedContent = new URLSearchParams(window.location.search).get("text");
+    if (!sharedContent) return;
+
+    const timeoutId = window.setTimeout(() => setTexto(sharedContent), 0);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  const contentBytes = new TextEncoder().encode(texto).length;
+  const qrError = !texto.trim()
+    ? "Introduce una URL o un texto para generar el código."
+    : contentBytes > MAX_QR_BYTES
+      ? `El contenido ocupa ${contentBytes.toLocaleString("es-ES")} bytes. Reduce el texto a ${MAX_QR_BYTES.toLocaleString("es-ES")} bytes o menos.`
+      : null;
 
   const downloadQR = () => {
+    setDownloadError(null);
+    if (qrError) return;
+
     const svg = document.getElementById("qr-code-svg");
-    if (!svg) return;
+    if (!svg) {
+      setDownloadError("No se pudo preparar el código QR para descargar.");
+      return;
+    }
     const svgData = new XMLSerializer().serializeToString(svg);
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     const img = new Image();
-    
+
+    if (!ctx) {
+      setDownloadError("El navegador no permite crear la imagen PNG.");
+      return;
+    }
+
     img.onload = () => {
       canvas.width = size;
       canvas.height = size;
-      ctx!.fillStyle = bgColor;
-      ctx!.fillRect(0, 0, size, size);
-      ctx!.drawImage(img, 0, 0, size, size);
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, size, size);
+      ctx.drawImage(img, 0, 0, size, size);
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.download = "mi_codigo_qr.png";
-      downloadLink.href = `${pngFile}`;
+      downloadLink.href = pngFile;
       downloadLink.click();
     };
+    img.onerror = () => setDownloadError("No se pudo convertir el código QR en una imagen PNG.");
     img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
   };
 
@@ -48,12 +80,19 @@ export default function GeneradorQR() {
             <textarea 
               id="qr-contenido"
               value={texto}
-              onChange={(e) => setTexto(e.target.value)}
+              onChange={(event) => {
+                setTexto(event.target.value);
+                setDownloadError(null);
+              }}
+              aria-describedby="qr-content-help"
+              aria-invalid={Boolean(qrError)}
               className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-cyan-500 outline-none text-slate-700"
               rows={3}
               placeholder="Introduce la URL o el texto..."
-              aria-label="Contenido a codificar en el QR"
             ></textarea>
+            <p id="qr-content-help" role={qrError ? "alert" : undefined} className={`mt-2 text-xs font-medium ${qrError ? "text-rose-600" : "text-slate-500"}`}>
+              {qrError ?? `${contentBytes.toLocaleString("es-ES")} de ${MAX_QR_BYTES.toLocaleString("es-ES")} bytes utilizados.`}
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -81,26 +120,32 @@ export default function GeneradorQR() {
 
         {/* Vista previa */}
         <div className="flex-1 flex flex-col items-center justify-center bg-slate-50 rounded-xl border border-slate-200 p-8">
-          <div className="bg-white p-4 shadow-sm rounded-lg mb-6 border border-slate-100">
-             <QRCodeSVG 
-                id="qr-code-svg"
-                value={texto || " "} 
-                size={Math.min(size, 200)}
-                bgColor={bgColor}
-                fgColor={fgColor}
-                level="H"
-                marginSize={4}
-                title="Código QR generado"
-             />
+          <div className="bg-white p-4 shadow-sm rounded-lg mb-6 border border-slate-100 min-h-[232px] min-w-[232px] flex items-center justify-center">
+            {qrError ? (
+              <p className="max-w-[190px] text-center text-sm font-semibold text-slate-500">Corrige el contenido para mostrar la vista previa.</p>
+            ) : (
+              <QRCodeSVG
+                  id="qr-code-svg"
+                  value={texto}
+                  size={Math.min(size, 200)}
+                  bgColor={bgColor}
+                  fgColor={fgColor}
+                  level="H"
+                  marginSize={4}
+                  title="Código QR generado"
+              />
+            )}
           </div>
           <button 
              onClick={downloadQR}
-             disabled={!texto}
+             disabled={Boolean(qrError)}
              className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-300 text-white font-bold rounded-xl shadow-sm transition-all active:scale-95 w-full max-w-[200px]"
              aria-label="Descargar código QR como imagen PNG"
+             aria-describedby={downloadError ? "qr-download-error" : undefined}
           >
              Descargar PNG
           </button>
+          {downloadError && <p id="qr-download-error" role="alert" className="mt-3 text-center text-sm font-semibold text-rose-600">{downloadError}</p>}
         </div>
 
       </div>
@@ -110,7 +155,7 @@ export default function GeneradorQR() {
         <h2 className="text-xl font-bold text-slate-800 mb-4">¿Cómo crear un código QR gratis?</h2>
         <div className="text-slate-600 text-sm leading-relaxed space-y-3">
           <p>
-            Con nuestro <strong>generador de códigos QR online</strong>, puedes convertir cualquier <strong>URL, texto o enlace</strong> en 
+            Con nuestro <strong>generador de códigos QR online</strong>, puedes convertir una <strong>URL, texto o enlace compatible</strong> en
             un código QR personalizable en segundos. Elige los <strong>colores</strong>, ajusta el <strong>tamaño</strong> y 
             descarga tu QR en <strong>PNG de alta resolución</strong>.
           </p>
@@ -129,6 +174,7 @@ export default function GeneradorQR() {
           <ul className="list-disc pl-5 space-y-1">
             <li>Usa una URL final correcta y revisa que no tenga errores.</li>
             <li>Evita fondos oscuros con modulos poco contrastados.</li>
+            <li>Reduce el contenido si supera el limite indicado; una URL corta suele producir un patron mas simple.</li>
             <li>Descarga un tamano suficiente si lo vas a imprimir o compartir en gran formato.</li>
           </ul>
         </div>

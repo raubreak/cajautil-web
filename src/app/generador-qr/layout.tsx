@@ -27,6 +27,12 @@ export const metadata: Metadata = {
     type: "website",
     images: ["https://cajautil.com/og-image.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Generador de Códigos QR Gratis y Personalizable",
+    description: "Crea y descarga códigos QR para enlaces y textos compatibles.",
+    images: ["https://cajautil.com/og-image.png"],
+  },
 };
 
 const jsonLd = {
@@ -36,7 +42,7 @@ const jsonLd = {
   url: `${SITE_URL}/generador-qr`,
   description: "Genera códigos QR personalizados para URLs, textos y más. Descarga en PNG.",
   applicationCategory: "UtilitiesApplication",
-  operatingSystem: "All",
+  operatingSystem: "Any",
   offers: {
     "@type": "Offer",
     price: "0",

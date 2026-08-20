@@ -32,8 +32,8 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Generador Link de WhatsApp",
   url: `${SITE_URL}/generador-enlace-whatsapp`,
-  description: "Crea dinámicamente URLs wa.me y web.whatsapp acortadas para compartir chats directos de clientes a negocios sin la necesidad de guardar el teléfono en contactos.",
-  applicationCategory: "UtilityApplication",
+  description: "Crea URLs wa.me con un número y un mensaje opcional para abrir chats de WhatsApp sin guardar antes el contacto.",
+  applicationCategory: "UtilitiesApplication",
   operatingSystem: "Any",
   offers: {
     "@type": "Offer",

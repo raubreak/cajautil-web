@@ -15,7 +15,7 @@ export default function GeneradorWhatsApp() {
   const formatPrefix = prefijo.replace(/[^0-9]/g, '');
   
   // URL generada
-  const linkGeneral = `https://api.whatsapp.com/send?phone=${formatPrefix}${formatPhone}&text=${encodeURIComponent(mensaje)}`;
+  const linkGeneral = `https://wa.me/${formatPrefix}${formatPhone}${mensaje ? `?text=${encodeURIComponent(mensaje)}` : ''}`;
   const isValid = formatPhone.length >= 6;
 
   const handleCopy = () => {
@@ -27,7 +27,7 @@ export default function GeneradorWhatsApp() {
 
   const handleOpenDesktop = () => {
     if (!isValid) return;
-    window.open(linkGeneral, '_blank');
+    window.open(linkGeneral, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -53,11 +53,12 @@ export default function GeneradorWhatsApp() {
             
             {/* Teléfono */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
+              <label htmlFor="whatsapp-phone" className="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
                 <Phone className="w-4 h-4 text-green-500" /> ¿Cuál es tu número de WhatsApp?
               </label>
               <div className="flex gap-2">
                 <select 
+                  aria-label="Prefijo internacional"
                   className="w-[110px] sm:w-[130px] px-3 py-3 border border-slate-300 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 text-base font-semibold transition-all bg-white"
                   value={prefijo}
                   onChange={(e) => setPrefijo(e.target.value)}
@@ -69,9 +70,9 @@ export default function GeneradorWhatsApp() {
                   <option value="56">🇨🇱 +56</option>
                   <option value="51">🇵🇪 +51</option>
                   <option value="1">🇺🇸 +1</option>
-                  <option value="00">Internac...</option>
                 </select>
                 <input
+                  id="whatsapp-phone"
                   type="tel"
                   placeholder="Ej: 600 123 456"
                   className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 text-lg font-semibold transition-all"
@@ -83,11 +84,12 @@ export default function GeneradorWhatsApp() {
 
             {/* Mensaje Custom */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center justify-between">
+              <label htmlFor="whatsapp-message" className="block text-sm font-bold text-slate-700 mb-2 flex items-center justify-between">
                 <span className="flex items-center gap-2"><Send className="w-4 h-4 text-green-500" /> ¿Qué mensaje mostrar al abrir el link?</span>
                 <span className="text-xs font-normal text-slate-400">Opcional</span>
               </label>
               <textarea
+                id="whatsapp-message"
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 text-base transition-all h-28 resize-none"
                 placeholder={`¡Hola! Vengo desde Instagram y quiero información sobre...`}
                 value={mensaje}
@@ -116,7 +118,7 @@ export default function GeneradorWhatsApp() {
           
           <div className="w-full bg-white border border-slate-200 rounded-xl flex items-stretch overflow-hidden mb-6 tooltip-container relative group">
             <div className="flex-1 px-4 py-3 text-sm sm:text-base font-mono truncate text-green-800 select-all">
-              {isValid ? linkGeneral : 'https://api.whatsapp.com/send?phone=...'}
+               {isValid ? linkGeneral : 'https://wa.me/34600123456'}
             </div>
             <button 
               onClick={handleCopy}
@@ -134,7 +136,14 @@ export default function GeneradorWhatsApp() {
                <ExternalLink className="w-4 h-4" /> Probar link
             </button>
             
-            <Link href={isValid ? `/generador-qr?text=${encodeURIComponent(linkGeneral)}` : '#'} className={`bg-white hover:bg-slate-100 border border-slate-200 disabled:bg-slate-100 disabled:text-slate-400 text-slate-700 p-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2 ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}>
+            <Link
+              href={isValid ? `/generador-qr?text=${encodeURIComponent(linkGeneral)}` : '#'}
+              aria-disabled={!isValid}
+              onClick={(event) => {
+                if (!isValid) event.preventDefault();
+              }}
+              className={`bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 p-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2 ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
                <QrCode className="w-4 h-4" /> Sacar QR Code
             </Link>
           </div>
