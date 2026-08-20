@@ -18,12 +18,14 @@ export const editorialArticles: EditorialArticle[] = [
     targetToolUrl: '/calculadora-sueldo-neto',
     tags: ['salario', 'nomina', 'empleo'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T09:00:00.000Z',
+    updatedAt: '2026-08-20T17:18:00.000Z',
     content: `## Por que no basta con mirar el bruto
 
 Cuando una empresa te habla de salario anual, casi siempre te esta dando una cifra en bruto. Esa cantidad es util para comparar bandas salariales, pero no te dice cuanto dinero real entrara en tu cuenta cada mes. Entre el bruto y el neto intervienen las cotizaciones a la Seguridad Social, la retencion de IRPF, el numero de pagas y, en algunos casos, bonus, dietas o retribucion flexible.
 
 Por eso, negociar solo con la cifra anual puede llevarte a errores. Dos ofertas con el mismo bruto pueden terminar en netos distintos si cambia el numero de pagas, el tratamiento fiscal o la parte variable. En la practica, el dato que mas condiciona tu vida diaria no es el titular de la oferta, sino el dinero que realmente te queda despues de impuestos y gastos asociados al cambio.
+
+La estimacion debe contrastarse con fuentes actualizadas. La [Agencia Tributaria publica su servicio de calculo de retenciones de 2026](https://sede.agenciatributaria.gob.es/Sede/Retenciones.shtml), mientras que la [Seguridad Social mantiene las bases y tipos de cotizacion vigentes](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537). Una calculadora orientativa ayuda a comparar escenarios, pero una nomina real tambien depende del contrato, la situacion personal y los conceptos incluidos por la empresa.
 
 ## Que deberias calcular antes de aceptar una oferta
 
@@ -32,6 +34,21 @@ Por eso, negociar solo con la cifra anual puede llevarte a errores. Dos ofertas 
 3. **Parte fija y parte variable**. Un bonus prometido no equivale a salario garantizado.
 4. **Beneficios extras**. Seguro medico, comida o tickets transporte pueden mejorar el paquete total.
 5. **Horario y exigencia real del puesto**. Un salario algo mejor puede salir caro si el cambio implica mas horas, guardias o menor estabilidad.
+
+## Plantilla para comparar dos ofertas sin mezclar conceptos
+
+No necesitas una hoja de calculo compleja. Empieza con una tabla que separe lo garantizado de lo probable y de lo puramente estimado:
+
+| Concepto | Puesto actual | Nueva oferta | Como compararlo |
+|---|---|---|---|
+| Bruto fijo anual | Importe contractual | Importe contractual | Compara el mismo periodo anual |
+| Pagas | 12 o 14 | 12 o 14 | Convierte ambos escenarios a neto anual y mensual |
+| Variable | Cobrado realmente | Garantizado o discrecional | No lo trates como fijo si depende de objetivos |
+| Beneficios | Valor que utilizas | Valor que realmente usaras | Evita valorar al 100 % algo que no necesitas |
+| Gastos asociados | Transporte y comidas | Transporte, comidas o teletrabajo | Restalos de la mejora neta mensual |
+| Tiempo | Horas y desplazamiento | Horas, guardias y desplazamiento | Calcula tambien el coste en tiempo personal |
+
+Esta separacion evita una trampa habitual: sumar al nuevo paquete todos los beneficios teoricos, pero comparar esa cifra con el salario fijo que ya cobras. Para que el ejercicio sea prudente, prepara una version conservadora sin bonus y otra en la que solo incluyas el variable que tenga condiciones claras y alcanzables.
 
 ## Caso practico: cuando 32.000 EUR no mejoran tanto como parece
 
@@ -74,7 +91,9 @@ Antes de contestar, intenta resumir cada oferta en una hoja simple con cinco fil
 
 ## Recomendacion final
 
-Antes de responder a una empresa, simula varios escenarios con la **calculadora de sueldo neto**. Te servira para llegar a la conversacion con una base clara, detectar si la mejora es real y evitar negociar a ciegas.
+Antes de responder a una empresa, simula varios escenarios con la [calculadora de sueldo neto](/calculadora-sueldo-neto). Te servira para llegar a la conversacion con una base clara, detectar si la mejora es real y evitar negociar a ciegas.
+
+Si la subida tiene un objetivo concreto, traduce tambien la diferencia mensual a ese objetivo. Puedes estimar cuanto cambia tu capacidad de entrada con la guia sobre [ahorro necesario para comprar una vivienda](/articulos/cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda) o comparar el efecto de aportar esa diferencia durante varios anos con la guia de [interes compuesto](/articulos/interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde). Asi la negociacion deja de centrarse en una cifra aislada y pasa a medir que decisiones reales permite financiar.
 `,
   },
   {

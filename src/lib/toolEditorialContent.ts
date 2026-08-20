@@ -82,8 +82,8 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/articulos/como-negociar-tu-sueldo-bruto-sin-perder-neto', label: 'Cómo negociar tu sueldo bruto sin perder de vista el neto' },
     ],
     references: [
-      { href: 'https://sede.agenciatributaria.gob.es/', label: 'Agencia Tributaria' },
-      { href: 'https://www.seg-social.es/', label: 'Seguridad Social' },
+      { href: 'https://sede.agenciatributaria.gob.es/Sede/Retenciones.shtml', label: 'AEAT: cálculo de retenciones 2026' },
+      { href: 'https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537', label: 'Seguridad Social: bases y tipos de cotización 2026' },
     ],
     disclaimer:
       'Información orientativa para planificación personal. No sustituye una nómina, un certificado de retenciones ni asesoramiento laboral o fiscal individual.',
