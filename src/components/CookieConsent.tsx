@@ -112,7 +112,7 @@ export default function CookieConsent() {
                   Google Analytics nos ayuda a medir el uso del sitio. La publicidad de terceros está desactivada
                   mientras no podamos garantizar formatos no intrusivos. Puedes aceptar o rechazar la analítica.{' '}
                   <Link href="/politica-de-cookies" className="text-blue-600 hover:underline font-medium">
-                    Mas informacion
+                    Más información sobre cookies
                   </Link>
                 </p>
               </div>

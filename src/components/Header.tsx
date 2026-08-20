@@ -51,7 +51,7 @@ export default function Header() {
   return (
     <nav className="w-full bg-white border-b border-slate-200 px-6 py-4 shadow-sm z-50 relative" aria-label="Navegación principal">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <Link href="/" className="text-xl font-black tracking-tighter text-slate-800 hover:opacity-80 transition-opacity" aria-label="Ir a la página de inicio">
+        <Link href="/" className="text-xl font-black tracking-tighter text-slate-800 hover:opacity-80 transition-opacity" aria-label="CajaUtil.com, ir a la página de inicio">
           Caja<span className="text-blue-600">Util</span><span className="text-slate-500 text-sm font-medium">.com</span>
         </Link>
         <div className="hidden md:flex items-center gap-1">

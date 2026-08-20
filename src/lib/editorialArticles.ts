@@ -276,7 +276,7 @@ WebP suele ser una mejora clara para contenido web, pero no sustituye una estrat
     targetToolUrl: '/generador-qr',
     tags: ['qr', 'marketing', 'movil'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T10:00:00.000Z',
+    updatedAt: '2026-08-20T18:30:00.000Z',
     content: `## Un QR no sirve si nadie puede escanearlo
 
 Los codigos QR parecen trivialmente faciles de crear, pero en la practica fallan mucho por decisiones de diseno: poco contraste, tamano insuficiente, enlaces rotos o exceso de elementos decorativos.
@@ -332,7 +332,7 @@ Antes de mandar a imprenta o publicar un QR en un cartel, merece la pena hacer e
 
 ## Recomendacion final
 
-Genera el QR, descargalo, imprimelo si hace falta y pruebalo con varios dispositivos antes de darlo por valido. Un minuto de test evita muchos fallos despues.
+Genera el QR, descargalo, imprimelo si hace falta y pruebalo con varios dispositivos antes de darlo por valido. Si solo tienes una captura o el archivo final, compruebalo tambien con el [lector de QR desde imagen](/lector-qr) para confirmar que el contenido se puede recuperar antes de publicarlo. Un minuto de test evita muchos fallos despues.
 `,
   },
   {

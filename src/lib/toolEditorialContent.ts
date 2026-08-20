@@ -817,6 +817,9 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/compresor-webp', label: 'Compresor WebP' },
       { href: '/extractor-colores', label: 'Extractor de colores' },
     ],
+    relatedArticles: [
+      { href: '/articulos/como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo', label: 'Como crear codigos QR utiles y evitar errores de escaneo' },
+    ],
   }),
   'extractor-colores': buildEntry({
     summary: [

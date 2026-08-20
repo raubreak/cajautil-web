@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: "Lector de Códigos QR Online — Escanea QR desde Foto",
-  description: "Sube una foto de un código QR y extrae su contenido (URL o texto) al instante. 100% privado y seguro: la imagen se procesa en tu navegador y no se envía a ningún servidor.",
+  title: "Leer QR desde una Imagen o Foto | Lector QR Online",
+  description: "Sube una imagen o foto de un código QR y extrae su URL o texto en el navegador. Compatible con JPG, PNG y WebP de hasta 10 MB.",
   keywords: [
     "lector de QR",
     "escanear QR online",
@@ -19,10 +19,15 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/lector-qr`,
   },
   openGraph: {
-    title: "Lector de Códigos QR Online — Privado y Seguro",
-    description: "Sube una foto de un QR y lee su contenido al instante. 100% privado.",
+    title: "Leer QR desde una Imagen o Foto | CajaUtil",
+    description: "Sube una foto o captura con un QR y extrae su contenido directamente en el navegador.",
     url: `${SITE_URL}/lector-qr`,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Leer QR desde una Imagen o Foto | CajaUtil",
+    description: "Sube una foto o captura con un QR y extrae su contenido directamente en el navegador.",
   },
 };
 
@@ -31,7 +36,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Lector de Códigos QR Online",
   url: `${SITE_URL}/lector-qr`,
-  description: "Escanea y lee códigos QR desde fotos. Privado y seguro.",
+  description: "Lee códigos QR desde imágenes, fotos y capturas compatibles procesadas en el navegador.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "All",
   offers: {
