@@ -251,6 +251,7 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     ],
     relatedArticles: [
       { href: '/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad', label: 'TIN, TAE y cuota mensual: cómo comparar préstamos de verdad' },
+      { href: '/articulos/cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda', label: 'Cuánto dinero necesitas ahorrar para comprar una vivienda' },
     ],
     references: [{ href: 'https://www.bde.es/', label: 'Guía hipotecaria del Banco de España' }],
     disclaimer:

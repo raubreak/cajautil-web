@@ -543,6 +543,125 @@ En estos casos, una calculadora puede seguir siendo util, pero necesita mucho ma
 Las calculadoras son utiles cuando abren la puerta a decisiones prudentes y medibles. Si necesitas una interpretacion clinica o tienes condicion medica previa, consulta con un profesional sanitario.
 `,
   },
+  {
+    slug: 'cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda',
+    title: 'Cuánto dinero necesitas ahorrar para comprar una vivienda',
+    description:
+      'Calcula la entrada, los gastos de compra y el colchón que conviene conservar antes de firmar una hipoteca.',
+    targetToolUrl: '/calculadora-hipotecas',
+    tags: ['hipoteca', 'vivienda', 'ahorro'],
+    publishedAt: '2026-08-20T10:00:00.000Z',
+    updatedAt: '2026-08-20T10:00:00.000Z',
+    content: `## La entrada no es el único ahorro que necesitas
+
+Cuando calculas cuánto dinero necesitas ahorrar para comprar una vivienda, es fácil quedarse con una sola cifra: la parte del precio que el banco no financia. Sin embargo, llegar a la firma exige separar al menos cuatro bolsas de dinero: la diferencia entre el precio y el préstamo, los impuestos y gastos de la compraventa, los costes que correspondan al comprador y un colchón para no estrenar la hipoteca con la cuenta vacía.
+
+No existe un porcentaje universal válido para todas las compras. La vivienda nueva y la usada tributan de forma distinta, los impuestos cambian según la comunidad autónoma y la financiación depende de la tasación, la solvencia y la política de cada entidad. Por eso es más útil calcular por escenarios que repetir una regla cerrada.
+
+## La fórmula práctica para estimar el ahorro inicial
+
+Puedes ordenar el cálculo así:
+
+**Ahorro necesario = parte no financiada + impuestos y gastos de compra + tasación y costes del comprador + colchón posterior**
+
+Cada bloque responde a una pregunta diferente:
+
+1. **Parte no financiada:** diferencia entre el precio de compra y el importe que finalmente presta el banco.
+2. **Impuestos y compraventa:** dependen de si la vivienda es nueva o usada, de su ubicación y de las circunstancias del comprador.
+3. **Costes asociados:** pueden incluir tasación, copias solicitadas, asesoramiento o gestiones que no asuma la entidad.
+4. **Colchón posterior:** reserva para mudanza, reparaciones, mobiliario, comunidad e imprevistos sin recurrir a deuda de consumo.
+
+La clave es no mezclar estos importes. Si utilizas todo el ahorro para completar el precio, cualquier reparación o gasto de instalación aparecerá justo cuando acabas de asumir una obligación mensual de largo plazo.
+
+## Ejemplo con una vivienda de 200.000 EUR
+
+Imagina una compra de 200.000 EUR y una oferta hipotecaria de 160.000 EUR. Este 80% es solo un supuesto para entender el método; no es un derecho ni una financiación garantizada.
+
+| Concepto | Importe ilustrativo |
+|---|---:|
+| Precio de compra | 200.000 EUR |
+| Préstamo supuesto | 160.000 EUR |
+| Parte no financiada | 40.000 EUR |
+| Impuestos y compra, escenario del 8% | 16.000 EUR |
+| Impuestos y compra, escenario del 10% | 20.000 EUR |
+| Impuestos y compra, escenario del 12% | 24.000 EUR |
+
+Antes de añadir tasación y colchón, el ahorro se situaría entre 56.000 y 64.000 EUR en esos tres escenarios. Los porcentajes sirven para probar sensibilidad, no para sustituir el cálculo fiscal real. Debes confirmar el impuesto aplicable, las posibles bonificaciones y los gastos concretos de la operación antes de firmar arras.
+
+Puedes usar la [calculadora de porcentajes](/calculadora-porcentajes) para probar distintos costes de compra y la [calculadora de hipotecas](/calculadora-hipotecas) para convertir el préstamo previsto en una cuota mensual.
+
+## Gastos de compra y gastos de hipoteca no son lo mismo
+
+Esta distinción evita muchos cálculos inflados o incompletos. Los impuestos y gastos de comprar la vivienda pertenecen a la compraventa. Los gastos de formalizar el préstamo hipotecario tienen otro reparto.
+
+El [Banco de España explica el reparto vigente de los gastos de formalización](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Gastos_asociados_a_la_hipoteca.html): el cliente paga la tasación, mientras que la entidad asume notaría, registro, impuestos y gestoría asociados a la hipoteca. Esto no significa que el banco pague los impuestos de la compraventa ni todos los costes de adquirir la vivienda.
+
+La [Ley 5/2019 reguladora de los contratos de crédito inmobiliario](https://www.boe.es/buscar/act.php?id=BOE-A-2019-3814) establece el marco de transparencia y protección en la contratación. Aun así, cada compraventa necesita un presupuesto desglosado para distinguir qué corresponde al préstamo y qué corresponde a adquirir el inmueble.
+
+## El precio y la tasación pueden cambiar la financiación
+
+El banco estudia tu capacidad de pago y también encarga o acepta una tasación homologada. Si compras por 200.000 EUR pero la valoración que utiliza la entidad es inferior, el importe financiable puede quedar por debajo de lo que esperabas. Esa diferencia sale de tu ahorro o puede impedir la operación.
+
+Por eso conviene preparar tres escenarios antes de entregar cantidades importantes:
+
+- **Escenario previsto:** financiación y tasación encajan con el presupuesto inicial.
+- **Escenario prudente:** el banco presta algo menos y necesitas aportar más entrada.
+- **Escenario de salida:** defines cuánto perderías o qué condiciones deberían cumplirse para no continuar.
+
+Las arras y sus condiciones merecen revisión profesional. Una preaprobación comercial no equivale necesariamente a una concesión definitiva del préstamo.
+
+## Cuánto colchón conservar después de comprar
+
+El colchón no debería calcularse como un porcentaje automático de la vivienda, sino a partir de tus gastos reales. Suma hipoteca, alimentación, suministros, seguros, transporte, comunidad y otras obligaciones mensuales. Después decide cuántos meses necesitas poder cubrir si bajan tus ingresos o aparece un gasto importante.
+
+Una persona con ingresos muy estables, dos titulares y pocos gastos puede aceptar una reserva distinta a la de un autónomo con ingresos variables. Lo importante es que el resultado no sea cero. Comprar una vivienda sin liquidez convierte una avería, una derrama o una mudanza más cara de lo previsto en nueva deuda.
+
+El [Banco de España recomienda analizar coste total, cuota, plazo y productos adicionales](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Contratacion_de_la_hipoteca.html) antes de contratar. La entidad también evaluará ingresos, activos, gastos y compromisos, pero superar su estudio no garantiza que la operación sea cómoda para tu economía doméstica.
+
+## Señales de que todavía vas demasiado justo
+
+- Necesitas financiar también impuestos, muebles o reformas con préstamos personales.
+- La compra consume todo tu ahorro y no deja reserva para imprevistos.
+- Solo puedes pagar la cuota si mantienes bonus u horas extra inciertas.
+- Has calculado la cuota inicial, pero no seguros, comunidad, mantenimiento o posibles subidas.
+- El presupuesto depende de que la tasación sea igual o superior al precio.
+- No has comparado la FEIN, la TAE y el coste de los productos vinculados.
+
+En ese punto, rebajar el precio objetivo o aplazar la compra no es fracasar. Es evitar que una operación de largo plazo nazca sin margen.
+
+## Checklist antes de firmar arras
+
+1. Confirma cuánto presta realmente la entidad y sobre qué valor realiza el cálculo.
+2. Solicita una estimación fiscal según vivienda nueva o usada y comunidad autónoma.
+3. Separa los gastos de compraventa de los gastos de formalización hipotecaria.
+4. Reserva el coste de tasación y cualquier servicio que contrates voluntariamente.
+5. Simula la cuota con varios tipos y plazos, no solo con la oferta más optimista.
+6. Comprueba cuánto ahorro queda después de firma, mudanza y primeras reparaciones.
+7. Lee la FEIN y pregunta cualquier diferencia respecto a la propuesta inicial.
+
+## Preguntas frecuentes
+
+### ¿Necesito tener ahorrado siempre el 30% del precio?
+
+No existe una regla legal universal del 30%. Esa cifra suele mezclar una entrada orientativa con impuestos y otros gastos, pero la necesidad real depende del porcentaje financiado, la tasación, la fiscalidad y el colchón que quieras conservar.
+
+### ¿El banco paga todos los gastos de comprar la vivienda?
+
+No. El reparto legal de determinados gastos se refiere a la formalización de la hipoteca. Los impuestos y costes de la compraventa deben presupuestarse aparte.
+
+### ¿Puedo usar todos mis ahorros como entrada?
+
+Poder no significa que sea prudente. Si la operación deja tu liquidez a cero, cualquier imprevisto puede obligarte a contratar deuda más cara. Incluye una reserva posterior dentro del objetivo de ahorro.
+
+### ¿Cómo sé si la cuota será asumible?
+
+Compara la cuota con tu neto mensual y con todos tus gastos recurrentes. Prueba también un escenario menos favorable y revisa cuánto margen queda para ahorro, mantenimiento e imprevistos.
+
+## Siguiente paso
+
+Calcula primero cuánto préstamo necesitarías y simula diferentes entradas en la [calculadora de hipotecas](/calculadora-hipotecas). Después añade impuestos, tasación y colchón en partidas separadas. El resultado será menos atractivo que una regla rápida, pero mucho más útil para decidir si puedes comprar sin quedarte sin margen.
+`,
+  },
 ];
 
 export function getEditorialArticleBySlug(slug: string): EditorialArticle | undefined {
