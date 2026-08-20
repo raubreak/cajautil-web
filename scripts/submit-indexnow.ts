@@ -20,7 +20,11 @@ async function main() {
     throw new Error(`No se pudo leer ${SITEMAP_URL}: HTTP ${sitemapResponse.status}`);
   }
 
-  const urls = extractSitemapUrls(await sitemapResponse.text());
+  const sitemapUrls = extractSitemapUrls(await sitemapResponse.text());
+  const requestedUrls = process.argv.slice(2).filter((argument) => argument !== '--dry-run');
+  const urls = requestedUrls.length
+    ? requestedUrls.map((url) => new URL(url, SITE_URL).toString())
+    : sitemapUrls;
 
   if (urls.length === 0 || urls.length > 10_000) {
     throw new Error(`Cantidad de URLs no valida para IndexNow: ${urls.length}`);
@@ -31,6 +35,10 @@ async function main() {
 
     if (parsedUrl.origin !== SITE_URL) {
       throw new Error(`El sitemap contiene una URL fuera del host canonico: ${url}`);
+    }
+
+    if (!sitemapUrls.includes(url)) {
+      throw new Error(`La URL no aparece en el sitemap indexable: ${url}`);
     }
   }
 
