@@ -26,7 +26,7 @@ const toolDefinitions = [
   ['generador-contrasenas', 'monthly', 0.8],
   ['mayusculas-minusculas', 'monthly', 0.7, '2026-08-20T22:10:06.000Z'],
   ['generador-qr', 'monthly', 0.8, '2026-08-20T22:38:27.000Z'],
-  ['lector-qr', 'monthly', 0.7, '2026-08-20T16:43:16.000Z'],
+  ['lector-qr', 'monthly', 0.7, '2026-08-20T23:13:25.000Z'],
   ['calculadora-dias', 'monthly', 0.7, '2026-08-20T20:37:15.000Z'],
   ['traductor-binario', 'monthly', 0.9],
   ['calculadora-edad', 'monthly', 0.9, '2026-08-20T22:50:49.000Z'],
