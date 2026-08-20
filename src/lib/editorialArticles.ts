@@ -334,7 +334,7 @@ Convierte una muestra con el [compresor WebP](/compresor-webp), compara el archi
     targetToolUrl: '/generador-qr',
     tags: ['qr', 'marketing', 'movil'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:26:00.000Z',
+    updatedAt: '2026-08-20T18:09:35.000Z',
     content: `## Un QR no sirve si nadie puede escanearlo
 
 Los codigos QR parecen trivialmente faciles de crear, pero en la practica fallan mucho por decisiones de diseno: poco contraste, tamano insuficiente, enlaces rotos o exceso de elementos decorativos.
@@ -394,6 +394,8 @@ Tambien conviene pensar en la luz ambiente, el reflejo del cristal y la calidad 
 - No revisar si el contenido final sigue activo tras unas semanas.
 - Usar acortadores o redirecciones opacas sin necesidad.
 
+Tampoco conviene publicar en un QR credenciales, claves privadas o datos que deban permanecer restringidos: cualquiera que vea el soporte puede copiarlos. Si el acceso necesita una clave, aplica primero las recomendaciones para [crear y guardar contrasenas seguras](/articulos/por-que-las-contrasenas-largas-suelen-ser-mejores-que-las-complejas) y decide si ese cartel es realmente el canal adecuado.
+
 ## Errores mas comunes
 
 1. Cambiar colores hasta perder legibilidad.
@@ -419,6 +421,8 @@ Antes de mandar a imprenta o publicar un QR en un cartel, merece la pena hacer e
 ## Recomendacion final
 
 Genera una primera version con el [generador de QR](/generador-qr), descargala e imprimela a escala real si el destino es fisico. Despues prueba el archivo final con varios dispositivos y compruebalo tambien con el [lector de QR desde imagen](/lector-qr). Este flujo detecta tanto problemas del patron como errores introducidos al maquetar, comprimir o exportar el diseño.
+
+Si el QR forma parte de una imagen para web, revisa antes [cuando conviene convertir a WebP](/articulos/webp-cuando-conviene-convertir-imagenes-y-cuando-no). Una compresion con perdida puede ser razonable para la fotografia que lo rodea, pero no para el patron que debe decodificarse.
 `,
   },
   {
@@ -697,12 +701,14 @@ Usa la [calculadora de IMC](/calculadora-imc) para obtener una referencia de pes
     targetToolUrl: '/calculadora-hipotecas',
     tags: ['hipoteca', 'vivienda', 'ahorro'],
     publishedAt: '2026-08-20T10:00:00.000Z',
-    updatedAt: '2026-08-20T10:00:00.000Z',
+    updatedAt: '2026-08-20T18:09:36.000Z',
     content: `## La entrada no es el único ahorro que necesitas
 
 Cuando calculas cuánto dinero necesitas ahorrar para comprar una vivienda, es fácil quedarse con una sola cifra: la parte del precio que el banco no financia. Sin embargo, llegar a la firma exige separar al menos cuatro bolsas de dinero: la diferencia entre el precio y el préstamo, los impuestos y gastos de la compraventa, los costes que correspondan al comprador y un colchón para no estrenar la hipoteca con la cuenta vacía.
 
 No existe un porcentaje universal válido para todas las compras. La vivienda nueva y la usada tributan de forma distinta, los impuestos cambian según la comunidad autónoma y la financiación depende de la tasación, la solvencia y la política de cada entidad. Por eso es más útil calcular por escenarios que repetir una regla cerrada.
+
+Si comparas una vivienda nueva con una usada, no reutilices un porcentaje genérico sin confirmar qué impuesto corresponde. La guía para [calcular el IVA correctamente](/articulos/como-calcular-el-iva-correctamente-en-facturas-y-presupuestos) explica por qué la operación matemática y el criterio fiscal son decisiones distintas.
 
 ## La fórmula práctica para estimar el ahorro inicial
 
@@ -784,6 +790,7 @@ En ese punto, rebajar el precio objetivo o aplazar la compra no es fracasar. Es 
 5. Simula la cuota con varios tipos y plazos, no solo con la oferta más optimista.
 6. Comprueba cuánto ahorro queda después de firma, mudanza y primeras reparaciones.
 7. Lee la FEIN y pregunta cualquier diferencia respecto a la propuesta inicial.
+8. Antes de transferir arras o cantidades importantes, confirma el destinatario por un canal independiente y revisa cómo [evitar errores al copiar un IBAN](/articulos/iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero).
 
 ## Preguntas frecuentes
 
@@ -801,7 +808,7 @@ Poder no significa que sea prudente. Si la operación deja tu liquidez a cero, c
 
 ### ¿Cómo sé si la cuota será asumible?
 
-Compara la cuota con tu neto mensual y con todos tus gastos recurrentes. Prueba también un escenario menos favorable y revisa cuánto margen queda para ahorro, mantenimiento e imprevistos.
+Compara la cuota con tu neto mensual y con todos tus gastos recurrentes. Si estás valorando una oferta laboral o un cambio de ingresos, la guía para [negociar el sueldo sin perder de vista el neto](/articulos/como-negociar-tu-sueldo-bruto-sin-perder-neto) ayuda a separar bruto, liquidez y gastos asociados. Prueba también un escenario menos favorable y revisa cuánto margen queda para ahorro, mantenimiento e imprevistos.
 
 ## Siguiente paso
 
