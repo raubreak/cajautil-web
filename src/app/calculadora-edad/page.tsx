@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Cake, Hourglass, Milestone, Infinity, PartyPopper } from 'lucide-react';
 
+import { calculateCalendarAge, calculateNextBirthday } from '@/lib/ageCalculator';
+
 interface AgeStats {
   years: number;
   months: number;
@@ -12,6 +14,7 @@ interface AgeStats {
   totalMinutes: number;
   totalSeconds: number;
   nextBirthday: {
+    isToday: boolean;
     days: number;
     hours: number;
     minutes: number;
@@ -56,20 +59,8 @@ export default function CalculadoraEdad() {
 
       setError('');
 
-      // Basic Age Logic
-      let y = now.getFullYear() - birth.getFullYear();
-      let m = now.getMonth() - birth.getMonth();
-      let d = now.getDate() - birth.getDate();
-
-      if (d < 0) {
-        m--;
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        d += prevMonth.getDate();
-      }
-      if (m < 0) {
-        y--;
-        m += 12;
-      }
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const calendarAge = calculateCalendarAge(birth, today);
 
       // High Precision Stats
       const diffMs = now.getTime() - birth.getTime();
@@ -78,33 +69,17 @@ export default function CalculadoraEdad() {
       const totalMinutes = Math.floor(diffMs / (1000 * 60));
       const totalSeconds = Math.floor(diffMs / 1000);
 
-      // A 29 de febrero se celebra el último día de febrero en años no bisiestos.
-      const nextBdayYear = now.getMonth() > birth.getMonth() || (now.getMonth() === birth.getMonth() && now.getDate() > birth.getDate()) 
-        ? now.getFullYear() + 1 
-        : now.getFullYear();
-      const lastDayOfBirthMonth = new Date(nextBdayYear, birth.getMonth() + 1, 0).getDate();
-      const nextBday = new Date(nextBdayYear, birth.getMonth(), Math.min(birth.getDate(), lastDayOfBirthMonth));
-      const bdayDiffMs = nextBday.getTime() - now.getTime();
-      
-      const bdayDays = Math.floor(bdayDiffMs / (1000 * 60 * 60 * 24));
-      const bdayHours = Math.floor((bdayDiffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const bdayMinutes = Math.floor((bdayDiffMs % (1000 * 60 * 60)) / (1000 * 60));
-      const bdaySeconds = Math.floor((bdayDiffMs % (1000 * 60)) / 1000);
+      const nextBirthday = calculateNextBirthday(birth, now);
 
       setStats({
-        years: y,
-        months: m,
-        days: d,
+        years: calendarAge.years,
+        months: calendarAge.months,
+        days: calendarAge.days,
         totalDays,
         totalHours,
         totalMinutes,
         totalSeconds,
-        nextBirthday: {
-            days: bdayDays,
-            hours: bdayHours,
-            minutes: bdayMinutes,
-            seconds: bdaySeconds
-        }
+        nextBirthday,
       });
     };
 
@@ -135,11 +110,14 @@ export default function CalculadoraEdad() {
                  <Calendar className="w-8 h-8 text-amber-600" />
             </div>
             <div className="w-full">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block text-center">Tu fecha de nacimiento</label>
+                <label htmlFor="birth-date" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block text-center">Tu fecha de nacimiento</label>
                 <input 
+                    id="birth-date"
                     type="date"
                     max={maxBirthDate}
                     value={birthDate}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? 'birth-date-error' : stats ? undefined : 'birth-date-help'}
                     onChange={(e) => {
                       setBirthDate(e.target.value);
                       if (!e.target.value) {
@@ -150,9 +128,9 @@ export default function CalculadoraEdad() {
                     className="w-full bg-slate-50 border-2 border-slate-100 p-5 rounded-2xl text-2xl font-bold text-slate-700 focus:outline-none focus:border-amber-300 focus:ring-4 focus:ring-amber-50 transition uppercase"
                 />
             </div>
-            {error && <p className="text-sm font-semibold text-red-600 text-center" role="alert">{error}</p>}
-            {!stats && (
-                <p className="text-xs text-slate-400 italic text-center leading-relaxed">Inserta el día en que naciste para que nuestro algoritmo calcule tu trayectoria cronológica en tiempo real.</p>
+            {error && <p id="birth-date-error" className="text-sm font-semibold text-red-600 text-center" role="alert">{error}</p>}
+            {!stats && !error && (
+                <p id="birth-date-help" className="text-xs text-slate-400 italic text-center leading-relaxed">Introduce tu fecha de nacimiento para calcular la edad por calendario.</p>
             )}
         </section>
 
@@ -194,20 +172,26 @@ export default function CalculadoraEdad() {
                 
                 {/* Cuánto falta para el cumple */}
                 <div className="bg-slate-900 rounded-[32px] p-8 text-white relative overflow-hidden group">
-                     {stats && stats.nextBirthday.days === 0 && <PartyPopper className="absolute -bottom-4 -right-4 w-32 h-32 text-amber-500/20 rotate-12" />}
+                     {stats?.nextBirthday.isToday && <PartyPopper className="absolute -bottom-4 -right-4 w-32 h-32 text-amber-500/20 rotate-12" />}
                      <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
                         <Cake className="w-4 h-4 text-amber-500" /> Próximo Cumpleaños
                      </h3>
                      {stats ? (
                          <div className="space-y-4">
-                            <div className="text-3xl font-black text-white tabular-nums leading-none">
-                                {stats.nextBirthday.days} <span className="text-sm font-normal text-slate-400">días restantes</span>
-                            </div>
-                            <div className="flex items-center gap-4 text-xs font-mono text-slate-500">
-                                <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.hours}h</span>
-                                <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.minutes}m</span>
-                                <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.seconds}s</span>
-                            </div>
+                             {stats.nextBirthday.isToday ? (
+                               <div className="text-3xl font-black text-white leading-none">¡Es hoy!</div>
+                             ) : (
+                               <>
+                                 <div className="text-3xl font-black text-white tabular-nums leading-none">
+                                     {stats.nextBirthday.days} <span className="text-sm font-normal text-slate-400">días restantes</span>
+                                 </div>
+                                 <div className="flex items-center gap-4 text-xs font-mono text-slate-500">
+                                     <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.hours}h</span>
+                                     <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.minutes}m</span>
+                                     <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.seconds}s</span>
+                                 </div>
+                               </>
+                             )}
                          </div>
                      ) : (
                          <div className="text-slate-700 italic text-sm">--</div>

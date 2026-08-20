@@ -24,7 +24,13 @@ export const metadata: Metadata = {
     description: 'Consulta tu edad por calendario y una estimación del tiempo transcurrido desde tu nacimiento.',
     url: `${SITE_URL}/calculadora-edad`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Calculadora de Edad | Años, Meses y Días',
+    description: 'Calcula tu edad por calendario y cuánto falta para tu próximo cumpleaños.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {
