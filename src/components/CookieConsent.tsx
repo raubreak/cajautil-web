@@ -16,7 +16,7 @@ type ConsentStatus = 'accepted' | 'rejected' | null;
 
 export default function CookieConsent() {
   const [consent, setConsent] = useState<ConsentStatus>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const rejectButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -25,7 +25,8 @@ export default function CookieConsent() {
     const timer = setTimeout(() => {
       setConsent(savedConsent);
       setVisible(!savedConsent);
-    }, savedConsent ? 0 : 800);
+      document.documentElement.removeAttribute('data-caja-consent');
+    }, 0);
     return () => clearTimeout(timer);
   }, []);
 
@@ -102,15 +103,14 @@ export default function CookieConsent() {
         <div
           role="dialog"
           aria-label="Aviso de cookies"
-          className="fixed bottom-0 inset-x-0 z-[9999] p-4 sm:p-6 animate-in slide-in-from-bottom"
+          className="cookie-consent-banner fixed bottom-0 inset-x-0 z-[9999] p-4 sm:p-6"
         >
           <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl border border-slate-200 p-5 sm:p-6">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div className="flex-grow">
                 <h2 className="text-base font-bold text-slate-800 mb-1">Uso de cookies</h2>
                 <p className="text-sm text-slate-500 leading-relaxed">
-                  Google Analytics nos ayuda a medir el uso del sitio. La publicidad de terceros está desactivada
-                  mientras no podamos garantizar formatos no intrusivos. Puedes aceptar o rechazar la analítica.{' '}
+                  Usamos Google Analytics solo si lo aceptas. La publicidad de terceros está desactivada.{' '}
                   <Link href="/politica-de-cookies" className="text-blue-600 hover:underline font-medium">
                     Más información sobre cookies
                   </Link>

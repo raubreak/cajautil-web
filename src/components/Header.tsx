@@ -49,19 +49,18 @@ export default function Header() {
         <Link href="/" className="text-xl font-black tracking-tighter text-slate-800 hover:opacity-80 transition-opacity" aria-label="CajaUtil.com, ir a la página de inicio">
           Caja<span className="text-blue-600">Util</span><span className="text-slate-500 text-sm font-medium">.com</span>
         </Link>
-        <div className="hidden md:flex items-center gap-1">
-          {herramientasNav.slice(0, 5).map((item) => (
-            <Link 
-              key={item.ruta} 
-              href={item.ruta} 
-              className="flex min-h-11 items-center rounded-lg px-3 text-xs font-semibold text-slate-600 transition-colors hover:bg-blue-50 hover:text-blue-700"
-            >
-              {item.nombre}
-            </Link>
-          ))}
-          <SearchModal />
-        </div>
-        <div className="md:hidden">
+        <div className="flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1">
+            {herramientasNav.slice(0, 5).map((item) => (
+              <Link
+                key={item.ruta}
+                href={item.ruta}
+                className="flex min-h-11 items-center rounded-lg px-3 text-xs font-semibold text-slate-600 transition-colors hover:bg-blue-50 hover:text-blue-700"
+              >
+                {item.nombre}
+              </Link>
+            ))}
+          </div>
           <SearchModal />
         </div>
       </div>
