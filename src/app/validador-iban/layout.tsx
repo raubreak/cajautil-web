@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Validador de IBAN Online Seguro y Privado',
-  description: 'Comprueba si un número de cuenta bancaria IBAN es correcto y válido. La validación se hace 100% en tu navegador por motivos de seguridad.',
+  title: 'Validador de IBAN Español Online',
+  description: 'Comprueba la estructura de un IBAN español y sus dígitos de control MOD-97 en tu navegador. No verifica titularidad ni existencia de la cuenta.',
   keywords: [
     "validador iban",
     "comprobar iban",
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/validador-iban`,
   },
   openGraph: {
-    title: 'Validador de IBAN Online 100% Seguro',
-    description: 'Verifica códigos de cuenta bancaria IBAN al instante. Tus datos no se envían a ningún servidor, el algoritmo funciona localmente.',
+    title: 'Validador de IBAN Español | Comprobación MOD-97',
+    description: 'Comprueba localmente la estructura española y los dígitos de control de un IBAN antes de revisar los datos con tu banco.',
     url: `${SITE_URL}/validador-iban`,
   }
 };
@@ -28,7 +28,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Validador de IBAN",
   url: `${SITE_URL}/validador-iban`,
-  description: "Herramienta online para auditar y validar números de cuenta bancarios (IBAN) usando el algoritmo matemático MOD 97-10 de manera segura en el cliente.",
+  description: "Herramienta online para comprobar la estructura española y los dígitos de control MOD 97-10 de un IBAN en el navegador.",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Any",
   offers: {

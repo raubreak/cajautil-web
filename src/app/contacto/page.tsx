@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Contacto',
-  description: 'Contacta con el equipo de CajaUtil.com para sugerencias, reportar errores o proponer nuevas herramientas. Respondemos en 24-48 horas.',
+  description: 'Contacta con el equipo de CajaUtil.com para sugerencias, reportar errores o proponer nuevas herramientas.',
   alternates: {
     canonical: 'https://cajautil.com/contacto',
   },
@@ -65,7 +65,7 @@ export default function Contacto() {
                 hola@cajautil.com
               </a>
               <p className="text-sm text-slate-500">
-                Intentamos responder a todos los mensajes en un plazo de 24-48 horas laborables.
+                Leemos las consultas y respondemos cuando requieren seguimiento.
               </p>
             </div>
 
@@ -99,8 +99,8 @@ export default function Contacto() {
               <h2 className="text-lg font-bold text-slate-800 mb-2">Sobre CajaUtil.com</h2>
               <p className="text-sm text-slate-600 mb-4">
                 CajaUtil.com es un proyecto independiente creado con el objetivo de ofrecer herramientas web gratuitas,
-                 rápidas y con procesamiento local cuando es posible.
-                 Mantenemos los servidores y el desarrollo gracias a la publicidad y explicamos ese uso en nuestras páginas legales.
+                rápidas y con procesamiento local cuando es posible. Actualmente financiamos los servidores y el desarrollo
+                con recursos propios; la publicidad de terceros permanece desactivada mientras no podamos garantizar formatos no intrusivos.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/sobre-nosotros" className="text-sm font-semibold text-blue-600 hover:underline">
@@ -193,7 +193,7 @@ export default function Contacto() {
                   Al enviar este formulario, aceptas nuestra{' '}
                   <Link href="/politica-de-privacidad" className="text-blue-500 hover:underline">
                     política de privacidad
-                  </Link>. No almacenamos tus datos en ningún servidor.
+                  </Link>. Al enviarlo se abrirá tu aplicación de correo y el mensaje será tratado por los proveedores de correo del remitente y de CajaUtil; no se guarda en una base de datos del formulario.
                 </p>
               </form>
             </div>

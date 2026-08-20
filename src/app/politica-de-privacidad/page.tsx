@@ -23,7 +23,7 @@ export default function PoliticaPrivacidad() {
           Este documento detalla los tipos de información que CajaUtil.com recoge y registra, así como la manera en que la utilizamos.
         </p>
 
-        <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">2. Herramientas 100% Locales</h2>
+        <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">2. Herramientas con procesamiento local</h2>
         <p>
           La gran mayoría de nuestras herramientas (como la calculadora de sueldo neto, el generador de contraseñas, contador de palabras y generador de códigos QR) 
           funcionan <strong>exclusivamente en tu navegador (lado del cliente o client-side)</strong>. 
@@ -40,10 +40,10 @@ export default function PoliticaPrivacidad() {
           La publicidad de terceros está desactivada mientras no podamos garantizar formatos no intrusivos.
         </p>
 
-        <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">4. Nuestros socios publicitarios</h2>
+        <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">4. Servicios de analítica de terceros</h2>
         <p>
-          Algunos anunciantes en nuestro sitio pueden utilizar cookies y web beacons. Nuestros socios publicitarios se enumeran a continuación. 
-          Cada uno de ellos tiene su propia Política de Privacidad para sus políticas sobre los datos de los usuarios.
+          Si aceptas la analítica, Google Analytics puede tratar datos técnicos y de navegación conforme a su propia política de privacidad.
+          No cargamos redes publicitarias de terceros mientras esos formatos permanezcan desactivados.
         </p>
         <ul className="list-disc pl-6 mb-4">
           <li><strong>Google Analytics:</strong> <a href="https://policies.google.com/privacy" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>

@@ -79,8 +79,8 @@ const AboutUsPage = () => {
             </p>
             <p>
               Gran parte de nuestras herramientas se ejecutan <strong>localmente en tu navegador</strong>. Cuando el procesamiento
-              puede hacerse en el dispositivo, evitamos enviar tus datos a servidores externos. En los casos en los que usamos
-              servicios de terceros para analítica o publicidad, lo informamos de forma transparente en
+              puede hacerse en el dispositivo, evitamos enviar los datos introducidos a nuestros servidores. El uso de analítica
+              opcional y el estado de la publicidad se explican de forma transparente en
               nuestra <Link href="/politica-de-privacidad" className="text-blue-600 font-semibold hover:underline">política de privacidad</Link> y
               nuestra <Link href="/politica-de-cookies" className="text-blue-600 font-semibold hover:underline">política de cookies</Link>.
             </p>

@@ -111,7 +111,7 @@ const faqJsonLd = {
       name: "¿Es seguro usar el generador de contraseñas online?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Absolutamente. Las contraseñas se generan localmente en tu navegador y nunca se envían por internet. Tu contraseña no sale de tu dispositivo.",
+        text: "Sí. Las contraseñas se generan localmente en tu navegador y CajaUtil no recibe el valor generado.",
       },
     },
     {
@@ -297,7 +297,7 @@ export default function Home() {
     },
     {
       titulo: 'Validador de IBAN',
-      descripcion: 'Validador algorítmico MOD 97 para cuentas bancarias europeas. Privado y 100% offline.',
+      descripcion: 'Comprueba la estructura y los dígitos MOD-97 de un IBAN español directamente en tu navegador.',
       ruta: '/validador-iban',
       Icono: ShieldCheck,
       color: 'from-indigo-400 to-indigo-600',
@@ -401,7 +401,7 @@ export default function Home() {
     },
     {
       titulo: 'Cronómetro Online',
-      descripcion: 'Mide tiempos con absoluta precisión. Incluye sistema de vueltas y centésimas de segundo.',
+      descripcion: 'Mide tiempos en el navegador e incluye registro de vueltas y centésimas de segundo.',
       ruta: '/cronometro',
       Icono: Timer,
       color: 'from-indigo-400 to-blue-500',
@@ -483,7 +483,7 @@ export default function Home() {
             </p>
             <p>
               Todas las herramientas son <strong>100% gratuitas</strong> y están optimizadas para móvil, tablet y ordenador.
-              Muchas se ejecutan directamente en tu navegador y, cuando intervienen servicios de analítica o publicidad, lo explicamos en nuestras páginas legales.
+              Muchas se ejecutan directamente en tu navegador. La analítica opcional y el estado de la publicidad se explican en nuestras páginas legales.
               No necesitas crear cuenta, instalar nada ni dar tu email para usar la web.
             </p>
           </div>
@@ -502,7 +502,7 @@ export default function Home() {
               },
               {
                 pregunta: "¿Es seguro usar el generador de contraseñas online?",
-                respuesta: "Absolutamente. Las contraseñas se generan localmente en tu navegador y nunca se envían por internet. Tu contraseña no sale de tu dispositivo."
+                respuesta: "Sí. Las contraseñas se generan localmente en tu navegador y CajaUtil no recibe el valor generado."
               },
               {
                 pregunta: "¿Puedo usar estas herramientas desde el móvil?",

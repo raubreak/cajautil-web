@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import { Image as ImageIcon, UploadCloud, Settings, Download, Shield, CheckCircle2, X, ArrowRightCircle } from 'lucide-react';
 
 interface ImageItem {
@@ -122,7 +123,7 @@ export default function CompresorWebPClient() {
   };
 
   const downloadAll = () => {
-    images.forEach((item, idx) => {
+    images.forEach((item) => {
       if (item.resultUrl) {
         const a = document.createElement('a');
         a.href = item.resultUrl;
@@ -133,12 +134,9 @@ export default function CompresorWebPClient() {
     });
   };
 
-  const totalOriginal = images.reduce((s, i) => s + i.file.size, 0);
   const totalCompressed = images.reduce((s, i) => s + (i.resultBlob?.size ?? 0), 0);
   const allDone = images.length > 0 && images.every(i => i.status === 'done');
   const hasPending = images.some(i => i.status === 'pending');
-  const savedPercent = totalOriginal > 0 && totalCompressed > 0 ? Math.round((1 - totalCompressed / totalOriginal) * 100) : 0;
-
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4 sm:px-6 z-10">
 
@@ -167,7 +165,7 @@ export default function CompresorWebPClient() {
             <span className={`font-bold text-slate-700 ${images.length > 0 ? 'text-sm' : 'text-lg'}`}>
               {images.length > 0 ? 'Añadir más imágenes' : 'Haz clic o arrastra tus fotos aquí'}
             </span>
-            {images.length === 0 && <span className="text-sm font-medium text-slate-400 mt-2">Soporta JPG, PNG, HEIC — Múltiples archivos</span>}
+            {images.length === 0 && <span className="text-sm font-medium text-slate-400 mt-2">JPG, PNG y otros formatos compatibles con tu navegador - Múltiples archivos</span>}
             <input type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
           </label>
 
@@ -190,7 +188,14 @@ export default function CompresorWebPClient() {
               <div className="space-y-2 max-h-[400px] overflow-y-auto">
                 {images.map(item => (
                   <div key={item.id} className="flex items-center gap-4 bg-slate-50 rounded-xl p-3 border border-slate-100">
-                    <img src={item.previewUrl} alt="Preview" className="w-12 h-12 object-cover rounded-lg shrink-0" />
+                    <Image
+                      src={item.previewUrl}
+                      alt={`Vista previa de ${item.file.name}`}
+                      width={48}
+                      height={48}
+                      unoptimized
+                      className="w-12 h-12 object-cover rounded-lg shrink-0"
+                    />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-700 truncate">{item.file.name}</p>
                       <p className="text-[11px] text-slate-400 font-mono">
@@ -251,12 +256,12 @@ export default function CompresorWebPClient() {
       <section className="w-full max-w-4xl prose prose-slate prose-headings:text-slate-800 mb-16 px-2 text-slate-600">
         <h2 className="text-2xl font-bold flex items-center gap-2 text-slate-800">
           <Shield className="w-6 h-6 text-sky-500" />
-          Velocidad WebP sin Servidores Externos.
+          Conversión WebP en tu navegador
         </h2>
-        <p>A diferencia de otras gigantescas webs de edición fotográfica, nosotros <strong>no enviamos jamás tu fotografía a ningún servidor externo</strong>. Todo el procesamiento ocurre íntegramente en tu navegador usando la API Canvas nativa.</p>
-        <p>El motor gráfico de tu hardware lee los píxeles, descarta los imperceptibles al ojo y reescribe el contenido en formato <code>.webp</code> (el estándar libre de Google). Esto significa que tu privacidad está 100% garantizada.</p>
-        <h3 className="text-lg font-bold">Por qué deberías subir el 100% como WebP</h3>
-        <p>Una imagen JPEG de cámara puede pesar 7 MB. Aplicando WebP en calidad media (Q=75) la misma foto pesa apenas <strong>140 KB</strong> con idéntica apariencia visual. Ideal para eCommerce, portfolios y cualquier web que necesite velocidad de carga.</p>
+        <p>La conversión se realiza localmente mediante la API Canvas del navegador. CajaUtil no recibe ni almacena las imágenes que eliges en esta herramienta.</p>
+        <p>El navegador decodifica la imagen y vuelve a codificarla como <code>.webp</code> con el nivel de calidad seleccionado. La compatibilidad de entrada y el resultado dependen del navegador, el formato original y el contenido de cada imagen.</p>
+        <h3 className="text-lg font-bold">Cuándo conviene utilizar WebP</h3>
+        <p>WebP puede reducir el peso de muchas fotografías e imágenes web, pero el ahorro y la diferencia visual varían en cada archivo. Compara siempre el resultado antes de sustituir el original, especialmente en imágenes con texto, transparencias o detalles finos.</p>
       </section>
     </main>
   );

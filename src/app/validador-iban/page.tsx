@@ -4,23 +4,42 @@ import React, { useState } from 'react';
 import { CreditCard, CheckCircle, AlertTriangle, ShieldCheck, Search, Link as LinkIcon, Plus } from 'lucide-react';
 import Link from 'next/link';
 
+interface ValidationResult {
+  status: 'idle' | 'valid' | 'invalid' | 'unsupported';
+  banksCode?: string;
+  message?: string;
+}
+
 export default function ValidadorIBAN() {
   const [ibanInput, setIbanInput] = useState('');
-  const [result, setResult] = useState<{ isValid: boolean | null; isSpanish: boolean; banksCode?: string; message?: string }>({
-    isValid: null,
-    isSpanish: false,
-  });
+  const [result, setResult] = useState<ValidationResult>({ status: 'idle' });
 
   const validateIBAN = (value: string) => {
     const iban = value.toUpperCase().replace(/[^A-Z0-9]/g, '');
     if (!iban) {
-      setResult({ isValid: null, isSpanish: false, message: 'Introduce un IBAN para validar' });
+      setResult({ status: 'idle', message: 'Introduce un IBAN para validar' });
       return;
     }
 
-    // Comprobación de longitud y formato mínimo (Letra Letra + Código)
-    if (iban.length < 15 || iban.length > 34 || !/^([A-Z]{2}[0-9]{2})(.*)$/.test(iban)) {
-      setResult({ isValid: false, isSpanish: false, message: 'Formato incorrecto. Revisa las letras o la longitud.' });
+    if (iban.length < 15 || iban.length > 34 || !/^[A-Z]{2}[0-9]{2}[A-Z0-9]+$/.test(iban)) {
+      setResult({ status: 'invalid', message: 'Formato incorrecto. Revisa las letras o la longitud.' });
+      return;
+    }
+
+    const countryCode = iban.slice(0, 2);
+    if (countryCode !== 'ES') {
+      setResult({
+        status: 'unsupported',
+        message: `El prefijo introducido es ${countryCode}. Esta herramienta comprueba únicamente la estructura de IBAN españoles.`,
+      });
+      return;
+    }
+
+    if (!/^ES[0-9]{22}$/.test(iban)) {
+      setResult({
+        status: 'invalid',
+        message: 'Un IBAN español debe contener ES, 2 dígitos de control y los 20 números del CCC.',
+      });
       return;
     }
 
@@ -40,10 +59,11 @@ export default function ValidadorIBAN() {
     const isValid = parseInt(remainder, 10) % 97 === 1;
 
     setResult({
-      isValid,
-      isSpanish: iban.startsWith('ES'),
-      banksCode: iban.startsWith('ES') ? iban.substring(4, 8) : undefined,
-      message: isValid ? 'El IBAN es matemáticamente correcto.' : 'El IBAN no pasa la comprobación (dígitos de control inválidos).'
+      status: isValid ? 'valid' : 'invalid',
+      banksCode: iban.substring(4, 8),
+      message: isValid
+        ? 'La estructura española y los dígitos de control MOD-97 son coherentes.'
+        : 'El IBAN no pasa la comprobación de los dígitos de control.'
     });
   };
 
@@ -51,7 +71,7 @@ export default function ValidadorIBAN() {
     const val = e.target.value;
     setIbanInput(val);
     if (val.trim() === '') {
-      setResult({ isValid: null, isSpanish: false });
+      setResult({ status: 'idle' });
     } else {
       validateIBAN(val);
     }
@@ -66,10 +86,10 @@ export default function ValidadorIBAN() {
           <CreditCard className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-600" />
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-800 tracking-tight mb-4 leading-tight">
-          Validador de <span className="text-indigo-600">IBAN</span>
+          Validador de <span className="text-indigo-600">IBAN español</span>
         </h1>
         <p className="text-base sm:text-lg text-slate-500 font-medium max-w-xl mx-auto leading-relaxed px-2">
-          Comprueba y valida números de cuenta bancarios (IBAN) al instante. 100% privado en tu navegador.
+          Comprueba la estructura española y los dígitos de control MOD-97 de forma local en tu navegador.
         </p>
       </div>
 
@@ -94,22 +114,33 @@ export default function ValidadorIBAN() {
         {/* RESULTS BOX */}
         {ibanInput && (
           <div className="mt-6">
-            {result.isValid === true ? (
+            {result.status === 'valid' ? (
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-emerald-800 shadow-sm transition-all duration-300">
                 <CheckCircle className="w-10 h-10 text-emerald-500 flex-shrink-0" />
                 <div className="text-center sm:text-left">
-                  <p className="font-bold text-lg mb-1">¡El IBAN es correcto!</p>
+                  <p className="font-bold text-lg mb-1">La comprobación matemática es correcta</p>
                   <p className="text-emerald-700 font-medium text-sm sm:text-base">
-                    {result.message} {result.isSpanish ? `Corresponde a una cuenta de banco español (Entidad: ${result.banksCode}).` : 'Es un IBAN internacional válido.'}
+                    {result.message} El código de entidad declarado es {result.banksCode}.
+                  </p>
+                  <p className="mt-2 text-xs font-medium text-emerald-800">
+                    Este resultado no confirma que la cuenta exista, esté activa o pertenezca al destinatario esperado.
                   </p>
                 </div>
               </div>
-            ) : result.isValid === false ? (
+            ) : result.status === 'invalid' ? (
               <div className="bg-red-50 border border-red-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-red-800 shadow-sm transition-all duration-300">
                 <AlertTriangle className="w-10 h-10 text-red-500 flex-shrink-0" />
                 <div className="text-center sm:text-left">
-                  <p className="font-bold text-lg mb-1">El IBAN NO es válido</p>
+                  <p className="font-bold text-lg mb-1">El IBAN no pasa la comprobación</p>
                   <p className="text-red-700 font-medium text-sm sm:text-base">{result.message}</p>
+                </div>
+              </div>
+            ) : result.status === 'unsupported' ? (
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-amber-900 shadow-sm transition-all duration-300">
+                <AlertTriangle className="w-10 h-10 text-amber-500 flex-shrink-0" />
+                <div className="text-center sm:text-left">
+                  <p className="font-bold text-lg mb-1">País no compatible</p>
+                  <p className="text-amber-800 font-medium text-sm sm:text-base">{result.message}</p>
                 </div>
               </div>
             ) : null}
@@ -118,7 +149,7 @@ export default function ValidadorIBAN() {
 
         <div className="mt-8 flex items-center justify-center gap-2 text-slate-400 bg-slate-50 border border-slate-100 rounded-lg py-3 px-4 shadow-sm">
           <ShieldCheck className="w-5 h-5 text-indigo-400" />
-          <span className="text-xs sm:text-sm font-medium">Validación local y segura. Tus datos bancarios no abandonan tu dispositivo.</span>
+          <span className="text-xs sm:text-sm font-medium">Comprobación local: el IBAN introducido no se envía a CajaUtil.</span>
         </div>
       </section>
 
@@ -129,15 +160,15 @@ export default function ValidadorIBAN() {
           ¿Qué es el código IBAN y por qué validarlo?
         </h2>
         
-        <p>El <strong>IBAN (International Bank Account Number)</strong> es el estándar internacional para la identificación de cuentas bancarias. Asegura que las transferencias SEPA e internacionales lleguen sin errores y de manera automatizada a la cuenta de destino correcta.</p>
+        <p>El <strong>IBAN (International Bank Account Number)</strong> es el estándar internacional para identificar cuentas bancarias y reducir errores de transcripción en transferencias. Un checksum correcto no garantiza por sí solo que el destinatario o la cuenta sean los esperados.</p>
 
-        <p>Nuestro <strong>validador de cuenta IBAN</strong> utiliza un complejo algoritmo matemático estandarizado llamado comprobación <strong>MOD-97-10</strong>. Al introducir tu código, la web de CajaUtil realiza este cálculo instantáneo validando los dígitos de control para confirmar que, matemáticamente, el número de código bancario es viable y correcto.</p>
+        <p>Nuestro <strong>validador de IBAN español</strong> comprueba sus 24 caracteres, la estructura numérica del CCC y el cálculo estandarizado <strong>MOD-97-10</strong>. El resultado detecta muchos errores de formato o transcripción, pero no consulta registros bancarios ni comprueba titularidad, estado de la cuenta o identidad del receptor.</p>
 
         <article className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mt-8 mb-8">
           <h3 className="text-xl font-bold mt-0 flex items-center gap-2 text-indigo-600">
-            <ShieldCheck className="w-5 h-5" /> Privacidad Bancaria 100%
+            <ShieldCheck className="w-5 h-5" /> Privacidad de la comprobación
           </h3>
-          <p className="mb-0 text-slate-600">Al tratarse de datos financieros, hemos diseñado esta herramienta para que se ejecute <em>Client-Side</em>. Esto significa que la comprobación algorítmica se procesa utilizando los recursos de tu smartphone u ordenador y <strong>nada</strong> se transmite por internet. En CajaUtil.com no recogemos, no vemos y no almacenamos el IBAN revisado.</p>
+          <p className="mb-0 text-slate-600">La comprobación se ejecuta en tu navegador. CajaUtil no recibe ni almacena el IBAN que introduces en esta herramienta. Antes de transferir dinero, confirma el destinatario por un canal fiable y revisa los datos en tu entidad bancaria.</p>
         </article>
 
         <h3 className="text-xl font-bold">Herramientas relacionadas de CajaUtil</h3>
@@ -181,7 +212,7 @@ export default function ValidadorIBAN() {
               <Plus className="h-5 w-5 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>Ojo con esto: la herramienta valida aritméticamente que el número está bien configurado y no tiene errores de tipeo o formato <strong>pero eso no confirma</strong> que un banco tenga este número de cuenta activo con saldo vigente. Sólo un banco de la zona SEPA puede saber si una cuenta en concreto aún está abierta.</p>
+              <p>No. La herramienta comprueba la estructura española y los dígitos de control, pero esos controles no detectan todos los errores posibles ni confirman que la cuenta exista, esté activa o pertenezca al destinatario esperado. Verifica siempre los datos con tu entidad bancaria antes de transferir dinero.</p>
             </div>
           </details>
         </div>

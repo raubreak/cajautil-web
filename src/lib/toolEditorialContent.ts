@@ -351,22 +351,22 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
   }),
   'validador-iban': buildEntry({
     summary: [
-      'Validar un IBAN ayuda a detectar errores de formato antes de enviar dinero, automatizar pagos o registrar cuentas bancarias en un sistema.',
-      'El dato importante es entender que la validacion evita fallos mecanicos, pero no confirma por si sola la identidad del titular ni la operatividad de la cuenta.',
+      'Comprobar un IBAN español ayuda a detectar muchos errores de formato antes de enviar dinero, automatizar pagos o registrar cuentas bancarias en un sistema.',
+      'La comprobacion reduce fallos mecanicos, pero no detecta todos los errores ni confirma por si sola la identidad del titular o la operatividad de la cuenta.',
     ],
     sections: [
       {
         title: 'Que comprueba el algoritmo MOD 97',
         paragraphs: [
-          'El estandar IBAN usa digitos de control que permiten detectar si la cadena ha sido escrita con errores. El algoritmo convierte la cuenta a una secuencia numerica y comprueba el resto sobre 97.',
+          'El estandar IBAN usa digitos de control que permiten detectar muchos errores de transcripcion. El algoritmo convierte la cuenta a una secuencia numerica y comprueba el resto sobre 97.',
           'Si el resultado no cuadra, la cuenta se considera invalida desde el punto de vista formal.',
         ],
       },
       {
         title: 'Usos practicos del validador',
         bullets: [
-          'Verificar un IBAN antes de una transferencia manual.',
-          'Comprobar cuentas enviadas por email o formularios.',
+          'Revisar la estructura de un IBAN español antes de una transferencia manual.',
+          'Comprobar IBAN españoles recibidos por email o formularios.',
           'Reducir errores al importar datos bancarios en procesos administrativos.',
           'Detectar fallos de transcripcion antes de que generen devoluciones o incidencias.',
         ],
@@ -380,9 +380,9 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       },
     ],
     faqs: [
-      { question: 'Puedo fiarme de una cuenta solo porque el IBAN sea valido', answer: 'No. Significa que el formato y los digitos de control son correctos, pero no valida identidad ni titularidad.' },
-      { question: 'Que errores detecta mejor', answer: 'Copias incompletas, digitos intercambiados, espacios o fallos de transcripcion frecuentes.' },
-      { question: 'Sirve para cuentas de otros paises', answer: 'Si el formato IBAN esta soportado, la validacion formal puede aplicarse tambien a cuentas internacionales con IBAN.' },
+      { question: 'Puedo fiarme de una cuenta solo porque el IBAN supere la comprobacion', answer: 'No. Solo significa que la estructura española y los digitos de control son coherentes; no valida identidad, titularidad ni existencia de la cuenta.' },
+      { question: 'Que errores detecta mejor', answer: 'Copias incompletas, digitos intercambiados o alterados y otros fallos de transcripcion frecuentes.' },
+      { question: 'Sirve para cuentas de otros paises', answer: 'No. Esta version comprueba unicamente la estructura de los IBAN españoles. Para otro pais necesitas un validador que aplique su longitud y estructura nacional.' },
     ],
     relatedTools: [
       { href: '/calculadora-iva', label: 'Calculadora de IVA' },
