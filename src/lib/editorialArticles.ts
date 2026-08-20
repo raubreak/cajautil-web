@@ -3,6 +3,7 @@ export interface EditorialArticle {
   title: string;
   description: string;
   targetToolUrl: string;
+  relatedArticleSlugs: string[];
   tags: string[];
   publishedAt: string;
   updatedAt: string;
@@ -16,6 +17,10 @@ export const editorialArticles: EditorialArticle[] = [
     description:
       'Guía práctica para evaluar ofertas salariales, traducir bruto a neto y negociar una subida con argumentos concretos.',
     targetToolUrl: '/calculadora-sueldo-neto',
+    relatedArticleSlugs: [
+      'cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda',
+      'interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde',
+    ],
     tags: ['salario', 'nomina', 'empleo'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T17:18:00.000Z',
@@ -102,6 +107,10 @@ Si la subida tiene un objetivo concreto, traduce tambien la diferencia mensual a
     description:
       'Aprende a diferenciar TIN, TAE, plazo y coste total para no elegir un préstamo solo por la cuota mensual.',
     targetToolUrl: '/calculadora-prestamos',
+    relatedArticleSlugs: [
+      'cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda',
+      'iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero',
+    ],
     tags: ['prestamos', 'finanzas', 'tae'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T17:37:00.000Z',
@@ -182,6 +191,10 @@ Usa la [calculadora de prestamos](/calculadora-prestamos) para comparar escenari
     description:
       'Repaso práctico de base imponible, cuota, tipos del IVA y errores típicos al preparar facturas o presupuestos.',
     targetToolUrl: '/calculadora-iva',
+    relatedArticleSlugs: [
+      'cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda',
+      'tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad',
+    ],
     tags: ['iva', 'facturacion', 'autonomos'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T17:38:00.000Z',
@@ -255,6 +268,9 @@ Usa la [calculadora de IVA](/calculadora-iva) para presupuestos rapidos, revisio
     description:
       'Ventajas, limitaciones y buenas prácticas para usar WebP sin perder calidad ni romper compatibilidad.',
     targetToolUrl: '/compresor-webp',
+    relatedArticleSlugs: [
+      'como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo',
+    ],
     tags: ['imagenes', 'webp', 'rendimiento'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T17:50:00.000Z',
@@ -332,6 +348,10 @@ Convierte una muestra con el [compresor WebP](/compresor-webp), compara el archi
     description:
       'Guía práctica para generar códigos QR legibles, útiles y preparados para móvil, impresión y cartelería.',
     targetToolUrl: '/generador-qr',
+    relatedArticleSlugs: [
+      'webp-cuando-conviene-convertir-imagenes-y-cuando-no',
+      'por-que-las-contrasenas-largas-suelen-ser-mejores-que-las-complejas',
+    ],
     tags: ['qr', 'marketing', 'movil'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T18:09:35.000Z',
@@ -431,6 +451,10 @@ Si el QR forma parte de una imagen para web, revisa antes [cuando conviene conve
     description:
       'Descubre por qué la longitud y la aleatoriedad protegen más que las reglas complejas, cuántos caracteres usar y cómo guardar tus contraseñas con seguridad.',
     targetToolUrl: '/generador-contrasenas',
+    relatedArticleSlugs: [
+      'iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero',
+      'como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo',
+    ],
     tags: ['seguridad', 'contrasenas', 'privacidad'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T17:51:00.000Z',
@@ -499,6 +523,10 @@ Usa el [generador de contrasenas](/generador-contrasenas) para crear una clave u
     description:
       'Aprende qué validan el IBAN y el BIC, qué no comprueban y qué datos revisar antes de confirmar una transferencia para reducir errores y fraudes.',
     targetToolUrl: '/validador-iban',
+    relatedArticleSlugs: [
+      'tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad',
+      'por-que-las-contrasenas-largas-suelen-ser-mejores-que-las-complejas',
+    ],
     tags: ['iban', 'banca', 'transferencias'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T17:39:00.000Z',
@@ -559,6 +587,10 @@ El [validador de IBAN](/validador-iban) te ayuda a evitar fallos mecanicos antes
     description:
       'Compara con cifras cómo influyen el tiempo, las aportaciones y la rentabilidad en el interés compuesto, sin confundir una simulación con una promesa.',
     targetToolUrl: '/calculadora-interes-compuesto',
+    relatedArticleSlugs: [
+      'como-negociar-tu-sueldo-bruto-sin-perder-neto',
+      'cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda',
+    ],
     tags: ['ahorro', 'inversion', 'interes compuesto'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T15:15:00.000Z',
@@ -636,6 +668,7 @@ El interes compuesto no convierte una aportacion en riqueza de forma automatica.
     description:
       'Guía para entender qué mide cada calculadora de salud, cuándo sirve y cuándo conviene no sacar conclusiones rápidas.',
     targetToolUrl: '/calculadora-calorias',
+    relatedArticleSlugs: [],
     tags: ['salud', 'imc', 'calorias'],
     publishedAt: '2026-04-11T09:00:00.000Z',
     updatedAt: '2026-08-20T17:52:00.000Z',
@@ -699,6 +732,10 @@ Usa la [calculadora de IMC](/calculadora-imc) para obtener una referencia de pes
     description:
       'Calcula la entrada, los gastos de compra y el colchón que conviene conservar antes de firmar una hipoteca.',
     targetToolUrl: '/calculadora-hipotecas',
+    relatedArticleSlugs: [
+      'como-negociar-tu-sueldo-bruto-sin-perder-neto',
+      'tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad',
+    ],
     tags: ['hipoteca', 'vivienda', 'ahorro'],
     publishedAt: '2026-08-20T10:00:00.000Z',
     updatedAt: '2026-08-20T18:09:36.000Z',

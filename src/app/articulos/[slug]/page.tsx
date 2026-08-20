@@ -5,10 +5,11 @@ import type { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, CalendarDays, Clock3, ExternalLink, RefreshCw, Tag } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CalendarDays, Clock3, ExternalLink, RefreshCw, Tag } from 'lucide-react';
 import AuthorSection from '@/components/AuthorSection';
 import { AUTHOR_PROFILE } from '@/lib/authorProfile';
 import { editorialArticles, getEditorialArticleBySlug } from '@/lib/editorialArticles';
+import type { EditorialArticle } from '@/lib/editorialArticles';
 import {
   estimateReadingTimeMinutes,
   getArticleDescription,
@@ -47,6 +48,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
       dateStyle: 'long',
     }).format(new Date(editorialArticle.updatedAt));
     const readingTime = estimateReadingTimeMinutes(editorialArticle.content);
+    const relatedArticles = editorialArticle.relatedArticleSlugs
+      .map(getEditorialArticleBySlug)
+      .filter((article): article is EditorialArticle => article !== undefined);
     const isFinanceArticle = isFinanceTopic(
       editorialArticle.title,
       editorialArticle.targetToolUrl,
@@ -152,6 +156,29 @@ export default async function ArticlePage({ params }: { params: { slug: string }
               {editorialArticle.content}
             </ReactMarkdown>
           </div>
+
+          {relatedArticles.length > 0 && (
+            <section className="mt-8" aria-labelledby="related-reading-heading">
+              <h2 id="related-reading-heading" className="mb-4 text-xl font-bold text-slate-900">Continúa con estas guías</h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {relatedArticles.map((relatedArticle) => (
+                  <Link
+                    key={relatedArticle.slug}
+                    href={`/articulos/${relatedArticle.slug}`}
+                    className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-colors hover:border-blue-300"
+                  >
+                    <h3 className="font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-700">
+                      {relatedArticle.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{relatedArticle.description}</p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-700">
+                      Leer guía <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           <section className="mt-8 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-bold text-slate-900 mb-3">Metodología editorial</h2>
