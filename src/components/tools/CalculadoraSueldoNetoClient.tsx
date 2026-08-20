@@ -38,7 +38,7 @@ export default function CalculadoraSueldoNetoClient({
           {title || <>Calculadora de <span className="text-amber-500">Sueldo Neto</span></>}
         </h1>
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto">
-          {subtitle || "Estimación España 2026 (Bruto a Neto mensual). Descubre cuánto te quedará limpio a final de mes."}
+          {subtitle || "Estima el neto mensual con tu IRPF, cotización y número de pagas reales."}
         </p>
       </div>
 

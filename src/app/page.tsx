@@ -137,7 +137,7 @@ export default function Home() {
   const herramientas = [
     {
       titulo: 'Calculadora de Sueldo Neto',
-      descripcion: 'Estima tu sueldo mensual neto a partir del bruto anual, con IRPF y Seguridad Social en España 2026.',
+      descripcion: 'Estima tu sueldo mensual neto a partir del bruto anual, con IRPF, cotización y número de pagas editables.',
       ruta: '/calculadora-sueldo-neto',
       Icono: Calculator,
       color: 'from-amber-400 to-orange-500',
@@ -217,7 +217,7 @@ export default function Home() {
     },
     {
       titulo: 'Compresor WebP',
-      descripcion: 'Reduce fotos un 80% convirtiendo de JPG/PNG a WebP sin usar servidores.',
+      descripcion: 'Reduce el peso de fotos JPG o PNG al convertirlas a WebP sin subirlas a un servidor.',
       ruta: '/compresor-webp',
       Icono: ImageIcon,
       color: 'from-sky-400 to-indigo-500',

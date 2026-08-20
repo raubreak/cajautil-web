@@ -23,25 +23,30 @@ export default function CalculadoraIMC() {
 
     const alturaMetros = altura / 100;
     const calculo = peso / (alturaMetros * alturaMetros);
-    const imc = Math.round(calculo * 10) / 10;
+    const imcNormalizado = Math.round(calculo * 1e10) / 1e10;
+    const imc = Math.round(calculo * 100) / 100;
 
-    if (imc < 18.5) {
+    if (imcNormalizado < 18.5) {
       return { imc, categoria: { id: 'bajo', label: 'Bajo Peso', color: 'blue', desc: 'Estas por debajo del rango saludable.' } };
     }
 
-    if (imc <= 24.9) {
+    if (imcNormalizado < 25) {
       return { imc, categoria: { id: 'normal', label: 'Peso Normal', color: 'emerald', desc: 'Estas en el rango orientativo considerado saludable.' } };
     }
 
-    if (imc <= 29.9) {
+    if (imcNormalizado < 30) {
       return { imc, categoria: { id: 'sobrepeso', label: 'Sobrepeso', color: 'amber', desc: 'El resultado orienta a un rango de sobrepeso respecto a tu estatura.' } };
     }
 
-    if (imc <= 34.9) {
+    if (imcNormalizado < 35) {
       return { imc, categoria: { id: 'obesidad1', label: 'Obesidad I', color: 'orange', desc: 'Conviene revisar habitos y valorar asesoramiento profesional.' } };
     }
 
-    return { imc, categoria: { id: 'obesidad2', label: 'Obesidad Extrema', color: 'rose', desc: 'El resultado sugiere pedir valoracion medica individualizada.' } };
+    if (imcNormalizado < 40) {
+      return { imc, categoria: { id: 'obesidad2', label: 'Obesidad II', color: 'rose', desc: 'El resultado sugiere pedir valoracion medica individualizada.' } };
+    }
+
+    return { imc, categoria: { id: 'obesidad3', label: 'Obesidad III', color: 'rose', desc: 'El resultado sugiere pedir valoracion medica individualizada.' } };
   };
 
   const { imc, categoria } = calcularIMC();
@@ -58,7 +63,7 @@ export default function CalculadoraIMC() {
           Calculadora de <span className="text-rose-500">IMC</span> Online
         </h1>
         <p className="text-base sm:text-lg text-slate-500 font-medium max-w-xl mx-auto leading-relaxed px-2">
-          Calcula tu Índice de Masa Corporal de forma privada. Descubre tu rango saludable según los baremos de la OMS al instante.
+          Calcula el Índice de Masa Corporal de una persona adulta de forma privada y consulta su rango orientativo.
         </p>
       </div>
 
@@ -69,11 +74,12 @@ export default function CalculadoraIMC() {
             
             {/* Peso */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2 flex justify-between items-center group">
+              <label htmlFor="bmi-weight" className="block text-sm font-bold text-slate-700 mb-2 flex justify-between items-center group">
                 <span className="flex items-center gap-2"><Weight className="w-4 h-4 text-rose-400 group-hover:text-rose-500" /> Tu Peso (Kg)</span>
                 <span className="text-rose-600 bg-rose-50 px-3 py-1 rounded-lg text-lg tabular-nums border border-rose-100">{peso} KG</span>
               </label>
               <input
+                id="bmi-weight"
                 type="range"
                 min="30"
                 max="200"
@@ -86,11 +92,12 @@ export default function CalculadoraIMC() {
 
             {/* Altura */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2 flex justify-between items-center group">
+              <label htmlFor="bmi-height" className="block text-sm font-bold text-slate-700 mb-2 flex justify-between items-center group">
                 <span className="flex items-center gap-2"><Ruler className="w-4 h-4 text-emerald-400 group-hover:text-emerald-500" /> Tu Altura (cm)</span>
                 <span className="text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg text-lg tabular-nums border border-emerald-100">{altura} CM</span>
               </label>
               <input
+                id="bmi-height"
                 type="range"
                 min="100"
                 max="250"
@@ -113,7 +120,7 @@ export default function CalculadoraIMC() {
           
           <div className="z-10 bg-white/60 p-6 rounded-full w-40 h-40 flex items-center justify-center mb-6 shadow-inner border border-white">
             <span className={`text-5xl font-black text-${categoria.color}-600 tracking-tighter tabular-nums`}>
-              {imc.toLocaleString('es-ES')}
+              {imc.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 2 })}
             </span>
           </div>
           
@@ -137,10 +144,16 @@ export default function CalculadoraIMC() {
           ¿Qué es el IMC y por qué hay que calcularlo?
         </h2>
         
-        <p>El <strong>Índice de Masa Corporal (IMC)</strong> es un indicador avalado mundialmente por la Organización Mundial de la Salud (OMS) y la comunidad médica internacional para determinar estadísticamente si una persona joven o adulta se encuentra dentro de las horquillas de salud o, si por el contrario, padece de bajo peso, sobrepeso incipiente y rangos de obesidad.</p>
+        <p>
+          El <strong>Índice de Masa Corporal (IMC)</strong> relaciona peso y altura para clasificar rangos orientativos en adultos. La{' '}
+          <a href="https://www.who.int/es/news-room/fact-sheets/detail/obesity-and-overweight" target="_blank" rel="noopener noreferrer">
+            Organización Mundial de la Salud
+          </a>{' '}
+          utiliza este indicador como referencia poblacional, no como diagnóstico individual.
+        </p>
 
         <h3 className="text-lg font-bold">Limitaciones de este medidor</h3>
-         <p>El IMC no distingue entre masa grasa y masa muscular. Deportistas, personas mayores, adolescentes o perfiles con condiciones concretas pueden obtener un resultado poco representativo. Por eso debe interpretarse como una <strong>referencia estadistica</strong>, no como un diagnostico medico.</p>
+         <p>El IMC no distingue entre masa grasa y masa muscular. Deportistas, personas mayores o perfiles con condiciones concretas pueden obtener un resultado poco representativo. Los menores de 18 años necesitan percentiles por edad y sexo, por lo que no deben interpretar este cálculo con rangos de adultos.</p>
 
          <h3 className="text-lg font-bold">Cómo usar bien el resultado</h3>
          <p>Puede servirte como punto de partida para seguir tu evolucion o detectar si conviene revisar habitos. Si tienes dudas sobre composicion corporal, salud metabolica o nutricion, lo ideal es complementarlo con otras mediciones y con el criterio de un profesional.</p>
@@ -148,7 +161,7 @@ export default function CalculadoraIMC() {
 
       {/* FAQ SECTION */}
       <section className="w-full max-w-4xl px-2 mb-12" aria-label="Preguntas Frecuentes">
-        <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">FAQs Médicas sobre tu Talla</h2>
+        <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preguntas frecuentes sobre el IMC</h2>
         <div className="space-y-4">
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-rose-500 transition-colors [&::-webkit-details-marker]:hidden">
@@ -166,7 +179,7 @@ export default function CalculadoraIMC() {
               <Plus className="h-5 w-5 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-               <p>El cálculo se realiza en la página con los datos que introduces en el formulario. Aun así, recuerda que el sitio utiliza servicios generales de analítica y publicidad descritos en nuestras políticas, aunque este cálculo concreto no requiere crear una cuenta ni enviar un historial médico.</p>
+               <p>El cálculo se realiza en la página con los datos que introduces en el formulario. No requiere crear una cuenta ni enviar un historial médico. La analítica general del sitio solo se activa si la aceptas.</p>
              </div>
           </details>
         </div>

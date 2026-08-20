@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: "Generador de Contraseñas Seguras — Aleatorias y Offline",
-  description: "Genera contraseñas seguras, aleatorias e imposibles de hackear con un solo clic. Configura longitud, mayúsculas, números y símbolos. 100% offline y privado: la contraseña nunca sale de tu navegador.",
+  title: "Generador de Contraseñas Seguras | Aleatorias y Offline",
+  description: "Genera contraseñas robustas y aleatorias con un solo clic. Configura longitud, mayúsculas, números y símbolos. 100% offline y privado: la contraseña nunca sale de tu navegador.",
   keywords: [
     "generador de contraseñas",
     "contraseña segura",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Generador de Contraseñas Seguras Online",
-    description: "Crea contraseñas robustas e imposibles de adivinar. 100% offline y gratis.",
+    description: "Crea contraseñas robustas y difíciles de adivinar. 100% offline y gratis.",
     url: `${SITE_URL}/generador-contrasenas`,
     type: "website",
   },

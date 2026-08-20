@@ -97,7 +97,7 @@ const CalculadoraHipotecasClient = () => {
             {/* Tipo de Interés */}
             <div>
               <label htmlFor="mortgage-interest" className="block text-sm font-bold text-slate-700 mb-2 flex justify-between">
-                Tipo de interés (TIN/TAE)
+                TIN anual
                 <span className="text-sky-700">{interes}%</span>
               </label>
               <div className="relative mb-3">
@@ -112,6 +112,9 @@ const CalculadoraHipotecasClient = () => {
                   onChange={(e) => setInteres(Number(e.target.value))}
                 />
               </div>
+              <p className="text-xs leading-relaxed text-slate-500">
+                Introduce el TIN, no la TAE. La cuota no incluye comisiones, seguros ni otros productos vinculados.
+              </p>
             </div>
             
           </div>
@@ -162,7 +165,7 @@ const CalculadoraHipotecasClient = () => {
         
         <p>A la hora de comprar un coche o una vivienda, los bancos nos muestran porcentajes (TIN y TAE), pero a menudo es difícil saber en qué se traduce eso mes a mes. Nuestra <strong>calculadora de cuota hipotecaria</strong> te permite descubrir en segundos y sin necesidad de ceder tus datos personales a ninguna entidad qué mensualidad te va a quedar.</p>
 
-        <p>El simulador utiliza el sistema de <strong>amortización francés</strong>, el estándar utilizado en España, México, Colombia y casi la totalidad de Europa y América Latina para los préstamos con interés fijo o variable. Este sistema se caracteriza por mantener unas cuotas mensuales constantes de principio a fin del plazo, donde al principio se pagan más intereses y al final se amortiza más capital neto.</p>
+        <p>El simulador utiliza el sistema de <strong>amortización francés</strong> y mantiene una cuota constante mientras no cambien el TIN ni el plazo introducidos. Al principio se pagan más intereses y al final se amortiza más capital. En una hipoteca variable, la entidad recalcula la cuota cuando revisa el tipo, por lo que conviene simular varios escenarios.</p>
 
         <p>Es una herramienta útil para hacer una primera estimación antes de hablar con un banco, comparar ofertas o entender cómo cambia la cuota cuando modificas importe, plazo o interés. El resultado no sustituye una FEIN, una oferta vinculante ni el asesoramiento financiero profesional.</p>
 

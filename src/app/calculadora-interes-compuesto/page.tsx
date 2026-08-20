@@ -256,9 +256,9 @@ export default function CalculadoraInteresCompuesto() {
 
       {/* SEO SECTION */}
        <section className="w-full max-w-4xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 mb-16 px-4 text-slate-600 prose-a:text-emerald-600">
-           <h2>¿Qué es el Interés Compuesto y por qué lo llaman &quot;magia&quot;?</h2>
-           <p>El interés compuesto es el principio financiero responsable de generar un crecimiento exponencial en el patrimonio de un inversor a largo plazo. Albert Einstein solía referirse a él como &quot;la octava maravilla del mundo&quot;.</p>
-           <p>La mecánica es sencilla pero profunda: <strong>los intereses que genera tu inversión inicial se reinvierten para generar, a su vez, nuevos intereses</strong>. Con el paso del tiempo, la curva de tu riqueza (como puedes ver en la gráfica de color verde) empieza a dispararse agresivamente hacia arriba creando el llamado efecto &quot;bola de nieve&quot;.</p>
+           <h2>¿Qué es el interés compuesto?</h2>
+           <p>El interés compuesto reinvierte los rendimientos generados para que también puedan producir nuevos rendimientos en los periodos siguientes.</p>
+           <p>Con el paso del tiempo, <strong>esa reinversión puede acelerar el crecimiento del capital</strong>, aunque el resultado real siempre depende de la rentabilidad, las comisiones, la fiscalidad y la regularidad de las aportaciones.</p>
 
           <h3>Un ejemplo muy humano: empezar antes pesa más que afinar el producto perfecto</h3>
           <p>

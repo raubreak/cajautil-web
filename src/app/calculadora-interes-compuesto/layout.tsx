@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/calculadora-interes-compuesto`,
   },
   openGraph: {
-    title: 'Calculadora de Interés Compuesto Mágica',
-    description: 'Averigua cómo una pequeña aportación mensual puede convertirte en millonario a largo plazo.',
+    title: 'Calculadora de Interés Compuesto con Aportaciones',
+    description: 'Compara cómo cambian el capital final, las aportaciones y los intereses en distintos escenarios a largo plazo.',
     url: `${SITE_URL}/calculadora-interes-compuesto`,
   }
 };

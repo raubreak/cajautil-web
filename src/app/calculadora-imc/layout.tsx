@@ -4,13 +4,13 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: 'Calculadora de IMC Gratis | Índice de Masa Corporal Online',
-  description: 'Calcula tu IMC (Índice de Masa Corporal) y descubre tu peso ideal al instante. Utilidad de salud rápida, privada y adaptada para adulto y niño.',
+  description: 'Calcula el IMC de una persona adulta a partir de peso y altura. Resultado orientativo, privado y basado en los rangos de referencia de la OMS.',
   keywords: [
     "calculadora imc",
     "calcular indice de masa corporal",
     "imc hombre",
     "imc mujer",
-    "peso ideal calcular",
+    "rango imc adultos",
     "calculadora salud masa",
     "mi imc online gratis"
   ],
@@ -29,7 +29,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de IMC (Índice de Masa Corporal)",
   url: `${SITE_URL}/calculadora-imc`,
-  description: "Calculadora rápida de parámetros de la Organización Mundial de la Salud para conocer el Índice de Masa Corporal en base a Estatura y Peso de un adulto y calcular estado de delgadez, normalidad o sobrepeso.",
+  description: "Calculadora orientativa del Índice de Masa Corporal para adultos a partir de estatura y peso, basada en los rangos de referencia de la Organización Mundial de la Salud.",
   applicationCategory: "HealthApplication",
   operatingSystem: "Any",
   offers: {

@@ -4,7 +4,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: 'Calculadora de Calorías y TDEE Online Gratis | Metabolismo Basal',
-  description: 'Calcula tu gasto calórico diario (TDEE), metabolismo basal (BMR) y cuántas calorías necesitas para perder peso, mantenerlo o ganar masa muscular. Fórmula Mifflin-St Jeor.',
+  description: 'Estima el gasto calórico diario (TDEE) y el metabolismo basal (BMR) de una persona adulta con la fórmula Mifflin-St Jeor.',
   keywords: [
     "calculadora calorias",
     "calcular calorias diarias",

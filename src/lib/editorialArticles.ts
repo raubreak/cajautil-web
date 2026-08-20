@@ -445,53 +445,79 @@ El validador te ayuda a evitar fallos mecanicos. La comprobacion de identidad de
   },
   {
     slug: 'interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde',
-    title: 'Interés compuesto: la diferencia entre aportar pronto y aportar tarde',
+    title: 'Interés compuesto: empezar antes o aportar más',
     description:
-      'Guía para entender cómo crece el capital con el tiempo y por qué el plazo suele importar más que la aportación puntual.',
+      'Compara con cifras cómo influyen el tiempo, las aportaciones y la rentabilidad en el interés compuesto, sin confundir una simulación con una promesa.',
     targetToolUrl: '/calculadora-interes-compuesto',
     tags: ['ahorro', 'inversion', 'interes compuesto'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T10:45:00.000Z',
-    content: `## El tiempo es el verdadero acelerador
+    updatedAt: '2026-08-20T15:15:00.000Z',
+    content: `## Por que empezar antes puede pesar mas que aportar mas
 
-Cuando se habla de interes compuesto se suele poner el foco en la rentabilidad, pero el factor decisivo muchas veces es el tiempo. Un capital que permanece invertido durante mas anos no solo crece por la rentabilidad anual, sino porque cada periodo genera rendimientos sobre los rendimientos anteriores.
+En el interes compuesto, empezar antes añade periodos en los que los rendimientos pueden generar nuevos rendimientos. Por eso una aportacion modesta mantenida durante mas anos puede alcanzar un resultado parecido, o incluso superior, al de una aportacion mayor iniciada tarde. No es una garantia de rentabilidad: es el efecto matematico de disponer de mas tiempo.
 
-Por eso esta idea suele entenderse mejor con escenarios que con definiciones. No hace falta acertar la mejor rentabilidad posible para ver el efecto: basta comparar el mismo ahorro durante plazos distintos.
+La forma mas clara de entenderlo es comparar escenarios con los mismos supuestos. La [calculadora de interes compuesto](/calculadora-interes-compuesto) permite cambiar aportacion, plazo y rentabilidad para comprobar cuanto depende el resultado de cada variable.
 
-## Por que empezar antes cambia tanto el resultado
+## Ejemplo: 100 EUR ahora frente a 200 EUR dentro de diez anos
 
-Dos personas pueden invertir la misma cantidad total y acabar con resultados muy distintos si una empieza antes. La ventaja no viene de aportar mucho de golpe, sino de dejar trabajar al capital durante mas ciclos.
+Supongamos una rentabilidad anual constante del 5 %, capitalizacion mensual y aportaciones realizadas al final de cada mes:
 
-Ese matiz cambia mucho la forma de pensar el ahorro. En lugar de obsesionarse con una aportacion perfecta, suele ser mas util empezar con algo asumible y sostenerlo durante anos.
+| Escenario | Periodo aportando | Aportacion mensual | Dinero aportado | Capital final estimado |
+|---|---:|---:|---:|---:|
+| Empezar ahora | 30 anos | 100 EUR | 36.000 EUR | 83.226 EUR |
+| Esperar 10 anos | 20 anos | 200 EUR | 48.000 EUR | 82.207 EUR |
 
-## Variables clave que debes vigilar
+En este ejemplo, quien empieza antes aporta 12.000 EUR menos y termina con una cifra ligeramente superior. La diferencia no procede de una rentabilidad mejor, sino de conceder diez anos adicionales a las primeras aportaciones.
 
-- capital inicial,
-- aportacion periodica,
-- rentabilidad anual estimada,
-- frecuencia de capitalizacion,
-- horizonte temporal.
-- comisiones y costes de producto.
+Los importes estan redondeados y no descuentan comisiones, impuestos ni inflacion. Tampoco suponen que vaya a existir una rentabilidad estable del 5 %. Sirven para entender la relacion entre tiempo y capitalizacion, no para anticipar el resultado de un producto real.
 
-## Error comun: obsesionarse con el ultimo 1 %
+## Como evoluciona una aportacion de 100 EUR al mes
 
-Mucha gente intenta afinar rentabilidades imposibles y olvida lo mas importante: constancia, comisiones razonables y un plazo suficiente. En muchos escenarios, ahorrar antes o mantener el plan durante mas tiempo pesa mas que encontrar un producto milagroso.
+Con el mismo supuesto teorico del 5 % anual, el crecimiento no avanza a velocidad constante:
 
-Tambien es frecuente subestimar el impacto de las interrupciones. Parar aportaciones durante anos o retirar capital demasiado pronto puede reducir bastante el efecto acumulativo, incluso si luego vuelves a invertir.
+| Plazo | Total aportado | Capital final estimado | Rendimiento acumulado estimado |
+|---|---:|---:|---:|
+| 10 anos | 12.000 EUR | 15.528 EUR | 3.528 EUR |
+| 20 anos | 24.000 EUR | 41.103 EUR | 17.103 EUR |
+| 30 anos | 36.000 EUR | 83.226 EUR | 47.226 EUR |
 
-## Como usar bien una calculadora
+Durante los primeros anos, la mayor parte del saldo procede de tus aportaciones. Conforme aumenta el capital, el rendimiento hipotetico se aplica sobre una base mayor. Esa es la razon por la que la distancia entre los escenarios de 20 y 30 anos es mucho mayor que entre los de 10 y 20.
 
-No la uses para predecir el futuro con precision. Usala para comparar escenarios y entender sensibilidades: que pasa si subes la aportacion mensual, si reduces comisiones o si extiendes el plazo cinco anos mas.
+## Las cinco variables que cambian el resultado
 
-Una buena practica es trabajar con varios escenarios: conservador, central y optimista. Asi evitas convertir una simulacion en promesa y la usas como lo que realmente es: una herramienta para pensar mejor.
+1. **Capital inicial:** empieza a generar rendimientos desde el primer periodo.
+2. **Aportacion periodica:** aumenta de forma constante la base sobre la que se calcula el crecimiento.
+3. **Rentabilidad:** pequenas diferencias se amplifican con plazos largos, pero una cifra mas alta suele implicar tambien mas riesgo.
+4. **Tiempo:** determina cuantos ciclos de capitalizacion puede completar el capital.
+5. **Costes e impuestos:** reducen el rendimiento que realmente permanece invertido.
 
-## Una conclusion poco intuitiva
+La frecuencia de capitalizacion tambien influye, aunque en una decision real suelen importar mas el plazo, la constancia, el riesgo y los costes totales del producto.
 
-En muchos casos, aportar antes 100 EUR al mes pesa mas que esperar varios anos para poder aportar 200. El interes compuesto premia la constancia temprana mucho mas de lo que la intuicion suele admitir.
+## Rentabilidad nominal no es rentabilidad real
 
-## Conclusiones
+Una simulacion puede mostrar crecimiento en euros y, aun asi, exagerar el aumento de poder adquisitivo si ignora la inflacion. Tambien puede omitir comisiones de gestion, custodia, compraventa o cambio de divisa.
 
-El interes compuesto no es magia. Es matematicas aplicadas a la constancia. Cuanto antes empieces y mas estable sea tu estrategia, mayor suele ser la diferencia final.
+Antes de contratar un producto conviene revisar su documentacion y entender riesgos y costes. La [CNMV publica guias para inversores](https://www.cnmv.es/Portal/Inversor/Guias.aspx) sobre conceptos, productos y precauciones que ayudan a interpretar mejor una simulacion.
+
+## Como comparar escenarios sin enganarte
+
+- Usa una hipotesis conservadora, otra central y otra optimista.
+- Mantén iguales las demas variables cuando quieras medir el efecto de una sola.
+- Introduce costes aproximados si conoces las comisiones del producto.
+- Compara tambien el dinero aportado, no solo el capital final.
+- Revisa el resultado en euros de hoy si el plazo es muy largo y la inflacion importa.
+
+No busques una cifra que confirme lo que quieres creer. La utilidad de la simulacion está en descubrir que variables pueden romper el plan y cuanto margen existe si la rentabilidad es menor de la esperada.
+
+## Que pasa si interrumpes las aportaciones
+
+Dejar de aportar no borra el capital acumulado, pero reduce la cantidad nueva que puede beneficiarse de los periodos restantes. El efecto es mayor cuando la interrupcion ocurre al principio, porque cada aportacion omitida pierde muchos anos potenciales de capitalizacion.
+
+Si tus ingresos cambian, una aportacion menor pero sostenible puede ser mas realista que abandonar el plan por completo. La constancia no significa mantener una cifra a cualquier precio: significa adaptar el ahorro sin comprometer gastos esenciales ni el fondo de emergencia.
+
+## Conclusion
+
+El interes compuesto no convierte una aportacion en riqueza de forma automatica. Muestra como el tiempo puede amplificar una estrategia constante cuando existen rendimientos positivos. Empezar antes aporta una ventaja matematica, pero el resultado real seguira dependiendo de riesgo, costes, impuestos, inflacion y disciplina.
 `,
   },
   {

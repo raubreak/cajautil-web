@@ -436,9 +436,9 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     relatedArticles: [
       { href: '/articulos/imc-calorias-y-tdee-como-leer-estas-metricas-sin-obsesionarte', label: 'IMC, calorias y TDEE: como leer estas metricas sin obsesionarte' },
     ],
-    references: [{ href: 'https://www.who.int/', label: 'Organizacion Mundial de la Salud' }],
+    references: [{ href: 'https://www.who.int/es/news-room/fact-sheets/detail/obesity-and-overweight', label: 'OMS: obesidad, sobrepeso e IMC en adultos' }],
     disclaimer:
-      'Informacion general orientativa. No sustituye evaluacion medica, nutricional ni diagnostico clinico.',
+      'Informacion general orientativa para adultos. En menores deben usarse percentiles por edad y sexo. No sustituye evaluacion medica, nutricional ni diagnostico clinico.',
   }),
   'calculadora-calorias': buildEntry({
     summary: [
@@ -527,7 +527,7 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/calculadora-porcentajes', label: 'Calculadora de porcentajes' },
     ],
     relatedArticles: [
-      { href: '/articulos/interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde', label: 'Interes compuesto: la diferencia entre aportar pronto y aportar tarde' },
+      { href: '/articulos/interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde', label: 'Interes compuesto: empezar antes o aportar mas' },
     ],
     disclaimer: 'Proyeccion estimativa. No equivale a rentabilidades garantizadas ni a recomendacion de inversion.',
   }),

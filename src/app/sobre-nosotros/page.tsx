@@ -106,7 +106,7 @@ const AboutUsPage = () => {
             <h3 className="text-xl font-bold text-slate-900 mb-3">Velocidad y simplicidad</h3>
             <p className="text-slate-600 leading-relaxed text-sm">
               Sin registros, sin esperas, sin instalaciones. Entras, usas la herramienta y listo.
-              Cada página se carga en menos de 2 segundos y está optimizada para móvil, tablet y escritorio.
+              Diseñamos cada página para cargar rápido y funcionar correctamente en móvil, tablet y escritorio.
             </p>
           </div>
           <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">

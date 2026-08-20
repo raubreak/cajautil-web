@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Compresor de Imágenes a WebP | Optimiza tu Web',
-    description: 'Reduce el peso de tus imágenes en un 80% convirtiéndolas a formato WebP de nueva generación. Privado, rápido y cliente-local.',
+    description: 'Reduce el peso de imágenes JPG o PNG convirtiéndolas a WebP en tu navegador. El ahorro depende de la imagen y la calidad elegida.',
     url: `${SITE_URL}/compresor-webp`,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Compresor de Imágenes a WebP | Optimiza tu Web',
-    description: 'Reduce el peso de tus imágenes en un 80% convirtiéndolas a formato WebP de nueva generación. Privado, rápido y cliente-local.',
+    description: 'Reduce el peso de imágenes JPG o PNG convirtiéndolas a WebP en tu navegador. El ahorro depende de la imagen y la calidad elegida.',
   }
 };
 

@@ -18,7 +18,7 @@ export default function CalculadoraSueldo() {
       },
       {
         '@type': 'HowToStep',
-        text: 'Revisa la estimación de IRPF, Seguridad Social y neto mensual resultante.',
+        text: 'Introduce los porcentajes de IRPF y cotización de tu nómina y revisa el neto mensual resultante.',
       },
     ],
   };
@@ -161,8 +161,8 @@ export default function CalculadoraSueldo() {
 
         <h2>Referencias rápidas para consultas frecuentes</h2>
         <p>
-          Muchas búsquedas de sueldo neto giran en torno a cantidades concretas como <strong>22.000</strong>, <strong>26.000</strong> o <strong>28.000 euros brutos al año</strong>,
-          así como dudas del tipo <strong>2000 brutos a netos</strong> o <strong>2400 brutos a netos</strong>. Esta tabla ofrece una referencia inicial con la misma lógica orientativa de la calculadora.
+          Estas referencias cubren cantidades habituales como <strong>18.000</strong>, <strong>24.000</strong>, <strong>27.000</strong> o <strong>32.000 euros brutos al año</strong>,
+          además de dudas mensuales como <strong>2000 brutos a netos</strong>. La tabla usa la misma lógica orientativa de la calculadora.
         </p>
         <div className="not-prose overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
           <table className="min-w-full text-sm text-slate-700">
@@ -175,6 +175,30 @@ export default function CalculadoraSueldo() {
               </tr>
             </thead>
             <tbody>
+              <tr className="border-t border-slate-200">
+                <td className="px-4 py-3 font-semibold">18.000 brutos a netos</td>
+                <td className="px-4 py-3">18.000 EUR al año</td>
+                <td className="px-4 py-3">1.178 EUR aprox.</td>
+                <td className="px-4 py-3">1.009 EUR aprox.</td>
+              </tr>
+              <tr className="border-t border-slate-200 bg-slate-50/70">
+                <td className="px-4 py-3 font-semibold">24.000 brutos a netos</td>
+                <td className="px-4 py-3">24.000 EUR al año</td>
+                <td className="px-4 py-3">1.570 EUR aprox.</td>
+                <td className="px-4 py-3">1.346 EUR aprox.</td>
+              </tr>
+              <tr className="border-t border-slate-200">
+                <td className="px-4 py-3 font-semibold">27.000 brutos a netos</td>
+                <td className="px-4 py-3">27.000 EUR al año</td>
+                <td className="px-4 py-3">1.766 EUR aprox.</td>
+                <td className="px-4 py-3">1.514 EUR aprox.</td>
+              </tr>
+              <tr className="border-t border-slate-200 bg-slate-50/70">
+                <td className="px-4 py-3 font-semibold">32.000 brutos a netos</td>
+                <td className="px-4 py-3">32.000 EUR al año</td>
+                <td className="px-4 py-3">2.093 EUR aprox.</td>
+                <td className="px-4 py-3">1.794 EUR aprox.</td>
+              </tr>
               <tr className="border-t border-slate-200">
                 <td className="px-4 py-3 font-semibold">22.000 brutos a netos</td>
                 <td className="px-4 py-3">22.000 EUR al año</td>

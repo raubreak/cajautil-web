@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Flame, TrendingDown, Equal, TrendingUp, Dumbbell } from 'lucide-react';
+import { Flame, Dumbbell } from 'lucide-react';
 
 type Gender = 'male' | 'female';
 type Activity = 1.2 | 1.375 | 1.55 | 1.725 | 1.9;
@@ -30,12 +30,23 @@ export default function CalculadoraCalorias() {
   const [height, setHeight] = useState('');
   const [activity, setActivity] = useState<Activity>(1.55);
   const [result, setResult] = useState<{ bmr: number; tdee: number } | null>(null);
+  const [error, setError] = useState('');
 
   const calculate = () => {
     const a = parseInt(age), w = parseFloat(weight), h = parseFloat(height);
-    if (isNaN(a) || isNaN(w) || isNaN(h)) return;
+    if (isNaN(a) || isNaN(w) || isNaN(h)) {
+      setResult(null);
+      setError('Completa edad, peso y altura para realizar la estimación.');
+      return;
+    }
+    if (a < 18 || a > 100 || w < 30 || w > 300 || h < 120 || h > 230) {
+      setResult(null);
+      setError('Usa valores para adultos dentro de estos rangos: 18-100 años, 30-300 kg y 120-230 cm.');
+      return;
+    }
     const bmr = calcBMR(gender, w, h, a);
     const tdee = bmr * activity;
+    setError('');
     setResult({ bmr: Math.round(bmr), tdee: Math.round(tdee) });
   };
 
@@ -71,18 +82,20 @@ export default function CalculadoraCalorias() {
           {/* Inputs */}
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Edad</label>
-              <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="25" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              <label htmlFor="calorie-age" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Edad</label>
+              <input id="calorie-age" type="number" min="18" max="100" value={age} onChange={(e) => setAge(e.target.value)} placeholder="25" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
             </div>
             <div>
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Peso (kg)</label>
-              <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="70" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              <label htmlFor="calorie-weight" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Peso (kg)</label>
+              <input id="calorie-weight" type="number" min="30" max="300" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="70" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
             </div>
             <div>
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Altura (cm)</label>
-              <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="175" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              <label htmlFor="calorie-height" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Altura (cm)</label>
+              <input id="calorie-height" type="number" min="120" max="230" step="0.1" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="175" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
             </div>
           </div>
+
+          {error && <p role="alert" className="text-sm font-semibold leading-relaxed text-rose-600">{error}</p>}
 
           {/* Actividad */}
           <div>
@@ -127,32 +140,12 @@ export default function CalculadoraCalorias() {
                 </div>
               </div>
 
-              {/* Objetivos */}
+              {/* Interpretación */}
               <div className="bg-slate-900 rounded-[32px] p-8 text-white">
-                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Calorías Según tu Objetivo</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
-                    <div className="flex items-center gap-3">
-                      <TrendingDown className="w-5 h-5 text-emerald-400" />
-                      <div><p className="font-bold text-sm">Perder peso</p><p className="text-[10px] text-slate-500">Déficit de 500 kcal</p></div>
-                    </div>
-                    <span className="text-xl font-black text-emerald-400 tabular-nums">{result.tdee - 500}</span>
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
-                    <div className="flex items-center gap-3">
-                      <Equal className="w-5 h-5 text-blue-400" />
-                      <div><p className="font-bold text-sm">Mantener</p><p className="text-[10px] text-slate-500">Gasto = Ingesta</p></div>
-                    </div>
-                    <span className="text-xl font-black text-blue-400 tabular-nums">{result.tdee}</span>
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
-                    <div className="flex items-center gap-3">
-                      <TrendingUp className="w-5 h-5 text-amber-400" />
-                      <div><p className="font-bold text-sm">Ganar músculo</p><p className="text-[10px] text-slate-500">Superávit +300 kcal</p></div>
-                    </div>
-                    <span className="text-xl font-black text-amber-400 tabular-nums">{result.tdee + 300}</span>
-                  </div>
-                </div>
+                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Cómo interpretar la estimación</h3>
+                <p className="text-sm leading-relaxed text-slate-200">
+                  El TDEE es un punto de partida para observar tendencias, no una prescripción de ingesta. Un déficit o superávit debe ajustarse a tu salud, actividad y evolución real.
+                </p>
               </div>
             </>
           ) : (
@@ -167,12 +160,12 @@ export default function CalculadoraCalorias() {
 
       <section className="w-full max-w-4xl prose prose-slate text-slate-600">
         <h2>¿Qué es el TDEE y cómo se calcula?</h2>
-        <p>El <strong>TDEE (Total Daily Energy Expenditure)</strong> es la cantidad total de calorías que tu cuerpo quema en un día. Se calcula multiplicando tu <strong>metabolismo basal (BMR)</strong> por un factor de actividad física. Utilizamos la <strong>ecuación de Mifflin-St Jeor</strong>, considerada la más precisa por la comunidad científica para estimar el gasto energético en reposo.</p>
+        <p>El <strong>TDEE (Total Daily Energy Expenditure)</strong> estima la energía total utilizada en un día. Se calcula multiplicando el <strong>metabolismo basal (BMR)</strong> por un factor de actividad física. Esta herramienta utiliza la <a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener noreferrer">ecuación de Mifflin-St Jeor</a>, una fórmula de estimación desarrollada para personas adultas.</p>
         <h3>¿Cómo usar estos resultados?</h3>
         <ul>
-          <li><strong>Para perder grasa:</strong> Consume entre 300-500 kcal menos que tu TDEE.</li>
-          <li><strong>Para mantener tu peso:</strong> Tu ingesta debe igualar tu TDEE.</li>
-          <li><strong>Para ganar masa muscular:</strong> Añade un superávit de 200-400 kcal a tu TDEE.</li>
+          <li><strong>Para observar mantenimiento:</strong> usa el TDEE como referencia inicial y compara la evolución durante varias semanas.</li>
+          <li><strong>Para cambiar de peso:</strong> evita convertir automáticamente la cifra en una dieta; el ajuste adecuado depende del contexto individual.</li>
+          <li><strong>Para entrenar:</strong> revisa también recuperación, rendimiento y composición corporal, no solo calorías.</li>
         </ul>
 
         <h3>Que conviene tener en cuenta</h3>
@@ -183,8 +176,8 @@ export default function CalculadoraCalorias() {
 
         <h3>Para quien sirve esta herramienta</h3>
         <p>
-          Puede ayudarte si quieres perder grasa, mantener peso o planificar una fase de volumen. No sustituye el consejo de un dietista-nutricionista o medico,
-          especialmente si tienes patologias, objetivos deportivos avanzados o necesidades clinicas especificas.
+          Está diseñada como referencia para adultos. No debe usarse como guía individual durante embarazo, lactancia, crecimiento, trastornos de la conducta alimentaria o situaciones clínicas.
+          No sustituye el consejo de un dietista-nutricionista o médico.
         </p>
 
         <h3>Herramientas relacionadas</h3>
