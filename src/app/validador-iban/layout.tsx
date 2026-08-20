@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Validador de IBAN Seguro y Privado | CajaUtil.com',
+  title: 'Validador de IBAN Online Seguro y Privado',
   description: 'Comprueba si un número de cuenta bancaria IBAN es correcto y válido. La validación se hace 100% en tu navegador por motivos de seguridad.',
   keywords: [
     "validador iban",

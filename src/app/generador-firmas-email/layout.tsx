@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Generador de Firmas de Email HTML Online Gratis | CajaUtil',
+  title: 'Generador de Firmas de Email HTML Online Gratis',
   description: 'Crea tu firma profesional para Gmail, Outlook o Apple Mail. Generador de firmas de correo electrónico con foto, enlaces a redes sociales y diseño moderno.',
   keywords: [
     "generador de firmas de email",

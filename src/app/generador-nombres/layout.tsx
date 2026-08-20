@@ -5,7 +5,7 @@ import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Generador de Nombres Aleatorios y Apellidos | CajaUtil.com',
+  title: 'Generador de Nombres Aleatorios y Apellidos',
   description: 'Genera nombres de hombre, mujer o apellidos aleatorios para personajes, bebés, juegos de rol o pruebas. Escoge la cantidad y el idioma al instante.',
   keywords: [
     "generador de nombres",

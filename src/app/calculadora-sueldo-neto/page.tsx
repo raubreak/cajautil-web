@@ -1,28 +1,6 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import CalculadoraSueldoNetoClient from "@/components/tools/CalculadoraSueldoNetoClient";
-
-export const metadata: Metadata = {
-  title: 'Calculadora de Sueldo Neto 2026 — Calcular Salario Mensual',
-  description: 'Calcula tu sueldo neto mensual y anual desde el bruto. Ajusta IRPF, cotización y 12 o 14 pagas para obtener una estimación transparente.',
-  alternates: {
-    canonical: 'https://cajautil.com/calculadora-sueldo-neto',
-  },
-  openGraph: {
-    title: 'Calculadora de Sueldo Neto 2026 — Calcular Salario Mensual',
-    description:
-      'Calcula tu sueldo neto mensual y anual desde el bruto ajustando IRPF, cotización y número de pagas.',
-    url: 'https://cajautil.com/calculadora-sueldo-neto',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Calculadora de Sueldo Neto 2026 — Calcular Salario Mensual',
-    description:
-      'Simula tu salario neto mensual en 12 o 14 pagas con IRPF y cotización ajustables.',
-  },
-};
 
 export default function CalculadoraSueldo() {
   const howToJsonLd = {

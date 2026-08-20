@@ -83,10 +83,11 @@ export default function CalculadoraInteresCompuesto() {
         <section className="lg:col-span-4 bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 flex flex-col gap-6">
           
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Inversión Inicial</label>
+            <label htmlFor="compound-initial" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Inversión Inicial</label>
             <div className="relative">
               <Wallet className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
               <input 
+                id="compound-initial"
                 type="number" 
                 value={initialAmount} 
                 onChange={(e) => setInitialAmount(e.target.value)}
@@ -98,10 +99,11 @@ export default function CalculadoraInteresCompuesto() {
           </div>
 
           <div>
-             <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Aportación Mensual</label>
+             <label htmlFor="compound-monthly" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Aportación Mensual</label>
              <div className="relative">
                <PiggyBank className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
-               <input 
+                <input
+                  id="compound-monthly"
                  type="number" 
                  value={monthlyContribution} 
                  onChange={(e) => setMonthlyContribution(e.target.value)}
@@ -113,7 +115,7 @@ export default function CalculadoraInteresCompuesto() {
           </div>
 
           <div>
-             <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1 group relative">
+             <label htmlFor="compound-rate" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1 group relative">
                Tasa de Interés Anual
                <Info className="w-4 h-4 text-emerald-400 cursor-help" />
                <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block w-64 bg-slate-800 text-white text-xs p-3 rounded-xl shadow-lg z-50 normal-case tracking-normal">
@@ -122,7 +124,8 @@ export default function CalculadoraInteresCompuesto() {
              </label>
              <div className="relative">
                <BarChart3 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
-               <input 
+                <input
+                  id="compound-rate"
                  type="number" 
                  step="0.1"
                  value={interestRate} 
@@ -135,10 +138,11 @@ export default function CalculadoraInteresCompuesto() {
           </div>
 
           <div>
-             <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Años de Inversión</label>
+             <label htmlFor="compound-years" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Años de Inversión</label>
              <div className="relative">
                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
-               <input 
+                <input
+                  id="compound-years"
                  type="number" 
                  value={years} 
                  onChange={(e) => setYears(e.target.value)}
@@ -149,7 +153,8 @@ export default function CalculadoraInteresCompuesto() {
              </div>
              
              {/* Slider simple */}
-             <input 
+              <input
+                 aria-label="Años de inversión"
                 type="range" 
                 min="1" 
                 max="50" 

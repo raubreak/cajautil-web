@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { ArrowLeft, CalendarDays, Clock3, ExternalLink, RefreshCw, Tag } from 'lucide-react';
 import AuthorSection from '@/components/AuthorSection';
 import { AUTHOR_PROFILE } from '@/lib/authorProfile';
-import { getEditorialArticleBySlug } from '@/lib/editorialArticles';
+import { editorialArticles, getEditorialArticleBySlug } from '@/lib/editorialArticles';
 import {
   estimateReadingTimeMinutes,
   getArticleDescription,
@@ -17,71 +17,10 @@ import {
   stripMarkdownToText,
 } from '@/lib/contentSanitizers';
 
-import type { Metadata } from 'next';
+export const revalidate = 3600;
 
-export const dynamic = 'force-dynamic';
-
-export async function generateMetadata({ params }: { params: { slug: string } | Promise<{slug: string}> }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const editorialArticle = getEditorialArticleBySlug(resolvedParams.slug);
-
-  if (editorialArticle) {
-    const canonicalUrl = `https://cajautil.com/articulos/${editorialArticle.slug}`;
-    const ogTitle = `${editorialArticle.title} | CajaUtil.com`;
-
-    return {
-      title: editorialArticle.title,
-      description: editorialArticle.description,
-      alternates: {
-        canonical: canonicalUrl,
-      },
-      openGraph: {
-        title: ogTitle,
-        description: editorialArticle.description,
-        url: canonicalUrl,
-        type: 'article',
-        images: [{ url: 'https://cajautil.com/og-image.png', alt: 'CajaUtil.com' }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: ogTitle,
-        description: editorialArticle.description,
-      },
-    };
-  }
-
-  const article = await prisma.article.findUnique({
-    where: { slug: resolvedParams.slug },
-  });
-
-  if (!article) return {};
-
-  const cleanContent = sanitizeMarkdownContent(article.content);
-  const canonicalUrl = `https://cajautil.com/articulos/${article.slug}`;
-  const description = getArticleDescription(article.metaDescription, cleanContent);
-  const ogTitle = `${article.title} | CajaUtil.com`;
-
-  return {
-    title: article.title,
-    description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title: ogTitle,
-      description,
-      url: canonicalUrl,
-      type: 'article',
-      images: article.coverImageUrl 
-        ? [{ url: article.coverImageUrl, alt: article.title }]
-        : [{ url: 'https://cajautil.com/og-image.png', alt: 'CajaUtil.com' }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: ogTitle,
-      description,
-    },
-  };
+export function generateStaticParams() {
+  return editorialArticles.map((article) => ({ slug: article.slug }));
 }
 
 export default async function ArticlePage({ params }: { params: { slug: string } | Promise<{slug: string}> }) {
@@ -108,22 +47,37 @@ export default async function ArticlePage({ params }: { params: { slug: string }
       keywords: editorialArticle.tags,
       articleBody: stripMarkdownToText(editorialArticle.content),
       author: {
-        '@type': 'Person',
-        name: AUTHOR_PROFILE.fullName,
-        image: AUTHOR_PROFILE.avatarUrl,
-        sameAs: AUTHOR_PROFILE.githubUrl,
+        '@id': 'https://cajautil.com/#person',
       },
       publisher: {
-        '@type': 'Organization',
-        name: 'CajaUtil.com',
-        url: 'https://cajautil.com',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://cajautil.com/og-image.png',
-        },
+        '@id': 'https://cajautil.com/#organization',
       },
       image: 'https://cajautil.com/og-image.png',
       isAccessibleForFree: true,
+    };
+    const breadcrumbJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Inicio',
+          item: 'https://cajautil.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Guías y artículos',
+          item: 'https://cajautil.com/articulos',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: editorialArticle.title,
+          item: `https://cajautil.com/articulos/${editorialArticle.slug}`,
+        },
+      ],
     };
 
     return (
@@ -131,6 +85,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
         <div className="max-w-4xl mx-auto">
           <Link href="/articulos" className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 mb-8 transition-colors">
@@ -157,7 +115,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 p-6 rounded-2xl mb-12 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">Herramienta recomendada</h3>
+              <h2 className="text-lg font-bold text-slate-800 mb-2">Herramienta recomendada</h2>
               <p className="text-slate-600 text-sm">Pon en práctica esta guía con la herramienta relacionada.</p>
             </div>
             <Link href={editorialArticle.targetToolUrl} className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 transition-transform hover:scale-105 shadow-md shadow-blue-500/20">
@@ -192,6 +150,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     });
   } catch (err) {
     console.error('Error fetching article:', err);
+    throw err;
   }
 
   if (!article) notFound();

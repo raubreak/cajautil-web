@@ -8,21 +8,20 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - ads.txt / robots.txt / sitemap.xml (crawler-facing static files)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|ads\.txt|robots\.txt|sitemap\.xml).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };
 
 export function proxy(req: NextRequest) {
   const url = req.nextUrl;
-  const hostname = req.headers.get('host') || '';
+  const hostname = (req.headers.get('host') || '').split(':')[0].toLowerCase();
   const validUser = process.env.ADMIN_USER;
   const validPassword = process.env.ADMIN_PASSWORD;
 
-  // 1. Redirección SEO 301 desde dominio Vercel hacia el dominio principal
-  if (hostname === 'cajautil-web.vercel.app') {
-    return NextResponse.redirect(`https://cajautil.com${url.pathname}${url.search}`, 301);
+  // 1. Consolidate every public alias on the canonical HTTPS host.
+  if (hostname === 'cajautil-web.vercel.app' || hostname === 'www.cajautil.com') {
+    return NextResponse.redirect(`https://cajautil.com${url.pathname}${url.search}`, 308);
   }
 
   // 2. Protección Auth para el Panel SEO

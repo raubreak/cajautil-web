@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     title: 'Calculadora de Descuentos Online gratis',
     description: 'Descubre el precio final de tus compras tras aplicar el porcentaje de rebaja de forma instantánea.',
     url: `${SITE_URL}/calculadora-descuentos`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Calculadora de Descuentos Online gratis',
+    description: 'Descubre el precio final de tus compras tras aplicar el porcentaje de rebaja de forma instantánea.',
   }
 };
 

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Generador de Enlaces de WhatsApp con Mensaje | CajaUtil.com',
+  title: 'Generador de Enlaces de WhatsApp con Mensaje',
   description: 'Crea un link directo a tu número de WhatsApp con un mensaje personalizado. Ideal para negocios, Instagram y TikTok. Gratis y rápido.',
   keywords: [
     "generador enlace whatsapp",

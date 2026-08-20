@@ -1,31 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import CalculadoraDescuentosClient from "@/components/tools/CalculadoraDescuentosClient";
-
-const canonical = "https://cajautil.com/calculadora-descuentos";
-
-export const metadata: Metadata = {
-  title: "Calculadora de Descuentos Online - Precio Final de Rebajas",
-  description:
-    "Calcula descuentos online y descubre cuanto ahorras y cual es el precio final. Ideal para rebajas, promociones y ofertas de Black Friday.",
-  alternates: {
-    canonical,
-  },
-  openGraph: {
-    title: "Calculadora de Descuentos Online - Precio Final de Rebajas",
-    description:
-      "Introduce el precio original y el porcentaje para saber al instante cuanto te ahorras y cuanto pagas.",
-    url: canonical,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Calculadora de Descuentos Online",
-    description:
-      "Calcula rebajas, promociones y ofertas para obtener el precio final exacto.",
-  },
-};
 
 export default function DescuentosApp() {
   const faqJsonLd = {

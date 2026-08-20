@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Compresor y Convertidor de Imágenes a WebP Online Gratís',
-  description: 'Comprime tus fotos y conviértelas de JPG/PNG a WebP sin perder calidad en segundos. 100% privado en tu ordenador.',
+  title: 'Convertir a WebP Online: Compresor de Imágenes Gratis',
+  description: 'Comprime y convierte fotos JPG o PNG a WebP sin subirlas al servidor. Reduce el peso con procesamiento local, rápido y privado.',
   keywords: [
     "convertir a webp",
     "comprimir imagen online",
@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     title: 'Compresor de Imágenes a WebP | Optimiza tu Web',
     description: 'Reduce el peso de tus imágenes en un 80% convirtiéndolas a formato WebP de nueva generación. Privado, rápido y cliente-local.',
     url: `${SITE_URL}/compresor-webp`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Compresor de Imágenes a WebP | Optimiza tu Web',
+    description: 'Reduce el peso de tus imágenes en un 80% convirtiéndolas a formato WebP de nueva generación. Privado, rápido y cliente-local.',
   }
 };
 

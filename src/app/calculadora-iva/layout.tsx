@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de IVA (Añadir y Quitar IVA) | CajaUtil.com',
+  title: 'Calculadora de IVA Online: Añadir y Quitar IVA',
   description: 'Calcula el IVA fácilmente. Añade o quita el IVA de cualquier precio. Calcula la base imponible y el precio final con el tipo de IVA que elijas (21%, 10%, 4%).',
   keywords: [
     "calculadora iva",
@@ -24,6 +24,11 @@ export const metadata: Metadata = {
     title: 'Calculadora de IVA Fácil y Rápida',
     description: 'Añade o extrae el IVA de cualquier importe. Comprueba la base imponible y la cuota de IVA al instante (por defecto 21%).',
     url: `${SITE_URL}/calculadora-iva`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Calculadora de IVA Fácil y Rápida',
+    description: 'Añade o extrae el IVA de cualquier importe. Comprueba la base imponible y la cuota de IVA al instante (por defecto 21%).',
   }
 };
 

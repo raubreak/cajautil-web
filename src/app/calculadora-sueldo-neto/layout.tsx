@@ -24,6 +24,11 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/calculadora-sueldo-neto`,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Calculadora de Sueldo Neto 2026 — España",
+    description: "Calcula cuánto cobrarás de neto al mes desde tu bruto anual con IRPF y cotización ajustables.",
+  },
 };
 
 const jsonLd = {

@@ -3,8 +3,6 @@ import prisma from '@/lib/prisma';
 import { getArticleDescription, sanitizeArticleTags, sanitizeMarkdownContent } from '@/lib/contentSanitizers';
 import { getEditorialArticleBySlug } from '@/lib/editorialArticles';
 
-export const dynamic = 'force-dynamic';
-
 export async function generateMetadata({ params }: { params: { slug: string } | Promise<{slug: string}> }): Promise<Metadata> {
   const resolvedParams = await params;
   const editorialArticle = getEditorialArticleBySlug(resolvedParams.slug);
@@ -25,6 +23,7 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
         description: editorialArticle.description,
         url: canonicalUrl,
         type: 'article',
+        images: [{ url: 'https://cajautil.com/og-image.png', alt: 'CajaUtil.com' }],
       },
       twitter: {
         card: 'summary_large_image',
@@ -51,7 +50,7 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
   const keywords = sanitizeArticleTags(article.tags);
 
   return {
-    title: `${article.title} - CajaUtil`,
+    title: article.title,
     description: cleanExcerpt,
     keywords,
     alternates: { canonical: canonicalUrl },
@@ -59,12 +58,15 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
       index: false,
       follow: true,
     },
-    openGraph: {
-      title: article.title,
-      description: cleanExcerpt,
-      url: canonicalUrl,
-      type: 'article',
-    },
+      openGraph: {
+        title: article.title,
+        description: cleanExcerpt,
+        url: canonicalUrl,
+        type: 'article',
+        images: article.coverImageUrl
+          ? [{ url: article.coverImageUrl, alt: article.title }]
+          : [{ url: 'https://cajautil.com/og-image.png', alt: 'CajaUtil.com' }],
+      },
     twitter: {
       card: 'summary_large_image',
       title: article.title,

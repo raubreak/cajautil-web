@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Aviso Legal y Condiciones de Uso | CajaUtil.com',
+  title: 'Aviso Legal y Condiciones de Uso',
   description: 'Información legal, términos y condiciones de uso y responsabilidad de CajaUtil.com.',
   alternates: {
     canonical: 'https://cajautil.com/aviso-legal',
