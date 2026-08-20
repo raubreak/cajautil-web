@@ -3,15 +3,24 @@
 import { useState } from "react";
 import { Tag, Sparkles, TrendingDown, Wallet, CornerRightDown, RefreshCcw } from "lucide-react";
 
+const MAX_PRICE = 100_000_000;
+
 export default function CalculadoraDescuentosClient() {
   const [precioOriginal, setPrecioOriginal] = useState<string>("100");
   const [descuento, setDescuento] = useState<string>("20");
 
-  const original = parseFloat(precioOriginal) || 0;
-  const desc = parseFloat(descuento) || 0;
-
-  const ahorro = (original * desc) / 100;
-  const precioFinal = original - ahorro;
+  const original = Number(precioOriginal);
+  const desc = Number(descuento);
+  const priceError = precioOriginal && (!Number.isFinite(original) || original <= 0 || original > MAX_PRICE)
+    ? "El precio debe estar entre 0,01 EUR y 100.000.000 EUR."
+    : null;
+  const discountError = descuento && (!Number.isFinite(desc) || desc < 0 || desc > 100)
+    ? "El descuento debe estar entre 0% y 100%."
+    : null;
+  const inputError = priceError ?? discountError;
+  const hasResult = Boolean(precioOriginal && descuento && !inputError);
+  const ahorro = hasResult ? (original * desc) / 100 : 0;
+  const precioFinal = hasResult ? original - ahorro : 0;
 
   const formatMoney = (n: number) =>
     n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -25,18 +34,24 @@ export default function CalculadoraDescuentosClient() {
         <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight mb-4 leading-tight">
           Calculadora de <span className="text-rose-500">Descuentos</span>
         </h1>
-        <p className="text-lg text-slate-500 font-medium">No vuelvas a dudar en las rebajas. Introduce el precio y el porcentaje para saber cuanto pagas exactamente.</p>
+        <p className="text-lg text-slate-500 font-medium">No vuelvas a dudar en las rebajas. Introduce el precio y el porcentaje para saber cuánto pagas exactamente.</p>
       </div>
 
       <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <section className="bg-white rounded-[40px] shadow-2xl p-8 sm:p-10 border border-slate-100 flex flex-col justify-center space-y-8">
           <div className="relative group">
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 block pl-2">Precio original (EUR)</label>
+            <label htmlFor="discount-price" className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 block pl-2">Precio original (EUR)</label>
             <div className="relative">
               <input
+                id="discount-price"
                 type="number"
+                min="0.01"
+                max={MAX_PRICE}
+                step="0.01"
                 value={precioOriginal}
                 onChange={(e) => setPrecioOriginal(e.target.value)}
+                aria-describedby={priceError ? "discount-error" : undefined}
+                aria-invalid={Boolean(priceError)}
                 className="w-full bg-slate-50 border-2 border-slate-100 p-6 rounded-3xl text-4xl font-black text-slate-800 focus:outline-none focus:border-rose-300 focus:ring-4 focus:ring-rose-50 transition appearance-none"
               />
               <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300 font-bold text-2xl">EUR</div>
@@ -44,12 +59,18 @@ export default function CalculadoraDescuentosClient() {
           </div>
 
           <div className="relative group">
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 block pl-2">Porcentaje de descuento (%)</label>
+            <label htmlFor="discount-percentage" className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 block pl-2">Porcentaje de descuento (%)</label>
             <div className="relative">
               <input
+                id="discount-percentage"
                 type="number"
+                min="0"
+                max="100"
+                step="0.01"
                 value={descuento}
                 onChange={(e) => setDescuento(e.target.value)}
+                aria-describedby={discountError ? "discount-error" : undefined}
+                aria-invalid={Boolean(discountError)}
                 className="w-full bg-slate-50 border-2 border-slate-100 p-6 rounded-3xl text-4xl font-black text-rose-500 focus:outline-none focus:border-rose-300 focus:ring-4 focus:ring-rose-50 transition appearance-none"
               />
               <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300 font-bold text-2xl">%</div>
@@ -60,7 +81,9 @@ export default function CalculadoraDescuentosClient() {
             {[5, 10, 15, 20, 25, 30, 50, 70].map((p) => (
               <button
                 key={p}
+                type="button"
                 onClick={() => setDescuento(p.toString())}
+                aria-pressed={descuento === p.toString()}
                 className={`py-3 rounded-2xl font-bold transition-all border ${descuento === p.toString() ? "bg-rose-500 text-white border-rose-500 shadow-lg shadow-rose-200" : "bg-slate-50 text-slate-500 border-slate-100 hover:bg-white hover:border-rose-200"}`}
               >
                 {p}%
@@ -68,7 +91,12 @@ export default function CalculadoraDescuentosClient() {
             ))}
           </div>
 
+          <p id="discount-error" role={inputError ? "alert" : undefined} className={`text-sm font-semibold ${inputError ? "text-rose-600" : "text-slate-400"}`}>
+            {inputError ?? "Introduce un precio positivo y un descuento entre 0% y 100%."}
+          </p>
+
           <button
+            type="button"
             onClick={() => {
               setPrecioOriginal("");
               setDescuento("");
@@ -79,7 +107,7 @@ export default function CalculadoraDescuentosClient() {
           </button>
         </section>
 
-        <section className="bg-slate-900 rounded-[40px] shadow-2xl p-10 flex flex-col justify-between text-white relative overflow-hidden">
+        <section aria-live="polite" aria-atomic="true" className="bg-slate-900 rounded-[40px] shadow-2xl p-10 flex flex-col justify-between text-white relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-rose-600/20 rounded-full blur-[100px] pointer-events-none"></div>
 
           <div className="relative z-10">
@@ -92,7 +120,7 @@ export default function CalculadoraDescuentosClient() {
                 </div>
                 <div>
                   <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Te ahorras</p>
-                  <p className="text-3xl font-black text-white">-{formatMoney(ahorro)} EUR</p>
+                  <p className="text-3xl font-black text-white break-words">{hasResult ? `-${formatMoney(ahorro)} EUR` : "--"}</p>
                 </div>
               </div>
 
@@ -102,7 +130,7 @@ export default function CalculadoraDescuentosClient() {
                 </div>
                 <div>
                   <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Precio final</p>
-                  <p className="text-6xl font-black text-white leading-none tabular-nums">{formatMoney(precioFinal)} <span className="text-2xl font-bold text-slate-500 block mt-2 sm:inline">EUR</span></p>
+                  <p className="text-4xl sm:text-6xl font-black text-white leading-none tabular-nums break-words">{hasResult ? formatMoney(precioFinal) : "--"} <span className="text-2xl font-bold text-slate-500 block mt-2 sm:inline">EUR</span></p>
                 </div>
               </div>
             </div>
@@ -111,11 +139,11 @@ export default function CalculadoraDescuentosClient() {
           <div className="relative z-10 pt-10 mt-10 border-t border-white/10 flex flex-col gap-4">
             <div className="flex items-center justify-between text-sm text-slate-400">
               <span>Precio original</span>
-              <span className="font-mono">{formatMoney(original)} EUR</span>
+              <span className="font-mono text-right break-words">{hasResult ? `${formatMoney(original)} EUR` : "--"}</span>
             </div>
-            <div className="flex items-center justify-between text-sm text-emerald-400 font-bold bg-emerald-500/10 p-4 rounded-2xl">
-              <div className="flex items-center gap-1.5"><Sparkles className="w-4 h-4" /> Buena oferta</div>
-              <span>{formatMoney(ahorro)} EUR menos</span>
+            <div className="flex items-center justify-between gap-4 text-sm text-emerald-400 font-bold bg-emerald-500/10 p-4 rounded-2xl">
+              <div className="flex items-center gap-1.5"><Sparkles className="w-4 h-4" /> Ahorro calculado</div>
+              <span className="text-right break-words">{hasResult ? `${formatMoney(ahorro)} EUR menos` : "Completa los datos"}</span>
             </div>
           </div>
         </section>
