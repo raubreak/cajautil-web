@@ -8,15 +8,15 @@ export default function CalculadoraPorcentajes() {
     step: [
       {
         "@type": "HowToStep",
-        text: "Escribe el porcentaje que quieres calcular, por ejemplo 21 para IVA o 15 para un descuento.",
+        text: "Elige si quieres calcular un porcentaje de una cantidad, una proporción o una variación porcentual.",
       },
       {
         "@type": "HowToStep",
-        text: "Introduce la cantidad base sobre la que aplicar el porcentaje.",
+        text: "Introduce los dos valores que solicita la operación seleccionada.",
       },
       {
         "@type": "HowToStep",
-        text: "Consulta el resultado instantaneo y usa las herramientas relacionadas si necesitas calcular IVA o rebajas completas.",
+        text: "Consulta el resultado instantáneo y revisa la fórmula indicada bajo los campos.",
       },
     ],
   };

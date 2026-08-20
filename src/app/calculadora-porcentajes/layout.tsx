@@ -39,7 +39,7 @@ const jsonLd = {
   url: `${SITE_URL}/calculadora-porcentajes`,
   description: "Calculadora gratuita para obtener porcentajes, proporciones y variaciones entre cantidades.",
   applicationCategory: "UtilitiesApplication",
-  operatingSystem: "All",
+  operatingSystem: "Any",
   offers: {
     "@type": "Offer",
     price: "0",
