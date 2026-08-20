@@ -29,7 +29,7 @@ const toolDefinitions = [
   ['lector-qr', 'monthly', 0.7, '2026-08-20T16:43:16.000Z'],
   ['calculadora-dias', 'monthly', 0.7, '2026-08-20T20:37:15.000Z'],
   ['traductor-binario', 'monthly', 0.9],
-  ['calculadora-edad', 'monthly', 0.9],
+  ['calculadora-edad', 'monthly', 0.9, '2026-08-20T22:50:49.000Z'],
   ['simbolos-copiar', 'monthly', 0.9],
   ['texto-invisible', 'monthly', 0.9],
   ['cps-test', 'monthly', 0.9],
