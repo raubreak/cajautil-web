@@ -140,7 +140,10 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     relatedArticles: [
       { href: '/articulos/como-calcular-el-iva-correctamente-en-facturas-y-presupuestos', label: 'Como calcular el IVA correctamente en facturas y presupuestos' },
     ],
-    references: [{ href: 'https://sede.agenciatributaria.gob.es/', label: 'Informacion fiscal oficial' }],
+    references: [
+      { href: 'https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes.html', label: 'AEAT: calculo del IVA repercutido' },
+      { href: 'https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes/tipos-impositivos-iva.html', label: 'AEAT: tipos impositivos del IVA' },
+    ],
     disclaimer:
       'Calculo orientativo para comprobaciones rapidas. La aplicacion del tipo correcto y el criterio de redondeo deben revisarse en cada caso real.',
   }),
@@ -196,7 +199,10 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     relatedArticles: [
       { href: '/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad', label: 'TIN, TAE y cuota mensual: cómo comparar préstamos de verdad' },
     ],
-    references: [{ href: 'https://www.bde.es/', label: 'Banco de España' }],
+    references: [
+      { href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/', label: 'Banco de Espana: prestamos personales y credito al consumo' },
+      { href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/calculo_tae_prestamo_personal.html', label: 'Banco de Espana: calculo de la TAE de un prestamo' },
+    ],
     disclaimer:
       'Simulacion informativa. No sustituye la FEIN, la oferta vinculante ni el analisis individual del contrato.',
   }),
@@ -374,7 +380,7 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       {
         title: 'Limitaciones que conviene recordar',
         paragraphs: [
-          'Un IBAN formalmente valido no garantiza que el titular sea correcto ni que la cuenta este activa. Para pagos importantes conviene verificar el dato por una segunda via.',
+          'Un IBAN formalmente valido no garantiza que el titular sea correcto ni que la cuenta este activa. La verificacion bancaria del beneficiario aporta una comprobacion adicional, pero ante una discrepancia conviene detenerse y confirmar el dato por una segunda via.',
           'Tampoco sustituye los procedimientos internos de prevencion de fraude o validacion documental en empresa.',
         ],
       },
@@ -392,6 +398,12 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     relatedArticles: [
       { href: '/articulos/iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero', label: 'IBAN y BIC: evita errores antes de una transferencia' },
     ],
+    references: [
+      { href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/serviciospago/traspasostransfe/guia-textual/conceptocaracter/Identificador_unico.html', label: 'Banco de Espana: el IBAN como identificador unico' },
+      { href: 'https://clientebancario.bde.es/pcb/es/blog/nuevo-servicio-gratuito-de-verificacion-del-beneficiario-a-partir-del-9-de-octubre-de-2025-.html', label: 'Banco de Espana: verificacion del beneficiario' },
+    ],
+    disclaimer:
+      'La validacion comprueba la estructura del IBAN, no la identidad del titular, la existencia de la cuenta ni la legitimidad del pago.',
   }),
   'calculadora-imc': buildEntry({
     summary: [

@@ -104,16 +104,30 @@ Si la subida tiene un objetivo concreto, traduce tambien la diferencia mensual a
     targetToolUrl: '/calculadora-prestamos',
     tags: ['prestamos', 'finanzas', 'tae'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T09:15:00.000Z',
+    updatedAt: '2026-08-20T17:37:00.000Z',
     content: `## La cuota mas baja no siempre es la mejor oferta
 
 Muchas personas comparan prestamos mirando solo la cuota mensual. Es comprensible: la cuota es el dato que mas se nota en el presupuesto domestico. El problema es que una cuota mas baja puede esconder un plazo mas largo y, por tanto, un coste total mucho mayor.
 
 ## Diferencia entre TIN y TAE
 
-El **TIN** es el tipo de interes nominal. Sirve para calcular el interes financiero puro del prestamo. La **TAE**, en cambio, intenta reflejar el coste real anual incorporando comisiones y otros gastos obligatorios.
+El **TIN** es el tipo de interes nominal que se aplica al capital. La **TAE**, en cambio, permite expresar el coste de la operacion en terminos anuales teniendo en cuenta el tipo, las comisiones y otros gastos incluidos en sus condiciones.
 
-En igualdad de condiciones, la TAE es mejor indicador para comparar dos ofertas. Aun asi, tampoco debe leerse sola: si una entidad incluye productos vinculados o seguros opcionales, conviene revisar la letra pequena.
+El [simulador de TAE del Banco de Espana](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/calculo_tae_prestamo_personal.html) parte precisamente del importe, el plazo, el tipo de interes, las comisiones y otros gastos. Tambien advierte que el resultado puede diferir de la oferta de una entidad si existen condiciones adicionales. Por eso la TAE es util para comparar propuestas equivalentes, pero no sustituye la lectura del contrato ni explica por si sola todos los productos vinculados.
+
+## Que incluye realmente la cuota
+
+El [Banco de Espana explica que el contrato de un prestamo personal](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/) recoge la cantidad concedida y las cuotas periodicas, que incluyen intereses, comisiones y gastos conforme a las condiciones pactadas. Antes de comparar, separa estos conceptos:
+
+| Dato | Que te permite evaluar |
+|---|---|
+| TIN | El tipo nominal aplicado al capital |
+| TAE | El coste anual de ofertas comparables bajo sus condiciones |
+| Cuota | La presion mensual sobre tu presupuesto |
+| Total devuelto | La suma que habras pagado al terminar |
+| Comisiones y vinculaciones | Costes o requisitos que pueden alterar la comparacion |
+
+Si dos propuestas no usan el mismo importe, plazo o frecuencia de pago, una diferencia de TAE no cuenta toda la historia. Igualar primero esos datos evita comparar productos distintos como si fueran equivalentes.
 
 ## Lo que cambia de verdad cuando alargas el plazo
 
@@ -159,7 +173,7 @@ Ese ejercicio suele revelar algo importante: la mejor oferta no siempre es la de
 
 ## Que hacer antes de firmar
 
-Usa un simulador para comparar escenarios con el mismo capital y distintos plazos. Despues revisa la documentacion precontractual y verifica si la TAE publicada coincide con tu caso real.
+Usa la [calculadora de prestamos](/calculadora-prestamos) para comparar escenarios con el mismo capital y distintos plazos. Despues revisa la documentacion precontractual, confirma que has incluido las comisiones y verifica si la TAE publicada corresponde a las condiciones de tu caso real.
 `,
   },
   {
@@ -170,7 +184,7 @@ Usa un simulador para comparar escenarios con el mismo capital y distintos plazo
     targetToolUrl: '/calculadora-iva',
     tags: ['iva', 'facturacion', 'autonomos'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T09:30:00.000Z',
+    updatedAt: '2026-08-20T17:38:00.000Z',
     content: `## IVA: lo que mas se confunde en el dia a dia
 
 El IVA parece sencillo hasta que tienes que quitarlo de un precio final o revisar una factura antigua. En ese punto aparecen errores muy comunes: aplicar el porcentaje sobre una cantidad equivocada, confundir base imponible con total o no saber cuando corresponde un tipo reducido.
@@ -196,8 +210,15 @@ La manera correcta es dividir 121 entre 1,21. Solo asi recuperas la base real so
 - **21 %**: tipo general.
 - **10 %**: tipo reducido para determinados bienes y servicios.
 - **4 %**: tipo superreducido para supuestos concretos.
+- **0 %**: aplicable solo a determinadas operaciones previstas por la normativa.
 
-La Agencia Tributaria publica los criterios aplicables y conviene revisarlos cuando hay dudas sobre una actividad concreta.
+La [Agencia Tributaria detalla los tipos impositivos vigentes](https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes/tipos-impositivos-iva.html) y los supuestos a los que se aplica cada uno. Que exista un tipo reducido, superreducido o del 0 % no permite elegirlo libremente: depende del bien, el servicio y las condiciones de la operacion.
+
+## Calculo y criterio fiscal son decisiones distintas
+
+La formula puede ser correcta y la factura seguir estando mal si se ha elegido un tipo que no corresponde. La [Agencia Tributaria separa el calculo del IVA repercutido](https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes.html) de la identificacion del tipo aplicable: primero debes saber que tratamiento fiscal corresponde y despues calcular la cuota sobre la base imponible.
+
+Esta distincion es especialmente importante en actividades con excepciones, operaciones exentas o ventas que combinan conceptos diferentes. La calculadora resuelve la operacion aritmetica; no clasifica fiscalmente lo que estas vendiendo.
 
 ## Situaciones practicas donde mas ayuda una calculadora
 
@@ -225,7 +246,7 @@ Si trabajas con presupuestos o facturas, merece la pena revisar tres cosas antes
 
 ## Recomendacion practica
 
-Usa la calculadora para presupuestos rapidos, revision de tickets o comprobacion de importes. Para facturacion formal, revisa siempre la normativa aplicable y el criterio de redondeo de tu software.
+Usa la [calculadora de IVA](/calculadora-iva) para presupuestos rapidos, revision de tickets o comprobacion de importes. Para facturacion formal, revisa siempre el tipo aplicable, la normativa de tu operacion y el criterio de redondeo de tu software.
 `,
   },
   {
@@ -444,12 +465,12 @@ Usa un generador local, guarda las claves en un gestor y reserva la memoria solo
     targetToolUrl: '/validador-iban',
     tags: ['iban', 'banca', 'transferencias'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T10:30:00.000Z',
+    updatedAt: '2026-08-20T17:39:00.000Z',
     content: `## Validar no es lo mismo que confirmar titularidad
 
-Un validador de IBAN sirve para detectar errores de formato y de digitos de control. Eso ya evita muchos fallos tipicos al copiar o transcribir una cuenta bancaria. Sin embargo, no confirma por si solo que el titular sea correcto ni que la cuenta este operativa.
+Un validador de IBAN sirve para detectar errores de formato y de digitos de control. Eso ya evita muchos fallos tipicos al copiar o transcribir una cuenta bancaria. Sin embargo, la herramienta no confirma por si sola que el titular sea correcto ni que la cuenta este operativa.
 
-Esa distincion es importante porque muchas personas interpretan "IBAN valido" como "destinatario correcto". No es asi. La validacion reduce errores mecanicos, pero no sustituye una comprobacion de identidad cuando hay dinero de por medio.
+Esa distincion es importante porque muchas personas interpretan "IBAN valido" como "destinatario correcto". No es asi. La validacion reduce errores mecanicos, pero no sustituye una comprobacion de identidad cuando hay dinero de por medio. El [Banco de Espana define el IBAN como identificador unico](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/serviciospago/traspasostransfe/guia-textual/conceptocaracter/Identificador_unico.html) de la cuenta en Espana y en la zona SEPA.
 
 ## Que comprueba realmente un IBAN
 
@@ -479,6 +500,12 @@ Esa distincion es importante porque muchas personas interpretan "IBAN valido" co
 - Guarda plantillas seguras solo cuando ya has verificado al destinatario.
 - Si recibes un IBAN nuevo para un proveedor habitual, verificalo antes de pagar.
 
+## Verificacion del beneficiario: que ha cambiado
+
+Desde el 9 de octubre de 2025, los proveedores de servicios de pago deben ofrecer gratuitamente la [verificacion del beneficiario](https://clientebancario.bde.es/pcb/es/blog/nuevo-servicio-gratuito-de-verificacion-del-beneficiario-a-partir-del-9-de-octubre-de-2025-.html) para transferencias bancarias en euros, tanto ordinarias como inmediatas. El banco comprueba si el nombre indicado coincide con el titular de la cuenta de destino y puede responder que es coincidente, casi coincidente, no coincidente o que no ha podido verificarlo.
+
+Esta comprobacion mejora la seguridad, pero no convierte cualquier IBAN valido en un destinatario fiable. Si el resultado no coincide y decides continuar, la transferencia se ejecutara hacia el IBAN introducido. Lee el aviso de tu banco, detente ante una discrepancia y confirma el dato por un canal independiente antes de autorizar el envio.
+
 ## Cuando mas valor aporta un validador
 
 Este tipo de herramienta es especialmente util cuando copias un IBAN largo desde una factura, un PDF o una cadena reenviada por mensajeria. En esos casos basta un caracter mal escrito para enviar dinero a una cuenta errada o provocar una devolucion evitable.
@@ -487,7 +514,7 @@ Tambien ayuda mucho en procesos internos: alta de proveedores, controles manuale
 
 ## Idea clave
 
-El validador te ayuda a evitar fallos mecanicos. La comprobacion de identidad del beneficiario sigue dependiendo de tus procesos de verificacion.
+El [validador de IBAN](/validador-iban) te ayuda a evitar fallos mecanicos antes de iniciar la operacion. La verificacion bancaria del beneficiario y tus comprobaciones por un segundo canal cubren riesgos distintos y siguen siendo necesarias cuando el pago es importante o el numero de cuenta ha cambiado.
 `,
   },
   {
