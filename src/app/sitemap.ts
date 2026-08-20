@@ -27,7 +27,7 @@ const toolDefinitions = [
   ['mayusculas-minusculas', 'monthly', 0.7],
   ['generador-qr', 'monthly', 0.8],
   ['lector-qr', 'monthly', 0.7, '2026-08-20T16:43:16.000Z'],
-  ['calculadora-dias', 'monthly', 0.7],
+  ['calculadora-dias', 'monthly', 0.7, '2026-08-20T20:37:15.000Z'],
   ['traductor-binario', 'monthly', 0.9],
   ['calculadora-edad', 'monthly', 0.9],
   ['simbolos-copiar', 'monthly', 0.9],
