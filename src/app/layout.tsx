@@ -118,6 +118,12 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Guías prácticas de CajaUtil.com"
+          href="/feed.xml"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `try{var c=localStorage.getItem('cajautil_cookie_consent');if(c==='accepted'||c==='rejected'){document.documentElement.setAttribute('data-caja-consent',c)}}catch(e){}`,

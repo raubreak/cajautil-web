@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, BookOpen, CalendarDays } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, Rss } from 'lucide-react';
 import type { Metadata } from 'next';
 
 import { editorialArticles } from '@/lib/editorialArticles';
@@ -32,9 +32,29 @@ export default function BlogIndex() {
   const articles = [...editorialArticles].sort(
     (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
   );
+  const articleListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Guías y artículos prácticos',
+    url: 'https://cajautil.com/articulos',
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: articles.length,
+      itemListElement: articles.map((article, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: article.title,
+        url: `https://cajautil.com/articulos/${article.slug}`,
+      })),
+    },
+  };
 
   return (
     <main className="min-h-screen bg-slate-50 py-12 px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleListJsonLd) }}
+      />
       <div className="max-w-6xl mx-auto">
         <header className="mb-16 text-center">
           <div className="inline-flex items-center justify-center rounded-3xl bg-blue-100 p-4 shadow-sm mb-6">
@@ -48,6 +68,13 @@ export default function BlogIndex() {
             simuladores y utilidades: conceptos, errores comunes, ejemplos prácticos y decisiones
             que conviene tomar con contexto.
           </p>
+          <a
+            href="/feed.xml"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-bold text-orange-800 transition-colors hover:border-orange-300 hover:bg-orange-100"
+          >
+            <Rss className="h-4 w-4" />
+            Seguir nuevas guías por RSS
+          </a>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
