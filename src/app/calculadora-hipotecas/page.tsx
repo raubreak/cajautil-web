@@ -11,7 +11,7 @@ export default function CalculadoraHipotecas() {
         <h2>Cómo usar esta calculadora de hipotecas</h2>
         <p>
           Introduce el capital solicitado, el plazo en años y el tipo de interés nominal anual para obtener una estimación
-          rápida de la cuota mensual. Es una ayuda útil para comparar escenarios antes de pedir ofertas a varias entidades.
+          rápida de la cuota mensual y consultar las primeras cuotas de amortización. Es una ayuda útil para comparar escenarios antes de pedir ofertas a varias entidades.
         </p>
         <p>
           El cálculo se basa en el <strong>sistema de amortización francés</strong>, que es el más habitual en España:
@@ -22,7 +22,7 @@ export default function CalculadoraHipotecas() {
 
         <h2>Conceptos clave para entender tu hipoteca</h2>
         <ul>
-          <li><strong>Capital:</strong> cantidad que solicitas al banco. Normalmente los bancos financian hasta el 80% del valor de tasación.</li>
+          <li><strong>Capital:</strong> cantidad que solicitas al banco. El porcentaje financiado depende de la entidad, tu perfil y la relación entre precio de compra y tasación; una referencia habitual no constituye una financiación garantizada.</li>
           <li><strong>TIN (Tipo de Interés Nominal):</strong> porcentaje anual que el banco cobra por el dinero prestado sin incluir comisiones.</li>
           <li><strong>TAE (Tasa Anual Equivalente):</strong> indicador que incluye el TIN, las comisiones y los gastos obligatorios. Útil para comparar ofertas reales.</li>
           <li><strong>Euríbor:</strong> índice de referencia para hipotecas a tipo variable en la zona euro. Se revisa periódicamente y afecta directamente a tu cuota.</li>
@@ -33,9 +33,12 @@ export default function CalculadoraHipotecas() {
         <ul>
           <li><strong>TAE y comisiones:</strong> no te quedes solo con el interés nominal. Compara la TAE entre entidades.</li>
           <li><strong>Vinculaciones:</strong> seguros, domiciliación de nómina o tarjetas pueden bonificar el tipo pero también añadir costes.</li>
-          <li><strong>Ahorro disponible:</strong> además de la entrada (normalmente un 20% del valor), recuerda gastos de notaría, tasación, registro e impuestos (entre un 10-12% adicional).</li>
+          <li><strong>Ahorro disponible:</strong> separa la entrada, los impuestos y gastos de compraventa, la tasación y el colchón que quieras conservar. No existe un porcentaje adicional universal para todas las operaciones.</li>
           <li><strong>Amortización anticipada:</strong> revisa si hay penalización por devolver capital antes de plazo.</li>
         </ul>
+        <p>
+          Para preparar estas partidas por separado, consulta la guía sobre <Link href="/articulos/cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda">cuánto dinero necesitas ahorrar para comprar una vivienda</Link>.
+        </p>
 
         <h2>Caso real: cuando una cuota asumible no significa una compra comoda</h2>
         <p>

@@ -5,8 +5,8 @@ import ToolEditorialSection from '@/components/ToolEditorialSection';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de Hipotecas Online Gratis',
-  description: 'Calcula la cuota mensual de una hipoteca, los intereses y el coste total. Compara importe, plazo y tipo antes de pedir ofertas al banco.',
+  title: 'Calculadora de Hipoteca | Cuota y Amortización',
+  description: 'Calcula la cuota de tu hipoteca, intereses, coste total y primeras cuotas de amortización. Compara capital, plazo y TIN con límites claros.',
   keywords: [
     "calculadora hipoteca",
     "calcular cuota hipoteca",
@@ -19,16 +19,16 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/calculadora-hipotecas`,
   },
   openGraph: {
-    title: 'Simulador de Hipotecas Online',
-    description: 'Averigua cuánto pagarás al mes y el total de intereses de tu hipoteca.',
+    title: 'Calculadora de Hipoteca | Cuota y Amortización',
+    description: 'Estima cuota, intereses, coste total y primeras cuotas de amortización con capital, plazo y TIN editables.',
     url: `${SITE_URL}/calculadora-hipotecas`,
     images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
     images: ['https://cajautil.com/og-image.png'],
-    title: 'Simulador de Hipotecas Online',
-    description: 'Averigua cuánto pagarás al mes y el total de intereses de tu hipoteca.',
+    title: 'Calculadora de Hipoteca | Cuota y Amortización',
+    description: 'Estima cuota, intereses, coste total y primeras cuotas de amortización con capital, plazo y TIN editables.',
   }
 };
 
@@ -37,7 +37,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de Hipotecas",
   url: `${SITE_URL}/calculadora-hipotecas`,
-  description: "Simulador financiero para estimar la cuota mensual y los intereses de una hipoteca con el sistema de amortización francés.",
+  description: "Simulador financiero para estimar cuota mensual, intereses, coste total y primeras cuotas de una hipoteca con amortización francesa.",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Any",
   offers: {
