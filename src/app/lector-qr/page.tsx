@@ -1,27 +1,43 @@
 "use client";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import jsQR from "jsqr";
 import Link from "next/link";
-import { ScanSearch } from "lucide-react";
+import { Check, Copy, ExternalLink, LoaderCircle, ScanSearch, ShieldAlert } from "lucide-react";
 
 import { trackToolEvent } from '@/lib/analytics';
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
-const MAX_IMAGE_PIXELS = 20_000_000;
+const MAX_SOURCE_PIXELS = 32_000_000;
+const MAX_PROCESSING_PIXELS = 4_000_000;
 const SUPPORTED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+
+const getHttpUrl = (value: string) => {
+  try {
+    const url = new URL(value.trim());
+    return url.protocol === "http:" || url.protocol === "https:" ? url : null;
+  } catch {
+    return null;
+  }
+};
 
 export default function LectorQR() {
   const [resultado, setResultado] = useState<string | null>(null);
   const [errorDesc, setErrorDesc] = useState<string | null>(null);
   const [nombreArchivo, setNombreArchivo] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const scanIdRef = useRef(0);
 
   const manejarSubida = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    
+
+    const scanId = ++scanIdRef.current;
     setErrorDesc(null);
     setResultado(null);
+    setCopyStatus("idle");
+    setIsProcessing(false);
     const file = files[0];
     e.currentTarget.value = "";
     trackToolEvent('tool_started', 'lector-qr');
@@ -39,49 +55,95 @@ export default function LectorQR() {
     }
 
     setNombreArchivo(file.name);
+    setIsProcessing(true);
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        if (img.width * img.height > MAX_IMAGE_PIXELS) {
-          setErrorDesc("La imagen tiene demasiada resolución. Redúcela por debajo de 20 megapíxeles e inténtalo de nuevo.");
+    let imageUrl: string;
+    try {
+      imageUrl = URL.createObjectURL(file);
+    } catch {
+      setIsProcessing(false);
+      setErrorDesc("No se ha podido preparar la imagen seleccionada.");
+      return;
+    }
+
+    const img = new Image();
+    img.onload = () => {
+      try {
+        if (scanId !== scanIdRef.current) return;
+
+        const sourcePixels = img.naturalWidth * img.naturalHeight;
+        if (sourcePixels === 0 || sourcePixels > MAX_SOURCE_PIXELS) {
+          setErrorDesc("La foto supera el límite de 32 megapíxeles. Reduce su resolución e inténtalo de nuevo.");
           return;
         }
 
         const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+        if (!canvas) throw new Error("Canvas unavailable");
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) throw new Error("Canvas context unavailable");
 
-        try {
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0, 0, img.width, img.height);
+        const scale = Math.min(1, Math.sqrt(MAX_PROCESSING_PIXELS / sourcePixels));
+        canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          const code = jsQR(imageData.data, imageData.width, imageData.height);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+        const decodedContent = code?.data;
 
-          if (code) {
-            setResultado(code.data);
-            trackToolEvent('tool_completed', 'lector-qr');
-          } else {
-            setErrorDesc("No se ha detectado ningún código QR válido en la imagen. Intenta con otra de mayor calidad o mejor enfocada.");
-          }
-        } catch {
+        if (decodedContent?.trim()) {
+          setResultado(decodedContent);
+          trackToolEvent('tool_completed', 'lector-qr');
+        } else {
+          setErrorDesc("No se ha detectado ningún código QR válido. Prueba una foto más nítida o recorta la imagen alrededor del código.");
+        }
+      } catch {
+        if (scanId === scanIdRef.current) {
           setErrorDesc("No se ha podido procesar la imagen. Prueba con otro archivo JPG, PNG o WebP.");
         }
-      };
-      img.onerror = () => setErrorDesc("No se ha podido abrir la imagen. Comprueba que el archivo no esté dañado.");
-      img.src = event.target?.result as string;
+      } finally {
+        URL.revokeObjectURL(imageUrl);
+        if (scanId === scanIdRef.current) setIsProcessing(false);
+      }
     };
-    reader.onerror = () => setErrorDesc("No se ha podido leer el archivo seleccionado.");
-    reader.readAsDataURL(file);
+    img.onerror = () => {
+      URL.revokeObjectURL(imageUrl);
+      if (scanId !== scanIdRef.current) return;
+      setIsProcessing(false);
+      setErrorDesc("No se ha podido abrir la imagen. Comprueba que el archivo no esté dañado.");
+    };
+    img.src = imageUrl;
   };
 
-  const isLink = (str: string) => {
-    return /^https?:\/\//i.test(str);
+  const copiarResultado = async () => {
+    if (!resultado) return;
+    setCopyStatus("idle");
+
+    try {
+      await navigator.clipboard.writeText(resultado);
+      setCopyStatus("copied");
+      trackToolEvent('result_copied', 'lector-qr');
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = resultado;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        const copied = document.execCommand("copy");
+        setCopyStatus(copied ? "copied" : "error");
+        if (copied) trackToolEvent('result_copied', 'lector-qr');
+      } catch {
+        setCopyStatus("error");
+      } finally {
+        textarea.remove();
+      }
+    }
   };
+
+  const decodedUrl = resultado ? getHttpUrl(resultado) : null;
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
@@ -110,43 +172,60 @@ export default function LectorQR() {
             <input type="file" className="hidden" accept="image/jpeg,image/png,image/webp" onChange={manejarSubida} aria-label="Subir imagen con código QR" />
           </label>
 
-          {nombreArchivo && <p className="text-sm font-bold bg-indigo-50 items-center justify-center py-2 px-4 rounded-full text-indigo-600">Archivo analizado: {nombreArchivo}</p>}
+          {nombreArchivo && <p className="text-sm font-bold bg-indigo-50 items-center justify-center py-2 px-4 rounded-full text-indigo-600">Archivo seleccionado: {nombreArchivo}</p>}
 
           <canvas ref={canvasRef} className="hidden"></canvas>
 
+          {isProcessing && (
+            <div className="flex items-center gap-2 text-sm font-bold text-indigo-700" role="status">
+              <LoaderCircle className="h-5 w-5 animate-spin" aria-hidden="true" />
+              Analizando la imagen en tu navegador...
+            </div>
+          )}
+
           {errorDesc && (
             <div className="w-full p-4 bg-red-50 text-red-800 rounded-2xl border border-red-200 text-sm font-semibold text-center" role="alert">
-              🚨 {errorDesc}
+              {errorDesc}
             </div>
           )}
 
           {resultado && (
-            <div className="w-full p-8 bg-indigo-50 border border-indigo-100 rounded-3xl flex flex-col items-center" role="status">
-               <p className="text-sm uppercase font-black tracking-widest text-indigo-400 mb-6 drop-shadow-sm">Contenido Extraído con Éxito</p>
+            <div className="w-full p-8 bg-indigo-50 border border-indigo-100 rounded-3xl flex flex-col items-center" aria-live="polite">
+               <p className="text-sm uppercase font-black tracking-widest text-indigo-700 mb-6">Contenido extraído</p>
                <div className="w-full bg-white p-6 rounded-2xl border border-indigo-100/50 shadow-inner font-mono text-base break-all text-slate-800 text-center mb-8">
                  {resultado}
                </div>
 
-               {isLink(resultado) ? (
-                 <a 
-                   href={resultado} 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-lg rounded-2xl text-center shadow-md transition-colors block"
-                  >
-                   🌐 Abrir Enlace en nueva pestaña
-                 </a>
-               ) : (
-                 <button 
-                    onClick={() => {
-                      navigator.clipboard.writeText(resultado);
-                      trackToolEvent('result_copied', 'lector-qr');
-                    }}
-                   className="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white font-black text-lg rounded-2xl text-center shadow-md transition-colors"
-                  >
-                   📋 Copiar al Portapapeles
-                 </button>
+               {decodedUrl && (
+                 <div className="mb-4 flex w-full items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
+                   <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+                   <p>Comprueba el dominio <strong>{decodedUrl.hostname}</strong> antes de abrir el enlace. Un QR puede dirigir a una web engañosa.</p>
+                 </div>
                )}
+
+               <div className={`grid w-full gap-3 ${decodedUrl ? "sm:grid-cols-2" : ""}`}>
+                 {decodedUrl && (
+                  <a
+                    href={decodedUrl.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-indigo-600 py-4 text-center text-base font-black text-white shadow-md transition-colors hover:bg-indigo-700"
+                   >
+                    <ExternalLink className="h-5 w-5" aria-hidden="true" /> Abrir enlace
+                  </a>
+                 )}
+                  <button
+                    type="button"
+                    onClick={copiarResultado}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-800 py-4 text-center text-base font-black text-white shadow-md transition-colors hover:bg-slate-900"
+                  >
+                    {copyStatus === "copied" ? <Check className="h-5 w-5" aria-hidden="true" /> : <Copy className="h-5 w-5" aria-hidden="true" />}
+                    {copyStatus === "copied" ? "Contenido copiado" : "Copiar contenido"}
+                  </button>
+               </div>
+               <p className={`mt-3 text-sm font-semibold ${copyStatus === "error" ? "text-red-700" : "text-indigo-700"}`} aria-live="polite">
+                 {copyStatus === "error" ? "No se pudo copiar. Selecciona el contenido manualmente." : copyStatus === "copied" ? "Contenido copiado al portapapeles." : ""}
+               </p>
             </div>
           )}
         </div>
@@ -161,7 +240,7 @@ export default function LectorQR() {
         </p>
         <p>
           La imagen se procesa en la propia pagina para leer el codigo QR contenido en la foto.
-          Despues puedes abrir el enlace detectado o copiar el contenido extraido si se trata de texto plano.
+          Las fotos grandes se reducen antes del analisis para limitar el uso de memoria. Despues puedes copiar cualquier contenido y, si es una URL HTTP o HTTPS, revisar su dominio antes de abrirla.
         </p>
 
         <h2>Consejos para mejorar el escaneo</h2>
