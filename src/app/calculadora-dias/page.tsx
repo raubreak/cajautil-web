@@ -1,25 +1,28 @@
 "use client";
 import { useState, useMemo } from "react";
-import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 
 export default function CalculadoraDias() {
   const [fechaInicio, setFechaInicio] = useState<string>("");
   const [fechaFin, setFechaFin] = useState<string>("");
 
-  const { dias, semanas, meses, anos } = useMemo(() => {
-    if (!fechaInicio || !fechaFin) return { dias: 0, semanas: 0, meses: 0, anos: 0 };
+  const { dias, diasInclusivos, semanas, meses, anos } = useMemo(() => {
+    if (!fechaInicio || !fechaFin) {
+      return { dias: 0, diasInclusivos: 0, semanas: 0, meses: 0, anos: 0 };
+    }
 
-    const inicio = new Date(fechaInicio);
-    const fin = new Date(fechaFin);
+    const [inicioAno, inicioMes, inicioDia] = fechaInicio.split('-').map(Number);
+    const [finAno, finMes, finDia] = fechaFin.split('-').map(Number);
+    const inicio = Date.UTC(inicioAno, inicioMes - 1, inicioDia);
+    const fin = Date.UTC(finAno, finMes - 1, finDia);
 
-    const diferenciaMs = Math.abs(fin.getTime() - inicio.getTime());
+    const diferenciaMs = Math.abs(fin - inicio);
     const d = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
     const s = Math.floor(d / 7);
     const m = Math.floor(d / 30.4375);
-    const a = Math.floor(d / 365.25);
+    const a = Math.floor(d / 365.2425);
 
-    return { dias: d, semanas: s, meses: m, anos: a };
+    return { dias: d, diasInclusivos: d + 1, semanas: s, meses: m, anos: a };
   }, [fechaInicio, fechaFin]);
 
   return (
@@ -70,17 +73,23 @@ export default function CalculadoraDias() {
           </div>
           <div className="p-6 bg-indigo-50 rounded-[24px] border border-indigo-100 flex flex-col items-center justify-center">
             <span className="block text-5xl font-black text-indigo-700 mb-2">{semanas}</span>
-            <span className="text-sm font-bold uppercase tracking-widest text-indigo-800/60">Semanas</span>
+            <span className="text-sm font-bold uppercase tracking-widest text-indigo-800/60">Semanas completas</span>
           </div>
           <div className="p-6 bg-indigo-50 rounded-[24px] border border-indigo-100 flex flex-col items-center justify-center">
             <span className="block text-5xl font-black text-indigo-700 mb-2">{meses}</span>
-            <span className="text-sm font-bold uppercase tracking-widest text-indigo-800/60">Meses</span>
+            <span className="text-sm font-bold uppercase tracking-widest text-indigo-800/60">Meses aprox.</span>
           </div>
           <div className="p-6 bg-indigo-50 rounded-[24px] border border-indigo-100 flex flex-col items-center justify-center">
             <span className="block text-5xl font-black text-indigo-700 mb-2">{anos}</span>
-            <span className="text-sm font-bold uppercase tracking-widest text-indigo-800/60">Años</span>
+            <span className="text-sm font-bold uppercase tracking-widest text-indigo-800/60">Años aprox.</span>
           </div>
         </div>
+        {fechaInicio && fechaFin && (
+          <p className="text-center text-sm leading-relaxed text-slate-600">
+            La diferencia excluye el día inicial. Si necesitas contar ambos días del intervalo,
+            el total es <strong>{diasInclusivos} {diasInclusivos === 1 ? 'día' : 'días'}</strong>.
+          </p>
+        )}
       </div>
       
       {/* Contenido SEO */}
@@ -88,19 +97,14 @@ export default function CalculadoraDias() {
         <h2>¿Cómo calcular los días entre dos fechas?</h2>
         <p>
           Nuestra <strong>calculadora de días entre fechas</strong> te muestra al instante la diferencia exacta 
-          en <strong>días, semanas, meses y años</strong>. Solo tienes que seleccionar la fecha de inicio y la de fin.
+          en <strong>días naturales</strong> y la expresa también como semanas completas, meses aproximados y años aproximados.
+          Solo tienes que seleccionar la fecha de inicio y la de fin.
         </p>
         <p>
-          Es perfecta para calcular <strong>plazos legales</strong>, <strong>vacaciones</strong>, 
-          <strong>eventos</strong>, <strong>embarazos</strong>, <strong>proyectos</strong> o 
-          <strong>períodos de prueba</strong>.
+          Puede ayudarte a organizar <strong>vacaciones</strong>, <strong>eventos</strong>, <strong>proyectos</strong> o{' '}
+          <strong>períodos de prueba</strong>. Para plazos legales o administrativos, confirma siempre si debes contar días
+          naturales, hábiles o ambos extremos del intervalo.
         </p>
-
-        <h3>Herramientas relacionadas</h3>
-        <ul>
-          <li><Link href="/calculadora-porcentajes">Calculadora de Porcentajes</Link></li>
-          <li><Link href="/calculadora-sueldo-neto">Calculadora Sueldo Neto</Link></li>
-        </ul>
       </section>
     </main>
   );

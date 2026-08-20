@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {children}
-      <ToolEditorialSection slug="calculadora-dias" compact />
+      <ToolEditorialSection slug="calculadora-dias" />
     </>
   );
 }
