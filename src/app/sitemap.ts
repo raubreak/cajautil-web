@@ -17,7 +17,7 @@ const toolDefinitions = [
   ['calculadora-hipotecas', 'monthly', 0.9],
   ['generador-enlace-whatsapp', 'monthly', 0.9],
   ['calculadora-imc', 'monthly', 0.9],
-  ['calculadora-porcentajes', 'monthly', 0.9],
+  ['calculadora-porcentajes', 'monthly', 0.9, '2026-08-20T22:23:43.000Z'],
   ['calculadora-iva', 'monthly', 0.9],
   ['calculadora-sueldo-neto', 'yearly', 0.9, '2026-08-20T16:22:57.000Z'],
   ['validador-iban', 'monthly', 0.9],
