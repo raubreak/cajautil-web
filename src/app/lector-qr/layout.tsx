@@ -23,9 +23,11 @@ export const metadata: Metadata = {
     description: "Sube una foto o captura con un QR y extrae su contenido directamente en el navegador.",
     url: `${SITE_URL}/lector-qr`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["https://cajautil.com/og-image.png"],
     title: "Leer QR desde una Imagen o Foto | CajaUtil",
     description: "Sube una foto o captura con un QR y extrae su contenido directamente en el navegador.",
   },

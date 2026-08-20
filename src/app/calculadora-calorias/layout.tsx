@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     title: 'Calculadora de Calorías y Metabolismo Basal Online',
     description: 'Descubre cuántas calorías necesitas al día según tu edad, peso, altura y nivel de actividad.',
     url: `${SITE_URL}/calculadora-calorias`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

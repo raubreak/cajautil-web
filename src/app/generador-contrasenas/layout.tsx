@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description: "Crea contraseñas robustas y difíciles de adivinar. 100% offline y gratis.",
     url: `${SITE_URL}/generador-contrasenas`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
 };
 

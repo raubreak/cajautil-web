@@ -20,9 +20,11 @@ export const metadata: Metadata = {
     title: 'Simulador de Hipotecas Online',
     description: 'Averigua cuánto pagarás al mes y el total de intereses de tu hipoteca.',
     url: `${SITE_URL}/calculadora-hipotecas`,
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Simulador de Hipotecas Online',
     description: 'Averigua cuánto pagarás al mes y el total de intereses de tu hipoteca.',
   }

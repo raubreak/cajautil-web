@@ -18,9 +18,11 @@ export const metadata: Metadata = {
     title: 'Simulador de Préstamos Personales Online — CajaUtil',
     description: 'Calcula cuánto pagarás por tu préstamo personal incluyendo intereses y tabla de amortización.',
     url: `${SITE_URL}/calculadora-prestamos`,
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Simulador de Préstamos Personales Online — CajaUtil',
     description: 'Calcula cuánto pagarás por tu préstamo personal incluyendo intereses y tabla de amortización.',
   }

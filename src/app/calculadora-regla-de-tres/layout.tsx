@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: 'Calculadora de Regla de 3 (Directa e Inversa)',
     description: 'Resuelve problemas de proporcionalidad matemática de la escuela, universidad o trabajo diario muy fácil y paso a paso.',
     url: `${SITE_URL}/calculadora-regla-de-tres`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

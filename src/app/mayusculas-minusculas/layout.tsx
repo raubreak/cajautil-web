@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     description: "Cambia el formato de cualquier texto al instante. Gratis.",
     url: `${SITE_URL}/mayusculas-minusculas`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
 };
 

@@ -21,9 +21,11 @@ export const metadata: Metadata = {
     title: 'Compresor de Imágenes a WebP | Optimiza tu Web',
     description: 'Reduce el peso de imágenes JPG o PNG convirtiéndolas a WebP en tu navegador. El ahorro depende de la imagen y la calidad elegida.',
     url: `${SITE_URL}/compresor-webp`,
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Compresor de Imágenes a WebP | Optimiza tu Web',
     description: 'Reduce el peso de imágenes JPG o PNG convirtiéndolas a WebP en tu navegador. El ahorro depende de la imagen y la calidad elegida.',
   }

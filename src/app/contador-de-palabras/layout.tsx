@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     description: "Cuenta palabras, caracteres y tiempo de lectura al instante. 100% gratis.",
     url: `${SITE_URL}/contador-de-palabras`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
 };
 

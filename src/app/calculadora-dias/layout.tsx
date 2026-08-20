@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description: "Calcula días, semanas, meses y años entre dos fechas. Gratis.",
     url: `${SITE_URL}/calculadora-dias`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
 };
 

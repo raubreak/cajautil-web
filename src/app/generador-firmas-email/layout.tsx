@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     title: 'Generador de Firmas de Email Profesionales Gratis — CajaUtil',
     description: 'Diseña tu firma de correo en segundos. Compatible con todos los clientes de email.',
     url: `${SITE_URL}/generador-firmas-email`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

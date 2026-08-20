@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     title: 'Conversor de Unidades Online — Peso, Longitud y Temperatura',
     description: 'Convierte entre unidades de medida al instante. Todo en tu navegador, sin instalar nada.',
     url: `${SITE_URL}/conversor-unidades`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

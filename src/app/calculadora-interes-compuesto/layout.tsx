@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Calculadora de Interés Compuesto con Aportaciones',
     description: 'Compara cómo cambian el capital final, las aportaciones y los intereses en distintos escenarios a largo plazo.',
     url: `${SITE_URL}/calculadora-interes-compuesto`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

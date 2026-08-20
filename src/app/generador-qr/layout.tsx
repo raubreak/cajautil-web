@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description: "Crea y descarga códigos QR en alta resolución. Personaliza colores y contenido.",
     url: `${SITE_URL}/generador-qr`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
 };
 

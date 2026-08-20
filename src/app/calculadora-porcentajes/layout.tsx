@@ -20,9 +20,11 @@ export const metadata: Metadata = {
     description: "Calcula porcentajes, proporciones e incrementos al instante. 100% gratis.",
     url: `${SITE_URL}/calculadora-porcentajes`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["https://cajautil.com/og-image.png"],
     title: "Calculadora de Porcentajes Online Gratis",
     description: "Calcula porcentajes, proporciones e incrementos al instante. 100% gratis.",
   },

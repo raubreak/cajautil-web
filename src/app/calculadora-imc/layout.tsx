@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Evalúa tu Índice de Masa Corporal | Calculadora IMC Saludable',
     description: 'Comprueba en qué rango de peso de la OMS te encuentras introduciendo tu altura y peso. Descubre tu IMC al instante.',
     url: `${SITE_URL}/calculadora-imc`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

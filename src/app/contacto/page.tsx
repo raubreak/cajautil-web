@@ -12,9 +12,11 @@ export const metadata: Metadata = {
     description: 'Contacta con el equipo de CajaUtil.com para sugerencias, reportar errores o proponer nuevas herramientas.',
     url: 'https://cajautil.com/contacto',
     type: 'website',
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Contacto | CajaUtil.com',
     description: 'Contacta con el equipo de CajaUtil.com para sugerencias, reportar errores o proponer nuevas herramientas.',
   },

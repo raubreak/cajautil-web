@@ -16,9 +16,11 @@ export const metadata: Metadata = {
     description: "Conoce la misión, valores y metodología editorial de CajaUtil.com. Herramientas web gratuitas con rigor, transparencia y privacidad.",
     url: 'https://cajautil.com/sobre-nosotros',
     type: 'website',
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Sobre nosotros | CajaUtil.com',
     description: "Conoce la misión, valores y metodología editorial de CajaUtil.com. Herramientas web gratuitas con rigor, transparencia y privacidad.",
   },

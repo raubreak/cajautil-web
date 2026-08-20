@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Calculadora de Edad Exacta Online Gratis',
     description: 'Descubre tu edad al detalle y cuántos segundos han pasado desde tu nacimiento al instante.',
     url: `${SITE_URL}/calculadora-edad`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

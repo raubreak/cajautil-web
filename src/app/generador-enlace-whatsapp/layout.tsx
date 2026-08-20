@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Generador Link WhatsApp | Crea Tu Enlace Personalizado',
     description: 'Convierte tu número de teléfono en un enlace dinámico hacia tu chat de WhatsApp con un solo clic.',
     url: `${SITE_URL}/generador-enlace-whatsapp`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

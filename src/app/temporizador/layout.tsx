@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: 'Temporizador Online Gratis con Alarma',
     description: 'Configura una cuenta atrás con sonido para estudiar, cocinar o entrenar.',
     url: `${SITE_URL}/temporizador`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

@@ -23,9 +23,11 @@ export const metadata: Metadata = {
     description: "Calcula cuánto cobrarás de neto al mes desde tu bruto anual con IRPF y cotización ajustables.",
     url: `${SITE_URL}/calculadora-sueldo-neto`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["https://cajautil.com/og-image.png"],
     title: "Calculadora de Sueldo Neto | España",
     description: "Calcula cuánto cobrarás de neto al mes desde tu bruto anual con IRPF y cotización ajustables.",
   },

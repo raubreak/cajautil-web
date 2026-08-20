@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: 'Validador de IBAN Español | Comprobación MOD-97',
     description: 'Comprueba localmente la estructura española y los dígitos de control de un IBAN antes de revisar los datos con tu banco.',
     url: `${SITE_URL}/validador-iban`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

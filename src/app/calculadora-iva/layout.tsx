@@ -24,9 +24,11 @@ export const metadata: Metadata = {
     title: 'Calculadora de IVA Fácil y Rápida',
     description: 'Añade o extrae el IVA de cualquier importe. Comprueba la base imponible y la cuota de IVA al instante (por defecto 21%).',
     url: `${SITE_URL}/calculadora-iva`,
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Calculadora de IVA Fácil y Rápida',
     description: 'Añade o extrae el IVA de cualquier importe. Comprueba la base imponible y la cuota de IVA al instante (por defecto 21%).',
   }

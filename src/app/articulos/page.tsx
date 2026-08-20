@@ -17,9 +17,11 @@ export const metadata: Metadata = {
       'Guías editoriales sobre salario, préstamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',
     url: 'https://cajautil.com/articulos',
     type: 'website',
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Guías y artículos prácticos | CajaUtil.com',
     description:
       'Guías editoriales sobre salario, préstamos, IVA, QR, WebP, seguridad y otras utilidades relacionadas con las herramientas de CajaUtil.com.',

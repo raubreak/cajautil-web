@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     title: 'Cronómetro Online Gratis y de Precisión — CajaUtil',
     description: 'Mide tus tiempos de forma precisa con nuestro cronómetro online gratuito.',
     url: `${SITE_URL}/cronometro`,
+    images: ['https://cajautil.com/og-image.png'],
   }
 };
 

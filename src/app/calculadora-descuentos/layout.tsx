@@ -21,9 +21,11 @@ export const metadata: Metadata = {
     title: 'Calculadora de Descuentos Online gratis',
     description: 'Descubre el precio final de tus compras tras aplicar el porcentaje de rebaja de forma instantánea.',
     url: `${SITE_URL}/calculadora-descuentos`,
+    images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['https://cajautil.com/og-image.png'],
     title: 'Calculadora de Descuentos Online gratis',
     description: 'Descubre el precio final de tus compras tras aplicar el porcentaje de rebaja de forma instantánea.',
   }
