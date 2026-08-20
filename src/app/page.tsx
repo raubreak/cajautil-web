@@ -452,7 +452,7 @@ export default function Home() {
                       {herramienta.descripcion}
                     </p>
                     
-                    <div className="mt-8 flex items-center text-sm font-bold text-slate-400 group-hover:text-blue-600 transition-colors">
+                    <div className="mt-8 flex items-center text-sm font-bold text-slate-600 group-hover:text-blue-700 transition-colors">
                       <span>Usar herramienta gratis</span>
                       <ArrowRight size={16} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -485,6 +485,12 @@ export default function Home() {
               Todas las herramientas son <strong>100% gratuitas</strong> y están optimizadas para móvil, tablet y ordenador.
               Muchas se ejecutan directamente en tu navegador. La analítica opcional y el estado de la publicidad se explican en nuestras páginas legales.
               No necesitas crear cuenta, instalar nada ni dar tu email para usar la web.
+            </p>
+            <p>
+              Si quieres entender mejor los resultados, consulta nuestras guías sobre
+              {' '}<Link href="/articulos/interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde" className="text-blue-600 font-semibold hover:underline">cómo funciona el interés compuesto</Link>,
+              {' '}<Link href="/articulos/como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo" className="text-blue-600 font-semibold hover:underline">cómo crear códigos QR que se lean bien</Link> y
+              {' '}<Link href="/articulos/cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda" className="text-blue-600 font-semibold hover:underline">cuánto ahorrar antes de comprar una vivienda</Link>.
             </p>
           </div>
         </section>

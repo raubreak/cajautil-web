@@ -276,7 +276,7 @@ WebP suele ser una mejora clara para contenido web, pero no sustituye una estrat
     targetToolUrl: '/generador-qr',
     tags: ['qr', 'marketing', 'movil'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T18:30:00.000Z',
+    updatedAt: '2026-08-20T16:30:00.000Z',
     content: `## Un QR no sirve si nadie puede escanearlo
 
 Los codigos QR parecen trivialmente faciles de crear, pero en la practica fallan mucho por decisiones de diseno: poco contraste, tamano insuficiente, enlaces rotos o exceso de elementos decorativos.

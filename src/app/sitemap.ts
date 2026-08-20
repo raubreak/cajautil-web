@@ -6,7 +6,7 @@ import { editorialArticles } from '@/lib/editorialArticles';
 const SITE_URL = 'https://cajautil.com';
 
 const toolDefinitions = [
-  ['calculadora-interes-compuesto', 'monthly', 0.9],
+  ['calculadora-interes-compuesto', 'monthly', 0.9, '2026-08-20T16:23:06.000Z'],
   ['extractor-colores', 'monthly', 0.9],
   ['temporizador', 'monthly', 0.9],
   ['calculadora-descuentos', 'monthly', 0.9],
@@ -19,14 +19,14 @@ const toolDefinitions = [
   ['calculadora-imc', 'monthly', 0.9],
   ['calculadora-porcentajes', 'monthly', 0.9],
   ['calculadora-iva', 'monthly', 0.9],
-  ['calculadora-sueldo-neto', 'yearly', 0.9],
+  ['calculadora-sueldo-neto', 'yearly', 0.9, '2026-08-20T16:22:57.000Z'],
   ['validador-iban', 'monthly', 0.9],
   ['generador-nombres', 'monthly', 0.8],
   ['contador-de-palabras', 'monthly', 0.8],
   ['generador-contrasenas', 'monthly', 0.8],
   ['mayusculas-minusculas', 'monthly', 0.7],
   ['generador-qr', 'monthly', 0.8],
-  ['lector-qr', 'monthly', 0.7],
+  ['lector-qr', 'monthly', 0.7, '2026-08-20T16:43:16.000Z'],
   ['calculadora-dias', 'monthly', 0.7],
   ['traductor-binario', 'monthly', 0.9],
   ['calculadora-edad', 'monthly', 0.9],
@@ -43,17 +43,21 @@ const toolDefinitions = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const latestArticleUpdate = new Date(
+    Math.max(...editorialArticles.map((article) => new Date(article.updatedAt).getTime())),
+  );
   const toolEntries = toolDefinitions
     .filter(([slug]) => !isLowValueTool(slug))
-    .map(([slug, changeFrequency, priority]) => ({
+    .map(([slug, changeFrequency, priority, lastModified]) => ({
       url: `${SITE_URL}/${slug}`,
+      ...(lastModified ? { lastModified: new Date(lastModified) } : {}),
       changeFrequency,
       priority,
     }));
 
   return [
     { url: SITE_URL, changeFrequency: 'weekly', priority: 1 },
-    { url: `${SITE_URL}/articulos`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE_URL}/articulos`, lastModified: latestArticleUpdate, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE_URL}/sobre-nosotros`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/contacto`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/politica-de-privacidad`, changeFrequency: 'yearly', priority: 0.4 },
