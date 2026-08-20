@@ -5,6 +5,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Página no encontrada',
   description: 'La página que buscas no existe o ha sido movida. Vuelve al inicio y encuentra las herramientas online gratuitas de CajaUtil.',
+  alternates: null,
+  openGraph: null,
+  twitter: null,
   robots: { index: false, follow: true },
 };
 
