@@ -59,7 +59,7 @@ export default function PoliticaCookies() {
         <p>
           Tienes derecho a decidir si deseas aceptar o rechazar las cookies no esenciales. Puedes consultar más información sobre el tratamiento publicitario en:
           <br />
-          <a href="https://monetag.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline"><strong>Política de privacidad de Monetag</strong></a>
+          <a href="https://monetag.com/privacy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline"><strong>Política de privacidad de Monetag</strong></a>
         </p>
         <p className="mt-4">
           Casi cualquier navegador te ofrece opciones avanzadas para borrar y gestionar cookies. Consulta siempre la documentacion oficial del navegador que utilices.

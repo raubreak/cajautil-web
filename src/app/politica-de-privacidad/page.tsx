@@ -51,7 +51,7 @@ export default function PoliticaPrivacidad() {
         </p>
         <ul className="list-disc pl-6 mb-4">
           <li><strong>Google Analytics:</strong> <a href="https://policies.google.com/privacy" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
-          <li><strong>Monetag:</strong> <a href="https://monetag.com/privacy-policy/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://monetag.com/privacy-policy/</a></li>
+          <li><strong>Monetag:</strong> <a href="https://monetag.com/privacy/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://monetag.com/privacy/</a></li>
         </ul>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">5. Enlaces de terceros</h2>
