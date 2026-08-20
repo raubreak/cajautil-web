@@ -70,6 +70,23 @@ export default function ToolEditorialSection({ slug, compact = false }: ToolEdit
           </div>
         ) : null}
 
+        {compact && entry.relatedArticles?.length ? (
+          <div className="mt-8 border-t border-slate-100 pt-8">
+            <h2 className="mb-3 text-lg font-black text-slate-900">Guías para interpretar mejor el resultado</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {entry.relatedArticles.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold leading-relaxed text-blue-800 transition-colors hover:border-blue-200 hover:bg-blue-100"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
         {!compact ? (
           <div className="mt-8 border-t border-slate-100 pt-8">
             <h3 className="mb-4 text-lg font-black text-slate-900">Preguntas frecuentes</h3>
