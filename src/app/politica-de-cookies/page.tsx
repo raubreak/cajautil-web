@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Política de Cookies | CajaUtil.com',
-  description: 'Conoce cómo CajaUtil.com y sus anunciantes y terceros utilizan las cookies para ofrecer, proteger y mejorar el servicio y sus anuncios.',
+  title: 'Política de Cookies',
+  description: 'Conoce cómo CajaUtil utiliza almacenamiento local y Google Analytics, y cómo aceptar, rechazar o cambiar tu elección.',
   alternates: {
     canonical: 'https://cajautil.com/politica-de-cookies',
   },
@@ -32,34 +32,32 @@ export default function PoliticaCookies() {
         </p>
         
         <p>
-          Sin embargo, <strong>CajaUtil.com usa tecnologías de terceros con fines publicitarios y de analítica web</strong>,
-          concretamente Google Analytics para medición y Monetag para publicidad.
+          CajaUtil.com puede usar <strong>Google Analytics con fines de analítica web</strong>, pero solo lo carga después de que aceptes.
+          La publicidad de terceros permanece desactivada mientras no podamos garantizar formatos no intrusivos.
         </p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">3. Tipos de Cookies que utilizamos</h2>
         <p>
-          Actualmente trabajamos con Google Analytics y Monetag, sujetos a sus propias políticas de tratamiento de datos.
+          Actualmente solo se carga Google Analytics cuando existe consentimiento.
         </p>
         <ul className="list-disc pl-6 mb-4">
           <li><strong>Cookies de medicion y analitica:</strong> Google Analytics puede utilizar almacenamiento para medir visitas, paginas vistas y eventos de uso.</li>
-          <li><strong>Cookies publicitarias:</strong> Monetag puede utilizar cookies, identificadores y datos técnicos para servir anuncios, medir su rendimiento y limitar el fraude, según tu consentimiento.</li>
           <li><strong>Almacenamiento tecnico:</strong> la plataforma de consentimiento o los servicios integrados pueden almacenar la eleccion realizada para respetarla en visitas posteriores.</li>
         </ul>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">4. Gestion del consentimiento</h2>
         <p>
           CajaUtil muestra un aviso de consentimiento para aceptar o rechazar las tecnologías no esenciales.
-          El tag publicitario de Monetag solo se carga después de aceptar.
+          Rechazar la analítica no limita el uso de ninguna herramienta.
         </p>
         <p>
-          Tu elección se guarda localmente en el navegador para respetarla en visitas posteriores. Puedes eliminarla borrando los datos del sitio.
+          Tu elección se guarda localmente en el navegador para respetarla en visitas posteriores. Puedes cambiarla en cualquier momento mediante el botón «Gestionar cookies».
         </p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">5. ¿Cómo rechazar y eliminar las Cookies?</h2>
         <p>
-          Tienes derecho a decidir si deseas aceptar o rechazar las cookies no esenciales. Puedes consultar más información sobre el tratamiento publicitario en:
-          <br />
-          <a href="https://monetag.com/privacy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline"><strong>Política de privacidad de Monetag</strong></a>
+          Tienes derecho a aceptar o rechazar las cookies no esenciales y a cambiar tu decisión posteriormente. Google explica su tratamiento de datos en su{' '}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline"><strong>política de privacidad</strong></a>.
         </p>
         <p className="mt-4">
           Casi cualquier navegador te ofrece opciones avanzadas para borrar y gestionar cookies. Consulta siempre la documentacion oficial del navegador que utilices.

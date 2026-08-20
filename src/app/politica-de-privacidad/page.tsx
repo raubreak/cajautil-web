@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad | CajaUtil.com',
+  title: 'Política de Privacidad',
   description: 'Conoce nuestra política de privacidad, el uso de datos en CajaUtil.com y cómo protegemos tu información y privacidad.',
   alternates: {
     canonical: 'https://cajautil.com/politica-de-privacidad',
@@ -32,16 +32,12 @@ export default function PoliticaPrivacidad() {
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">3. Analítica, publicidad y consentimiento</h2>
         <p>
-          CajaUtil.com utiliza <strong>Google Analytics</strong> para medir el uso del sitio y <strong>Monetag</strong> para financiar el proyecto mediante publicidad.
-          Estas tecnologias pueden recoger identificadores online, datos tecnicos del dispositivo, informacion basica de navegacion y eventos de uso.
+          CajaUtil.com puede utilizar <strong>Google Analytics</strong> para medir el uso del sitio después del consentimiento.
+          Esta tecnología puede recoger identificadores online, datos técnicos del dispositivo, información básica de navegación y eventos de uso.
         </p>
         <p>
           Puedes <strong>aceptar o rechazar las tecnologías no esenciales</strong> mediante el aviso de consentimiento de CajaUtil.
-          El tag publicitario de Monetag solo se carga después de aceptar.
-        </p>
-        <p>
-          Monetag puede tratar identificadores online, dirección IP, información del navegador, dispositivo y actividad publicitaria para servir anuncios,
-          medir resultados y prevenir fraude conforme a su propia política de privacidad.
+          La publicidad de terceros está desactivada mientras no podamos garantizar formatos no intrusivos.
         </p>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">4. Nuestros socios publicitarios</h2>
@@ -51,7 +47,6 @@ export default function PoliticaPrivacidad() {
         </p>
         <ul className="list-disc pl-6 mb-4">
           <li><strong>Google Analytics:</strong> <a href="https://policies.google.com/privacy" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
-          <li><strong>Monetag:</strong> <a href="https://monetag.com/privacy/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://monetag.com/privacy/</a></li>
         </ul>
 
         <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4">5. Enlaces de terceros</h2>

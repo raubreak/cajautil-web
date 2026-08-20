@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     canonical: 'https://cajautil.com/sobre-nosotros',
   },
   openGraph: {
-    title: 'Sobre nosotros | CajaUtil.com',
+    title: 'Sobre nosotros',
     description: "Conoce la misión, valores y metodología editorial de CajaUtil.com. Herramientas web gratuitas con rigor, transparencia y privacidad.",
     url: 'https://cajautil.com/sobre-nosotros',
     type: 'website',
@@ -177,9 +177,8 @@ const AboutUsPage = () => {
           <div className="prose prose-slate max-w-none text-slate-600 space-y-4">
             <p>
               CajaUtil.com es un proyecto independiente. Mantenemos los servidores, el desarrollo y las actualizaciones
-              gracias a formatos publicitarios gestionados por <strong>Monetag</strong>, que se cargan después del consentimiento. Este modelo nos permite
-              ofrecer todas las herramientas de forma completamente gratuita y sin necesidad de cobrar suscripciones ni
-              pedir datos personales a los usuarios.
+              con recursos propios. La publicidad de terceros permanece desactivada mientras no podamos garantizar formatos
+              no intrusivos. Priorizamos que las herramientas sigan siendo rápidas, gratuitas y utilizables sin registro.
             </p>
             <p>
                No vendemos datos de usuario, no tenemos programas de afiliados ocultos y cualquier relación comercial

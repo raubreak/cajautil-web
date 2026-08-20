@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 
@@ -14,36 +14,33 @@ const CONSENT_KEY = 'cajautil_cookie_consent';
 
 type ConsentStatus = 'accepted' | 'rejected' | null;
 
-function getInitialConsent(): ConsentStatus {
-  if (typeof window === 'undefined') return null;
-  const stored = localStorage.getItem(CONSENT_KEY);
-  if (stored === 'accepted' || stored === 'rejected') return stored;
-  return null;
-}
-
 export default function CookieConsent() {
-  const [consent, setConsent] = useState<ConsentStatus>(getInitialConsent);
+  const [consent, setConsent] = useState<ConsentStatus>(null);
   const [visible, setVisible] = useState(false);
+  const rejectButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (consent) return; // User already made a choice
-    // Show the banner after a short delay for better UX
-    const timer = setTimeout(() => setVisible(true), 800);
+    const stored = localStorage.getItem(CONSENT_KEY);
+    const savedConsent = stored === 'accepted' || stored === 'rejected' ? stored : null;
+    const timer = setTimeout(() => {
+      setConsent(savedConsent);
+      setVisible(!savedConsent);
+    }, savedConsent ? 0 : 800);
     return () => clearTimeout(timer);
-  }, [consent]);
+  }, []);
 
   const handleAccept = () => {
     localStorage.setItem(CONSENT_KEY, 'accepted');
     setConsent('accepted');
     setVisible(false);
 
-    // Enable Google Analytics consent mode
+    // Enable analytics only. Advertising storage remains disabled.
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       window.gtag('consent', 'update', {
         analytics_storage: 'granted',
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
       });
     }
   };
@@ -52,6 +49,15 @@ export default function CookieConsent() {
     localStorage.setItem(CONSENT_KEY, 'rejected');
     setConsent('rejected');
     setVisible(false);
+
+    if (typeof document !== 'undefined') {
+      document.cookie.split(';').forEach((cookie) => {
+        const name = cookie.split('=')[0].trim();
+        if (!name.startsWith('_ga')) return;
+        document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+        document.cookie = `${name}=; Max-Age=0; path=/; domain=.cajautil.com; SameSite=Lax`;
+      });
+    }
 
     // Deny Google Analytics consent mode
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
@@ -67,16 +73,32 @@ export default function CookieConsent() {
   return (
     <>
       {consent === 'accepted' && (
-        <Script
-          id="monetag-zone-229851"
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="229851"
-          data-cfasync="false"
-          strategy="afterInteractive"
-        />
+        <>
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-3Q52JTD2XN"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'granted',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied'
+              });
+              gtag('js', new Date());
+              gtag('config', 'G-3Q52JTD2XN', {
+                anonymize_ip: true,
+                allow_google_signals: false
+              });
+            `}
+          </Script>
+        </>
       )}
 
-      {!consent && visible && (
+      {visible && (
         <div
           role="dialog"
           aria-label="Aviso de cookies"
@@ -87,8 +109,8 @@ export default function CookieConsent() {
               <div className="flex-grow">
                 <h2 className="text-base font-bold text-slate-800 mb-1">Uso de cookies</h2>
                 <p className="text-sm text-slate-500 leading-relaxed">
-                  Utilizamos cookies propias y de terceros (Google Analytics y Monetag) para medir el uso del sitio
-                  y mostrar publicidad. Puedes aceptar o rechazar las cookies no esenciales.{' '}
+                  Google Analytics nos ayuda a medir el uso del sitio. La publicidad de terceros está desactivada
+                  mientras no podamos garantizar formatos no intrusivos. Puedes aceptar o rechazar la analítica.{' '}
                   <Link href="/politica-de-cookies" className="text-blue-600 hover:underline font-medium">
                     Mas informacion
                   </Link>
@@ -96,6 +118,7 @@ export default function CookieConsent() {
               </div>
               <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
                 <button
+                  ref={rejectButtonRef}
                   onClick={handleReject}
                   className="flex-1 sm:flex-initial text-sm font-bold text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 px-5 py-2.5 rounded-xl transition-colors"
                 >
@@ -111,6 +134,19 @@ export default function CookieConsent() {
             </div>
           </div>
         </div>
+      )}
+
+      {consent && !visible && (
+        <button
+          type="button"
+          onClick={() => {
+            setVisible(true);
+            requestAnimationFrame(() => rejectButtonRef.current?.focus());
+          }}
+          className="fixed bottom-3 left-3 z-40 rounded-lg border border-slate-300 bg-white/95 px-3 py-2 text-xs font-semibold text-slate-600 shadow-sm hover:bg-slate-50 hover:text-slate-900"
+        >
+          Gestionar cookies
+        </button>
       )}
     </>
   );

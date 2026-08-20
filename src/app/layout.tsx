@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
-import Script from 'next/script';
 import Header from "@/components/Header";
 import CookieConsent from "@/components/CookieConsent";
 import ToolEditorialRouterSection from "@/components/ToolEditorialRouterSection";
@@ -83,6 +82,7 @@ export const metadata: Metadata = {
 // JSON-LD para el sitio web completo
 const websiteJsonLd = {
   "@context": "https://schema.org",
+  "@id": `${SITE_URL}/#website`,
   "@type": "WebSite",
   name: SITE_NAME,
   url: SITE_URL,
@@ -91,6 +91,7 @@ const websiteJsonLd = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
+  "@id": `${SITE_URL}/#organization`,
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
@@ -100,6 +101,7 @@ const organizationJsonLd = {
 
 const personJsonLd = {
   '@context': 'https://schema.org',
+  '@id': `${SITE_URL}/#person`,
   '@type': 'Person',
   name: AUTHOR_PROFILE.fullName,
   alternateName: AUTHOR_PROFILE.name,
@@ -108,9 +110,7 @@ const personJsonLd = {
   image: AUTHOR_PROFILE.avatarUrl,
   sameAs: [AUTHOR_PROFILE.githubUrl],
   worksFor: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: SITE_URL,
+    '@id': `${SITE_URL}/#organization`,
   },
 };
 
@@ -122,7 +122,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <meta name="monetag" content="bda98a4f7815b78b4105e11fafe02a7c" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -135,35 +134,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        {/* Google Consent Mode v2 must load before Google Analytics. */}
-        <Script id="consent-mode-defaults" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-              analytics_storage: 'denied',
-              ad_storage: 'denied',
-              ad_user_data: 'denied',
-              ad_personalization: 'denied',
-              wait_for_update: 500,
-            });
-          `}
-        </Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-3Q52JTD2XN"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-3Q52JTD2XN', {
-              anonymize_ip: true,
-              allow_google_signals: false
-            });
-          `}
-        </Script>
       </head>
       <body className={`${inter.className} bg-slate-50 text-slate-900 min-h-screen flex flex-col`}>
         <Header />
@@ -181,7 +151,7 @@ export default function RootLayout({
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
               <div className="col-span-2">
                 <Link href="/" className="text-2xl font-black tracking-tighter text-white mb-4 block">
-                  Caja<span className="text-blue-500">Util</span><span className="text-slate-500 text-sm font-medium">.com</span>
+                  Caja<span className="text-blue-500">Util</span><span className="text-slate-400 text-sm font-medium">.com</span>
                 </Link>
                 <p className="text-sm max-w-xs leading-relaxed">
                   Utilidades web rapidas y seguras. Priorizamos el procesamiento local cuando es posible, sin registro ni instalacion.
