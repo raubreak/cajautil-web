@@ -21,9 +21,15 @@ async function main() {
   }
 
   const sitemapUrls = extractSitemapUrls(await sitemapResponse.text());
+  const sitemapUrlByNormalizedUrl = new Map(
+    sitemapUrls.map((url) => [new URL(url).toString(), url]),
+  );
   const requestedUrls = process.argv.slice(2).filter((argument) => argument !== '--dry-run');
   const urls = requestedUrls.length
-    ? requestedUrls.map((url) => new URL(url, SITE_URL).toString())
+    ? requestedUrls.map((url) => {
+        const normalizedUrl = new URL(url, SITE_URL).toString();
+        return sitemapUrlByNormalizedUrl.get(normalizedUrl) ?? normalizedUrl;
+      })
     : sitemapUrls;
 
   if (urls.length === 0 || urls.length > 10_000) {
