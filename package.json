@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "editorial:audit": "tsx scripts/editorial-workflow.ts",
+    "seo:indexnow": "tsx scripts/submit-indexnow.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {
