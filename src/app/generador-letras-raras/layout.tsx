@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import ToolEditorialSection from '@/components/ToolEditorialSection';
 import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
 
 const SITE_URL = "https://cajautil.com";
@@ -47,6 +48,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {children}
+      <ToolEditorialSection slug="generador-letras-raras" compact />
     </>
   );
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import ToolEditorialSection from '@/components/ToolEditorialSection';
+
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
@@ -39,6 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {children}
+      <ToolEditorialSection slug="conversor-unidades" />
     </>
   );
 }

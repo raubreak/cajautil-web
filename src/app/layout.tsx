@@ -4,7 +4,6 @@ import "./globals.css";
 import Link from 'next/link';
 import Header from "@/components/Header";
 import CookieConsent from "@/components/CookieConsent";
-import ToolEditorialRouterSection from "@/components/ToolEditorialRouterSection";
 
 import { AUTHOR_PROFILE } from '@/lib/authorProfile';
 
@@ -143,8 +142,6 @@ export default function RootLayout({
         <div className="flex-grow flex flex-col z-10 relative">
           {children}
         </div>
-
-        <ToolEditorialRouterSection />
 
         <CookieConsent />
 
