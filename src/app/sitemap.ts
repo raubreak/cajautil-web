@@ -13,7 +13,7 @@ const toolDefinitions = [
   ['ruleta-aleatoria', 'monthly', 0.9],
   ['calculadora-regla-de-tres', 'monthly', 0.9, '2026-08-20T20:58:50.000Z'],
   ['generador-letras-raras', 'monthly', 0.9],
-  ['compresor-webp', 'monthly', 0.9],
+  ['compresor-webp', 'monthly', 0.9, '2026-08-20T21:07:53.000Z'],
   ['calculadora-hipotecas', 'monthly', 0.9],
   ['generador-enlace-whatsapp', 'monthly', 0.9],
   ['calculadora-imc', 'monthly', 0.9],
