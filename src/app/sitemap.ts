@@ -1,263 +1,64 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
 
 import { isLowValueTool } from '@/lib/adsenseReadiness';
 import { editorialArticles } from '@/lib/editorialArticles';
 
 const SITE_URL = 'https://cajautil.com';
-const CONTENT_LAST_MODIFIED = new Date('2026-08-20T00:00:00.000Z');
+
+const toolDefinitions = [
+  ['calculadora-interes-compuesto', 'monthly', 0.9],
+  ['extractor-colores', 'monthly', 0.9],
+  ['temporizador', 'monthly', 0.9],
+  ['calculadora-descuentos', 'monthly', 0.9],
+  ['ruleta-aleatoria', 'monthly', 0.9],
+  ['calculadora-regla-de-tres', 'monthly', 0.9],
+  ['generador-letras-raras', 'monthly', 0.9],
+  ['compresor-webp', 'monthly', 0.9],
+  ['calculadora-hipotecas', 'monthly', 0.9],
+  ['generador-enlace-whatsapp', 'monthly', 0.9],
+  ['calculadora-imc', 'monthly', 0.9],
+  ['calculadora-porcentajes', 'monthly', 0.9],
+  ['calculadora-iva', 'monthly', 0.9],
+  ['calculadora-sueldo-neto', 'yearly', 0.9],
+  ['validador-iban', 'monthly', 0.9],
+  ['generador-nombres', 'monthly', 0.8],
+  ['contador-de-palabras', 'monthly', 0.8],
+  ['generador-contrasenas', 'monthly', 0.8],
+  ['mayusculas-minusculas', 'monthly', 0.7],
+  ['generador-qr', 'monthly', 0.8],
+  ['lector-qr', 'monthly', 0.7],
+  ['calculadora-dias', 'monthly', 0.7],
+  ['traductor-binario', 'monthly', 0.9],
+  ['calculadora-edad', 'monthly', 0.9],
+  ['simbolos-copiar', 'monthly', 0.9],
+  ['texto-invisible', 'monthly', 0.9],
+  ['cps-test', 'monthly', 0.9],
+  ['generador-lorem-ipsum', 'monthly', 0.8],
+  ['conversor-unidades', 'monthly', 0.9],
+  ['calculadora-calorias', 'monthly', 0.9],
+  ['generador-hashtags', 'monthly', 0.9],
+  ['calculadora-prestamos', 'monthly', 0.9],
+  ['generador-firmas-email', 'monthly', 0.9],
+  ['cronometro', 'monthly', 0.9],
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = CONTENT_LAST_MODIFIED;
-  const toolEntries = ([
-    {
-      url: `${SITE_URL}/calculadora-interes-compuesto`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/extractor-colores`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/temporizador`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-descuentos`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/ruleta-aleatoria`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-regla-de-tres`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/generador-letras-raras`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/compresor-webp`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-hipotecas`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/generador-enlace-whatsapp`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-imc`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-porcentajes`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-iva`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-sueldo-neto`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/validador-iban`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/generador-nombres`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/contador-de-palabras`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/generador-contrasenas`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/mayusculas-minusculas`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/generador-qr`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/lector-qr`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/calculadora-dias`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/traductor-binario`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-edad`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/simbolos-copiar`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/texto-invisible`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/cps-test`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/generador-lorem-ipsum`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/conversor-unidades`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-calorias`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/generador-hashtags`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/calculadora-prestamos`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/generador-firmas-email`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/cronometro`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-  ] satisfies MetadataRoute.Sitemap).filter((entry) => !isLowValueTool(entry.url.replace(`${SITE_URL}/`, '')));
+  const toolEntries = toolDefinitions
+    .filter(([slug]) => !isLowValueTool(slug))
+    .map(([slug, changeFrequency, priority]) => ({
+      url: `${SITE_URL}/${slug}`,
+      changeFrequency,
+      priority,
+    }));
 
   return [
-    {
-      url: SITE_URL,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${SITE_URL}/articulos`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/sobre-nosotros`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/contacto`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/politica-de-privacidad`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
-    {
-      url: `${SITE_URL}/politica-de-cookies`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
-    {
-      url: `${SITE_URL}/aviso-legal`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
+    { url: SITE_URL, changeFrequency: 'weekly', priority: 1 },
+    { url: `${SITE_URL}/articulos`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE_URL}/sobre-nosotros`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/contacto`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/politica-de-privacidad`, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${SITE_URL}/politica-de-cookies`, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${SITE_URL}/aviso-legal`, changeFrequency: 'yearly', priority: 0.4 },
     ...toolEntries,
     ...editorialArticles.map((article) => ({
       url: `${SITE_URL}/articulos/${article.slug}`,

@@ -100,7 +100,7 @@ export function estimateReadingTimeMinutes(value: string | null | undefined): nu
 }
 
 export function isFinanceTopic(...values: Array<string | null | undefined>): boolean {
-  return values.some((value) => /(prestamo|hipoteca|credito|finanzas|salario|sueldo|iva|iban|impuesto)/i.test(value ?? ''));
+  return values.some((value) => /(prestamo|hipoteca|credito|finanzas|salario|sueldo|iva|iban|impuesto|inter[eé]s|ahorro|inversi[oó]n)/i.test(value ?? ''));
 }
 
 export function assessToolVariantIndexability(topContent: string | null | undefined, bottomContent: string | null | undefined) {

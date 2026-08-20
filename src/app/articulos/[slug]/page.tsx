@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import type { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,6 +20,17 @@ import {
 
 export const revalidate = 3600;
 
+const markdownComponents: Components = {
+  table({ node, ...props }) {
+    void node;
+    return (
+      <div className="my-6 overflow-x-auto">
+        <table {...props} />
+      </div>
+    );
+  },
+};
+
 export function generateStaticParams() {
   return editorialArticles.map((article) => ({ slug: article.slug }));
 }
@@ -35,6 +47,11 @@ export default async function ArticlePage({ params }: { params: { slug: string }
       dateStyle: 'long',
     }).format(new Date(editorialArticle.updatedAt));
     const readingTime = estimateReadingTimeMinutes(editorialArticle.content);
+    const isFinanceArticle = isFinanceTopic(
+      editorialArticle.title,
+      editorialArticle.targetToolUrl,
+      ...editorialArticle.tags,
+    );
     const articleJsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Article',
@@ -123,8 +140,15 @@ export default async function ArticlePage({ params }: { params: { slug: string }
             </Link>
           </div>
 
+          {isFinanceArticle && (
+            <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-relaxed text-amber-950">
+              Este contenido es informativo y orientativo. No sustituye el asesoramiento financiero, fiscal o legal profesional ni la oferta vinculante de una entidad.
+              Antes de contratar un producto, revisa siempre la documentación oficial y confirma comisiones, TAE, plazos y condiciones reales.
+            </section>
+          )}
+
           <div className="prose prose-slate prose-lg max-w-none rounded-3xl border border-slate-100 bg-white p-6 sm:p-8 shadow-sm prose-headings:font-black prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-a:text-blue-600 prose-img:rounded-2xl">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
               {editorialArticle.content}
             </ReactMarkdown>
           </div>
@@ -258,7 +282,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
         {/* Contenido Markdown */}
         <div className="prose prose-slate prose-lg max-w-none rounded-3xl border border-slate-100 bg-white p-6 sm:p-8 shadow-sm prose-headings:font-black prose-p:mb-6 prose-p:leading-relaxed prose-li:mb-2 prose-a:text-blue-600 prose-img:rounded-2xl">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
             {cleanContent}
           </ReactMarkdown>
         </div>
