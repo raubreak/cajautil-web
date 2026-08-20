@@ -38,7 +38,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Compresor y Convertidor WebP",
   url: `${SITE_URL}/compresor-webp`,
-  description: "Potente herramienta en javascript local (Canvas API) para reducir drásticamente el peso de las imágenes (MB a KB) convirtiendo un archivo JPEG o PNG a formato comprimido WebP de Google sin envíos a servidores externos.",
+  description: "Herramienta local basada en Canvas para convertir imágenes JPEG o PNG a WebP con calidad ajustable, sin enviar los archivos a servidores externos.",
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Any",
   offers: {

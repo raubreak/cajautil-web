@@ -10,9 +10,9 @@ export default function CompresorWebP() {
       <section className="mx-auto mb-16 w-full max-w-4xl px-6 prose prose-slate prose-headings:text-slate-800 text-slate-600">
         <h2>Por que convertir imagenes a WebP</h2>
         <p>
-          WebP es un formato de imagen desarrollado por Google que ofrece una compresion superior a JPG y PNG
-          manteniendo una calidad visual excelente para la mayoria de usos web. En promedio, un archivo WebP
-          pesa entre un 25% y un 34% menos que un JPEG equivalente y hasta un 26% menos que un PNG.
+          WebP es un formato de imagen desarrollado por Google que admite compresion con y sin perdida, transparencia
+          y animacion. Puede reducir el peso frente a JPG o PNG en muchos usos web, pero el ahorro depende del contenido,
+          el formato original y la calidad elegida. Algunas imagenes incluso pueden crecer, por lo que conviene comparar.
         </p>
         <p>
           Reducir el peso de las imágenes tiene un impacto directo en la velocidad de carga de tu página web,
@@ -26,9 +26,9 @@ export default function CompresorWebP() {
           directamente en tu dispositivo. El proceso es el siguiente:
         </p>
         <ol>
-          <li><strong>Selecciona o arrastra</strong> una o varias imagenes en formato JPG, PNG o GIF.</li>
+          <li><strong>Selecciona o arrastra</strong> una o varias imagenes estaticas compatibles con tu navegador, como JPG, PNG o WebP.</li>
           <li>El navegador lee el archivo y lo dibuja en un elemento Canvas interno.</li>
-          <li>Se exporta como WebP con el nivel de calidad que elijas (normalmente entre 75% y 85% es optimo).</li>
+          <li>Se exporta como WebP con el nivel de calidad que elijas; compara varios niveles si necesitas equilibrar peso y detalle.</li>
           <li><strong>Descarga el resultado</strong> directamente. No se sube nada a ningun servidor.</li>
         </ol>
 
@@ -50,9 +50,9 @@ export default function CompresorWebP() {
         <h2>Privacidad y limites</h2>
         <p>
           Esta utilidad procesa los archivos integramente en tu navegador, sin enviar datos a servidores externos.
-          El rendimiento depende de la capacidad del dispositivo: en móviles antiguos, imágenes muy grandes (más de
-          10 MP) pueden tardar algo más. Revisa siempre la calidad final y el peso resultante antes de publicar
-          en un proyecto profesional.
+          El rendimiento depende de la capacidad del dispositivo. Para evitar bloquear el navegador, se rechazan
+          imágenes superiores a 40 megapíxeles. Revisa siempre la calidad final y el peso resultante antes de publicar
+          en un proyecto profesional: convertir a WebP no garantiza que todos los archivos pesen menos.
         </p>
 
         <h3>Herramientas relacionadas</h3>

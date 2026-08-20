@@ -10,8 +10,12 @@ interface ImageItem {
   previewUrl: string;
   resultBlob: Blob | null;
   resultUrl: string | null;
-  status: 'pending' | 'processing' | 'done';
+  resultQuality: number | null;
+  status: 'pending' | 'processing' | 'done' | 'error';
+  error: string | null;
 }
+
+const MAX_PIXELS = 40_000_000;
 
 const formatBytes = (bytes: number, decimals = 1) => {
   if (!+bytes) return '0 B';
@@ -19,6 +23,12 @@ const formatBytes = (bytes: number, decimals = 1) => {
   const sizes = ['B', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(decimals))} ${sizes[i]}`;
+};
+
+const formatSizeChange = (originalSize: number, resultSize: number) => {
+  const difference = Math.round((resultSize / originalSize - 1) * 100);
+  if (difference === 0) return 'sin cambio';
+  return difference < 0 ? `${Math.abs(difference)}% menos` : `${difference}% más`;
 };
 
 export default function CompresorWebPClient() {
@@ -37,7 +47,9 @@ export default function CompresorWebPClient() {
           previewUrl: URL.createObjectURL(file),
           resultBlob: null,
           resultUrl: null,
+          resultQuality: null,
           status: 'pending',
+          error: null,
         });
       }
     });
@@ -74,15 +86,20 @@ export default function CompresorWebPClient() {
     setImages([]);
   };
 
-  const compressOne = (item: ImageItem): Promise<ImageItem> => {
+  const compressOne = (item: ImageItem, targetQuality: number): Promise<ImageItem> => {
     return new Promise((resolve) => {
       const img = new window.Image();
       img.crossOrigin = 'anonymous';
       img.onload = () => {
         const canvas = canvasRef.current;
-        if (!canvas) { resolve({ ...item, status: 'done' }); return; }
+        if (!canvas) { resolve({ ...item, status: 'error', error: 'No se pudo preparar el conversor.' }); return; }
         const ctx = canvas.getContext('2d');
-        if (!ctx) { resolve({ ...item, status: 'done' }); return; }
+        if (!ctx) { resolve({ ...item, status: 'error', error: 'Canvas no está disponible en este navegador.' }); return; }
+
+        if (img.naturalWidth * img.naturalHeight > MAX_PIXELS) {
+          resolve({ ...item, status: 'error', error: 'La imagen supera el límite de 40 megapíxeles.' });
+          return;
+        }
 
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
@@ -95,17 +112,19 @@ export default function CompresorWebPClient() {
                 ...item,
                 resultBlob: blob,
                 resultUrl: URL.createObjectURL(blob),
+                resultQuality: targetQuality,
                 status: 'done',
+                error: null,
               });
             } else {
-              resolve({ ...item, status: 'done' });
+              resolve({ ...item, status: 'error', error: 'El navegador no pudo generar el archivo WebP.' });
             }
           },
           'image/webp',
-          quality / 100
+          targetQuality / 100
         );
       };
-      img.onerror = () => resolve({ ...item, status: 'done' });
+      img.onerror = () => resolve({ ...item, status: 'error', error: 'El navegador no pudo leer esta imagen.' });
       img.src = item.previewUrl;
     });
   };
@@ -113,10 +132,11 @@ export default function CompresorWebPClient() {
   const compressAll = async () => {
     setIsProcessing(true);
     const pending = images.filter(i => i.status === 'pending');
+    const targetQuality = quality;
 
     for (const item of pending) {
       setImages(prev => prev.map(i => i.id === item.id ? { ...i, status: 'processing' } : i));
-      const result = await compressOne(item);
+      const result = await compressOne(item, targetQuality);
       setImages(prev => prev.map(i => i.id === item.id ? result : i));
     }
     setIsProcessing(false);
@@ -128,14 +148,15 @@ export default function CompresorWebPClient() {
         const a = document.createElement('a');
         a.href = item.resultUrl;
         const name = item.file.name.replace(/\.[^.]+$/, '');
-        a.download = `${name}_webp_q${quality}.webp`;
+        a.download = `${name}_webp_q${item.resultQuality}.webp`;
         a.click();
       }
     });
   };
 
   const totalCompressed = images.reduce((s, i) => s + (i.resultBlob?.size ?? 0), 0);
-  const allDone = images.length > 0 && images.every(i => i.status === 'done');
+  const allFinished = images.length > 0 && images.every(i => i.status === 'done' || i.status === 'error');
+  const hasResults = images.some(i => i.resultUrl);
   const hasPending = images.some(i => i.status === 'pending');
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4 sm:px-6 z-10">
@@ -180,7 +201,7 @@ export default function CompresorWebPClient() {
                 <div className="flex items-center gap-3">
                   <Settings className="w-4 h-4 text-sky-500" />
                   <span className="text-xs font-bold text-slate-500">Calidad:</span>
-                  <input type="range" min="10" max="100" step="5" value={quality} onChange={(e) => setQuality(Number(e.target.value))} className="w-24 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-500" />
+                  <input type="range" min="10" max="100" step="5" value={quality} onChange={(e) => setQuality(Number(e.target.value))} disabled={isProcessing} aria-label="Calidad WebP" className="w-24 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-500 disabled:cursor-not-allowed disabled:opacity-50" />
                   <span className="text-sky-700 bg-sky-100 px-2 py-1 rounded-lg text-xs font-mono font-bold tabular-nums">{quality}%</span>
                 </div>
               </div>
@@ -201,22 +222,26 @@ export default function CompresorWebPClient() {
                       <p className="text-[11px] text-slate-400 font-mono">
                         {formatBytes(item.file.size)}
                         {item.resultBlob && (
-                          <> → <span className="text-emerald-600 font-bold">{formatBytes(item.resultBlob.size)}</span> <span className="text-emerald-500">(-{Math.round((1 - item.resultBlob.size / item.file.size) * 100)}%)</span></>
+                          <>
+                            {' '}→ <span className="text-emerald-600 font-bold">{formatBytes(item.resultBlob.size)}</span>{' '}
+                            <span className={item.resultBlob.size < item.file.size ? 'text-emerald-500' : item.resultBlob.size > item.file.size ? 'text-amber-600' : 'text-slate-500'}>
+                              ({formatSizeChange(item.file.size, item.resultBlob.size)})
+                            </span>
+                          </>
                         )}
+                        {item.status === 'error' && <span className="mt-1 block font-sans text-rose-600">{item.error}</span>}
                       </p>
                     </div>
                     {item.status === 'processing' && (
                       <div className="w-6 h-6 border-2 border-sky-500 border-t-transparent rounded-full animate-spin shrink-0" />
                     )}
                     {item.status === 'done' && item.resultUrl && (
-                      <a href={item.resultUrl} download={`${item.file.name.replace(/\.[^.]+$/, '')}_q${quality}.webp`} className="p-2 text-emerald-500 hover:bg-emerald-50 rounded-lg transition shrink-0">
+                      <a href={item.resultUrl} download={`${item.file.name.replace(/\.[^.]+$/, '')}_q${item.resultQuality}.webp`} aria-label={`Descargar ${item.file.name} en WebP`} className="p-2 text-emerald-500 hover:bg-emerald-50 rounded-lg transition shrink-0">
                         <Download className="w-5 h-5" />
                       </a>
                     )}
-                    {item.status === 'done' && !item.resultUrl && (
-                      <CheckCircle2 className="w-5 h-5 text-slate-300 shrink-0" />
-                    )}
-                    <button onClick={() => removeImage(item.id)} className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition shrink-0">
+                    {item.status === 'done' && item.resultUrl && <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" aria-label="Conversión completada" />}
+                    <button onClick={() => removeImage(item.id)} aria-label={`Eliminar ${item.file.name}`} className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition shrink-0">
                       <X className="w-4 h-4" />
                     </button>
                   </div>
@@ -237,7 +262,7 @@ export default function CompresorWebPClient() {
                     )}
                   </button>
                 )}
-                {allDone && (
+                {allFinished && hasResults && (
                   <button
                     onClick={downloadAll}
                     className="flex-1 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors text-lg shadow-lg shadow-emerald-500/20"
