@@ -7,7 +7,7 @@ const SITE_URL = 'https://cajautil.com';
 
 const toolDefinitions = [
   ['calculadora-interes-compuesto', 'monthly', 0.9, '2026-08-20T16:23:06.000Z'],
-  ['extractor-colores', 'monthly', 0.9],
+  ['extractor-colores', 'monthly', 0.9, '2026-08-20T20:44:39.000Z'],
   ['temporizador', 'monthly', 0.9],
   ['calculadora-descuentos', 'monthly', 0.9],
   ['ruleta-aleatoria', 'monthly', 0.9],
