@@ -100,7 +100,20 @@ export function estimateReadingTimeMinutes(value: string | null | undefined): nu
 }
 
 export function isFinanceTopic(...values: Array<string | null | undefined>): boolean {
-  return values.some((value) => /(prestamo|hipoteca|credito|finanzas|salario|sueldo|iva|iban|impuesto|inter[eé]s|ahorro|inversi[oó]n)/i.test(value ?? ''));
+  const financeTerms = new Set([
+    'prestamo', 'prestamos', 'hipoteca', 'hipotecas', 'credito', 'creditos', 'finanzas',
+    'salario', 'salarios', 'sueldo', 'sueldos', 'iva', 'iban', 'impuesto', 'impuestos',
+    'interes', 'intereses', 'ahorro', 'ahorros', 'inversion', 'inversiones',
+  ]);
+
+  return values.some((value) =>
+    (value ?? '')
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .some((term) => financeTerms.has(term)),
+  );
 }
 
 export function assessToolVariantIndexability(topContent: string | null | undefined, bottomContent: string | null | undefined) {
