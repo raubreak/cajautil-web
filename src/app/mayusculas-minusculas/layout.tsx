@@ -4,7 +4,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: "Convertir Texto a Mayúsculas o Minúsculas Online — Gratis",
-  description: "Transforma texto a MAYÚSCULAS, minúsculas, capitalizado o formato oración con un clic. Herramienta gratuita para escritores, estudiantes y redactores. Sin registro ni instalación.",
+  description: "Transforma texto a MAYÚSCULAS, minúsculas, capitalizado o formato oración con un clic. Gratis, sin registro y directamente en tu navegador.",
   keywords: [
     "convertir mayúsculas a minúsculas",
     "pasar a mayúsculas",

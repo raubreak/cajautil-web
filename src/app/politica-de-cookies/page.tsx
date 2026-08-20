@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Política de Cookies',
+  title: 'Política de Cookies | CajaUtil',
   description: 'Conoce cómo CajaUtil utiliza almacenamiento local y Google Analytics, y cómo aceptar, rechazar o cambiar tu elección.',
   alternates: {
     canonical: 'https://cajautil.com/politica-de-cookies',

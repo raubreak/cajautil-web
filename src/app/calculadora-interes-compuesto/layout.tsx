@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de Interés Compuesto Online | Simulador de Inversiones',
+  title: 'Calculadora de Interés Compuesto | Simulador Online',
   description: 'Descubre cómo crecerá tu dinero con nuestra calculadora de interés compuesto. Añade aportaciones mensuales y visualiza tus ganancias a largo plazo.',
   keywords: [
     "calculadora interes compuesto",

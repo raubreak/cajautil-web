@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Contacto',
+  title: 'Contacto y soporte | CajaUtil',
   description: 'Contacta con el equipo de CajaUtil.com para sugerencias, reportar errores o proponer nuevas herramientas.',
   alternates: {
     canonical: 'https://cajautil.com/contacto',

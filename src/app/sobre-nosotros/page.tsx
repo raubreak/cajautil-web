@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import { AUTHOR_PROFILE } from '@/lib/authorProfile';
 
 export const metadata: Metadata = {
-  title: "Sobre nosotros",
+  title: "Sobre CajaUtil: misión y metodología editorial",
   description: "Conoce la misión, valores y metodología editorial de CajaUtil.com. Herramientas web gratuitas creadas con rigor, transparencia y privacidad.",
   alternates: {
     canonical: 'https://cajautil.com/sobre-nosotros',

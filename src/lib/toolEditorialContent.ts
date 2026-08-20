@@ -390,7 +390,7 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/calculadora-sueldo-neto', label: 'Calculadora de sueldo neto' },
     ],
     relatedArticles: [
-      { href: '/articulos/iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero', label: 'IBAN, BIC y transferencias: como evitar errores antes de enviar dinero' },
+      { href: '/articulos/iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero', label: 'IBAN y BIC: evita errores antes de una transferencia' },
     ],
   }),
   'calculadora-imc': buildEntry({

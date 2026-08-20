@@ -337,9 +337,9 @@ Genera el QR, descargalo, imprimelo si hace falta y pruebalo con varios disposit
   },
   {
     slug: 'por-que-las-contrasenas-largas-suelen-ser-mejores-que-las-complejas',
-    title: 'Por qué las contraseñas largas suelen ser mejores que las complejas',
+    title: 'Contraseñas largas: por qué suelen ser más seguras',
     description:
-      'Qué hace fuerte a una contraseña, cuántos caracteres convienen y cómo combinar longitud, aleatoriedad y gestores.',
+      'Descubre por qué la longitud y la aleatoriedad protegen más que las reglas complejas, cuántos caracteres usar y cómo guardar tus contraseñas con seguridad.',
     targetToolUrl: '/generador-contrasenas',
     tags: ['seguridad', 'contrasenas', 'privacidad'],
     publishedAt: '2026-04-11T09:00:00.000Z',
@@ -391,9 +391,9 @@ Usa un generador local, guarda las claves en un gestor y reserva la memoria solo
   },
   {
     slug: 'iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero',
-    title: 'IBAN, BIC y transferencias: cómo evitar errores antes de enviar dinero',
+    title: 'IBAN y BIC: evita errores antes de una transferencia',
     description:
-      'Qué comprueba un IBAN, qué no comprueba y qué deberías revisar antes de confirmar una transferencia.',
+      'Aprende qué validan el IBAN y el BIC, qué no comprueban y qué datos revisar antes de confirmar una transferencia para reducir errores y fraudes.',
     targetToolUrl: '/validador-iban',
     tags: ['iban', 'banca', 'transferencias'],
     publishedAt: '2026-04-11T09:00:00.000Z',

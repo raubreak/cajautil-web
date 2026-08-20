@@ -16,10 +16,7 @@ const GOOGLE_SITE_VERIFICATION = process.env.GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Herramientas Online Gratis | Calculadoras y Utilidades Web - CajaUtil.com",
-    template: "%s | CajaUtil.com"
-  },
+  title: "Herramientas Online Gratis | Calculadoras y Utilidades Web - CajaUtil.com",
   description: "Herramientas online gratuitas: calculadora de porcentajes, sueldo neto, generador de contraseñas, códigos QR, contador de palabras y más. Sin registro, rápidas y seguras.",
   keywords: [
     "herramientas online gratis",
