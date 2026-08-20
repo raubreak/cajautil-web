@@ -5,8 +5,8 @@ import ToolEditorialSection from '@/components/ToolEditorialSection';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Sueldo Neto España | Bruto a Neto",
-  description: "Calcula tu sueldo neto mensual desde el salario bruto anual. Ajusta IRPF, cotización y 12 o 14 pagas para una estimación transparente.",
+  title: "Calculadora Sueldo Neto | Bruto a Neto y Neto a Bruto",
+  description: "Convierte sueldo bruto a neto o neto a bruto, anual o mensual. Ajusta IRPF, cotización y 12 o 14 pagas con un desglose transparente.",
   keywords: [
     "calcular sueldo neto",
     "calculadora sueldo neto",
@@ -16,13 +16,15 @@ export const metadata: Metadata = {
     "sueldo neto España",
     "calcular retenciones IRPF",
     "salario neto mensual",
+    "sueldo neto a bruto",
+    "bruto mensual a neto",
   ],
   alternates: {
     canonical: `${SITE_URL}/calculadora-sueldo-neto`,
   },
   openGraph: {
-    title: "Calculadora de Sueldo Neto | España",
-    description: "Calcula cuánto cobrarás de neto al mes desde tu bruto anual con IRPF y cotización ajustables.",
+    title: "Calculadora de Sueldo Neto | Bruto y Neto",
+    description: "Convierte sueldo bruto a neto o neto a bruto, anual o por paga, con IRPF y cotización ajustables.",
     url: `${SITE_URL}/calculadora-sueldo-neto`,
     type: "website",
     images: ["https://cajautil.com/og-image.png"],
@@ -30,8 +32,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     images: ["https://cajautil.com/og-image.png"],
-    title: "Calculadora de Sueldo Neto | España",
-    description: "Calcula cuánto cobrarás de neto al mes desde tu bruto anual con IRPF y cotización ajustables.",
+    title: "Calculadora de Sueldo Neto | Bruto y Neto",
+    description: "Convierte sueldo bruto a neto o neto a bruto, anual o por paga, con IRPF y cotización ajustables.",
   },
 };
 
@@ -40,7 +42,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de Sueldo Neto España",
   url: `${SITE_URL}/calculadora-sueldo-neto`,
-  description: "Calculadora gratuita de sueldo neto mensual con IRPF, cotización y número de pagas ajustables.",
+  description: "Calculadora gratuita para convertir sueldo bruto a neto o neto a bruto, anual o por paga, con IRPF y cotización ajustables.",
   applicationCategory: "FinanceApplication",
   operatingSystem: "All",
   offers: {

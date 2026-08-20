@@ -4,6 +4,19 @@ import { Coins } from "lucide-react";
 
 import { trackToolEvent } from '@/lib/analytics';
 
+type ConversionDirection = 'bruto-neto' | 'neto-bruto';
+type InputPeriod = 'anual' | 'paga';
+
+const MAX_ANNUAL_SALARY = 10_000_000;
+
+const formatCurrency = (value: number) =>
+  value.toLocaleString('es-ES', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
 interface Props {
   title?: React.ReactNode;
   subtitle?: string;
@@ -17,17 +30,20 @@ export default function CalculadoraSueldoNetoClient({
   initialBruto = "", 
   initialPagas = 12 
 }: Props) {
-  const [brutoAnual, setBrutoAnual] = useState<number | "">(initialBruto);
+  const [importe, setImporte] = useState<number | "">(initialBruto);
+  const [direccion, setDireccion] = useState<ConversionDirection>('bruto-neto');
+  const [periodo, setPeriodo] = useState<InputPeriod>('anual');
   const [pagas, setPagas] = useState<12 | 14>(initialPagas);
   const [irpf, setIrpf] = useState(15);
   const [retencionSS, setRetencionSS] = useState(6.5);
   const startedTracked = useRef(false);
   const completedTracked = useRef(false);
 
-  const handleSalaryChange = (value: number) => {
-    setBrutoAnual(value);
+  const handleSalaryChange = (value: string) => {
+    const numericValue = value === '' ? '' : Number(value);
+    setImporte(numericValue);
 
-    if (value <= 0) return;
+    if (numericValue === '' || !Number.isFinite(numericValue) || numericValue <= 0) return;
     if (!startedTracked.current) {
       startedTracked.current = true;
       trackToolEvent('tool_started', 'calculadora-sueldo-neto');
@@ -39,10 +55,35 @@ export default function CalculadoraSueldoNetoClient({
   };
 
   const totalDeducciones = irpf + retencionSS;
-  const netoAnual = brutoAnual 
-    ? Number(brutoAnual) * (1 - totalDeducciones / 100) 
+  const factorNeto = 1 - totalDeducciones / 100;
+  const importeNumerico = importe === '' ? 0 : importe;
+  const importeAnual = periodo === 'anual' ? importeNumerico : importeNumerico * pagas;
+  const error = importe === ''
+    ? null
+    : !Number.isFinite(importeNumerico)
+      ? 'Introduce un importe numérico válido.'
+      : importeNumerico <= 0
+        ? 'El importe debe ser mayor que cero.'
+        : importeAnual > MAX_ANNUAL_SALARY
+          ? 'El importe anual no puede superar los 10.000.000 €.'
+          : null;
+  const hasResult = importe !== '' && error === null;
+  const brutoAnual = hasResult
+    ? direccion === 'bruto-neto'
+      ? importeAnual
+      : importeAnual / factorNeto
     : 0;
-  const netoMensual = netoAnual / pagas;
+  const netoAnual = hasResult
+    ? direccion === 'bruto-neto'
+      ? importeAnual * factorNeto
+      : importeAnual
+    : 0;
+  const brutoPorPaga = brutoAnual / pagas;
+  const netoPorPaga = netoAnual / pagas;
+  const promedioNetoMensual = netoAnual / 12;
+  const resultadoPrincipal = direccion === 'bruto-neto' ? netoPorPaga : brutoAnual;
+  const importeLabel = `Sueldo ${direccion === 'bruto-neto' ? 'bruto' : 'neto'} ${periodo === 'anual' ? 'anual' : 'por paga'} (€)`;
+  const maxImporte = periodo === 'anual' ? MAX_ANNUAL_SALARY : MAX_ANNUAL_SALARY / pagas;
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -55,30 +96,87 @@ export default function CalculadoraSueldoNetoClient({
           {title || <>Calculadora de <span className="text-amber-700">Sueldo Neto</span></>}
         </h1>
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto">
-          {subtitle || "Estima el neto mensual con tu IRPF, cotización y número de pagas reales."}
+          {subtitle || "Convierte sueldo bruto y neto con tu IRPF, cotización y número de pagas reales."}
         </p>
       </div>
 
       <div className="w-full max-w-2xl bg-white rounded-[40px] shadow-2xl p-8 sm:p-12 border border-slate-100 flex flex-col gap-8 mb-12">
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end">
-            <div>
-              <label htmlFor="bruto-anual" className="block text-sm font-bold text-slate-700 mb-2">Sueldo Bruto Anual (€)</label>
-              <input 
-                id="bruto-anual"
-                type="number" 
-                value={brutoAnual}
-                onChange={(e) => handleSalaryChange(Number(e.target.value))}
-                className="w-full border-2 border-slate-200 rounded-2xl p-4 text-xl font-bold bg-white focus:ring-4 focus:ring-amber-100 focus:border-amber-400 outline-none transition-all text-slate-900"
-                placeholder="Ej: 30000"
-                aria-label="Introduce tu sueldo bruto anual en euros"
-              />
-            </div>
+          <div className="space-y-6">
+            <fieldset>
+              <legend className="block text-sm font-bold text-slate-700 mb-2">Qué quieres calcular</legend>
+              <div className="grid grid-cols-2 bg-slate-100 p-2 rounded-2xl border-2 border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setDireccion('bruto-neto')}
+                  className={`py-3 px-2 text-sm font-black rounded-xl transition-all ${direccion === 'bruto-neto' ? 'bg-white shadow-md text-amber-700' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200/50'}`}
+                  aria-pressed={direccion === 'bruto-neto'}
+                >
+                  Bruto a neto
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDireccion('neto-bruto')}
+                  className={`py-3 px-2 text-sm font-black rounded-xl transition-all ${direccion === 'neto-bruto' ? 'bg-white shadow-md text-amber-700' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200/50'}`}
+                  aria-pressed={direccion === 'neto-bruto'}
+                >
+                  Neto a bruto
+                </button>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend className="block text-sm font-bold text-slate-700 mb-2">El importe que vas a introducir es</legend>
+              <div className="grid grid-cols-2 bg-slate-100 p-2 rounded-2xl border-2 border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setPeriodo('anual')}
+                  className={`py-3 px-2 text-sm font-black rounded-xl transition-all ${periodo === 'anual' ? 'bg-white shadow-md text-amber-700' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200/50'}`}
+                  aria-pressed={periodo === 'anual'}
+                >
+                  Anual
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPeriodo('paga')}
+                  className={`py-3 px-2 text-sm font-black rounded-xl transition-all ${periodo === 'paga' ? 'bg-white shadow-md text-amber-700' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200/50'}`}
+                  aria-pressed={periodo === 'paga'}
+                >
+                  Mensual / por paga
+                </button>
+              </div>
+            </fieldset>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end">
+              <div>
+                <label htmlFor="importe-sueldo" className="block text-sm font-bold text-slate-700 mb-2">
+                  {importeLabel}
+                </label>
+                <input
+                  id="importe-sueldo"
+                  type="number"
+                  min="0.01"
+                  max={maxImporte}
+                  step="0.01"
+                  value={importe}
+                  onChange={(event) => handleSalaryChange(event.target.value)}
+                  className="w-full border-2 border-slate-200 rounded-2xl p-4 text-xl font-bold bg-white focus:ring-4 focus:ring-amber-100 focus:border-amber-400 outline-none transition-all text-slate-900"
+                  placeholder={periodo === 'anual' ? 'Ej: 30000' : 'Ej: 2000'}
+                  aria-describedby={error ? 'ayuda-importe error-importe' : 'ayuda-importe'}
+                  aria-invalid={Boolean(error)}
+                />
+                <p id="ayuda-importe" className="mt-2 text-xs text-slate-500">
+                  {periodo === 'paga' && pagas === 14
+                    ? 'Se multiplicará por 14; cada paga ordinaria y extra se considera del mismo importe.'
+                    : `Se usará como base para ${pagas} pagas al año.`}
+                </p>
+                {error && <p id="error-importe" className="mt-2 text-sm font-semibold text-rose-700">{error}</p>}
+              </div>
 
             <div>
               <label className="block text-sm font-bold text-slate-700 mb-2">Número de Pagas</label>
               <div className="flex bg-slate-100 p-2 rounded-2xl border-2 border-slate-100" role="group" aria-label="Seleccionar número de pagas">
                 <button 
+                  type="button"
                   onClick={() => setPagas(12)}
                   className={`flex-1 py-3 text-sm font-black rounded-xl transition-all shadow-sm ${pagas === 12 ? 'bg-white shadow-md text-amber-700 scale-105' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200/50'}`}
                   aria-pressed={pagas === 12}
@@ -86,6 +184,7 @@ export default function CalculadoraSueldoNetoClient({
                   12 Pagas
                 </button>
                 <button 
+                  type="button"
                   onClick={() => setPagas(14)}
                   className={`flex-1 py-3 text-sm font-black rounded-xl transition-all shadow-sm ${pagas === 14 ? 'bg-white shadow-md text-amber-700 scale-105' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200/50'}`}
                   aria-pressed={pagas === 14}
@@ -127,11 +226,38 @@ export default function CalculadoraSueldoNetoClient({
             </div>
           </div>
 
-          <div className="mt-8 p-8 bg-amber-50 rounded-[32px] border border-amber-100 shadow-inner transform transition hover:scale-[1.01]" role="status" aria-live="polite">
-            <p className="text-sm font-extrabold text-amber-900 uppercase tracking-widest text-center mb-4">Tu Sueldo Mensual (Neto)</p>
-            <p className="text-6xl font-black text-amber-600 text-center mb-8 drop-shadow-sm">
-              {netoMensual > 0 ? `${netoMensual.toLocaleString('es-ES', { maximumFractionDigits: 0 })} €` : "0 €"}
+          <div className="mt-8 p-8 bg-amber-50 rounded-[32px] border border-amber-100 shadow-inner" role="status" aria-live="polite">
+            <p className="text-sm font-extrabold text-amber-900 uppercase tracking-widest text-center mb-4">
+              {direccion === 'bruto-neto' ? 'Sueldo neto por paga' : 'Sueldo bruto anual estimado'}
             </p>
+            <p className="text-5xl sm:text-6xl font-black text-amber-600 text-center mb-8 drop-shadow-sm break-words">
+              {hasResult ? formatCurrency(resultadoPrincipal) : '0,00 €'}
+            </p>
+
+            {hasResult && (
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm">
+                <div className="bg-white/60 p-4 rounded-xl border border-amber-100/50">
+                  <dt className="font-bold text-slate-600">Bruto anual</dt>
+                  <dd className="font-black text-slate-800 mt-1">{formatCurrency(brutoAnual)}</dd>
+                </div>
+                <div className="bg-white/60 p-4 rounded-xl border border-amber-100/50">
+                  <dt className="font-bold text-slate-600">Neto anual</dt>
+                  <dd className="font-black text-slate-800 mt-1">{formatCurrency(netoAnual)}</dd>
+                </div>
+                <div className="bg-white/60 p-4 rounded-xl border border-amber-100/50">
+                  <dt className="font-bold text-slate-600">Bruto por paga ({pagas})</dt>
+                  <dd className="font-black text-slate-800 mt-1">{formatCurrency(brutoPorPaga)}</dd>
+                </div>
+                <div className="bg-white/60 p-4 rounded-xl border border-amber-100/50">
+                  <dt className="font-bold text-slate-600">Neto por paga ({pagas})</dt>
+                  <dd className="font-black text-slate-800 mt-1">{formatCurrency(netoPorPaga)}</dd>
+                </div>
+                <div className="bg-white/60 p-4 rounded-xl border border-amber-100/50 sm:col-span-2">
+                  <dt className="font-bold text-slate-600">Promedio neto mensual (neto anual ÷ 12)</dt>
+                  <dd className="font-black text-slate-800 mt-1">{formatCurrency(promedioNetoMensual)}</dd>
+                </div>
+              </dl>
+            )}
             
             <div className="space-y-3 mt-4 pt-6 text-sm text-slate-600">
               <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-amber-100/50">
@@ -143,7 +269,7 @@ export default function CalculadoraSueldoNetoClient({
                 <span className="font-black text-rose-700 bg-rose-100 px-3 py-1 rounded-lg">-{retencionSS.toLocaleString('es-ES')}%</span>
               </div>
               <p className="text-xs text-amber-900 mt-4 leading-tight italic font-medium px-4">
-                *Estimación aritmética basada en los porcentajes que indiques. No calcula automáticamente tu retención fiscal personal.
+                * Estimación aritmética basada en los porcentajes que indiques. No calcula automáticamente tu retención fiscal personal.
               </p>
             </div>
           </div>

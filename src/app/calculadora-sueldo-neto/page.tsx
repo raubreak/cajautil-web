@@ -10,15 +10,15 @@ export default function CalculadoraSueldo() {
     step: [
       {
         '@type': 'HowToStep',
-        text: 'Introduce tu salario bruto anual en euros.',
+        text: 'Elige si quieres convertir de bruto a neto o de neto a bruto.',
       },
       {
         '@type': 'HowToStep',
-        text: 'Selecciona si cobras en 12 o 14 pagas.',
+        text: 'Indica si el importe es anual o corresponde a cada paga y selecciona si cobras en 12 o 14 pagas.',
       },
       {
         '@type': 'HowToStep',
-        text: 'Introduce los porcentajes de IRPF y cotización de tu nómina y revisa el neto mensual resultante.',
+        text: 'Introduce el importe y los porcentajes de IRPF y cotización de tu nómina; después revisa el desglose anual, por paga y mensual.',
       },
     ],
   };
@@ -67,6 +67,14 @@ export default function CalculadoraSueldo() {
           text: 'El neto depende sobre todo del IRPF aplicado, de las cotizaciones y del número de pagas. Con esta calculadora puedes estimar rápidamente cuánto quedaría al mes en 12 o 14 pagas.',
         },
       },
+      {
+        '@type': 'Question',
+        name: 'Cómo calcular el sueldo bruto desde el neto',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Selecciona “Neto a bruto”, indica si tu importe neto es anual o por paga y ajusta los porcentajes de IRPF y cotización. La calculadora estimará el bruto necesario con esas deducciones.',
+        },
+      },
     ],
   };
 
@@ -86,7 +94,8 @@ export default function CalculadoraSueldo() {
       <section className="w-full max-w-4xl prose prose-slate prose-headings:text-slate-800 px-2 text-slate-600">
         <h2>Cómo interpretar tu sueldo neto</h2>
         <p>
-          El resultado es una <strong>estimación orientativa</strong> del salario que podrías recibir tras descontar IRPF y cotizaciones sociales.
+          El resultado es una <strong>estimación orientativa</strong> del salario que podrías recibir tras descontar IRPF y cotizaciones sociales,
+          o del bruto necesario para alcanzar un neto concreto.
           El neto real puede variar según tu comunidad autónoma, situación familiar, contrato, pagas prorrateadas y otras circunstancias laborales.
         </p>
         <p>
@@ -129,8 +138,8 @@ export default function CalculadoraSueldo() {
               <tr>
                 <th className="px-4 py-3">Bruto anual</th>
                 <th className="px-4 py-3">IRPF estimado</th>
-                <th className="px-4 py-3">Neto mensual 12 pagas</th>
-                <th className="px-4 py-3">Neto mensual 14 pagas</th>
+                <th className="px-4 py-3">Neto por paga (12 pagas)</th>
+                <th className="px-4 py-3">Neto por paga (14 pagas)</th>
               </tr>
             </thead>
             <tbody>
@@ -138,7 +147,7 @@ export default function CalculadoraSueldo() {
                 <td className="px-4 py-3 font-semibold">25.000 EUR</td>
                 <td className="px-4 py-3">15%</td>
                 <td className="px-4 py-3">1.635 EUR aprox.</td>
-                <td className="px-4 py-3">1.401 EUR aprox.</td>
+                <td className="px-4 py-3">1.402 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200 bg-slate-50/70">
                 <td className="px-4 py-3 font-semibold">30.000 EUR</td>
@@ -170,8 +179,8 @@ export default function CalculadoraSueldo() {
               <tr>
                 <th className="px-4 py-3">Busqueda habitual</th>
                 <th className="px-4 py-3">Equivalencia bruta</th>
-                <th className="px-4 py-3">Neto 12 pagas aprox.</th>
-                <th className="px-4 py-3">Neto 14 pagas aprox.</th>
+                <th className="px-4 py-3">Neto por paga (12) aprox.</th>
+                <th className="px-4 py-3">Neto por paga (14) aprox.</th>
               </tr>
             </thead>
             <tbody>
@@ -236,6 +245,17 @@ export default function CalculadoraSueldo() {
           Estas referencias usan un IRPF del 15% y una cotización del 6,50%. Ajusta ambos porcentajes con los datos de tu nómina para evitar tomar una cifra genérica como resultado personal.
         </p>
 
+        <h2>Cómo pasar de sueldo neto a bruto</h2>
+        <p>
+          Si conoces cuánto quieres cobrar, selecciona <strong>Neto a bruto</strong> e introduce el neto anual o el neto de cada paga.
+          La calculadora invertirá las deducciones que hayas indicado para estimar el salario bruto necesario. Por ejemplo, no es lo mismo buscar
+          1.500 EUR netos en 12 pagas que en 14: el segundo objetivo implica un neto anual mayor.
+        </p>
+        <p>
+          Este cálculo inverso sigue siendo orientativo. El IRPF no es un porcentaje universal y puede cambiar por ingresos, contrato y circunstancias personales;
+          usa el porcentaje de una nómina o una simulación fiscal reciente cuando necesites una referencia más realista.
+        </p>
+
         <h2>Qué revisar si usas el neto para tomar decisiones</h2>
         <ul>
           <li><strong>Oferta laboral:</strong> compara el neto mensual real y no solo el bruto anual anunciado.</li>
@@ -297,6 +317,16 @@ export default function CalculadoraSueldo() {
           </summary>
           <p className="mt-4 mb-0">
             Son dos de las consultas más habituales cuando comparas ofertas. Puedes usar las referencias orientativas de esta página para una respuesta rápida y después simular 12 o 14 pagas para acercarte más a tu situación real.
+          </p>
+        </details>
+        <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Cómo calcular el sueldo bruto desde el neto</span>
+            <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mt-4 mb-0">
+            Selecciona “Neto a bruto”, indica si el importe es anual o por paga y ajusta el IRPF y la cotización. Obtendrás el bruto estimado necesario,
+            junto con un desglose anual y por paga.
           </p>
         </details>
 
