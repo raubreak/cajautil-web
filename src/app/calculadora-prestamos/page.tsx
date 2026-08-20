@@ -99,7 +99,7 @@ export default function CalculadoraPrestamos() {
               <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <p className="mt-4 mb-0">
-              Introduce el importe solicitado, el plazo en meses y el TIN anual. La herramienta estima tu cuota mensual, el total devuelto y el coste financiero del préstamo.
+              Introduce el importe solicitado, el plazo en años y el TIN anual. La herramienta estima tu cuota mensual, el total devuelto y el coste financiero del préstamo.
             </p>
           </details>
           <details className="group open:bg-white p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
