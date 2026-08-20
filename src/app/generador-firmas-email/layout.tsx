@@ -6,7 +6,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: 'Generador de Firmas de Email HTML Online Gratis',
-  description: 'Crea tu firma profesional para Gmail, Outlook o Apple Mail. Generador de firmas de correo electrónico con foto, enlaces a redes sociales y diseño moderno.',
+  description: 'Crea una firma de correo HTML con nombre, empresa, teléfono, email, web, foto y color. Cópiala y pruébala en Gmail, Outlook o Apple Mail.',
   keywords: [
     "generador de firmas de email",
     "firma correo electronico gratis",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE_URL}/generador-firmas-email` },
   openGraph: {
     title: 'Generador de Firmas de Email Profesionales Gratis — CajaUtil',
-    description: 'Diseña tu firma de correo en segundos. Compatible con todos los clientes de email.',
+    description: 'Diseña una firma HTML sencilla, copia el resultado y pruébalo en tu cliente de correo.',
     url: `${SITE_URL}/generador-firmas-email`,
     images: ['https://cajautil.com/og-image.png'],
   }
@@ -29,7 +29,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Generador de Firmas de Email",
   url: `${SITE_URL}/generador-firmas-email`,
-  description: "Crea firmas de correo electrónico profesionales con plantillas HTML listas para copiar y pegar en Gmail, Outlook o Mail.",
+  description: "Crea una firma de correo HTML personalizable para copiar, pegar y probar en Gmail, Outlook o Mail.",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Any",
   offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" }
