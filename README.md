@@ -1,24 +1,60 @@
-# 🛠️ Utilidades Web - Portal Multiusos
+# CajaUtil
 
-Este repositorio contiene el código fuente de un portal web estático y ultrarrápido diseñado para ofrecer **mini-herramientas de uso cotidiano** (calculadoras, utilidades de texto, conversores y generadores).
+[CajaUtil](https://cajautil.com) reúne calculadoras, generadores, conversores y utilidades gratuitas que funcionan sin registro. El proyecto prioriza respuestas claras, procesamiento local cuando es posible y una experiencia sin publicidad intrusiva.
 
-## 🚀 Objetivo del Proyecto (Business MVP)
-El propósito principal de este MVP es la **monetización pasiva mediante publicidad (Monetag / Display Ads)** basándose en una estrategia de muy bajo coste operativo y tráfico orgánico útil:
-1. **Coste de Servidor Cero:** Las herramientas se ejecutan de lado del cliente (Frontend / JavaScript).
-2. **SEO Long-Tail:** Captura de búsquedas diarias masivas pero muy específicas (ej. *"cómo calcular el 21% de IVA"*, *"contador de palabras online"*).
-3. **Alta Retención:** Los usuarios interactúan activamente con la pantalla, generando impresiones publicitarias de valor.
+## Qué incluye
 
-## 💻 Tech Stack
-- **Framework:** [Next.js](https://nextjs.org/) (App Router, SSG)
-- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
-- **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
-- **Despliegue:** [Vercel](https://vercel.com/)
+- Calculadoras financieras y cotidianas: sueldo neto, IVA, préstamos, hipotecas, porcentajes y fechas.
+- Utilidades de texto, imágenes, códigos QR, contraseñas y conversiones.
+- Guías editoriales que explican fórmulas, límites y fuentes utilizadas.
+- Páginas estáticas optimizadas para móvil, accesibilidad y rastreo.
 
-## 🧰 Roadmap de Herramientas (Fase 1)
-- [ ] Calculadora de Porcentajes.
-- [ ] Calculadora de Sueldo Neto / IRPF.
-- [ ] Navaja Suiza de Texto (Contador de palabras, conversores a mayúsculas/minúsculas).
-- [ ] *[Más por definir en base a la investigación de mercado]*
+Consulta las herramientas publicadas en [cajautil.com](https://cajautil.com) y la metodología del proyecto en [Sobre CajaUtil](https://cajautil.com/sobre-nosotros).
 
----
-*⌨️ Desarrollado en conjunto por Raúl y Clawbreak.*
+## Privacidad y publicidad
+
+Las herramientas procesan los datos en el navegador siempre que la operación lo permite. La publicidad de terceros permanece desactivada mientras no se puedan garantizar formatos respetuosos con el uso recurrente de las herramientas.
+
+Los detalles sobre analítica, cookies y tratamiento de datos están disponibles en la [política de privacidad](https://cajautil.com/politica-de-privacidad) y la [política de cookies](https://cajautil.com/politica-de-cookies).
+
+## Desarrollo local
+
+```bash
+npm ci
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:3000`.
+
+## Validación
+
+```bash
+npx eslint .
+npx tsc --noEmit
+npm run editorial:audit
+npm run build
+```
+
+El repositorio no tiene todavía un framework de pruebas unitarias. Para cambios pequeños se usa lint dirigido, comprobación de tipos y la validación específica de la herramienta afectada.
+
+## Stack
+
+- Next.js App Router y React.
+- TypeScript en modo estricto.
+- Tailwind CSS.
+- Prisma y PostgreSQL para contenido dinámico.
+- Vercel para despliegues de producción.
+
+## Estructura
+
+| Ruta | Responsabilidad |
+|---|---|
+| `src/app/` | Páginas, metadata, sitemap y rutas API |
+| `src/components/` | Interfaz y herramientas interactivas |
+| `src/lib/` | Contenido editorial, SEO y servicios compartidos |
+| `scripts/` | Auditorías y operaciones de contenido |
+| `prisma/` | Esquema de datos |
+
+## Contribuciones
+
+Si detectas un cálculo incorrecto, una fuente desactualizada o un problema de accesibilidad, abre una incidencia con la URL, el resultado obtenido y el resultado esperado. No incluyas datos personales ni credenciales.
