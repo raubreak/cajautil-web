@@ -448,7 +448,10 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     relatedArticles: [
       { href: '/articulos/imc-calorias-y-tdee-como-leer-estas-metricas-sin-obsesionarte', label: 'IMC, calorias y TDEE: como leer estas metricas sin obsesionarte' },
     ],
-    references: [{ href: 'https://www.who.int/es/news-room/fact-sheets/detail/obesity-and-overweight', label: 'OMS: obesidad, sobrepeso e IMC en adultos' }],
+    references: [
+      { href: 'https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight', label: 'OMS: obesidad, sobrepeso e IMC' },
+      { href: 'https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/calculate-bmi-for-adults', label: 'NHS: calculo y limites del IMC en adultos' },
+    ],
     disclaimer:
       'Informacion general orientativa para adultos. En menores deben usarse percentiles por edad y sexo. No sustituye evaluacion medica, nutricional ni diagnostico clinico.',
   }),
@@ -494,6 +497,10 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     ],
     relatedArticles: [
       { href: '/articulos/imc-calorias-y-tdee-como-leer-estas-metricas-sin-obsesionarte', label: 'IMC, calorias y TDEE: como leer estas metricas sin obsesionarte' },
+    ],
+    references: [
+      { href: 'https://pubmed.ncbi.nlm.nih.gov/2305711/', label: 'PubMed: ecuacion de Mifflin-St Jeor' },
+      { href: 'https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight', label: 'OMS: interpretacion del IMC y contexto de salud' },
     ],
     disclaimer:
       'Estimacion orientativa para planificacion personal. No sustituye consejo nutricional o medico individual.',
@@ -747,6 +754,10 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     relatedArticles: [
       { href: '/articulos/webp-cuando-conviene-convertir-imagenes-y-cuando-no', label: 'WebP: cuando conviene convertir imagenes y cuando no' },
     ],
+    references: [
+      { href: 'https://developers.google.com/speed/webp', label: 'Google Developers: formato y compresion WebP' },
+      { href: 'https://web.dev/articles/choose-the-right-image-format', label: 'web.dev: como elegir el formato de imagen' },
+    ],
   }),
   'generador-qr': buildEntry({
     summary: [
@@ -995,6 +1006,9 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     ],
     relatedArticles: [
       { href: '/articulos/por-que-las-contrasenas-largas-suelen-ser-mejores-que-las-complejas', label: 'Por que las contrasenas largas suelen ser mejores que las complejas' },
+    ],
+    references: [
+      { href: 'https://pages.nist.gov/800-63-4/sp800-63b.html#passwordver', label: 'NIST SP 800-63B: requisitos y buenas practicas para contrasenas' },
     ],
   }),
   'generador-enlace-whatsapp': buildEntry({

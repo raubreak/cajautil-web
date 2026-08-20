@@ -257,10 +257,12 @@ Usa la [calculadora de IVA](/calculadora-iva) para presupuestos rapidos, revisio
     targetToolUrl: '/compresor-webp',
     tags: ['imagenes', 'webp', 'rendimiento'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T09:45:00.000Z',
+    updatedAt: '2026-08-20T17:50:00.000Z',
     content: `## Por que WebP se ha vuelto el formato por defecto en muchas webs
 
-Reducir el peso de las imagenes es una de las mejoras mas rentables en cualquier sitio web. Menos peso significa menos tiempo de descarga, mejor experiencia movil y, en muchos casos, mejores metricas de rendimiento. WebP se ha consolidado porque suele ofrecer una compresion superior a JPG y PNG sin una perdida visible en la mayoria de contextos.
+Reducir el peso de las imagenes es una de las mejoras mas rentables en cualquier sitio web. Menos peso significa menos tiempo de descarga, mejor experiencia movil y, en muchos casos, mejores metricas de rendimiento. WebP se ha consolidado porque admite compresion con y sin perdida, transparencia y animacion.
+
+Google documenta que, en sus estudios, las [imagenes WebP sin perdida fueron un 26 % menores que PNG](https://developers.google.com/speed/webp) y las versiones con perdida entre un 25 % y un 34 % menores que JPEG a calidad comparable. Son referencias generales, no una garantia para cada archivo: una captura, un logotipo y una fotografia pueden responder de forma muy distinta al mismo ajuste.
 
 La clave no es convertir por convertir, sino entender cuando el cambio mejora de verdad la experiencia y cuando solo complica tu flujo de trabajo. En proyectos pequenos, esa diferencia importa mucho porque cada paso extra en edicion y exportacion termina costando tiempo.
 
@@ -279,6 +281,20 @@ La clave no es convertir por convertir, sino entender cuando el cambio mejora de
 - Flujos donde otro sistema exige PNG o JPG.
 - Casos donde necesitas transparencia o exportaciones muy concretas para imprenta.
 
+## Elegir por contenido, no solo por extension
+
+La eleccion correcta depende de lo que contiene la imagen y de como se utilizara:
+
+| Tipo de recurso | Primera opcion que conviene probar | Que debes comprobar |
+|---|---|---|
+| Fotografia | WebP con perdida o AVIF | Artefactos en piel, cielo, texto y degradados |
+| Captura de interfaz | WebP sin perdida o PNG | Nitidez de texto, iconos y lineas finas |
+| Logotipo o icono geometrico | SVG | Que no incluya rasterizados innecesarios |
+| Imagen con transparencia | WebP, AVIF o PNG | Bordes, sombras y compatibilidad del flujo |
+| Animacion compleja | Video antes que GIF | Peso, controles, accesibilidad y reproduccion |
+
+La guia de rendimiento de web.dev recomienda [elegir el formato segun las propiedades visuales y funcionales](https://web.dev/articles/choose-the-right-image-format), y servir imagenes rasterizadas con dimensiones adecuadas. Convertir una fotografia enorme a WebP sin ajustar sus pixeles puede seguir dejando una descarga excesiva.
+
 ## Un criterio util antes de convertir una carpeta entera
 
 Si una imagen ya pesa poco, apenas aparece en pantalla o forma parte de un flujo interno, el beneficio real de convertirla puede ser minimo. En cambio, si se trata de una portada, una galeria o una pagina con mucho trafico movil, reducir kilobytes si suele marcar diferencia.
@@ -295,7 +311,7 @@ La mejor decision suele salir de comparar tres cosas: peso final, calidad visual
 
 ## Relacion con SEO y Core Web Vitals
 
-Google no premia un formato concreto, pero si premia una experiencia mas rapida. Si tus imagenes pesadas retrasan la carga del contenido principal, comprimirlas puede ayudarte a mejorar LCP y a reducir el consumo de datos del usuario.
+WebP no concede una ventaja SEO automatica. Si una imagen es el elemento principal visible, su peso y tiempo de descarga pueden influir en LCP. Comprimirla, dimensionarla correctamente y priorizar su carga puede mejorar esa metrica y reducir el consumo de datos del usuario.
 
 Ademas, una biblioteca de imagenes bien optimizada reduce la friccion del usuario en movil. No es solo una cuestion de robots o metricas: una pagina que pesa menos suele cargar antes, consumir menos datos y dar una sensacion de mayor calidad tecnica.
 
@@ -305,7 +321,9 @@ Antes de migrar todo a WebP, prueba con 10 o 15 imagenes reales de tu sitio. Rev
 
 ## Conclusiones
 
-WebP suele ser una mejora clara para contenido web, pero no sustituye una estrategia completa de optimizacion. Tamano correcto, lazy loading y eleccion de imagen adecuada siguen siendo igual de importantes.
+WebP suele ser una mejora clara para contenido web, pero no sustituye una estrategia completa de optimizacion. Tamano correcto, imagenes responsivas, carga diferida fuera de pantalla y eleccion de formato siguen siendo igual de importantes.
+
+Convierte una muestra con el [compresor WebP](/compresor-webp), compara el archivo resultante al tamano real de uso y conserva el original. Si el recurso es un codigo QR, evita una compresion que difumine el patron y sigue primero la guia para [crear QR faciles de escanear](/articulos/como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo).
 `,
   },
   {
@@ -411,10 +429,10 @@ Genera una primera version con el [generador de QR](/generador-qr), descargala e
     targetToolUrl: '/generador-contrasenas',
     tags: ['seguridad', 'contrasenas', 'privacidad'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T10:15:00.000Z',
+    updatedAt: '2026-08-20T17:51:00.000Z',
     content: `## El problema de las reglas antiguas
 
-Durante anos se repitio la misma receta: una mayuscula, un numero, un simbolo y listo. Eso mejora algo la resistencia, pero hoy se sabe que la **longitud** y la **aleatoriedad real** pesan mucho mas que un patron complicado pero previsible.
+Durante anos se repitio la misma receta: una mayuscula, un numero, un simbolo y listo. El problema es que cumplir esa plantilla no elimina patrones humanos previsibles. La **longitud**, la **aleatoriedad real** y no reutilizar la clave importan mas que una complejidad puramente cosmetica.
 
 El problema de muchas contrasenas supuestamente complejas es que siguen teniendo una logica humana facil de adivinar: nombres, fechas, patrones repetidos o sustituciones obvias como cambiar una a por @. Eso da sensacion de seguridad, pero no siempre resistencia real.
 
@@ -428,7 +446,9 @@ El problema de muchas contrasenas supuestamente complejas es que siguen teniendo
 
 ## Longitud frente a complejidad
 
-Una contrasena corta con muchos simbolos puede seguir siendo peor que una larga y aleatoria. En la practica, 16 caracteres aleatorios suelen ser una base razonable para cuentas importantes. Si el servicio lo permite, 20 o mas es mejor.
+Una contrasena corta con muchos simbolos puede seguir siendo peor que una larga y aleatoria. Como referencia para los servicios que verifican contrasenas, la [publicacion NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html#passwordver) exige un minimo de 15 caracteres cuando la contrasena es el unico factor y permite ocho cuando forma parte de una autenticacion multifactor. Tambien recomienda admitir al menos 64 caracteres.
+
+Eso no convierte 15 en una cifra magica para todas las cuentas. Una clave generada aleatoriamente de 16 o mas caracteres ofrece un margen practico alto, siempre que el servicio la acepte, sea unica y se almacene de forma segura.
 
 En el dia a dia, la mejor estrategia no es inventar claves cada vez mas ingeniosas, sino reducir la dependencia de la memoria. Si cada cuenta tiene una contrasena distinta y fuerte guardada en un gestor, el riesgo baja mucho aunque tu no recuerdes ninguna salvo la maestra.
 
@@ -439,6 +459,18 @@ En el dia a dia, la mejor estrategia no es inventar claves cada vez mas ingenios
 - Contrasenas guardadas en notas o correos sin proteccion.
 - Ausencia de doble factor en cuentas criticas.
 - Respuestas de recuperacion faciles de deducir.
+
+## Reglas que ya no ayudan como se pensaba
+
+NIST indica que los servicios no deberian imponer reglas adicionales de composicion ni exigir cambios periodicos sin evidencia de compromiso. Forzar una sustitucion cada pocas semanas puede llevar a variaciones predecibles, como cambiar solo el mes o el ultimo numero.
+
+El cambio inmediato si es necesario cuando existe una filtracion, un aviso de acceso no reconocido o sospecha de robo. En ese caso, cambia primero la cuenta afectada y despues cualquier otra donde hayas reutilizado una clave igual o parecida.
+
+## Gestor, doble factor y passkeys
+
+Un gestor reduce la tentacion de reutilizar claves y permite generar una distinta para cada servicio. NIST tambien exige que los verificadores permitan gestores y autocompletado. Para correo, banca y cuentas que recuperan otras credenciales, activa ademas un segundo factor; si el servicio ofrece una opcion resistente al phishing, como una passkey o llave de seguridad, merece prioridad frente a codigos reenviables.
+
+Ninguna contrasena evita que entregues tus credenciales en una pagina falsa. La longitud protege frente a intentos de adivinacion, mientras que el segundo factor y los autenticadores resistentes al phishing cubren otros tipos de ataque.
 
 ## Errores frecuentes
 
@@ -454,7 +486,7 @@ Si una cuenta te doleria perderla, la combinacion minima deberia ser esta: contr
 
 ## Recomendacion practica
 
-Usa un generador local, guarda las claves en un gestor y reserva la memoria solo para una contrasena maestra robusta. Esa combinacion suele ser mucho mas segura que intentar inventar claves a mano.
+Usa el [generador de contrasenas](/generador-contrasenas) para crear una clave unica y larga, guardala en un gestor y reserva la memoria para una contrasena maestra robusta. El generador funciona en tu navegador, pero la seguridad final depende tambien de donde almacenas la clave, de no reutilizarla y de activar protecciones adicionales.
 `,
   },
   {
@@ -602,7 +634,7 @@ El interes compuesto no convierte una aportacion en riqueza de forma automatica.
     targetToolUrl: '/calculadora-calorias',
     tags: ['salud', 'imc', 'calorias'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-04-15T11:00:00.000Z',
+    updatedAt: '2026-08-20T17:52:00.000Z',
     content: `## Estas calculadoras sirven para orientarte, no para diagnosticarte
 
 Las herramientas de IMC, metabolismo basal y gasto calorico diario pueden ser utiles para tener una referencia rapida, pero no sustituyen una valoracion clinica ni un plan nutricional personalizado.
@@ -611,9 +643,23 @@ Eso no significa que no sirvan. Significa que funcionan mejor cuando se usan com
 
 ## Que mide cada una
 
-- **IMC**: relacion entre peso y altura. Sirve como indicador poblacional basico, pero no distingue masa muscular ni composicion corporal.
+- **IMC**: relacion entre peso y altura. Sirve como indicador poblacional basico, pero no distingue masa muscular, grasa ni distribucion corporal.
 - **BMR**: energia minima estimada que tu cuerpo necesita en reposo.
 - **TDEE**: gasto diario total segun nivel de actividad.
+
+La [Organizacion Mundial de la Salud describe el IMC como un marcador indirecto](https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight) y senala que medidas adicionales, como el perimetro de cintura, pueden ayudar a valorar el contexto. En adultos usa 25 como umbral de sobrepeso y 30 para obesidad, pero en menores los criterios dependen de edad y sexo.
+
+## Por que BMR y TDEE no son una prescripcion
+
+La formula de Mifflin-St Jeor estima el gasto en reposo a partir de variables como peso, altura, edad y sexo. El TDEE aplica despues un factor de actividad. Cada paso introduce incertidumbre: una persona puede describir su actividad de forma optimista, cambiar su entrenamiento o tener necesidades distintas a la media usada por la ecuacion.
+
+Por eso el resultado no indica automaticamente cuanto debes comer. Es un punto de partida matematico que necesita observacion y, cuando hay una condicion clinica o un objetivo exigente, valoracion profesional.
+
+| Resultado | Uso razonable | Lo que no demuestra |
+|---|---|---|
+| IMC | Detectar un rango orientativo en adultos | Composicion corporal o diagnostico individual |
+| BMR | Estimar energia en reposo | Consumo diario total exacto |
+| TDEE | Preparar un punto inicial segun actividad | Necesidad calorica constante o garantizada |
 
 ## Donde se suele fallar al interpretarlas
 
@@ -627,7 +673,7 @@ Eso no significa que no sirvan. Significa que funcionan mejor cuando se usan com
 
 Utilizalas para definir un punto de partida. Si quieres perder grasa, ganar masa o mejorar rendimiento, lo razonable es observar tendencia, adherencia y sensaciones durante varias semanas en lugar de reaccionar a un numero aislado.
 
-Tambien conviene recordar que las formulas son estimaciones. Dos personas con la misma altura, peso y actividad declarada pueden tener necesidades reales distintas. Por eso el seguimiento en el tiempo suele aportar mas valor que la primera cifra calculada.
+Tambien conviene recordar que las formulas son estimaciones. Dos personas con la misma altura, peso y actividad declarada pueden tener necesidades reales distintas. Por eso el seguimiento en el tiempo suele aportar mas valor que la primera cifra calculada. El [NHS recuerda que el IMC no distingue musculo y grasa](https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/calculate-bmi-for-adults) y recomienda no usar estas herramientas para diagnosticar sintomas.
 
 ## Cuando conviene ser especialmente prudente
 
@@ -640,7 +686,7 @@ En estos casos, una calculadora puede seguir siendo util, pero necesita mucho ma
 
 ## Recomendacion final
 
-Las calculadoras son utiles cuando abren la puerta a decisiones prudentes y medibles. Si necesitas una interpretacion clinica o tienes condicion medica previa, consulta con un profesional sanitario.
+Usa la [calculadora de IMC](/calculadora-imc) para obtener una referencia de peso y altura, y la [calculadora de calorias y TDEE](/calculadora-calorias) para comparar escenarios de actividad. Si necesitas una interpretacion clinica, estas embarazada, eres menor, tienes una condicion medica o la relacion con el peso y la comida te genera ansiedad, consulta con un profesional sanitario antes de modificar tu alimentacion.
 `,
   },
   {
