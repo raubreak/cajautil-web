@@ -2,14 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 
+import SearchModal from '@/components/SearchModal';
 import { isLowValueTool } from '@/lib/adsenseReadiness';
-
-const SearchModal = dynamic(() => import('./SearchModal'), {
-  ssr: false,
-  loading: () => <div className="w-24 h-8 bg-slate-100 animate-pulse rounded-xl" />
-});
 
 const herramientasNav = [
   { nombre: "Colores", ruta: "/extractor-colores" },
