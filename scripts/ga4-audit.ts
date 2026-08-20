@@ -7,6 +7,8 @@ type TrafficTotals = {
   views: number;
 };
 
+const TOOL_EVENTS = ['tool_started', 'tool_completed', 'result_copied'];
+
 function parseMetricValue(value: string | null | undefined): number {
   const parsed = Number.parseInt(value ?? '0', 10);
   return Number.isNaN(parsed) ? 0 : parsed;
@@ -54,6 +56,37 @@ async function getTrafficTotals(
     sessions: totals.sessions,
     views: totals.views,
   };
+}
+
+async function getToolEvents(
+  analyticsDataClient: BetaAnalyticsDataClient,
+  propertyId: string,
+) {
+  const [response] = await analyticsDataClient.runReport({
+    property: `properties/${propertyId}`,
+    dateRanges: [{ startDate: '28daysAgo', endDate: '1daysAgo' }],
+    dimensions: [{ name: 'eventName' }, { name: 'pagePath' }],
+    metrics: [{ name: 'eventCount' }],
+    dimensionFilter: {
+      filter: {
+        fieldName: 'eventName',
+        inListFilter: { values: TOOL_EVENTS },
+      },
+    },
+    orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }],
+  });
+
+  console.log('\n--- Uso de herramientas de los últimos 28 días completos ---');
+  if (!response.rows?.length) {
+    console.log('Sin eventos de herramientas todavía');
+    return;
+  }
+
+  for (const row of response.rows) {
+    console.log(
+      `Evento: ${row.dimensionValues?.[0].value} | Ruta: ${row.dimensionValues?.[1].value} | Total: ${row.metricValues?.[0].value}`,
+    );
+  }
 }
 
 // Obtener datos orgánicos de GA4 de los últimos 7 días completos
@@ -147,6 +180,7 @@ async function getTrafficDropData() {
     console.log(`Vistas semana actual: ${currentWeekTotals.views}`);
     console.log(`Vistas semana anterior: ${previousWeekTotals.views}`);
     console.log(`Variación de vistas: ${viewsChange}`);
+    await getToolEvents(analyticsDataClient, propertyId);
   } catch(e) {
     console.error("Error consultando Analytics API:", e);
   }

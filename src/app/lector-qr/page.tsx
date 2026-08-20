@@ -4,6 +4,8 @@ import jsQR from "jsqr";
 import Link from "next/link";
 import { ScanSearch } from "lucide-react";
 
+import { trackToolEvent } from '@/lib/analytics';
+
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const MAX_IMAGE_PIXELS = 20_000_000;
 const SUPPORTED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -22,6 +24,7 @@ export default function LectorQR() {
     setResultado(null);
     const file = files[0];
     e.currentTarget.value = "";
+    trackToolEvent('tool_started', 'lector-qr');
 
     if (!SUPPORTED_IMAGE_TYPES.has(file.type)) {
       setNombreArchivo("");
@@ -61,6 +64,7 @@ export default function LectorQR() {
 
           if (code) {
             setResultado(code.data);
+            trackToolEvent('tool_completed', 'lector-qr');
           } else {
             setErrorDesc("No se ha detectado ningún código QR válido en la imagen. Intenta con otra de mayor calidad o mejor enfocada.");
           }
@@ -134,7 +138,10 @@ export default function LectorQR() {
                  </a>
                ) : (
                  <button 
-                   onClick={() => navigator.clipboard.writeText(resultado)}
+                    onClick={() => {
+                      navigator.clipboard.writeText(resultado);
+                      trackToolEvent('result_copied', 'lector-qr');
+                    }}
                    className="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white font-black text-lg rounded-2xl text-center shadow-md transition-colors"
                   >
                    📋 Copiar al Portapapeles

@@ -1,6 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Coins } from "lucide-react";
+
+import { trackToolEvent } from '@/lib/analytics';
 
 interface Props {
   title?: React.ReactNode;
@@ -19,6 +21,22 @@ export default function CalculadoraSueldoNetoClient({
   const [pagas, setPagas] = useState<12 | 14>(initialPagas);
   const [irpf, setIrpf] = useState(15);
   const [retencionSS, setRetencionSS] = useState(6.5);
+  const startedTracked = useRef(false);
+  const completedTracked = useRef(false);
+
+  const handleSalaryChange = (value: number) => {
+    setBrutoAnual(value);
+
+    if (value <= 0) return;
+    if (!startedTracked.current) {
+      startedTracked.current = true;
+      trackToolEvent('tool_started', 'calculadora-sueldo-neto');
+    }
+    if (!completedTracked.current) {
+      completedTracked.current = true;
+      trackToolEvent('tool_completed', 'calculadora-sueldo-neto');
+    }
+  };
 
   const totalDeducciones = irpf + retencionSS;
   const netoAnual = brutoAnual 
@@ -50,7 +68,7 @@ export default function CalculadoraSueldoNetoClient({
                 id="bruto-anual"
                 type="number" 
                 value={brutoAnual}
-                onChange={(e) => setBrutoAnual(Number(e.target.value))}
+                onChange={(e) => handleSalaryChange(Number(e.target.value))}
                 className="w-full border-2 border-slate-200 rounded-2xl p-4 text-xl font-bold bg-white focus:ring-4 focus:ring-amber-100 focus:border-amber-400 outline-none transition-all text-slate-900"
                 placeholder="Ej: 30000"
                 aria-label="Introduce tu sueldo bruto anual en euros"
