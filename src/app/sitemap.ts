@@ -9,7 +9,7 @@ const toolDefinitions = [
   ['calculadora-interes-compuesto', 'monthly', 0.9, '2026-08-20T16:23:06.000Z'],
   ['extractor-colores', 'monthly', 0.9, '2026-08-20T20:44:39.000Z'],
   ['temporizador', 'monthly', 0.9],
-  ['calculadora-descuentos', 'monthly', 0.9],
+  ['calculadora-descuentos', 'monthly', 0.9, '2026-08-20T21:45:00.000Z'],
   ['ruleta-aleatoria', 'monthly', 0.9],
   ['calculadora-regla-de-tres', 'monthly', 0.9, '2026-08-20T20:58:50.000Z'],
   ['generador-letras-raras', 'monthly', 0.9],
