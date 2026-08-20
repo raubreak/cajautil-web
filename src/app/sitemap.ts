@@ -14,7 +14,7 @@ const toolDefinitions = [
   ['calculadora-regla-de-tres', 'monthly', 0.9, '2026-08-20T20:58:50.000Z'],
   ['generador-letras-raras', 'monthly', 0.9],
   ['compresor-webp', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
-  ['calculadora-hipotecas', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
+  ['calculadora-hipotecas', 'monthly', 0.9, '2026-08-20T23:53:43.000Z'],
   ['generador-enlace-whatsapp', 'monthly', 0.9, '2026-08-20T22:38:27.000Z'],
   ['calculadora-imc', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
   ['calculadora-porcentajes', 'monthly', 0.9, '2026-08-20T22:23:43.000Z'],
