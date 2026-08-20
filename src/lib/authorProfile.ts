@@ -1,7 +1,7 @@
 export const AUTHOR_PROFILE = {
-  name: 'Raul B.',
+  name: 'Raul Santos',
   fullName: 'Raul Santos',
-  role: 'Especialista en Herramientas Digitales y Automatizacion Web',
+  role: 'Desarrollador de herramientas digitales y responsable editorial',
   avatarUrl: 'https://avatars.githubusercontent.com/u/843986?v=4',
   githubUrl: 'https://github.com/raubreak',
 } as const;

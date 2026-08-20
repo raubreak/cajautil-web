@@ -1,29 +1,6 @@
 import CalculadoraPorcentajesClient from "@/components/tools/CalculadoraPorcentajesClient";
 
 export default function CalculadoraPorcentajes() {
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Cómo calcular un porcentaje de una cantidad",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Multiplica la cantidad por el porcentaje y divide el resultado entre 100. Esta calculadora automatiza ese proceso para descuentos, IVA, comisiones o subidas.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Cómo saber el descuento de un precio",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Introduce el porcentaje y el precio base para obtener el importe descontado. Si quieres ver directamente el precio final, puedes usar tambien la calculadora de descuentos.",
-        },
-      },
-    ],
-  };
-
   const howToJsonLd = {
     "@context": "https://schema.org",
     "@type": "HowTo",
@@ -46,10 +23,6 @@ export default function CalculadoraPorcentajes() {
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}

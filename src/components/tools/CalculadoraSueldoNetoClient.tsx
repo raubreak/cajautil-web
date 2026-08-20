@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
-import { Coins, Plus } from "lucide-react";
+import { Coins } from "lucide-react";
 
 interface Props {
   title?: React.ReactNode;
@@ -133,43 +132,6 @@ export default function CalculadoraSueldoNetoClient({
         </div>
       </div>
       
-      {/* Contenido SEO Base (Solo se muestra en la home de la tool si no hay variants, 
-          o se puede dejar para que Gemini lo pise debajo) */}
-      {!title && (
-        <section className="w-full max-w-3xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-amber-700">
-          <h2>¿Cómo calcular el sueldo neto en España?</h2>
-          <p>
-            Para calcular tu <strong>sueldo neto</strong> a partir del <strong>salario bruto anual</strong>, se restan las <strong>retenciones de IRPF</strong> y 
-            la <strong>cotización del trabajador a la Seguridad Social</strong>. Ambos porcentajes son editables para que puedas reproducir los datos de tu nómina.
-          </p>
-          <p>
-            El <strong>tipo de IRPF</strong> depende de tus ingresos totales, situación familiar y comunidad autónoma.
-            Para un resultado útil, introduce la retención de tu nómina o la obtenida con el servicio oficial de la Agencia Tributaria.
-          </p>
-
-          <h2>Preguntas frecuentes</h2>
-          <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-            <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
-              <span>¿Cuánto es el sueldo neto de 30.000€ brutos?</span>
-              <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
-            </summary>
-            <p className="mt-4 mb-0 text-slate-600">Con un salario bruto de 30.000€ anuales, un IRPF del 15% y una cotización del 6,50%, el cálculo deja unos 1.963€ netos en 12 pagas o 1.682€ en 14 pagas.</p>
-          </details>
-          <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
-            <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
-              <span>¿Qué diferencia hay entre 12 y 14 pagas?</span>
-              <Plus className="h-5 w-5 shrink-0 text-amber-500 transition-transform group-open:rotate-45" aria-hidden="true" />
-            </summary>
-            <p className="mt-4 mb-0 text-slate-600">El neto anual es el mismo. Con 14 pagas cobras menos al mes pero recibes dos pagas extra (generalmente en junio y diciembre). Con 12 pagas cobras más cada mes sin extras.</p>
-          </details>
-
-          <h3>Herramientas relacionadas</h3>
-          <ul>
-            <li><Link href="/calculadora-porcentajes">Calculadora de Porcentajes de IRPF</Link></li>
-            <li><Link href="/calculadora-dias">Calculadora de Días de Vacaciones</Link></li>
-          </ul>
-        </section>
-      )}
     </div>
   );
 }

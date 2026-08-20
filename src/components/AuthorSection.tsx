@@ -16,7 +16,7 @@ const AuthorSection = () => {
         />
       </div>
       <div className="text-center md:text-left">
-        <h3 className="text-xl font-bold text-slate-900 mb-2">Revisado por {AUTHOR_PROFILE.name}</h3>
+        <h3 className="text-xl font-bold text-slate-900 mb-2">Revisión técnica y editorial por {AUTHOR_PROFILE.name}</h3>
         <p className="text-slate-500 font-medium text-sm mb-4">
           {AUTHOR_PROFILE.role}
         </p>
