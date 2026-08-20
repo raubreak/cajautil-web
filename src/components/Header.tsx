@@ -15,7 +15,7 @@ const herramientasNav = [
   { nombre: "Símbolos", ruta: "/simbolos-copiar" },
   { nombre: "Texto Invisible", ruta: "/texto-invisible" },
   { nombre: "CPS Test", ruta: "/cps-test" },
-  { nombre: "Edad Exacta", ruta: "/calculadora-edad" },
+  { nombre: "Calculadora de Edad", ruta: "/calculadora-edad" },
   { nombre: "WebP", ruta: "/compresor-webp" },
   { nombre: "Regla de 3", ruta: "/calculadora-regla-de-tres" },
   { nombre: "Hipotecas", ruta: "/calculadora-hipotecas" },

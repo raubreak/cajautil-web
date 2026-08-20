@@ -21,9 +21,9 @@ const AuthorSection = () => {
           {AUTHOR_PROFILE.role}
         </p>
         <p className="text-slate-600 leading-relaxed text-sm">
-          Raúl cuenta con más de 10 años de experiencia desarrollando utilidades web que simplifican la vida digital.
-          Cada herramienta y contenido en CajaUtil.com es revisado meticulosamente para asegurar precisión, seguridad y la mejor experiencia de usuario,
-          cumpliendo con altos estándares de transparencia y utilidad.
+          Raúl cuenta con más de 10 años de experiencia desarrollando utilidades web. Revisa la implementación, las fórmulas,
+          las fuentes citadas, la accesibilidad y las limitaciones que se explican en CajaUtil. Las estimaciones financieras o de salud
+          son orientativas y no sustituyen la revisión de un profesional cualificado.
         </p>
         <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-blue-600 md:justify-start">
           <Link href="/sobre-nosotros" className="hover:underline">Conoce nuestra metodología</Link>

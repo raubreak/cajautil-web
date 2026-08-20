@@ -5,8 +5,8 @@ import ToolEditorialSection from '@/components/ToolEditorialSection';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de Edad Exacta | Cuántos Días He Vivido',
-  description: 'Calcula tu edad exacta en años, meses, días, horas, minutos y segundos. Descubre cuánto falta para tu próximo cumpleaños y cuántos días has vivido desde que naciste.',
+  title: 'Calculadora de Edad | Años, Meses y Días Vividos',
+  description: 'Calcula tu edad por calendario en años, meses y días. Estima cuánto falta para tu próximo cumpleaños y el tiempo transcurrido desde que naciste.',
   keywords: [
     "calculadora de edad",
     "cuantos dias he vivido",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/calculadora-edad`,
   },
   openGraph: {
-    title: 'Calculadora de Edad Exacta Online Gratis',
-    description: 'Descubre tu edad al detalle y cuántos segundos han pasado desde tu nacimiento al instante.',
+    title: 'Calculadora de Edad Online Gratis',
+    description: 'Consulta tu edad por calendario y una estimación del tiempo transcurrido desde tu nacimiento.',
     url: `${SITE_URL}/calculadora-edad`,
     images: ['https://cajautil.com/og-image.png'],
   }
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "Calculadora de Edad Exacta",
+  name: "Calculadora de Edad",
   url: `${SITE_URL}/calculadora-edad`,
-  description: "Herramienta online para calcular la edad exacta de una persona en múltiples unidades temporales y el tiempo restante para su próximo aniversario.",
+  description: "Herramienta online para calcular la edad por calendario y estimar el tiempo restante para el próximo aniversario.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Any",
   offers: {

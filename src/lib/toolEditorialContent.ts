@@ -259,7 +259,16 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad', label: 'TIN, TAE y cuota mensual: cómo comparar préstamos de verdad' },
       { href: '/articulos/cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda', label: 'Cuánto dinero necesitas ahorrar para comprar una vivienda' },
     ],
-    references: [{ href: 'https://www.bde.es/', label: 'Guía hipotecaria del Banco de España' }],
+    references: [
+      {
+        href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Contratacion_de_la_hipoteca.html',
+        label: 'Cómo analizar la contratación de una hipoteca — Banco de España',
+      },
+      {
+        href: 'https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/hipotecas/guia-textual/primerospasoscon/Gastos_asociados_a_la_hipoteca.html',
+        label: 'Gastos asociados a la hipoteca — Banco de España',
+      },
+    ],
     disclaimer:
       'Estimacion orientativa. La oferta final depende de tasacion, perfil financiero, vinculaciones y documentacion precontractual.',
   }),
@@ -634,12 +643,12 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
   }),
   'calculadora-edad': buildEntry({
     summary: [
-      'Calcular edad exacta es util para tramites, formularios, curiosidad personal o para medir tiempo en dias, meses y anos con mas detalle que una fecha de nacimiento aislada.',
-      'La herramienta gana valor cuando necesitas una diferencia precisa y no solo saber cuantos anos has cumplido.',
+      'Calcular la edad por calendario es util para formularios, curiosidad personal o para expresar el tiempo en dias, meses y anos con mas detalle que una fecha de nacimiento aislada.',
+      'La herramienta gana valor cuando necesitas una referencia detallada y no solo saber cuantos anos has cumplido.',
     ],
     sections: [
       {
-        title: 'Para que sirve una edad exacta',
+        title: 'Para que sirve calcular la edad por calendario',
         paragraphs: [
           'Ademas de la curiosidad, puede ayudarte en formularios, seguimiento de hitos personales, comparativas de tiempo o simples calculos de antiguedad vital.',
           'Expresar la edad en dias, horas o semanas tambien puede tener interes educativo o divulgativo.',
@@ -661,8 +670,8 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       },
     ],
     faqs: [
-      { question: 'Cuenta anos bisiestos', answer: 'Si, la edad exacta debe considerar la longitud real del calendario.' },
-      { question: 'Puedo calcular la edad en una fecha futura', answer: 'Si, es util para saber cuantos anos o dias tendras en un momento concreto.' },
+      { question: 'Cuenta anos bisiestos', answer: 'Si. El calculo por calendario considera la distinta longitud de los meses y los anos bisiestos.' },
+      { question: 'Puedo introducir una fecha de nacimiento futura', answer: 'No. El campo acepta fechas de nacimiento hasta el dia actual. Para comparar dos fechas distintas puedes usar la calculadora de dias.' },
       { question: 'Sirve para tramites oficiales', answer: 'Sirve como referencia, pero la validez juridica la determina siempre la documentacion oficial.' },
     ],
     relatedTools: [

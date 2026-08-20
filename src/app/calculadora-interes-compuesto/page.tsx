@@ -73,7 +73,7 @@ export default function CalculadoraInteresCompuesto() {
           Calculadora de <br/><span className="text-emerald-600">Interés Compuesto</span>
         </h1>
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto leading-relaxed">
-          Descubre cómo tu dinero puede crecer exponencialmente a lo largo del tiempo gracias al poder de la inversión a largo plazo.
+          Compara cómo podrían evolucionar tus aportaciones bajo una tasa anual constante y distintos plazos.
         </p>
       </div>
 
@@ -118,8 +118,8 @@ export default function CalculadoraInteresCompuesto() {
              <label htmlFor="compound-rate" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1 group relative">
                Tasa de Interés Anual
                <Info className="w-4 h-4 text-emerald-400 cursor-help" />
-               <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block w-64 bg-slate-800 text-white text-xs p-3 rounded-xl shadow-lg z-50 normal-case tracking-normal">
-                 El rendimiento estimado o interés anual (%). Históricamente, el S&P 500 ha rendido en torno al 7-10% anual.
+                 <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block w-64 bg-slate-800 text-white text-xs p-3 rounded-xl shadow-lg z-50 normal-case tracking-normal">
+                  Tasa anual constante usada solo para la simulación. No representa una rentabilidad garantizada ni incorpora inflación, comisiones o impuestos.
                </div>
              </label>
              <div className="relative">
@@ -176,7 +176,7 @@ export default function CalculadoraInteresCompuesto() {
                    <div className="absolute right-[-20px] top-[-20px] opacity-10 group-hover:scale-110 transition-transform duration-700">
                       <TrendingUp className="w-48 h-48" />
                    </div>
-                   <p className="text-xs font-bold text-emerald-200 uppercase tracking-widest mb-2 relative z-10">Balance Final Esperado</p>
+                    <p className="text-xs font-bold text-emerald-200 uppercase tracking-widest mb-2 relative z-10">Capital final simulado</p>
                    <p className="text-4xl sm:text-5xl font-black tabular-nums transition-transform relative z-10 leading-none py-1">
                      {formatCurrency(simulation.finalBalance)}
                    </p>
@@ -189,7 +189,7 @@ export default function CalculadoraInteresCompuesto() {
                    </div>
                    
                    <div className="mt-4 sm:mt-0">
-                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Total Intereses Ganados</p>
+                      <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Rendimiento simulado</p>
                      <p className="text-2xl font-black text-emerald-500">+{formatCurrency(simulation.totalInterest)}</p>
                    </div>
                 </div>
@@ -271,13 +271,13 @@ export default function CalculadoraInteresCompuesto() {
           </p>
            
            <h3>Fórmula Matemática del Interés Compuesto</h3>
-           <p>La fórmula clásica matemática es <code>A = P (1 + r/n)^(nt)</code>. Sin embargo, en nuestra calculadora gratuita hemos incorporado los aportes mensuales (que es como la mayoría de los mortales invierten), un cálculo mucho más complejo que suma el rendimiento mensual al capital aportado hasta esa fecha y lo vuelve a componer de nuevo cada 30 días.</p>
+           <p>La fórmula clásica es <code>A = P (1 + r/n)^(nt)</code>. Esta calculadora añade las aportaciones al final de cada mes y aplica una tasa nominal anual constante dividida entre doce. No incorpora inflación, comisiones, impuestos, volatilidad ni cambios de rentabilidad.</p>
 
-           <h3>Tips para Maximizar tu Rendimiento</h3>
+           <h3>Claves para comparar escenarios con prudencia</h3>
            <ul>
-               <li><strong>Empieza Temprano:</strong> El tiempo es el factor multiplicador en esta ecuación matemática (<code className="bg-slate-100 px-1 rounded">t</code>). El dinero de una persona en la veintena crece infinitamente más que el de una de cuarenta con el mismo interés porque los intereses tienen más décadas de rodaje.</li>
-               <li><strong>Sé Constante:</strong> Ingresar de 200€ a 400€ al mes habitualmente como un &quot;gasto fijo&quot; hacia tus fondos indexados (aportaciones periódicas) es el pilar de la libertad financiera y el movimiento FIRE.</li>
-               <li><strong>Evita Sacar el Dinero:</strong> Cada vez que retiras el capital para comprar un coche o un capricho asestas un golpe mortal a la base de la bola de nieve. Cortas de raíz cientos de ramificaciones futuras de intereses.</li>
+               <li><strong>Compara plazos:</strong> un horizonte mayor da más periodos de composición, pero no elimina el riesgo ni garantiza una rentabilidad.</li>
+               <li><strong>Usa aportaciones sostenibles:</strong> prueba cantidades que puedas mantener sin comprometer gastos esenciales ni tu fondo de emergencia.</li>
+               <li><strong>Incluye costes:</strong> contrasta el resultado con escenarios de menor rentabilidad para representar comisiones, impuestos e inflación.</li>
            </ul>
 
           <h3>Cómo usar la simulación sin engañarte</h3>

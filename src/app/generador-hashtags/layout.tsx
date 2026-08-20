@@ -6,8 +6,8 @@ import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Generador de Hashtags para Instagram y TikTok | Gratis',
-  description: 'Genera los mejores hashtags para Instagram, TikTok y Twitter a partir de una palabra clave. Copia y pega los hashtags más relevantes para crecer en redes sociales gratis.',
+  title: 'Generador de Ideas de Hashtags para Redes Sociales',
+  description: 'Obtén ideas de hashtags para Instagram, TikTok y X a partir de una palabra clave. Revisa, selecciona y copia etiquetas relacionadas gratis.',
   keywords: [
     "generador de hashtags",
     "hashtags instagram",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   robots: LOW_VALUE_TOOL_ROBOTS,
   alternates: { canonical: `${SITE_URL}/generador-hashtags` },
   openGraph: {
-    title: 'Generador de Hashtags Gratis para Redes Sociales',
-    description: 'Introduce tu tema y genera al instante los mejores hashtags para Instagram, TikTok, Twitter y LinkedIn.',
+    title: 'Generador de Ideas de Hashtags para Redes Sociales',
+    description: 'Introduce un tema y obtén ideas de etiquetas para revisar, seleccionar y copiar.',
     url: `${SITE_URL}/generador-hashtags`,
   }
 };

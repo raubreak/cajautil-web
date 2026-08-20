@@ -198,7 +198,7 @@ const CalculadoraHipotecasClient = () => {
               <Plus className="h-5 w-5 text-sky-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>Sí, sirve perfectamente para simular lo que pagarás bajo un escenario u otro. Haz una prueba con el interés Euríbor/Libor actual y vuelve a hacer una simulación sumándole 1 o 2 puntos porcentuales para saber cómo quedaría tu cuota en los peores y mejores escenarios.</p>
+              <p>Sirve para comparar escenarios con un TIN constante. En una hipoteca variable puedes probar distintos valores del índice de referencia más el diferencial, pero la herramienta no modela fechas de revisión ni cambios futuros del Euríbor. El resultado es orientativo y no sustituye la información de la entidad.</p>
             </div>
           </details>
 
@@ -208,7 +208,7 @@ const CalculadoraHipotecasClient = () => {
               <Plus className="h-5 w-5 text-sky-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <div className="px-5 pb-5 text-slate-600 leading-relaxed">
-              <p>En absoluto. A diferencia de las calculadoras de los grandes bancos, nuestra utilidad es estricta sobre privacidad. Toda la matemática se resuleve <em>offline</em> de lado cliente en la RAM momentánea de tu teléfono. Al cerrar la página, se pierde todo.</p>
+              <p>No guardamos los importes que introduces. El cálculo se resuelve localmente en tu navegador y CajaUtil no envía esos valores a un servidor. Al cerrar o recargar la página, la simulación se restablece.</p>
             </div>
           </details>
         </div>

@@ -71,7 +71,7 @@ const itemListItems = [
   { name: "Símbolos para Copiar y Pegar", url: `${SITE_URL}/simbolos-copiar` },
   { name: "Texto Invisible para WhatsApp", url: `${SITE_URL}/texto-invisible` },
   { name: "CPS Test Online", url: `${SITE_URL}/cps-test` },
-  { name: "Calculadora de Edad Exacta", url: `${SITE_URL}/calculadora-edad` },
+  { name: "Calculadora de Edad", url: `${SITE_URL}/calculadora-edad` },
   { name: "Generador de Lorem Ipsum", url: `${SITE_URL}/generador-lorem-ipsum` },
   { name: "Conversor de Unidades", url: `${SITE_URL}/conversor-unidades` },
   { name: "Calculadora de Calorías y TDEE", url: `${SITE_URL}/calculadora-calorias` },
@@ -345,7 +345,7 @@ export default function Home() {
     },
     {
       titulo: 'Calculadora de Edad',
-      descripcion: 'Descubre tu edad exacta en días, horas y segundos. Cuenta atrás para tu cumpleaños.',
+      descripcion: 'Calcula tu edad por calendario y estima los días y horas transcurridos desde tu nacimiento.',
       ruta: '/calculadora-edad',
       Icono: Cake,
       color: 'from-amber-400 to-orange-500',
@@ -369,7 +369,7 @@ export default function Home() {
     },
     {
       titulo: 'Generador de Hashtags',
-      descripcion: 'Genera los mejores hashtags para Instagram, TikTok y Twitter a partir de una palabra clave.',
+      descripcion: 'Obtén ideas de hashtags para Instagram, TikTok y X a partir de una palabra clave.',
       ruta: '/generador-hashtags',
       Icono: Hash,
       color: 'from-pink-400 to-fuchsia-500',

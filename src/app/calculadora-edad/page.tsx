@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, Cake, Hourglass, Timer, Milestone, Infinity, PartyPopper } from 'lucide-react';
+import { Calendar, Cake, Hourglass, Milestone, Infinity, PartyPopper } from 'lucide-react';
 
 interface AgeStats {
   years: number;
@@ -22,15 +22,39 @@ interface AgeStats {
 export default function CalculadoraEdad() {
   const [birthDate, setBirthDate] = useState<string>('');
   const [stats, setStats] = useState<AgeStats | null>(null);
+  const [error, setError] = useState('');
+
+  const now = new Date();
+  const maxBirthDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
   useEffect(() => {
-    if (!birthDate) return;
+    if (!birthDate) {
+      return;
+    }
 
-    const timer = setInterval(() => {
-      const birth = new Date(birthDate);
+    const updateStats = () => {
+      const [year, month, day] = birthDate.split('-').map(Number);
+      const birth = new Date(year, month - 1, day);
       const now = new Date();
-      
-      if (isNaN(birth.getTime())) return;
+
+      if (
+        Number.isNaN(birth.getTime()) ||
+        birth.getFullYear() !== year ||
+        birth.getMonth() !== month - 1 ||
+        birth.getDate() !== day
+      ) {
+        setStats(null);
+        setError('Introduce una fecha válida.');
+        return;
+      }
+
+      if (birth.getTime() > now.getTime()) {
+        setStats(null);
+        setError('La fecha de nacimiento no puede estar en el futuro.');
+        return;
+      }
+
+      setError('');
 
       // Basic Age Logic
       let y = now.getFullYear() - birth.getFullYear();
@@ -54,11 +78,12 @@ export default function CalculadoraEdad() {
       const totalMinutes = Math.floor(diffMs / (1000 * 60));
       const totalSeconds = Math.floor(diffMs / 1000);
 
-      // Next Birthday Logic
+      // A 29 de febrero se celebra el último día de febrero en años no bisiestos.
       const nextBdayYear = now.getMonth() > birth.getMonth() || (now.getMonth() === birth.getMonth() && now.getDate() > birth.getDate()) 
         ? now.getFullYear() + 1 
         : now.getFullYear();
-      const nextBday = new Date(nextBdayYear, birth.getMonth(), birth.getDate());
+      const lastDayOfBirthMonth = new Date(nextBdayYear, birth.getMonth() + 1, 0).getDate();
+      const nextBday = new Date(nextBdayYear, birth.getMonth(), Math.min(birth.getDate(), lastDayOfBirthMonth));
       const bdayDiffMs = nextBday.getTime() - now.getTime();
       
       const bdayDays = Math.floor(bdayDiffMs / (1000 * 60 * 60 * 24));
@@ -81,7 +106,10 @@ export default function CalculadoraEdad() {
             seconds: bdaySeconds
         }
       });
-    }, 1000);
+    };
+
+    updateStats();
+    const timer = setInterval(updateStats, 1000);
 
     return () => clearInterval(timer);
   }, [birthDate]);
@@ -94,7 +122,7 @@ export default function CalculadoraEdad() {
           <Cake className="w-10 h-10 text-amber-500" />
         </div>
         <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight mb-4">
-          Calculadora de <span className="text-amber-500">Edad Exacta</span>
+          Calculadora de <span className="text-amber-500">Edad</span>
         </h1>
         <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-lg mx-auto">Selecciona tu fecha de nacimiento y descubre detalles fascinantes sobre el tiempo que has vivido.</p>
       </div>
@@ -110,11 +138,19 @@ export default function CalculadoraEdad() {
                 <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block text-center">Tu fecha de nacimiento</label>
                 <input 
                     type="date"
+                    max={maxBirthDate}
                     value={birthDate}
-                    onChange={(e) => setBirthDate(e.target.value)}
+                    onChange={(e) => {
+                      setBirthDate(e.target.value);
+                      if (!e.target.value) {
+                        setStats(null);
+                        setError('');
+                      }
+                    }}
                     className="w-full bg-slate-50 border-2 border-slate-100 p-5 rounded-2xl text-2xl font-bold text-slate-700 focus:outline-none focus:border-amber-300 focus:ring-4 focus:ring-amber-50 transition uppercase"
                 />
             </div>
+            {error && <p className="text-sm font-semibold text-red-600 text-center" role="alert">{error}</p>}
             {!stats && (
                 <p className="text-xs text-slate-400 italic text-center leading-relaxed">Inserta el día en que naciste para que nuestro algoritmo calcule tu trayectoria cronológica en tiempo real.</p>
             )}
@@ -206,15 +242,15 @@ export default function CalculadoraEdad() {
 
       <section className="w-full max-w-4xl mt-16 prose prose-slate text-slate-600">
           <h2>Más que una simple Calculadora de Edad</h2>
-          <p>Esta herramienta ha sido diseñada para amantes de los datos curiosos. La mayoría de las calculadoras de edad solo te dicen tus años, pero nosotros bajamos hasta el último segundo de tu existencia.</p>
+          <p>Esta herramienta muestra tu edad en años, meses y días, además de una estimación del tiempo transcurrido desde la fecha indicada.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                  <h4 className="font-black text-amber-500 mb-2 uppercase tracking-wide">Fórmula Cronológica</h4>
-                  <p className="text-sm">Calculamos la edad teniendo en cuenta años bisiestos y la duración exacta de cada mes lunar según el calendario gregoriano. Por eso nuestro cálculo es extremadamente preciso.</p>
+                   <h4 className="font-black text-amber-500 mb-2 uppercase tracking-wide">Cálculo por calendario</h4>
+                   <p className="text-sm">La edad en años, meses y días se calcula con el calendario gregoriano y contempla la distinta duración de los meses y los años bisiestos. Los totales de horas y días son estimaciones basadas en el tiempo transcurrido y pueden variar por la zona horaria.</p>
               </div>
               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
                   <h4 className="font-black text-indigo-600 mb-2 uppercase tracking-wide">Próximo Aniversario</h4>
-                  <p className="text-sm">Nuestro temporizador en tiempo real te dice exactamente cuánto tiempo falta para que sopléis las velas. Se actualiza cada segundo para darte una sensación real del paso del tiempo.</p>
+                   <p className="text-sm">El temporizador estima cuánto falta para el próximo cumpleaños y se actualiza cada segundo. Para fechas del 29 de febrero, usa el último día de febrero en años no bisiestos.</p>
               </div>
           </div>
           <p>¿Vas a celebrar un <strong>aniversario de oro</strong> o quieres saber cuántas horas has trabajado en tu vida? Conocer tu edad en días es una métrica sorprendente que a menudo nos ayuda a valorar más cada jornada.</p>

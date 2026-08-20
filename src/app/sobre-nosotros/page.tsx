@@ -141,6 +141,12 @@ const AboutUsPage = () => {
               <li><strong>Transparencia:</strong> indicamos claramente cuando un resultado es orientativo y no sustituye el asesoramiento profesional.</li>
               <li><strong>Accesibilidad:</strong> usamos lenguaje sencillo y estructuramos los contenidos con encabezados, listas y ejemplos para facilitar la comprensión.</li>
             </ul>
+            <h3>Correcciones y actualizaciones</h3>
+            <p>
+              Si detectas un error, puedes comunicarlo desde la <Link href="/contacto" className="text-blue-600 font-semibold hover:underline">página de contacto</Link>.
+              Revisamos el cálculo, el texto y las fuentes afectadas; si el aviso es correcto, publicamos la corrección y actualizamos la fecha de revisión correspondiente.
+              No ocultamos relaciones comerciales ni presentamos estimaciones como asesoramiento profesional.
+            </p>
           </div>
         </section>
 

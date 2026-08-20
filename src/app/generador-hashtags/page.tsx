@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Hash, Copy, Check, Instagram, Sparkles, Shuffle, X } from 'lucide-react';
+import { Hash, Copy, Check, Sparkles, Shuffle } from 'lucide-react';
 
 // Base de hashtags por categoría temática
 const HASHTAG_DB: Record<string, string[]> = {
@@ -107,7 +107,7 @@ export default function GeneradorHashtags() {
           Generador de <span className="text-pink-500">Hashtags</span>
         </h1>
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto leading-relaxed">
-          Introduce una palabra clave y genera los mejores hashtags para Instagram, TikTok y Twitter al instante.
+          Introduce una palabra clave y obtén ideas de hashtags basadas en categorías y variaciones predefinidas.
         </p>
       </div>
 
@@ -174,20 +174,20 @@ export default function GeneradorHashtags() {
       </div>
 
       <section className="w-full max-w-4xl mt-16 prose prose-slate text-slate-600">
-        <h2>La importancia de los Hashtags en Redes Sociales</h2>
-        <p>Los <strong>hashtags</strong> son el motor de descubrimiento en plataformas como <strong>Instagram, TikTok y Twitter</strong>. Usar los hashtags correctos puede multiplicar el alcance de tus publicaciones exponencialmente. Nuestro generador analiza tu temática y crea una selección personalizada de hashtags que combinan términos populares con variaciones específicas de nicho.</p>
+        <h2>Cómo usar estas ideas de hashtags</h2>
+        <p>Los <strong>hashtags</strong> pueden ayudar a clasificar una publicación en plataformas como <strong>Instagram, TikTok y X</strong>, pero no garantizan alcance. El generador compara tu palabra con una lista local de categorías y crea variaciones; no consulta tendencias, volumen de búsqueda ni datos en tiempo real.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
           <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm">
             <h4 className="font-black text-pink-500 mb-2">Instagram</h4>
-            <p className="text-xs">Puedes usar hasta 30 hashtags por post. Mezcla populares con específicos para maximizar alcance.</p>
+            <p className="text-xs">Selecciona solo etiquetas relacionadas con el contenido y comprueba antes las normas vigentes de la plataforma.</p>
           </div>
           <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm">
             <h4 className="font-black text-slate-800 mb-2">TikTok</h4>
-            <p className="text-xs">Los hashtags en TikTok conducen directamente al For You Page (FYP). Usa 3-5 relevantes por vídeo.</p>
+            <p className="text-xs">Prioriza etiquetas que describan realmente el vídeo; aparecer en recomendaciones depende de muchas más señales.</p>
           </div>
           <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm">
             <h4 className="font-black text-blue-500 mb-2">Twitter/X</h4>
-            <p className="text-xs">1-2 hashtags por tweet es lo óptimo. Más de eso puede parecer spam y reducir el engagement.</p>
+            <p className="text-xs">Usa pocas etiquetas relevantes cuando aporten contexto y evita cadenas que dificulten la lectura.</p>
           </div>
         </div>
       </section>

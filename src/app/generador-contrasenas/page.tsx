@@ -11,24 +11,41 @@ export default function GeneradorContrasenas() {
   const [includeSymbols, setIncludeSymbols] = useState(true);
   const [copied, setCopied] = useState(false);
 
+  const secureRandomIndex = (max: number) => {
+    const values = new Uint32Array(1);
+    const limit = 2 ** 32 - ((2 ** 32) % max);
+
+    do {
+      window.crypto.getRandomValues(values);
+    } while (values[0] >= limit);
+
+    return values[0] % max;
+  };
+
   const generatePassword = () => {
     const lower = "abcdefghijklmnopqrstuvwxyz";
     const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const num = "0123456789";
     const sym = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
     
-    let chars = lower;
-    if (includeUppercase) chars += upper;
-    if (includeNumbers) chars += num;
-    if (includeSymbols) chars += sym;
-    
-    const randomValues = new Uint32Array(length);
-    window.crypto.getRandomValues(randomValues);
-    let pass = "";
-    for (let i = 0; i < length; i++) {
-        pass += chars.charAt(randomValues[i] % chars.length);
+    const selectedSets = [lower];
+    if (includeUppercase) selectedSets.push(upper);
+    if (includeNumbers) selectedSets.push(num);
+    if (includeSymbols) selectedSets.push(sym);
+
+    const chars = selectedSets.join('');
+    const passwordChars = selectedSets.map((set) => set[secureRandomIndex(set.length)]);
+
+    while (passwordChars.length < length) {
+      passwordChars.push(chars[secureRandomIndex(chars.length)]);
     }
-    setPassword(pass);
+
+    for (let index = passwordChars.length - 1; index > 0; index--) {
+      const randomIndex = secureRandomIndex(index + 1);
+      [passwordChars[index], passwordChars[randomIndex]] = [passwordChars[randomIndex], passwordChars[index]];
+    }
+
+    setPassword(passwordChars.join(''));
     setCopied(false);
   };
 
@@ -126,13 +143,11 @@ export default function GeneradorContrasenas() {
       <section className="w-full max-w-3xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-rose-600">
         <h2>¿Cómo crear una contraseña segura?</h2>
         <p>
-          Una <strong>contraseña segura</strong> debe tener al menos <strong>12 caracteres</strong>, incluir 
-          <strong>mayúsculas, minúsculas, números y símbolos</strong>. Evita usar palabras del diccionario, 
-          fechas de nacimiento o información personal.
+          Una contraseña resistente debe ser <strong>larga, única y aleatoria</strong>. Como referencia práctica, usa 16 caracteres o más cuando el servicio lo permita y evita palabras del diccionario, fechas o información personal.
         </p>
         <p>
           Nuestro <strong>generador de contraseñas</strong> crea claves aleatorias directamente en tu navegador usando la <code>Crypto API</code> del dispositivo.
-          Esto ayuda a generar resultados más robustos que una aleatoriedad básica basada en <code>Math.random()</code>.
+          Esto ayuda a generar resultados más robustos que una aleatoriedad básica basada en <code>Math.random()</code>. Cada grupo de caracteres seleccionado aparece al menos una vez en el resultado.
         </p>
 
         <h2>Consejos para usar bien una contraseña segura</h2>
@@ -155,7 +170,7 @@ export default function GeneradorContrasenas() {
             <span>¿Cuántos caracteres debe tener una contraseña segura?</span>
             <Plus className="h-5 w-5 shrink-0 text-cyan-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
-          <p className="mt-4 mb-0 text-slate-600">Los expertos en criptografía y seguridad (como el NIST) recomiendan un mínimo de 12-16 caracteres para frenar ataques por fuerza bruta de las computadoras modernas.</p>
+          <p className="mt-4 mb-0 text-slate-600">No existe una longitud universal para todos los servicios. Una clave aleatoria de 16 caracteres o más ofrece un margen práctico sólido; para frases de contraseña, prioriza todavía más longitud, además de unicidad y almacenamiento en un gestor fiable.</p>
         </details>
 
         <h3>Herramientas relacionadas</h3>

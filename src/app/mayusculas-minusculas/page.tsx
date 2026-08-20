@@ -84,8 +84,6 @@ export default function ConvertidorTexto() {
         <ul>
           <li><Link href="/contador-de-palabras">Contador de Palabras y Caracteres</Link></li>
           <li><Link href="/generador-contrasenas">Generador de Contraseñas Seguras</Link></li>
-          <li><Link href="/contador-de-palabras">Contador de palabras</Link></li>
-          <li><Link href="/generador-contrasenas">Generador de contraseñas</Link></li>
         </ul>
       </section>
     </main>
