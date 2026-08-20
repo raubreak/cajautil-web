@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { PiggyBank, TrendingUp, Calendar, Wallet, BarChart3, Info } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 const formatCurrency = (val: number) => 
   new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(val);
@@ -201,46 +201,46 @@ export default function CalculadoraInteresCompuesto() {
                    Evolución de tu Inversión (Años)
                 </h3>
                 <div className="w-full h-72 sm:h-96">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart
-                      data={simulation.chartData}
-                      margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
-                    >
-                      <defs>
-                        <linearGradient id="colorAportaciones" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="#94a3b8" stopOpacity={0.1}/>
-                        </linearGradient>
-                        <linearGradient id="colorIntereses" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="#10b981" stopOpacity={0.1}/>
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis 
+                  <AreaChart
+                    responsive
+                    style={{ width: '100%', height: '100%' }}
+                    data={simulation.chartData}
+                    margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                  >
+                    <defs>
+                      <linearGradient id="colorAportaciones" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#94a3b8" stopOpacity={0.1}/>
+                      </linearGradient>
+                      <linearGradient id="colorIntereses" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#10b981" stopOpacity={0.1}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <XAxis
                         dataKey="year" 
                         axisLine={false} 
                         tickLine={false} 
                         tick={{fill: '#94a3b8', fontSize: 12}}
                         tickFormatter={(value) => `Año ${value}`}
-                      />
-                      <YAxis 
+                    />
+                    <YAxis
                         axisLine={false} 
                         tickLine={false} 
                         tick={{fill: '#94a3b8', fontSize: 12}}
                         tickFormatter={(value) => `€${(value/1000).toFixed(0)}k`}
                         width={60}
-                      />
-                      <Tooltip 
+                    />
+                    <Tooltip
                         formatter={(value: unknown) => formatCurrency(Number(Array.isArray(value) ? value[0] : value ?? 0))}
                         labelFormatter={(label) => `Año ${label}`}
                         contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)', fontWeight: 'bold' }}
                         itemStyle={{ color: '#1e293b', fontSize: '14px' }}
-                      />
-                      <Area type="monotone" dataKey="Aportaciones" stackId="1" stroke="#64748b" strokeWidth={3} fill="url(#colorAportaciones)" />
-                      <Area type="monotone" dataKey="Intereses" stackId="1" stroke="#059669" strokeWidth={3} fill="url(#colorIntereses)" />
-                    </AreaChart>
-                  </ResponsiveContainer>
+                    />
+                    <Area type="monotone" dataKey="Aportaciones" stackId="1" stroke="#64748b" strokeWidth={3} fill="url(#colorAportaciones)" />
+                    <Area type="monotone" dataKey="Intereses" stackId="1" stroke="#059669" strokeWidth={3} fill="url(#colorIntereses)" />
+                  </AreaChart>
                 </div>
               </div>
             </>

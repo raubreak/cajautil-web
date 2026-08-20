@@ -1,8 +1,8 @@
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'CajaUtil.com — Herramientas Online Gratis',
+    name: 'CajaUtil.com - Herramientas Online Gratis',
     short_name: 'CajaUtil',
     description: 'Calculadoras, generadores y conversores gratuitos directamente en tu navegador.',
     start_url: '/',
@@ -11,9 +11,14 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#2563eb',
     icons: [
       {
-        src: '/favicon.ico',
-        sizes: 'any',
-        type: 'image/x-icon',
+        src: '/pwa-icons/192',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: '/pwa-icons/512',
+        sizes: '512x512',
+        type: 'image/png',
       },
     ],
   }
