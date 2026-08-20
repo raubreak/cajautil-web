@@ -6,7 +6,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: 'Calculadora de Interés Compuesto | Simulador Online',
-  description: 'Descubre cómo crecerá tu dinero con nuestra calculadora de interés compuesto. Añade aportaciones mensuales y visualiza tus ganancias a largo plazo.',
+  description: 'Compara escenarios de interés compuesto con capital inicial, aportaciones mensuales, tasa anual y plazo. Simulación gratuita y orientativa.',
   keywords: [
     "calculadora interes compuesto",
     "simulador inversiones",
@@ -24,7 +24,13 @@ export const metadata: Metadata = {
     description: 'Compara cómo cambian el capital final, las aportaciones y los intereses en distintos escenarios a largo plazo.',
     url: `${SITE_URL}/calculadora-interes-compuesto`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Calculadora de Interés Compuesto con Aportaciones',
+    description: 'Compara capital, aportaciones y rendimiento en escenarios positivos o negativos.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {

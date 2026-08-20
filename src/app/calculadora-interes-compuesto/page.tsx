@@ -1,11 +1,30 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { PiggyBank, TrendingUp, Calendar, Wallet, BarChart3, Info } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-const formatCurrency = (val: number) => 
-  new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(val);
+const MAX_INITIAL_AMOUNT = 100_000_000;
+const MAX_MONTHLY_CONTRIBUTION = 1_000_000;
+const MIN_INTEREST_RATE = -100;
+const MAX_INTEREST_RATE = 100;
+const MAX_YEARS = 50;
+
+const currencyFormatter = new Intl.NumberFormat('es-ES', {
+  style: 'currency',
+  currency: 'EUR',
+  maximumFractionDigits: 2,
+});
+
+const formatCurrency = (value: number) => currencyFormatter.format(value);
+const formatSignedCurrency = (value: number) => `${value > 0 ? '+' : ''}${formatCurrency(value)}`;
+
+interface InputErrors {
+  initialAmount?: string;
+  monthlyContribution?: string;
+  interestRate?: string;
+  years?: string;
+}
 
 export default function CalculadoraInteresCompuesto() {
   const [initialAmount, setInitialAmount] = useState('5000');
@@ -13,16 +32,39 @@ export default function CalculadoraInteresCompuesto() {
   const [interestRate, setInterestRate] = useState('7');
   const [years, setYears] = useState('10');
 
-  const simulation = useMemo(() => {
-    const P = parseFloat(initialAmount);
-    const PMT = parseFloat(monthlyContribution);
-    const rate = parseFloat(interestRate) / 100;
-    const t = parseInt(years);
+  const calculation = (() => {
+    const principal = Number(initialAmount);
+    const contribution = Number(monthlyContribution);
+    const annualRatePercent = Number(interestRate);
+    const durationYears = Number(years);
+    const errors: InputErrors = {};
 
-    if (isNaN(P) || isNaN(PMT) || isNaN(rate) || isNaN(t) || t <= 0) return null;
+    if (!initialAmount.trim() || !Number.isFinite(principal) || principal < 0 || principal > MAX_INITIAL_AMOUNT) {
+      errors.initialAmount = `Introduce un importe entre 0 € y ${MAX_INITIAL_AMOUNT.toLocaleString('es-ES')} €.`;
+    }
+    if (!monthlyContribution.trim() || !Number.isFinite(contribution) || contribution < 0 || contribution > MAX_MONTHLY_CONTRIBUTION) {
+      errors.monthlyContribution = `Introduce una aportación entre 0 € y ${MAX_MONTHLY_CONTRIBUTION.toLocaleString('es-ES')} €.`;
+    }
+    if (!interestRate.trim() || !Number.isFinite(annualRatePercent) || annualRatePercent < MIN_INTEREST_RATE || annualRatePercent > MAX_INTEREST_RATE) {
+      errors.interestRate = `Introduce una tasa entre ${MIN_INTEREST_RATE}% y ${MAX_INTEREST_RATE}%.`;
+    }
+    if (!years.trim() || !Number.isInteger(durationYears) || durationYears < 1 || durationYears > MAX_YEARS) {
+      errors.years = `Introduce un plazo entero entre 1 y ${MAX_YEARS} años.`;
+    }
 
-    let currentBalance = P;
-    let totalContributions = P;
+    if (Object.keys(errors).length > 0) {
+      return { simulation: null, errors, calculationError: null };
+    }
+    if (principal === 0 && contribution === 0) {
+      return {
+        simulation: null,
+        errors,
+        calculationError: 'La inversión inicial y la aportación mensual no pueden ser ambas cero.',
+      };
+    }
+
+    let currentBalance = principal;
+    let totalContributions = principal;
     const chartData = [];
 
     // Mes 0
@@ -33,13 +75,21 @@ export default function CalculadoraInteresCompuesto() {
       Total: currentBalance
     });
 
-    const monthlyRate = rate / 12;
+    const monthlyRate = annualRatePercent / 100 / 12;
 
-    for (let year = 1; year <= t; year++) {
+    for (let year = 1; year <= durationYears; year++) {
       for (let month = 1; month <= 12; month++) {
         currentBalance *= (1 + monthlyRate); // Interés compuesto
-        currentBalance += PMT;             // Aportación mensual a final de mes
-        totalContributions += PMT;
+        currentBalance += contribution;     // Aportación mensual a final de mes
+        totalContributions += contribution;
+      }
+
+      if (!Number.isFinite(currentBalance) || !Number.isFinite(totalContributions)) {
+        return {
+          simulation: null,
+          errors,
+          calculationError: 'El resultado queda fuera del rango que puede calcular el navegador.',
+        };
       }
 
       chartData.push({
@@ -54,12 +104,18 @@ export default function CalculadoraInteresCompuesto() {
     const totalInterest = finalBalance - totalContributions;
 
     return {
-      finalBalance,
-      totalContributions,
-      totalInterest,
-      chartData
+      simulation: {
+        finalBalance,
+        totalContributions,
+        totalInterest,
+        chartData,
+      },
+      errors,
+      calculationError: null,
     };
-  }, [initialAmount, monthlyContribution, interestRate, years]);
+  })();
+
+  const { simulation, errors, calculationError } = calculation;
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
@@ -89,13 +145,19 @@ export default function CalculadoraInteresCompuesto() {
               <input 
                 id="compound-initial"
                 type="number" 
+                min="0"
+                max={MAX_INITIAL_AMOUNT}
+                step="0.01"
                 value={initialAmount} 
                 onChange={(e) => setInitialAmount(e.target.value)}
+                aria-invalid={Boolean(errors.initialAmount)}
+                aria-describedby={errors.initialAmount ? 'compound-initial-error' : undefined}
                 className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xl font-black text-slate-800 focus:outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-50 transition"
                 placeholder="5000"
               />
               <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold">€</span>
             </div>
+            {errors.initialAmount && <p id="compound-initial-error" role="alert" className="mt-2 text-xs font-semibold text-rose-600">{errors.initialAmount}</p>}
           </div>
 
           <div>
@@ -104,14 +166,20 @@ export default function CalculadoraInteresCompuesto() {
                <PiggyBank className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                 <input
                   id="compound-monthly"
-                 type="number" 
+                 type="number"
+                 min="0"
+                 max={MAX_MONTHLY_CONTRIBUTION}
+                 step="0.01"
                  value={monthlyContribution} 
                  onChange={(e) => setMonthlyContribution(e.target.value)}
+                 aria-invalid={Boolean(errors.monthlyContribution)}
+                 aria-describedby={errors.monthlyContribution ? 'compound-monthly-error' : undefined}
                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xl font-black text-slate-800 focus:outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-50 transition"
                  placeholder="200"
                />
-               <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold">€</span>
-             </div>
+                <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold">€</span>
+              </div>
+              {errors.monthlyContribution && <p id="compound-monthly-error" role="alert" className="mt-2 text-xs font-semibold text-rose-600">{errors.monthlyContribution}</p>}
           </div>
 
           <div>
@@ -126,15 +194,20 @@ export default function CalculadoraInteresCompuesto() {
                <BarChart3 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                 <input
                   id="compound-rate"
-                 type="number" 
-                 step="0.1"
-                 value={interestRate} 
-                 onChange={(e) => setInterestRate(e.target.value)}
+                  type="number"
+                  min={MIN_INTEREST_RATE}
+                  max={MAX_INTEREST_RATE}
+                  step="0.1"
+                  value={interestRate}
+                  onChange={(e) => setInterestRate(e.target.value)}
+                  aria-invalid={Boolean(errors.interestRate)}
+                  aria-describedby={errors.interestRate ? 'compound-rate-error' : undefined}
                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xl font-black text-slate-800 focus:outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-50 transition"
                  placeholder="7"
                />
-               <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold">%</span>
-             </div>
+                <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold">%</span>
+              </div>
+              {errors.interestRate && <p id="compound-rate-error" role="alert" className="mt-2 text-xs font-semibold text-rose-600">{errors.interestRate}</p>}
           </div>
 
           <div>
@@ -143,22 +216,28 @@ export default function CalculadoraInteresCompuesto() {
                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                 <input
                   id="compound-years"
-                 type="number" 
-                 value={years} 
-                 onChange={(e) => setYears(e.target.value)}
+                  type="number"
+                  min="1"
+                  max={MAX_YEARS}
+                  step="1"
+                  value={years}
+                  onChange={(e) => setYears(e.target.value)}
+                  aria-invalid={Boolean(errors.years)}
+                  aria-describedby={errors.years ? 'compound-years-error' : undefined}
                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xl font-black text-slate-800 focus:outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-50 transition"
                  placeholder="10"
                />
-               <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold shrink-0">Años</span>
-             </div>
+                <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold shrink-0">Años</span>
+              </div>
+              {errors.years && <p id="compound-years-error" role="alert" className="mt-2 text-xs font-semibold text-rose-600">{errors.years}</p>}
              
              {/* Slider simple */}
               <input
                  aria-label="Años de inversión"
                 type="range" 
-                min="1" 
-                max="50" 
-                value={years} 
+                 min="1"
+                 max={MAX_YEARS}
+                 value={Math.min(MAX_YEARS, Math.max(1, Number(years) || 1))}
                 onChange={(e) => setYears(e.target.value)} 
                 className="w-full mt-4 accent-emerald-500"
              />
@@ -190,7 +269,7 @@ export default function CalculadoraInteresCompuesto() {
                    
                    <div className="mt-4 sm:mt-0">
                       <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Rendimiento simulado</p>
-                     <p className="text-2xl font-black text-emerald-500">+{formatCurrency(simulation.totalInterest)}</p>
+                      <p className={`text-2xl font-black ${simulation.totalInterest >= 0 ? 'text-emerald-500' : 'text-rose-600'}`}>{formatSignedCurrency(simulation.totalInterest)}</p>
                    </div>
                 </div>
               </div>
@@ -247,7 +326,7 @@ export default function CalculadoraInteresCompuesto() {
           ) : (
              <div className="bg-white rounded-[40px] shadow-xl border border-dashed border-slate-200 p-16 flex flex-col items-center justify-center text-center opacity-30 h-full min-h-[400px]">
                 <TrendingUp className="w-16 h-16 mb-6 text-slate-300" />
-                <p className="text-lg font-bold text-slate-400">Introduce los datos para calcular la magia del interés compuesto</p>
+                <p className="text-lg font-bold text-slate-400" role={calculationError ? 'alert' : undefined}>{calculationError ?? 'Introduce valores válidos para calcular la simulación.'}</p>
              </div>
           )}
         </section>
