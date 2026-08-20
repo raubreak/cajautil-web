@@ -26,6 +26,12 @@ export const metadata: Metadata = {
     type: "website",
     images: ["https://cajautil.com/og-image.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Convertir Texto a Mayúsculas o Minúsculas Online",
+    description: "Cambia mayúsculas, minúsculas, palabras capitalizadas o formato oración sin enviar el texto al servidor.",
+    images: ["https://cajautil.com/og-image.png"],
+  },
 };
 
 const jsonLd = {
@@ -35,7 +41,7 @@ const jsonLd = {
   url: `${SITE_URL}/mayusculas-minusculas`,
   description: "Herramienta para cambiar textos entre mayúsculas, minúsculas, capitalizado y formato oración.",
   applicationCategory: "UtilitiesApplication",
-  operatingSystem: "All",
+  operatingSystem: "Any",
   offers: {
     "@type": "Offer",
     price: "0",
