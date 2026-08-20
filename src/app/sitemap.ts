@@ -37,7 +37,7 @@ const toolDefinitions = [
   ['conversor-unidades', 'monthly', 0.9],
   ['calculadora-calorias', 'monthly', 0.9],
   ['generador-hashtags', 'monthly', 0.9],
-  ['calculadora-prestamos', 'monthly', 0.9],
+  ['calculadora-prestamos', 'monthly', 0.9, '2026-08-20T21:35:17.000Z'],
   ['generador-firmas-email', 'monthly', 0.9, '2026-08-20T21:25:29.000Z'],
   ['cronometro', 'monthly', 0.9],
 ] as const;
