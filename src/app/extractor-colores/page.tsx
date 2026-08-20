@@ -22,6 +22,8 @@ export default function ExtractorColores() {
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
+        setColors([]);
+        setHoverColor(null);
         setImage(event.target?.result as string);
       };
       reader.readAsDataURL(file);
@@ -34,6 +36,8 @@ export default function ExtractorColores() {
     if (file && file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onload = (event) => {
+          setColors([]);
+          setHoverColor(null);
           setImage(event.target?.result as string);
         };
         reader.readAsDataURL(file);
@@ -53,9 +57,13 @@ export default function ExtractorColores() {
       const r = imageData[i];
       const g = imageData[i + 1];
       const b = imageData[i + 2];
-      const rG = Math.round(r / 20) * 20;
-      const gG = Math.round(g / 20) * 20;
-      const bG = Math.round(b / 20) * 20;
+      const alpha = imageData[i + 3];
+
+      if (alpha < 128) continue;
+
+      const rG = Math.min(255, Math.round(r / 20) * 20);
+      const gG = Math.min(255, Math.round(g / 20) * 20);
+      const bG = Math.min(255, Math.round(b / 20) * 20);
       const key = `${rG},${gG},${bG}`;
 
       colorCounts[key] = (colorCounts[key] || 0) + 1;
@@ -83,8 +91,8 @@ export default function ExtractorColores() {
 
       img.onload = () => {
         // Limit dimensions for fast processing
-        const MAX_WIDTH = 500;
-        const scale = Math.min(1, MAX_WIDTH / img.width);
+        const MAX_DIMENSION = 500;
+        const scale = Math.min(1, MAX_DIMENSION / img.width, MAX_DIMENSION / img.height);
         canvas.width = img.width * scale;
         canvas.height = img.height * scale;
         
@@ -158,7 +166,11 @@ export default function ExtractorColores() {
                     className="w-full h-auto rounded-xl shadow-lg border border-slate-100"
                    />
                    <button 
-                    onClick={() => setImage(null)}
+                     onClick={() => {
+                       setImage(null);
+                       setColors([]);
+                       setHoverColor(null);
+                     }}
                     className="mt-6 px-6 py-2 bg-slate-100 text-slate-500 rounded-xl font-bold hover:bg-rose-50 hover:text-rose-600 transition"
                    >
                     Subir otra imagen
