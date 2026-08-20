@@ -3,14 +3,6 @@ import Link from "next/link";
 import React from "react";
 import { Plus } from 'lucide-react';
 
-export const metadata = {
-  title: 'Simulador de Préstamos Personales — Cuadro de Amortización',
-  description: 'Calcula online tu cuota mensual, coste total y genera la tabla de amortización de tu préstamo bancario de forma gratuita.',
-  alternates: {
-    canonical: 'https://cajautil.com/calculadora-prestamos',
-  },
-};
-
 export default function CalculadoraPrestamos() {
   const faqJsonLd = {
     '@context': 'https://schema.org',
@@ -37,7 +29,7 @@ export default function CalculadoraPrestamos() {
         name: '¿Puedo usar esta calculadora para financiar estudios universitarios?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Sí. Puedes simular importes y plazos generales o ir directamente a la calculadora de préstamos para estudios universitarios si quieres una landing más enfocada a ese caso de uso.',
+          text: 'Sí. Puedes simular el importe de una carrera, un máster o un curso indicando el capital que necesitas, el plazo de devolución y el interés de la oferta.',
         },
       },
     ],
@@ -82,9 +74,8 @@ export default function CalculadoraPrestamos() {
           </p>
 
           <p>
-            Si estás valorando pagar una carrera, un máster o un curso largo, puedes pasar a la{' '}
-            <Link href="/calculadora-prestamos-estudios-universitarios">calculadora de préstamos para estudios universitarios</Link>{' '}
-            para revisar ese escenario con una intención más específica.
+            Si estás valorando pagar una carrera, un máster o un curso largo, introduce como capital el importe que necesitas financiar y compara varios plazos.
+            Revisa también si la oferta incluye carencia, comisión de apertura o condiciones distintas durante el periodo de estudios, porque este simulador calcula una cuota constante.
           </p>
 
           <h3>Importante antes de tomar una decisión</h3>
@@ -126,14 +117,14 @@ export default function CalculadoraPrestamos() {
               <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
             </summary>
             <p className="mt-4 mb-0">
-              Sí. Puedes usar esta simulación general y, si tu caso encaja mejor con financiación académica, visitar la <Link href="/calculadora-prestamos-estudios-universitarios">landing específica para estudios universitarios</Link> para mantener la navegación dentro del mismo tema.
+              Sí. Usa como capital el coste que necesitas financiar y compara distintos plazos e intereses. Si la oferta incluye carencia durante los estudios, revisa el cuadro del banco porque ese periodo puede cambiar las cuotas y el coste total.
             </p>
           </details>
 
           <h3>Herramientas relacionadas</h3>
           <ul>
             <li><Link href="/calculadora-hipotecas">Calculadora de hipotecas</Link></li>
-            <li><Link href="/calculadora-prestamos-estudios-universitarios">Préstamos para estudios universitarios</Link></li>
+            <li><Link href="/calculadora-interes-compuesto">Calculadora de interés compuesto</Link></li>
             <li><Link href="/calculadora-porcentajes">Calculadora de porcentajes</Link></li>
           </ul>
       </section>

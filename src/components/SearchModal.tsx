@@ -20,7 +20,7 @@ const TOOLS = [
   { nombre: "Generador de QR", ruta: "/generador-qr", tags: "qr codigo url texto generar descargar" },
   { nombre: "Lector de QR", ruta: "/lector-qr", tags: "leer qr escanear codigo" },
   { nombre: "Extractor de Colores", ruta: "/extractor-colores", tags: "color paleta hex rgb imagen foto diseño" },
-  { nombre: "Temporizador y Cronómetro", ruta: "/temporizador", tags: "temporizador cronometro timer alarma cuenta atras" },
+  { nombre: "Temporizador Online", ruta: "/temporizador", tags: "temporizador timer alarma cuenta atras pomodoro" },
   { nombre: "Ruleta Aleatoria", ruta: "/ruleta-aleatoria", tags: "ruleta sorteo aleatorio girar decisiones" },
   { nombre: "Generador de Letras Raras", ruta: "/generador-letras-raras", tags: "letras raras instagram fuentes goticas esteticas bio tiktok" },
   { nombre: "Mayúsculas y Minúsculas", ruta: "/mayusculas-minusculas", tags: "mayusculas minusculas convertir texto capitalizar" },
@@ -46,6 +46,9 @@ export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const wasOpenRef = useRef(false);
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   const results = useMemo(() => {
@@ -76,7 +79,13 @@ export default function SearchModal() {
   // Focus input when modal opens
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
+      wasOpenRef.current = true;
+      const timer = setTimeout(() => inputRef.current?.focus(), 50);
+      return () => clearTimeout(timer);
+    }
+    if (wasOpenRef.current) {
+      triggerRef.current?.focus();
+      wasOpenRef.current = false;
     }
   }, [isOpen]);
 
@@ -95,12 +104,32 @@ export default function SearchModal() {
     }
   };
 
+  const handleDialogKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key !== 'Tab') return;
+
+    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable?.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+
   return (
     <>
       {/* Trigger button */}
       <button
+        ref={triggerRef}
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-slate-400 hover:text-slate-600 transition-all text-xs font-medium border border-slate-200"
+        className="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-100 px-3 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-200 hover:text-slate-900"
         aria-label="Buscar herramientas"
       >
         <Search className="w-3.5 h-3.5" />
@@ -118,8 +147,13 @@ export default function SearchModal() {
           
           {/* Modal */}
           <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Buscar herramientas"
             className="relative w-full max-w-lg mx-4 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
             onClick={(e) => e.stopPropagation()}
+            onKeyDown={handleDialogKeyDown}
           >
             {/* Search input */}
             <div className="flex items-center gap-3 px-5 py-4 border-b border-slate-100">
@@ -134,10 +168,11 @@ export default function SearchModal() {
                   }}
                   onKeyDown={handleKeyDown}
                   placeholder="Buscar herramienta..."
+                  aria-label="Buscar herramienta"
                   className="flex-1 text-base font-medium text-slate-800 placeholder:text-slate-300 focus:outline-none bg-transparent"
                 />
               {query && (
-                <button onClick={() => setQuery('')} className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 transition">
+                <button onClick={() => setQuery('')} aria-label="Borrar búsqueda" className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 transition">
                   <X className="w-4 h-4" />
                 </button>
               )}

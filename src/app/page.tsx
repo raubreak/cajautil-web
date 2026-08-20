@@ -7,7 +7,7 @@ import { isLowValueTool } from '@/lib/adsenseReadiness';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: "CajaUtil — Herramientas Online Gratis y Utilidades Web",
+  title: "Herramientas Online Gratis y Utilidades Web",
   description: "Calculadoras, generadores y utilidades gratuitas: IVA, sueldo neto, porcentajes, QR y más. Rápidas, seguras y directas en tu navegador.",
   keywords: [
     "herramientas online gratis",
@@ -153,7 +153,7 @@ export default function Home() {
     },
     {
       titulo: 'Calculadora de Porcentajes',
-      descripcion: 'Calcula rápidamente el IVA, descuentos, propinas o variaciones porcentuales de cualquier cantidad.',
+      descripcion: 'Calcula cuánto es un porcentaje de una cantidad, qué proporción representa y su variación porcentual.',
       ruta: '/calculadora-porcentajes',
       Icono: Percent,
       color: 'from-blue-500 to-indigo-500',
@@ -169,7 +169,7 @@ export default function Home() {
     },
     {
       titulo: 'Calculadora de Hipotecas',
-      descripcion: 'Calcula online la cuota mensual de tu préstamo con el cuadro de amortización completo.',
+      descripcion: 'Estima la cuota mensual de una hipoteca y compara cómo cambian el coste, el plazo y los intereses.',
       ruta: '/calculadora-hipotecas',
       Icono: HomeIcon,
       color: 'from-sky-500 to-blue-600',
@@ -249,7 +249,7 @@ export default function Home() {
     },
     {
       titulo: 'Temporizador & Alarma',
-      descripcion: 'Reloj de cuenta atrás y cronómetro para tus rutinas de estudio, cocina o ejercicio.',
+      descripcion: 'Cuenta atrás con alarma para rutinas de estudio, cocina, ejercicio o sesiones Pomodoro.',
       ruta: '/temporizador',
       Icono: AlarmClock,
       color: 'from-blue-400 to-indigo-500',
@@ -432,9 +432,10 @@ export default function Home() {
             {herramientas.map((herramienta, index) => {
               const IconComponent = herramienta.Icono;
               return (
-                <Link 
-                  key={index} 
+                <Link
+                  key={index}
                   href={herramienta.ruta}
+                  prefetch={false}
                   className="group relative bg-white rounded-3xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] border border-slate-100 overflow-hidden flex flex-col"
                   title={herramienta.titulo}
                 >
@@ -470,8 +471,8 @@ export default function Home() {
           <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
             <p>
               En <strong>CajaUtil.com</strong> reunimos las <strong>herramientas online más útiles</strong> para tu día a día, 
-              desde <Link href="/calculadora-porcentajes" className="text-blue-600 font-semibold hover:underline">calculadoras de porcentajes</Link> para 
-              saber cuánto IVA tiene un producto, hasta un <Link href="/generador-contrasenas" className="text-blue-600 font-semibold hover:underline">generador de contraseñas seguras</Link> que 
+              desde <Link href="/calculadora-porcentajes" className="text-blue-600 font-semibold hover:underline">calculadoras de porcentajes</Link> para
+              resolver proporciones y variaciones, hasta un <Link href="/generador-contrasenas" className="text-blue-600 font-semibold hover:underline">generador de contraseñas seguras</Link> que
               funciona sin conexión a internet.
             </p>
             <p>

@@ -34,7 +34,7 @@ const CalculadoraHipotecasClient = () => {
   })();
 
   return (
-    <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4 sm:px-6 z-10">
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4 sm:px-6 z-10">
       
       {/* HEADER SECTION */}
       <div className="w-full max-w-2xl text-center mb-8">
@@ -45,7 +45,7 @@ const CalculadoraHipotecasClient = () => {
           Calculadora de <span className="text-sky-600">Hipotecas</span>
         </h1>
         <p className="text-base sm:text-lg text-slate-500 font-medium max-w-xl mx-auto leading-relaxed px-2">
-          Simulador online para calcular cuotas y gastos de tu préstamo. Rápido, gratis y sin bancos fisgando.
+          Simulador online para estimar la cuota de una hipoteca. Rápido, gratis y sin enviar datos al banco.
         </p>
       </div>
 
@@ -56,13 +56,14 @@ const CalculadoraHipotecasClient = () => {
             
             {/* Monto del Préstamo */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2 flex justify-between">
+              <label htmlFor="mortgage-amount" className="block text-sm font-bold text-slate-700 mb-2 flex justify-between">
                 Importe del Préstamo
-                <span className="text-sky-600">{importe.toLocaleString('es-ES')} €</span>
+                <span className="text-sky-700">{importe.toLocaleString('es-ES')} €</span>
               </label>
               <div className="relative">
                 <Euro className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input
+                  id="mortgage-amount"
                   type="number"
                   min="0"
                   step="1000"
@@ -75,13 +76,14 @@ const CalculadoraHipotecasClient = () => {
 
             {/* Plazo */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2 flex justify-between">
+              <label htmlFor="mortgage-years" className="block text-sm font-bold text-slate-700 mb-2 flex justify-between">
                 Plazo de amortización
-                <span className="text-sky-600">{anios} {anios === 1 ? 'año' : 'años'}</span>
+                <span className="text-sky-700">{anios} {anios === 1 ? 'año' : 'años'}</span>
               </label>
               <div className="relative">
                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input
+                  id="mortgage-years"
                   type="number"
                   min="1"
                   max="50"
@@ -94,13 +96,14 @@ const CalculadoraHipotecasClient = () => {
 
             {/* Tipo de Interés */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2 flex justify-between">
+              <label htmlFor="mortgage-interest" className="block text-sm font-bold text-slate-700 mb-2 flex justify-between">
                 Tipo de interés (TIN/TAE)
-                <span className="text-sky-600">{interes}%</span>
+                <span className="text-sky-700">{interes}%</span>
               </label>
               <div className="relative mb-3">
                 <Percent className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input
+                  id="mortgage-interest"
                   type="number"
                   min="0"
                   step="0.1"
@@ -129,18 +132,18 @@ const CalculadoraHipotecasClient = () => {
               <span className="text-5xl sm:text-7xl font-black tabular-nums tracking-tight">
                 {resultado.cuotaMensual.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
-              <span className="text-2xl text-slate-400 font-medium ml-2">€/mes</span>
+              <span className="text-2xl text-slate-300 font-medium ml-2">€/mes</span>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-slate-700/50 pt-8 mt-2">
               <div className="bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
-                 <p className="text-slate-400 text-sm font-medium mb-1">Total de Intereses a pagar</p>
+                 <p className="text-slate-300 text-sm font-medium mb-1">Total de Intereses a pagar</p>
                  <p className="text-2xl font-bold text-red-300 tabular-nums">
                    {resultado.totalIntereses.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
                  </p>
               </div>
               <div className="bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
-                 <p className="text-slate-400 text-sm font-medium mb-1">Coste Total del Préstamo</p>
+                 <p className="text-slate-300 text-sm font-medium mb-1">Coste Total del Préstamo</p>
                  <p className="text-2xl font-bold text-white tabular-nums">
                    {resultado.costeTotal.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
                  </p>
@@ -174,7 +177,7 @@ const CalculadoraHipotecasClient = () => {
 
       {/* FAQ SECTION */}
       <section className="w-full max-w-4xl px-2" aria-label="Preguntas Frecuentes">
-        <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preguntas Frecuentes sobre el cálculo de préstamos</h2>
+        <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preguntas frecuentes sobre el cálculo de hipotecas</h2>
         <div className="space-y-4">
           <details className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group">
             <summary className="flex list-none items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-sky-600 transition-colors [&::-webkit-details-marker]:hidden">
@@ -208,7 +211,7 @@ const CalculadoraHipotecasClient = () => {
         </div>
       </section>
 
-    </main>
+    </div>
   );
 };
 

@@ -3,15 +3,13 @@ import type { Metadata } from "next";
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Porcentajes Online Gratis — Calcula IVA, Descuentos y Más",
-  description: "Calcula porcentajes al instante: IVA, descuentos, propinas, incrementos y variaciones porcentuales. Herramienta gratuita, rápida y sin registro. Ideal para compras, finanzas y matemáticas.",
+  title: "Calculadora de Porcentajes Online Gratis",
+  description: "Calcula cuánto es un porcentaje de una cantidad, qué porcentaje representa un valor y la variación porcentual entre dos cifras. Gratis y sin registro.",
   keywords: [
     "calculadora de porcentajes",
     "calcular porcentaje",
-    "calculadora de IVA",
-    "calcular descuento",
     "porcentaje de una cantidad",
-    "calcular IVA online",
+    "variacion porcentual",
     "calculadora porcentajes online gratis",
   ],
   alternates: {
@@ -19,9 +17,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Calculadora de Porcentajes Online Gratis",
-    description: "Calcula porcentajes, IVA, descuentos e incrementos al instante. 100% gratis.",
+    description: "Calcula porcentajes, proporciones e incrementos al instante. 100% gratis.",
     url: `${SITE_URL}/calculadora-porcentajes`,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Calculadora de Porcentajes Online Gratis",
+    description: "Calcula porcentajes, proporciones e incrementos al instante. 100% gratis.",
   },
 };
 
@@ -30,7 +33,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de Porcentajes Online",
   url: `${SITE_URL}/calculadora-porcentajes`,
-  description: "Calculadora de porcentajes gratuita para calcular IVA, descuentos e incrementos.",
+  description: "Calculadora gratuita para obtener porcentajes, proporciones y variaciones entre cantidades.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "All",
   offers: {

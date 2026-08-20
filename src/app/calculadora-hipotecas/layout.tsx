@@ -3,33 +3,37 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de Hipotecas y Préstamos Gratis | CajaUtil.com',
-  description: 'Calcula la cuota mensual de tu hipoteca o préstamo personal. Simulador online con cuadro de amortización de intereses. Fácil y sin registro.',
+  title: 'Calculadora de Hipotecas Online Gratis',
+  description: 'Calcula la cuota mensual de una hipoteca, los intereses y el coste total. Compara importe, plazo y tipo antes de pedir ofertas al banco.',
   keywords: [
     "calculadora hipoteca",
-    "simulador prestamos",
     "calcular cuota hipoteca",
-    "amortizacion prestamo",
-    "calcular intereses dolares",
+    "amortizacion hipoteca",
+    "intereses hipoteca",
     "simulador credito hipotecario",
-    "cuota mensual de prestamo"
+    "cuota mensual hipoteca"
   ],
   alternates: {
     canonical: `${SITE_URL}/calculadora-hipotecas`,
   },
   openGraph: {
-    title: 'Simulador de Hipotecas y Préstamos | CajaUtil.com',
-    description: 'Averigua al instante cuánto pagarás al mes de cuota y el total de intereses de tu préstamo.',
+    title: 'Simulador de Hipotecas Online',
+    description: 'Averigua cuánto pagarás al mes y el total de intereses de tu hipoteca.',
     url: `${SITE_URL}/calculadora-hipotecas`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Simulador de Hipotecas Online',
+    description: 'Averigua cuánto pagarás al mes y el total de intereses de tu hipoteca.',
   }
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "Calculadora de Hipotecas y Préstamos",
+  name: "Calculadora de Hipotecas",
   url: `${SITE_URL}/calculadora-hipotecas`,
-  description: "Simulador financiero para calcular las cuotas mensuales y el cuadro de amortización de un préstamo o hipoteca basándose en el sistema francés.",
+  description: "Simulador financiero para estimar la cuota mensual y los intereses de una hipoteca con el sistema de amortización francés.",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Any",
   offers: {

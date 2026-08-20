@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Simulador de Préstamos Personales Online Gratis | CajaUtil',
+  title: 'Simulador de Préstamos Personales Online Gratis',
   description: 'Calcula las cuotas mensuales de tu préstamo personal. Simulador de intereses, amortización y coste total del crédito en segundos.',
   keywords: [
     "simulador prestamo personal",
@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     title: 'Simulador de Préstamos Personales Online — CajaUtil',
     description: 'Calcula cuánto pagarás por tu préstamo personal incluyendo intereses y tabla de amortización.',
     url: `${SITE_URL}/calculadora-prestamos`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Simulador de Préstamos Personales Online — CajaUtil',
+    description: 'Calcula cuánto pagarás por tu préstamo personal incluyendo intereses y tabla de amortización.',
   }
 };
 

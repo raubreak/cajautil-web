@@ -3,11 +3,10 @@ import type { Metadata } from 'next';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Temporizador Online y Cronómetro | Alarma Gratis con Sonido',
-  description: 'Usa nuestro temporizador de cuenta atrás y cronómetro online gratis. Perfecto como reloj Pomodoro, para estudiar, cocinar o entrenar. Con alarmas y pantalla completa.',
+  title: 'Temporizador Online Gratis con Alarma y Sonido',
+  description: 'Configura una cuenta atrás online con alarma y accesos rápidos. Temporizador gratuito para estudiar, cocinar, entrenar o aplicar Pomodoro.',
   keywords: [
     "temporizador online",
-    "cronometro online",
     "alarma online gratis",
     "cuenta atras online",
     "reloj pomodoro online",
@@ -18,8 +17,8 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/temporizador`,
   },
   openGraph: {
-    title: 'Temporizador y Cronómetro Online Gratis con Alarma',
-    description: 'Reloj de cuenta regresiva y cronómetro profesional para gestionar tu tiempo de forma productiva.',
+    title: 'Temporizador Online Gratis con Alarma',
+    description: 'Configura una cuenta atrás con sonido para estudiar, cocinar o entrenar.',
     url: `${SITE_URL}/temporizador`,
   }
 };
@@ -28,9 +27,9 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@id": `${SITE_URL}/temporizador#webapplication`,
   "@type": "WebApplication",
-  name: "Temporizador y Cronómetro Online",
+  name: "Temporizador Online con Alarma",
   url: `${SITE_URL}/temporizador`,
-  description: "Herramienta de gestión de tiempo que incluye temporizador de cuenta atrás personalizable y cronómetro de alta precisión.",
+  description: "Temporizador de cuenta atrás personalizable con alarma y accesos rápidos para intervalos habituales.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Any",
   offers: {
