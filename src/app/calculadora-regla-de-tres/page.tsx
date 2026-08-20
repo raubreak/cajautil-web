@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Calculator, ArrowRight, CornerDownRight, Percent, ArrowLeftRight, Type } from 'lucide-react';
+import { Calculator, CornerDownRight, ArrowLeftRight, Type } from 'lucide-react';
+
+const numberFormatter = new Intl.NumberFormat('es-ES', {
+  maximumSignificantDigits: 12,
+});
 
 export default function ReglaDeTres() {
   const [a, setA] = useState<string>('');
@@ -15,22 +19,26 @@ export default function ReglaDeTres() {
     const numB = parseFloat(b);
     const numC = parseFloat(c);
 
-    if (isNaN(numA) || isNaN(numB) || isNaN(numC) || numA === 0) return null;
+    if (![numA, numB, numC].every(Number.isFinite)) return null;
 
     if (modo === 'directa') {
       // Directa: A -> B, C -> X  => X = (B * C) / A
-      return (numB * numC) / numA;
+      if (numA === 0) return null;
+      const result = (numB * numC) / numA;
+      return Number.isFinite(result) ? result : null;
     } else {
       // Inversa: A -> B, C -> X => X = (A * B) / C
       if (numC === 0) return null;
-      return (numA * numB) / numC;
+      const result = (numA * numB) / numC;
+      return Number.isFinite(result) ? result : null;
     }
   };
 
   const resultado = calcularX();
+  const hasCompleteInput = a !== '' && b !== '' && c !== '';
   const formatNum = (num: number | null) => {
     if (num === null) return 'X';
-    return Number.isInteger(num) ? num.toString() : num.toFixed(2).replace(/\.00$/, '');
+    return numberFormatter.format(num);
   };
 
   return (
@@ -54,18 +62,20 @@ export default function ReglaDeTres() {
         <section className="bg-white rounded-3xl shadow-xl shadow-slate-200/40 p-6 sm:p-8 border border-slate-100 flex flex-col h-full">
             
             {/* TABS DIRECTA / INVERSA */}
-            <div className="bg-slate-100 p-1.5 rounded-2xl flex items-center mb-8 relative w-full overflow-hidden">
+            <div className="bg-slate-100 p-1.5 rounded-2xl flex items-center mb-8 relative w-full overflow-hidden" role="group" aria-label="Tipo de proporcionalidad">
                 <div 
                     className={`absolute inset-y-1.5 w-[calc(50%-6px)] bg-white rounded-xl shadow-sm transition-all duration-300 ease-out ${modo === 'directa' ? 'left-1.5' : 'left-[calc(50%+1.5px)]'}`}
                 />
                 <button
                     onClick={() => setModo('directa')}
+                    aria-pressed={modo === 'directa'}
                     className={`flex-1 py-3 text-sm font-bold sm:text-base relative z-10 transition-colors ${modo === 'directa' ? 'text-emerald-600' : 'text-slate-500 hover:text-slate-700'}`}
                 >
                     Regla Directa
                 </button>
                 <button
                     onClick={() => setModo('inversa')}
+                    aria-pressed={modo === 'inversa'}
                     className={`flex-1 py-3 text-sm font-bold sm:text-base relative z-10 transition-colors ${modo === 'inversa' ? 'text-emerald-600' : 'text-slate-500 hover:text-slate-700'}`}
                 >
                     Regla Inversa
@@ -76,8 +86,9 @@ export default function ReglaDeTres() {
                 {/* FILA 1: A -> B */}
                 <div className="flex items-center gap-4 w-full">
                     <div className="flex-1">
-                        <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Valor A</label>
+                        <label htmlFor="regla-a" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Valor A</label>
                         <input
+                            id="regla-a"
                             type="number"
                             value={a}
                             onChange={(e) => setA(e.target.value)}
@@ -91,8 +102,9 @@ export default function ReglaDeTres() {
                          </div>
                     </div>
                     <div className="flex-1">
-                        <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Valor B (Equivalencia)</label>
+                        <label htmlFor="regla-b" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Valor B (Equivalencia)</label>
                         <input
+                            id="regla-b"
                             type="number"
                             value={b}
                             onChange={(e) => setB(e.target.value)}
@@ -113,8 +125,9 @@ export default function ReglaDeTres() {
                              </div>
                         </div>
                         
-                        <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 text-emerald-600">Nueva C</label>
+                        <label htmlFor="regla-c" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 text-emerald-600">Nueva C</label>
                         <input
+                            id="regla-c"
                             type="number"
                             value={c}
                             onChange={(e) => setC(e.target.value)}
@@ -130,6 +143,9 @@ export default function ReglaDeTres() {
                     <div className="flex-1 group">
                         <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 text-indigo-500">Resultado (X)</label>
                         <div
+                            role="status"
+                            aria-live="polite"
+                            aria-label={resultado === null ? 'Resultado pendiente' : `Resultado: ${formatNum(resultado)}`}
                             className={`w-full px-4 py-4 border-2 rounded-xl transition-all text-2xl font-black text-center shadow-sm relative overflow-hidden flex items-center justify-center h-[62px] ${resultado !== null ? 'bg-indigo-500 border-indigo-500 text-white' : 'bg-slate-50 border-slate-200 text-slate-400 border-dashed'}`}
                         >
                             {formatNum(resultado)}
@@ -139,6 +155,11 @@ export default function ReglaDeTres() {
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                             )}
                         </div>
+                        {hasCompleteInput && resultado === null && (
+                          <p className="mt-2 text-center text-xs font-semibold text-rose-600" role="alert">
+                            Revisa los valores: no se puede dividir entre cero ni usar cantidades fuera de rango.
+                          </p>
+                        )}
                     </div>
                 </div>
             </div>
@@ -233,7 +254,7 @@ export default function ReglaDeTres() {
         <p>Es el modelo contrario. Cuando una magnitud <strong>crece</strong>, el resultado o tiempo que cuesta realizarlo proporcionalmente <strong>disminuye</strong>.</p>
         <ul className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
             <li><strong>Ejemplo de Vida Real (Obreros / Tiempo):</strong> Si para pintar una casa, 2 albañiles (A) tardan 6 días (B)... ¿Cuántos días (X) tardarán si contratas a 3 albañiles (C)?</li>
-            <li>Teórica y lógicamente tardarán menos tiempo en acabarlo porque hay "más" trabajadores. <strong>En este caso debes seleccionar Arriba la pestaña Regla Inversa.</strong></li>
+            <li>Teórica y lógicamente tardarán menos tiempo en acabarlo porque hay más trabajadores. <strong>En este caso debes seleccionar la pestaña Regla Inversa.</strong></li>
         </ul>
         
       </section>
