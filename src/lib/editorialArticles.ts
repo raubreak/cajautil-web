@@ -295,7 +295,7 @@ WebP suele ser una mejora clara para contenido web, pero no sustituye una estrat
     targetToolUrl: '/generador-qr',
     tags: ['qr', 'marketing', 'movil'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T16:30:00.000Z',
+    updatedAt: '2026-08-20T17:26:00.000Z',
     content: `## Un QR no sirve si nadie puede escanearlo
 
 Los codigos QR parecen trivialmente faciles de crear, pero en la practica fallan mucho por decisiones de diseno: poco contraste, tamano insuficiente, enlaces rotos o exceso de elementos decorativos.
@@ -309,6 +309,24 @@ Lo que parece una tarea de segundos puede convertirse en un problema si el QR te
 - Contraste alto entre modulos y fondo.
 - Pruebas reales en varios moviles antes de imprimir o publicar.
 - Un destino rapido y pensado para el dispositivo desde el que se escanea.
+
+## La zona de silencio no es decorativa
+
+El patron necesita un espacio limpio alrededor para que el lector separe el codigo de textos, bordes, fotografias y otros elementos del diseño. DENSO WAVE, creadora del QR Code, indica que la [zona de silencio debe tener cuatro modulos en los cuatro lados](https://www.qrcode.com/en/howto/code.html). Un modulo es cada cuadrado minimo que forma el patron.
+
+No recortes ese margen al exportar ni coloques un marco, un logotipo o una frase dentro. Una imagen puede parecer mas integrada en el cartel si ocupa todo el espacio, pero tambien puede dejar de ser reconocible para la camara. El generador de CajaUtil incluye ese margen de cuatro modulos en la descarga.
+
+## Tamano, resolucion y distancia de lectura
+
+No existe un unico tamaño correcto en centimetros para todos los casos. Depende de cuantos modulos tenga el codigo, de la resolucion de impresion, de la distancia y de la camara que lo lee. DENSO WAVE recomienda [imprimir los modulos tan grandes como permita el espacio disponible](https://www.qrcode.com/en/howto/cell.html) y usar al menos cuatro puntos de impresora por modulo para una operacion estable.
+
+Esto explica por que aumentar solo el lienzo no siempre salva un QR complejo. Una URL larga genera un patron mas denso: cada modulo termina siendo mas pequeno dentro del mismo tamaño fisico. Si el codigo va a verse desde lejos, simplifica el contenido, aumenta el tamaño final y prueba una copia a escala real antes de producir todo el material.
+
+## Correccion de errores: ayuda, pero no sustituye una buena impresion
+
+La correccion de errores permite recuperar parte de los datos cuando existe suciedad o daño. [DENSO WAVE documenta cuatro niveles](https://www.qrcode.com/en/about/error_correction.html): elevar el nivel mejora la capacidad de recuperacion, pero tambien aumenta la cantidad de datos y puede hacer el patron mas denso.
+
+El generador de CajaUtil utiliza nivel H para ofrecer mayor tolerancia. Aun asi, no debes usar esa tolerancia como permiso para tapar esquinas, reducir contraste o imprimir demasiado pequeño. La correccion puede ayudar ante daños parciales; no corrige una fotografia desenfocada, una zona de silencio eliminada o un destino web roto.
 
 ## Escenarios habituales
 
@@ -349,9 +367,19 @@ Tambien conviene pensar en la luz ambiente, el reflejo del cristal y la calidad 
 
 Antes de mandar a imprenta o publicar un QR en un cartel, merece la pena hacer esta comprobacion minima: probarlo con iPhone y Android, revisar el destino con datos moviles, confirmar que el enlace no redirige de forma rara y comprobar que el contraste sigue siendo alto en el material final.
 
+| Comprobacion | Que revisar |
+|---|---|
+| Contenido | La URL o el texto codificado es definitivo y no contiene errores |
+| Margen | Quedan cuatro modulos limpios alrededor del patron |
+| Contraste | Los modulos se distinguen con claridad del fondo |
+| Tamaño | La prueba impresa se lee desde la distancia de uso prevista |
+| Dispositivos | Funciona al menos en iPhone y Android con camaras distintas |
+| Destino | La pagina abre con datos moviles, carga rapido y sigue activa |
+| Archivo final | El QR se vuelve a leer desde el PDF, imagen o impresion definitiva |
+
 ## Recomendacion final
 
-Genera el QR, descargalo, imprimelo si hace falta y pruebalo con varios dispositivos antes de darlo por valido. Si solo tienes una captura o el archivo final, compruebalo tambien con el [lector de QR desde imagen](/lector-qr) para confirmar que el contenido se puede recuperar antes de publicarlo. Un minuto de test evita muchos fallos despues.
+Genera una primera version con el [generador de QR](/generador-qr), descargala e imprimela a escala real si el destino es fisico. Despues prueba el archivo final con varios dispositivos y compruebalo tambien con el [lector de QR desde imagen](/lector-qr). Este flujo detecta tanto problemas del patron como errores introducidos al maquetar, comprimir o exportar el diseño.
 `,
   },
   {

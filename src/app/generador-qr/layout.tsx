@@ -4,7 +4,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: "Generador de Códigos QR Online Gratis — Personaliza y Descarga",
-  description: "Crea códigos QR personalizados para URLs, textos, tarjetas de visita o WiFi. Cambia colores y descarga en PNG de alta resolución. Gratis, sin registro y al instante.",
+  description: "Crea códigos QR personalizados para URLs, textos o datos de contacto. Cambia colores y descarga en PNG de alta resolución. Gratis y sin registro.",
   keywords: [
     "generador de QR",
     "crear código QR",

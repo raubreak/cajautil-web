@@ -22,7 +22,7 @@ export default function GeneradorQR() {
       canvas.height = size;
       ctx!.fillStyle = bgColor;
       ctx!.fillRect(0, 0, size, size);
-      ctx!.drawImage(img, 0, 0);
+      ctx!.drawImage(img, 0, 0, size, size);
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.download = "mi_codigo_qr.png";
@@ -89,7 +89,8 @@ export default function GeneradorQR() {
                 bgColor={bgColor}
                 fgColor={fgColor}
                 level="H"
-                includeMargin={false}
+                marginSize={4}
+                title="Código QR generado"
              />
           </div>
           <button 
