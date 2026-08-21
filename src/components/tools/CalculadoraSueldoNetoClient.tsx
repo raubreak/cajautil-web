@@ -28,7 +28,7 @@ export default function CalculadoraSueldoNetoClient({
   title, 
   subtitle, 
   initialBruto = "", 
-  initialPagas = 12 
+  initialPagas = 12
 }: Props) {
   const [importe, setImporte] = useState<number | "">(initialBruto);
   const [direccion, setDireccion] = useState<ConversionDirection>('bruto-neto');
@@ -81,6 +81,8 @@ export default function CalculadoraSueldoNetoClient({
   const brutoPorPaga = brutoAnual / pagas;
   const netoPorPaga = netoAnual / pagas;
   const promedioNetoMensual = netoAnual / 12;
+  const irpfAnual = brutoAnual * irpf / 100;
+  const cotizacionAnual = brutoAnual * retencionSS / 100;
   const resultadoPrincipal = direccion === 'bruto-neto' ? netoPorPaga : brutoAnual;
   const importeLabel = `Sueldo ${direccion === 'bruto-neto' ? 'bruto' : 'neto'} ${periodo === 'anual' ? 'anual' : 'por paga'} (€)`;
   const maxImporte = periodo === 'anual' ? MAX_ANNUAL_SALARY : MAX_ANNUAL_SALARY / pagas;
@@ -262,11 +264,17 @@ export default function CalculadoraSueldoNetoClient({
             <div className="space-y-3 mt-4 pt-6 text-sm text-slate-600">
               <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-amber-100/50">
                 <span className="font-bold text-slate-700">Retención de IRPF</span>
-                <span className="font-black text-rose-700 bg-rose-100 px-3 py-1 rounded-lg">-{irpf.toLocaleString('es-ES')}%</span>
+                <span className="text-right font-black text-rose-700">
+                  -{irpf.toLocaleString('es-ES')}%
+                  {hasResult ? <span className="block text-xs">{formatCurrency(irpfAnual)} al año</span> : null}
+                </span>
               </div>
               <div className="flex justify-between items-center bg-white/50 p-4 rounded-xl border border-amber-100/50">
                 <span className="font-bold text-slate-700">Seguridad Social</span>
-                <span className="font-black text-rose-700 bg-rose-100 px-3 py-1 rounded-lg">-{retencionSS.toLocaleString('es-ES')}%</span>
+                <span className="text-right font-black text-rose-700">
+                  -{retencionSS.toLocaleString('es-ES')}%
+                  {hasResult ? <span className="block text-xs">{formatCurrency(cotizacionAnual)} al año</span> : null}
+                </span>
               </div>
               <p className="text-xs text-amber-900 mt-4 leading-tight italic font-medium px-4">
                 * Estimación aritmética basada en los porcentajes que indiques. No calcula automáticamente tu retención fiscal personal.

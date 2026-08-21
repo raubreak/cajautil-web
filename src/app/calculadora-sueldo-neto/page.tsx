@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
-import CalculadoraSueldoNetoClient from "@/components/tools/CalculadoraSueldoNetoClient";
+
+import CalculadoraSueldoNetoClient from '@/components/tools/CalculadoraSueldoNetoClient';
 
 export default function CalculadoraSueldo() {
   const howToJsonLd = {
@@ -100,6 +101,16 @@ export default function CalculadoraSueldo() {
         </p>
         <p>
           Esta calculadora resulta útil para comparar ofertas de empleo, revisar una subida salarial o hacer simulaciones rápidas antes de hablar con una asesoría o con tu empresa.
+        </p>
+
+        <h2>Método de cálculo reproducible</h2>
+        <p>
+          La herramienta no intenta adivinar tu situación fiscal. Aplica exactamente los dos porcentajes que introduces sobre el bruto anual:
+          <strong> neto anual = bruto anual × (1 − IRPF/100 − cotización/100)</strong>. Después divide ese resultado entre 12 o 14 pagas.
+        </p>
+        <p>
+          Por ejemplo, con 30.000 EUR brutos, un IRPF del 15% y una cotización del 6,50%, las deducciones simuladas son 4.500 EUR y 1.950 EUR.
+          El neto anual resultante es 23.550 EUR: 1.962,50 EUR en 12 pagas o 1.682,14 EUR en 14. La calculadora muestra ahora esos importes anuales para que puedas comprobar la operación.
         </p>
 
         <h2>Qué factores pueden cambiar el neto</h2>
@@ -332,6 +343,7 @@ export default function CalculadoraSueldo() {
 
         <h3>Herramientas relacionadas</h3>
         <ul>
+          <li><Link href="/articulos/como-leer-una-nomina-paso-a-paso">Guía para leer una nómina paso a paso</Link></li>
           <li><Link href="/calculadora-porcentajes">Calculadora de porcentajes</Link></li>
           <li><Link href="/calculadora-hipotecas">Calculadora de hipotecas</Link></li>
           <li><Link href="/calculadora-iva">Calculadora de IVA</Link></li>

@@ -12,18 +12,183 @@ export interface EditorialArticle {
 
 export const editorialArticles: EditorialArticle[] = [
   {
+    slug: 'como-leer-una-nomina-paso-a-paso',
+    title: 'Cómo leer una nómina paso a paso: devengos y deducciones',
+    description:
+      'Aprende a revisar salario bruto, bases de cotización, IRPF, deducciones y líquido con un ejemplo comprobable y fuentes oficiales.',
+    targetToolUrl: '/calculadora-sueldo-neto',
+    relatedArticleSlugs: [
+      'como-negociar-tu-sueldo-bruto-sin-perder-neto',
+      'cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda',
+    ],
+    tags: ['nomina', 'salario', 'irpf'],
+    publishedAt: '2026-08-21T12:05:35.000Z',
+    updatedAt: '2026-08-21T12:05:35.000Z',
+    content: `## ¿Qué es una nómina y qué deberías comprobar primero?
+
+Una nómina es el documento que explica cómo se pasa de tu salario bruto al dinero que finalmente recibes. No es solo un justificante de pago: reúne los datos de la empresa y del trabajador, el período liquidado, los conceptos que suman, las cantidades que se descuentan y las bases utilizadas para cotizar y calcular retenciones.
+
+Para leer una nómina sin perderte, sigue siempre el mismo orden: identifica el período, revisa los devengos, localiza las bases, comprueba las deducciones y contrasta el líquido. Ese recorrido evita el error habitual de mirar solo el último número y dar por bueno todo lo anterior.
+
+Esta guía explica cada bloque con un caso reproducible. Los porcentajes del ejemplo son ilustrativos, porque una nómina real depende del contrato, del convenio, de la situación fiscal y de los conceptos incluidos. Para contrastar datos vigentes, consulta el [servicio de retenciones de la Agencia Tributaria](https://sede.agenciatributaria.gob.es/Sede/Retenciones.shtml) y la información de [cotización de la Seguridad Social](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
+
+## El mapa rápido de una nómina
+
+Aunque el diseño cambia entre empresas y programas de gestión, la información suele dividirse en cinco zonas:
+
+1. **Encabezado**: identifica empresa, trabajador, grupo profesional y período.
+2. **Devengos**: muestra todo lo generado antes de descuentos.
+3. **Bases**: indica sobre qué importes se calculan cotizaciones y retenciones.
+4. **Deducciones**: recoge cotizaciones del trabajador, IRPF y otros descuentos.
+5. **Líquido total a percibir**: es el importe que debería llegar a tu cuenta.
+
+Si esos cinco bloques están presentes y entiendes cómo se conectan, ya puedes detectar muchas incoherencias sin dominar legislación laboral. El objetivo no es sustituir a una asesoría, sino saber qué preguntas hacer cuando un importe no cuadra.
+
+## 1. Revisa el encabezado y el período liquidado
+
+Empieza por lo aparentemente sencillo. Comprueba tu nombre, documento identificativo, número de afiliación, categoría o grupo profesional y fecha de antigüedad cuando aparezca. En la parte de la empresa deben constar su denominación, identificación fiscal y código de cuenta de cotización.
+
+El período de liquidación merece especial atención. Una nómina mensual puede reflejar 30 días aunque el mes tenga 28 o 31, según el sistema salarial aplicado. También conviene verificar si existen ausencias, incapacidad temporal, alta o baja a mitad de mes, porque pueden explicar diferencias frente al cobro anterior.
+
+La antigüedad y el grupo profesional no son detalles decorativos. Pueden afectar a complementos, bases y condiciones previstas por convenio. Si alguno no coincide con tu contrato o con una modificación firmada, pide una explicación antes de asumir que es un simple error de formato.
+
+## 2. Entiende los devengos: todo lo que suma
+
+Los devengos son las cantidades generadas durante el período. Normalmente se separan entre percepciones salariales y no salariales. Las primeras retribuyen el trabajo; las segundas pueden compensar gastos o situaciones concretas, aunque su tratamiento depende de cada concepto y de los límites aplicables.
+
+Entre los devengos salariales puedes encontrar:
+
+- salario base,
+- complementos de convenio, puesto, antigüedad o responsabilidad,
+- horas extraordinarias,
+- incentivos, comisiones o bonus,
+- prorrata de pagas extraordinarias,
+- retribución en especie.
+
+No sumes mentalmente solo el salario base. Dos ofertas con la misma base pueden producir brutos diferentes por complementos, y un variable cobrado un mes no debe confundirse con una cantidad garantizada. Para comparar empleos, separa siempre fijo, variable y compensaciones de gastos.
+
+Las percepciones no salariales pueden incluir dietas, kilometraje, suplidos o determinadas indemnizaciones. Que aparezcan en la nómina no significa automáticamente que tengan el mismo tratamiento fiscal o de cotización que el salario. Revisa el concepto exacto y no des por hecho que todo importe denominado dieta está exento.
+
+## 3. Diferencia salario bruto, base de cotización y base de IRPF
+
+Este es uno de los puntos que más confunden. El total devengado, la base de cotización y la base sometida a IRPF pueden parecer cifras intercambiables, pero no siempre lo son. Cada una responde a una finalidad distinta.
+
+El **bruto** resume lo generado antes de deducciones. La **base de cotización** sirve para aplicar los tipos correspondientes a contingencias y otros conceptos de Seguridad Social. La **base sujeta a IRPF** se utiliza para calcular la retención fiscal. Retribuciones en especie, pagas extra prorrateadas, horas extra o conceptos con tratamiento específico pueden hacer que estas cifras no coincidan exactamente.
+
+Por eso una calculadora sencilla debe presentarse como simulación. Puede aplicar los porcentajes que introduces sobre un bruto, pero no puede reconstruir todas las bases de una nómina individual sin conocer contrato, conceptos y circunstancias. Esa limitación no invalida la estimación: simplemente define para qué sirve y para qué no.
+
+## 4. Comprueba las deducciones una por una
+
+Las deducciones reducen el bruto hasta llegar al líquido. Las más habituales son las aportaciones del trabajador a la Seguridad Social y la retención de IRPF. También pueden aparecer anticipos, embargos, cuotas sindicales, retribución flexible u otros ajustes autorizados.
+
+No te limites a leer el porcentaje. Multiplica la base indicada por el tipo y comprueba el importe, teniendo en cuenta el redondeo aplicado por el programa de nóminas. Si el cálculo difiere, revisa primero que estás usando la base correcta: aplicar el porcentaje al líquido o a una base distinta produce una discrepancia falsa.
+
+La retención de IRPF es un pago a cuenta, no el impuesto definitivo de todo el año. Puede variar si cambian ingresos previstos, contrato o circunstancias comunicadas a la empresa. Una retención baja aumenta el neto mensual, pero podría dejar una regularización posterior; una más alta reduce liquidez durante el año, aunque tampoco significa por sí sola que pagues más impuesto definitivo.
+
+## Caso reproducible: de 2.500 EUR brutos a 1.962,50 EUR netos
+
+Supongamos un caso deliberadamente simplificado: 2.500 EUR brutos por paga, 12 pagas, todos los conceptos incluidos en la misma base, una cotización del trabajador del 6,50 % y una retención de IRPF del 15 %. No representa una nómina universal; sirve para comprobar la aritmética de principio a fin.
+
+| Paso | Operación | Resultado |
+|---|---|---|
+| Bruto mensual | Importe de partida | 2.500,00 EUR |
+| Cotización | 2.500 × 6,50 % | 162,50 EUR |
+| IRPF | 2.500 × 15 % | 375,00 EUR |
+| Total deducciones | 162,50 + 375,00 | 537,50 EUR |
+| Líquido | 2.500 − 537,50 | 1.962,50 EUR |
+
+En términos anuales, el bruto sería 30.000 EUR, la cotización simulada 1.950 EUR, la retención 4.500 EUR y el neto 23.550 EUR. Puedes reproducir el escenario en la [calculadora de sueldo neto](/calculadora-sueldo-neto) introduciendo 30.000 EUR, 12 pagas, un 15 % de IRPF y un 6,50 % de cotización. El resultado debe coincidir salvo diferencias de redondeo.
+
+La comprobación importante no es memorizar 1.962,50 EUR. Es entender que, si cambias cualquiera de las bases o porcentajes, cambia el resultado. En una nómina real debes utilizar los valores que aparecen en el documento o en una simulación oficial, no adoptar automáticamente los de este ejemplo.
+
+## Cómo interpretar 12 y 14 pagas
+
+Cobrar en 14 pagas no significa necesariamente ganar más al año. Si el salario anual es el mismo, cambia la distribución: doce mensualidades ordinarias más dos extras frente a doce pagos con las extras prorrateadas. Para comparar correctamente, lleva ambas opciones a bruto anual y neto anual.
+
+Con el ejemplo anterior, 23.550 EUR netos anuales equivalen a 1.962,50 EUR por paga si son 12. Si se repartieran en 14 pagos iguales, serían 1.682,14 EUR por paga. El promedio mensual económico seguiría siendo 1.962,50 EUR al dividir el neto anual entre doce, aunque la tesorería real de cada mes sería distinta.
+
+Comprueba también si las pagas extraordinarias incluyen todos los complementos. El convenio o el contrato pueden definir su composición, de modo que no siempre equivalen exactamente a una mensualidad ordinaria.
+
+## Señales que merecen una segunda revisión
+
+Una diferencia no demuestra por sí sola que exista un error, pero estas situaciones justifican revisar documentos o preguntar a recursos humanos:
+
+- el salario base no coincide con el contrato o la tabla aplicable,
+- falta un complemento fijo que aparecía en meses anteriores,
+- las unidades de horas extra o variables no corresponden al período,
+- la base cambia sin que haya variado el salario o la situación laboral,
+- el porcentaje de IRPF se modifica de forma notable sin explicación,
+- el líquido no coincide con el ingreso bancario,
+- aparecen descuentos que no reconoces.
+
+Guarda contrato, anexos, nóminas y justificantes de ingreso. Comparar tres meses consecutivos suele ser más útil que mirar un documento aislado, porque permite distinguir cambios recurrentes de ajustes puntuales.
+
+## Errores frecuentes al leer una nómina
+
+El primer error es confundir bruto con base. El segundo es interpretar la retención como el impuesto final. El tercero es comparar pagos mensuales sin convertir 12 y 14 pagas al mismo período anual.
+
+También es frecuente ignorar la retribución en especie, contar un bonus como fijo o pensar que una dieta tiene siempre el mismo tratamiento. Otra equivocación consiste en sumar porcentajes correctos y aplicarlos a una cifra equivocada. La operación puede estar bien y la conclusión ser falsa.
+
+Evita, por último, usar una tabla genérica como si fuera una nómina personalizada. Las referencias orientativas ayudan a detectar órdenes de magnitud, pero no conocen tus bases, reducciones, convenio ni situación comunicada a la empresa.
+
+## Checklist para revisar tu nómina en cinco minutos
+
+1. Confirma empresa, trabajador y período.
+2. Compara salario base y complementos con el contrato y el mes anterior.
+3. Suma los devengos y comprueba el total bruto.
+4. Identifica la base usada para cada deducción.
+5. Multiplica base por porcentaje y revisa el redondeo.
+6. Resta todas las deducciones al total devengado.
+7. Contrasta el líquido con el ingreso bancario.
+8. Anota cualquier diferencia y solicita el detalle antes de aceptar una explicación verbal.
+
+Este proceso no convierte una revisión doméstica en asesoramiento profesional, pero mejora mucho la calidad de la consulta. En lugar de decir "creo que cobro menos", puedes señalar el concepto, la base y la diferencia concreta.
+
+## Preguntas frecuentes sobre la nómina
+
+### ¿El salario neto aparece siempre con ese nombre?
+
+No necesariamente. Puede figurar como "líquido total a percibir", "líquido" o una expresión equivalente. Es el resultado después de restar las deducciones al total devengado y debe corresponder con el pago realizado, salvo anticipos o ajustes identificados.
+
+### ¿Por qué cambia mi neto si el bruto es igual?
+
+Puede cambiar la retención, una base, un complemento, una ausencia o algún descuento. Compara ambos recibos línea por línea y no solo los totales. Si la diferencia procede del IRPF, pide que te indiquen la causa de la regularización.
+
+### ¿La base de cotización debe ser igual al bruto?
+
+No siempre. Existen conceptos y reglas que pueden producir diferencias. La nómina debe mostrar las bases utilizadas; aplica cada porcentaje sobre su base correspondiente y consulta una fuente oficial o profesional si el encaje no está claro.
+
+### ¿Puedo calcular mi nómina solo con el salario anual?
+
+Puedes obtener una aproximación si conoces el número de pagas y porcentajes razonables, pero no una réplica exacta. Para precisión necesitas las bases, conceptos salariales, situación fiscal y condiciones del contrato.
+
+### ¿Qué documento uso para conocer mi IRPF?
+
+La nómina muestra el porcentaje aplicado en ese período. Para una estimación actualizada puedes usar el servicio oficial de retenciones de la AEAT y comunicar correctamente tus circunstancias a la empresa mediante los procedimientos previstos.
+
+## Qué hacer después de entender las cifras
+
+Una nómina bien leída te permite comparar ofertas con el mismo criterio, detectar cambios y planificar gastos con un dato más realista. Si estás valorando otra empresa, utiliza la guía para [negociar el sueldo sin perder de vista el neto](/articulos/como-negociar-tu-sueldo-bruto-sin-perder-neto). Si el ingreso condiciona una compra, contrasta también el margen disponible con la guía sobre [ahorro necesario para comprar una vivienda](/articulos/cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda).
+
+La regla final es sencilla: no aceptes el líquido como una caja negra. Sigue el camino desde los devengos hasta las bases y deducciones, reproduce las operaciones y pregunta cuando una cifra no pueda explicarse. Entender el documento no garantiza que nunca haya ajustes, pero sí evita tomar decisiones importantes apoyándote en una lectura incompleta.
+
+Cuando tengas claros los datos de tu recibo, usa la [calculadora de sueldo neto](/calculadora-sueldo-neto) para contrastar otros escenarios con tus propios porcentajes.
+`,
+  },
+  {
     slug: 'como-negociar-tu-sueldo-bruto-sin-perder-neto',
     title: 'Cómo negociar tu sueldo bruto sin perder de vista el neto',
     description:
       'Guía práctica para evaluar ofertas salariales, traducir bruto a neto y negociar una subida con argumentos concretos.',
     targetToolUrl: '/calculadora-sueldo-neto',
     relatedArticleSlugs: [
+      'como-leer-una-nomina-paso-a-paso',
       'cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda',
       'interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde',
     ],
     tags: ['salario', 'nomina', 'empleo'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:18:00.000Z',
+    updatedAt: '2026-08-21T12:05:35.000Z',
     content: `## Por que no basta con mirar el bruto
 
 Cuando una empresa te habla de salario anual, casi siempre te esta dando una cifra en bruto. Esa cantidad es util para comparar bandas salariales, pero no te dice cuanto dinero real entrara en tu cuenta cada mes. Entre el bruto y el neto intervienen las cotizaciones a la Seguridad Social, la retencion de IRPF, el numero de pagas y, en algunos casos, bonus, dietas o retribucion flexible.
@@ -96,7 +261,11 @@ Antes de contestar, intenta resumir cada oferta en una hoja simple con cinco fil
 
 ## Recomendacion final
 
-Antes de responder a una empresa, simula varios escenarios con la [calculadora de sueldo neto](/calculadora-sueldo-neto). Te servira para llegar a la conversacion con una base clara, detectar si la mejora es real y evitar negociar a ciegas.
+Antes de responder a una empresa, simula varios escenarios con la [calculadora de sueldo neto](/calculadora-sueldo-neto). Por ejemplo, introduce una oferta de 32.000 EUR en 12 pagas y ajusta los porcentajes a tu caso. Te servira para llegar a la conversacion con una base clara, detectar si la mejora es real y evitar negociar a ciegas.
+
+Si antes necesitas comprobar de donde salen el bruto, las bases y las deducciones, revisa la guia para [leer una nomina paso a paso](/articulos/como-leer-una-nomina-paso-a-paso). Entender esos conceptos evita trasladar a la simulacion un porcentaje o una base incorrectos.
+
+Tambien puedes abrir la [calculadora de sueldo neto](/calculadora-sueldo-neto) sin valores de ejemplo y completar directamente los datos de tu nomina.
 
 Si la subida tiene un objetivo concreto, traduce tambien la diferencia mensual a ese objetivo. Puedes estimar cuanto cambia tu capacidad de entrada con la guia sobre [ahorro necesario para comprar una vivienda](/articulos/cuanto-dinero-necesitas-ahorrado-para-comprar-una-vivienda) o comparar el efecto de aportar esa diferencia durante varios anos con la guia de [interes compuesto](/articulos/interes-compuesto-la-diferencia-entre-aportar-pronto-y-aportar-tarde). Asi la negociacion deja de centrarse en una cifra aislada y pasa a medir que decisiones reales permite financiar.
 `,

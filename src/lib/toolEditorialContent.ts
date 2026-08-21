@@ -79,6 +79,7 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/calculadora-prestamos', label: 'Simulador de préstamos' },
     ],
     relatedArticles: [
+      { href: '/articulos/como-leer-una-nomina-paso-a-paso', label: 'Cómo leer una nómina: devengos, deducciones y líquido' },
       { href: '/articulos/como-negociar-tu-sueldo-bruto-sin-perder-neto', label: 'Cómo negociar tu sueldo bruto sin perder de vista el neto' },
     ],
     references: [
