@@ -41,6 +41,16 @@ El mapa queda separado así:
 
 ## Publicación
 
-Pendiente de commit, despliegue y comprobación de producción. IndexNow y GSC solo se notificarán cuando las nuevas respuestas estén disponibles públicamente.
+- Commit funcional: `b52d50e feat(seo): strengthen salary content cluster`.
+- Vercel completó el despliegue y GitHub dejó el estado en `success`.
+- Producción mantiene 44/44 URLs con `200`, indexables, sin incidencias, duplicados ni páginas huérfanas.
+- Las cuatro URLs afectadas devolvieron `200`, H1 único, canonical propio y ausencia de publicidad intrusiva.
+- El RSS publica 11 entradas e incluye la nueva guía con fecha `Fri, 21 Aug 2026 12:05:35 GMT`.
+- La calculadora reprodujo en producción el escenario de 30.000 EUR: 23.550 EUR netos, 4.500 EUR de IRPF y 1.950 EUR de cotización.
+- Lighthouse móvil de producción: 100 en accesibilidad, buenas prácticas y SEO; sin errores de consola ni desbordamiento horizontal.
+- IndexNow recibió `/calculadora-sueldo-neto`, la nueva guía, la guía de negociación y `/articulos` con `HTTP 200`.
+- GSC aceptó de nuevo el sitemap con `HTTP 204`.
+- La inspección inmediata de la nueva guía devuelve `Descubierta: actualmente sin indexar`, estado esperable antes de un nuevo rastreo; Google ya asocia la URL al sitemap.
+- Se canceló el reintento programado porque el despliegue actual terminó correctamente.
 
 La preparación técnica y editorial no garantiza rankings, clics ni indexación inmediata. La autoridad externa, la competencia y el tiempo de reevaluación de Google siguen fuera del control del sitio.
