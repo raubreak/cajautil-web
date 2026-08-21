@@ -17,7 +17,7 @@ type ArticleAudit = {
   invalidRelatedArticleSlugs: string[];
 };
 
-const MIN_WORDS = 250;
+const MIN_EDITORIAL_WORDS = 500;
 
 function countWords(content: string): number {
   return content.trim().split(/\s+/).filter(Boolean).length;
@@ -60,7 +60,7 @@ function groupByDate(values: string[]): Map<string, number> {
 function buildMarkdownReport(audit: ArticleAudit[]): string {
   const duplicatePublishedDates = [...groupByDate(audit.map((item) => item.publishedAt)).entries()].filter(([, count]) => count > 1);
   const duplicateUpdatedDates = [...groupByDate(audit.map((item) => item.updatedAt)).entries()].filter(([, count]) => count > 1);
-  const underTarget = audit.filter((item) => item.words < MIN_WORDS);
+  const underTarget = audit.filter((item) => item.words < MIN_EDITORIAL_WORDS);
   const reviewedCount = audit.filter((item) => item.reviewed).length;
   const withoutExternalSources = audit.filter((item) => item.externalSources === 0);
   const withoutTargetToolLink = audit.filter((item) => !item.targetToolLinked);
@@ -73,7 +73,7 @@ function buildMarkdownReport(audit: ArticleAudit[]): string {
     `- Fecha: ${new Date().toISOString()}`,
     `- Articulos auditados: ${audit.length}`,
     `- Articulos con revision posterior a publicacion: ${reviewedCount}`,
-    `- Objetivo minimo de palabras: ${MIN_WORDS}`,
+    `- Objetivo minimo de palabras: ${MIN_EDITORIAL_WORDS}`,
     '',
     '## Hallazgos',
     '',
@@ -103,10 +103,11 @@ function validateAudit(audit: ArticleAudit[]) {
   const invalidRelations = audit.filter((item) => item.invalidRelatedArticleSlugs.length > 0);
   const missingSources = audit.filter((item) => item.externalSources === 0);
   const missingToolLinks = audit.filter((item) => !item.targetToolLinked);
+  const underTarget = audit.filter((item) => item.words < MIN_EDITORIAL_WORDS);
 
-  if (invalidRelations.length || missingSources.length || missingToolLinks.length) {
+  if (invalidRelations.length || missingSources.length || missingToolLinks.length || underTarget.length) {
     throw new Error(
-      `Auditoria editorial bloqueada: ${invalidRelations.length} relaciones invalidas, ${missingSources.length} articulos sin fuentes y ${missingToolLinks.length} sin enlace a herramienta.`,
+      `Auditoria editorial bloqueada: ${invalidRelations.length} relaciones invalidas, ${missingSources.length} articulos sin fuentes, ${missingToolLinks.length} sin enlace a herramienta y ${underTarget.length} por debajo de ${MIN_EDITORIAL_WORDS} palabras.`,
     );
   }
 }

@@ -19,7 +19,7 @@ export default function DeleteButton({ id }: { id: string }) {
         } else {
           alert('Error: ' + result.error);
         }
-      } catch (e) {
+      } catch {
         alert('Error conectando con el servidor.');
       }
       setLoading(false);
