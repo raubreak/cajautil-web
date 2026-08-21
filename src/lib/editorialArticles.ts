@@ -782,64 +782,145 @@ Si el QR forma parte de una imagen para web, revisa antes [cuando conviene conve
     ],
     tags: ['seguridad', 'contrasenas', 'privacidad'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:51:00.000Z',
-    content: `## El problema de las reglas antiguas
+    updatedAt: '2026-08-21T13:51:48.000Z',
+    content: `## Una contraseña compleja puede seguir siendo previsible
 
-Durante anos se repitio la misma receta: una mayuscula, un numero, un simbolo y listo. El problema es que cumplir esa plantilla no elimina patrones humanos previsibles. La **longitud**, la **aleatoriedad real** y no reutilizar la clave importan mas que una complejidad puramente cosmetica.
+Durante años se repitió la misma receta: una mayúscula, un número, un símbolo y un cambio periódico. El resultado habitual no era una cadena verdaderamente imprevisible, sino variantes como una palabra conocida con la primera letra en mayúscula, un año y un signo al final. Cumplían la regla visual, pero un atacante también podía anticipar el patrón.
 
-El problema de muchas contrasenas supuestamente complejas es que siguen teniendo una logica humana facil de adivinar: nombres, fechas, patrones repetidos o sustituciones obvias como cambiar una a por @. Eso da sensacion de seguridad, pero no siempre resistencia real.
+Una contraseña resistente combina tres propiedades distintas: **longitud**, **imprevisibilidad** y **unicidad por servicio**. La longitud amplía el espacio que tendría que explorar un ataque de adivinación; la generación aleatoria evita decisiones humanas previsibles; la unicidad impide que una filtración abra otras cuentas. Ninguna de ellas sustituye a la autenticación multifactor ni protege por sí sola frente al phishing.
 
-## Que hace fuerte a una contrasena
+La [guía vigente NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html#passwordver) refleja ese cambio de enfoque. Para los servicios que verifican contraseñas, establece un mínimo de 15 caracteres cuando se usan como único factor y permite un mínimo de ocho cuando forman parte de un proceso multifactor. También desaconseja imponer reglas de composición adicionales y cambios periódicos sin evidencia de compromiso.
 
-- Muchos caracteres.
-- Sin palabras obvias ni sustituciones tipicas.
-- Distinta para cada servicio.
-- Guardada en un gestor fiable en lugar de reutilizarla.
-- Acompanada de doble factor cuando el servicio lo permite.
+## Qué significa que la longitud importa más
 
-## Longitud frente a complejidad
+Si cada posición se elige de forma independiente y uniforme entre **N** símbolos, una cadena de longitud **L** tiene **N^L** combinaciones posibles. Su máximo teórico de información puede expresarse como **L × log2(N)** bits. Añadir una posición multiplica todas las combinaciones por N; por eso la longitud produce un efecto acumulativo.
 
-Una contrasena corta con muchos simbolos puede seguir siendo peor que una larga y aleatoria. Como referencia para los servicios que verifican contrasenas, la [publicacion NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html#passwordver) exige un minimo de 15 caracteres cuando la contrasena es el unico factor y permite ocho cuando forma parte de una autenticacion multifactor. Tambien recomienda admitir al menos 64 caracteres.
+Esta fórmula describe bien un generador uniforme conocido, pero NO permite atribuir automáticamente una cifra de entropía a una contraseña inventada por una persona. El [apéndice de NIST sobre fortaleza de contraseñas](https://pages.nist.gov/800-63-4/sp800-63b/passwords/) advierte precisamente que estimar la entropía de claves elegidas por usuarios es difícil: nombres, frases populares, sustituciones y patrones de teclado no siguen una distribución uniforme.
 
-Eso no convierte 15 en una cifra magica para todas las cuentas. Una clave generada aleatoriamente de 16 o mas caracteres ofrece un margen practico alto, siempre que el servicio la acepte, sea unica y se almacene de forma segura.
+Una comparación sencilla muestra la diferencia. Si una máquina eligiera solo letras minúsculas de forma uniforme, existirían estos máximos matemáticos:
 
-En el dia a dia, la mejor estrategia no es inventar claves cada vez mas ingeniosas, sino reducir la dependencia de la memoria. Si cada cuenta tiene una contrasena distinta y fuerte guardada en un gestor, el riesgo baja mucho aunque tu no recuerdes ninguna salvo la maestra.
+| Longitud | Espacio de búsqueda | Máximo teórico aproximado |
+|---:|---:|---:|
+| 8 | 26^8 | 37,60 bits |
+| 12 | 26^12 | 56,41 bits |
+| 16 | 26^16 | 75,21 bits |
+| 20 | 26^20 | 94,01 bits |
 
-## Donde suele romperse la seguridad de verdad
+No son tiempos de descifrado ni garantías. La velocidad real depende de si el ataque es online u offline, del almacenamiento del servicio, del algoritmo de hash, de su coste, del hardware y de lo que el atacante ya sepa. En un acceso online, el límite de intentos puede frenar las pruebas. Tras una brecha de hashes, el atacante puede trabajar offline sin ese límite, aunque un hash lento, con sal individual y parámetros adecuados eleva el coste.
 
-- Reutilizacion entre servicios.
-- Fugas de datos en una web secundaria.
-- Contrasenas guardadas en notas o correos sin proteccion.
-- Ausencia de doble factor en cuentas criticas.
-- Respuestas de recuperacion faciles de deducir.
+## Por qué «Casa2026!» no equivale a nueve elecciones aleatorias
 
-## Reglas que ya no ayudan como se pensaba
+Contar caracteres sin estudiar cómo se eligieron produce una falsa sensación de precisión. «Casa2026!» tiene mayúscula, minúsculas, números y símbolo, pero procede de una palabra común, el año y una posición típica para el signo. Un atacante no necesita recorrer antes todas las cadenas posibles: prueba diccionarios, credenciales filtradas, años y transformaciones frecuentes.
 
-NIST indica que los servicios no deberian imponer reglas adicionales de composicion ni exigir cambios periodicos sin evidencia de compromiso. Forzar una sustitucion cada pocas semanas puede llevar a variaciones predecibles, como cambiar solo el mes o el ultimo numero.
+Ese es el motivo por el que NIST rechaza las reglas obligatorias de composición como defensa principal. Su ejemplo explica que, al exigir mayúscula y número, quien habría usado «password» puede pasar a «Password1»; al pedir símbolo, a «Password1!». La apariencia cambia más que la estrategia.
 
-El cambio inmediato si es necesario cuando existe una filtracion, un aviso de acceso no reconocido o sospecha de robo. En ese caso, cambia primero la cuenta afectada y despues cualquier otra donde hayas reutilizado una clave igual o parecida.
+Para una contraseña que debas memorizar, una frase larga de varias palabras no relacionadas puede ser más manejable que una cadena breve llena de signos. No utilices una cita, letra de canción, refrán ni secuencia que otras personas puedan asociar contigo. Para cuentas almacenadas en un gestor, una cadena aleatoria generada por software evita tener que inventar y recordar patrones.
 
-## Gestor, doble factor y passkeys
+## Cómo genera CajaUtil una contraseña
 
-Un gestor reduce la tentacion de reutilizar claves y permite generar una distinta para cada servicio. NIST tambien exige que los verificadores permitan gestores y autocompletado. Para correo, banca y cuentas que recuperan otras credenciales, activa ademas un segundo factor; si el servicio ofrece una opcion resistente al phishing, como una passkey o llave de seguridad, merece prioridad frente a codigos reenviables.
+El [generador de contraseñas](/generador-contrasenas) ejecuta todo el proceso en el navegador. El código no realiza una petición para crear la clave ni la guarda en una base de datos. Utiliza **Crypto.getRandomValues()**, que [MDN describe como una fuente de valores criptográficamente fuertes](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues), en lugar de la función no criptográfica Math.random().
 
-Ninguna contrasena evita que entregues tus credenciales en una pagina falsa. La longitud protege frente a intentos de adivinacion, mientras que el segundo factor y los autenticadores resistentes al phishing cubren otros tipos de ataque.
+El procedimiento es reproducible mediante estos pasos:
 
-## Errores frecuentes
+1. Incluye siempre las 26 letras minúsculas.
+2. Añade, si los seleccionas, 26 mayúsculas, 10 números y 29 símbolos.
+3. Elige al menos un carácter de cada grupo activo.
+4. Completa las posiciones restantes desde la unión de esos grupos.
+5. Baraja el resultado con Fisher-Yates para que los caracteres obligatorios no queden siempre al principio.
 
-1. Reutilizar la misma contrasena en varios sitios.
-2. Crear variantes previsibles del mismo patron.
-3. Guardarlas en notas sin proteccion.
-4. No activar doble factor en servicios criticos.
-5. Pensar que una clave dificil de recordar siempre es mas segura.
+Cada índice aleatorio usa **rejection sampling**. Se toma un entero de 32 bits y se descartan los valores de la franja final que impedirían repartir el rango por igual entre todos los índices disponibles. Aplicar directamente un resto a cualquier entero introduciría un pequeño sesgo cuando el tamaño del alfabeto no divide exactamente 2^32.
 
-## Una regla simple para cuentas importantes
+Con todas las opciones activas, la unión contiene 91 caracteres. Dieciséis elecciones independientes y uniformes entre 91 símbolos tendrían un límite de 16 × log2(91), aproximadamente **104,12 bits**. Esa cifra es solo una referencia superior: el generador fuerza la presencia de cada grupo y después baraja, por lo que su distribución concreta no es simplemente 91^16. No publicamos ese número como una puntuación ni como una promesa de años necesarios para romper la clave.
 
-Si una cuenta te doleria perderla, la combinacion minima deberia ser esta: contrasena unica, longitud generosa, generacion aleatoria y doble factor activo. Esa base suele proteger mejor que cualquier truco creativo para "complicar" una palabra facil.
+## Qué longitud deberías elegir
 
-## Recomendacion practica
+No existe un número universal que convierta cualquier contraseña en segura. Como regla operativa, usa **16 caracteres aleatorios o más** cuando el servicio lo permita y elige hasta 64 para cuentas donde prefieras un margen mayor. El control de CajaUtil permite generar entre 8 y 64, porque algunos sistemas mantienen límites heredados, pero mostrar ocho no significa recomendarlo como opción general de un solo factor.
 
-Usa el [generador de contrasenas](/generador-contrasenas) para crear una clave unica y larga, guardala en un gestor y reserva la memoria para una contrasena maestra robusta. El generador funciona en tu navegador, pero la seguridad final depende tambien de donde almacenas la clave, de no reutilizarla y de activar protecciones adicionales.
+La propia norma NIST diferencia entre una contraseña usada sola y otra integrada en autenticación multifactor. Además, el contexto cambia el riesgo: el correo principal puede restablecer muchas otras cuentas; el gestor contiene todas tus credenciales; una cuenta bancaria expone operaciones sensibles. En esos casos, usa una clave larga, única y aleatoria, junto con el método multifactor más resistente que ofrezca el servicio.
+
+Los símbolos amplían el alfabeto disponible, pero no compensan una longitud insuficiente ni una selección previsible. Si un sitio rechaza ciertos caracteres, genera una clave más larga con los grupos admitidos en vez de crear una variante fácil de recordar.
+
+## El gestor evita el fallo más peligroso: reutilizar
+
+Cuando una combinación filtrada se prueba automáticamente en otros servicios se produce **credential stuffing**. El problema no es que la contraseña original fuera necesariamente corta; es que la misma credencial servía en varios lugares. Una clave única limita el alcance de la filtración a la cuenta afectada.
+
+Un gestor fiable permite almacenar una credencial distinta por servicio, rellenarla sin teclearla y detectar reutilizaciones. NIST indica que los verificadores deben permitir gestores y autocompletado, y que deberían permitir pegar contraseñas cuando el autocompletado no esté disponible. [OWASP también recomienda facilitar los gestores de contraseñas](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#password-managers) en lugar de bloquear esos mecanismos.
+
+Protege especialmente la contraseña maestra: debe ser larga, única y memorizable, no una derivación de tus otras claves. Activa MFA en el gestor, guarda sus códigos de recuperación fuera del propio almacén y entiende su procedimiento de recuperación antes de depender de él. No guardes la única copia de esos códigos dentro de la cuenta que necesitarías recuperar.
+
+## MFA y passkeys cubren amenazas diferentes
+
+Una contraseña larga sigue siendo vulnerable si la escribes en una página falsa, un malware registra el teclado o alguien controla el dispositivo. NIST recalca que longitud y complejidad no detienen el phishing ni la ingeniería social. La defensa debe tener varias capas.
+
+Activa MFA en correo, gestor, banca, redes sociales y cualquier cuenta que permita recuperar otras. Una aplicación autenticadora o una llave de seguridad evita depender solo de la contraseña. Los códigos temporales todavía pueden ser solicitados por una web de phishing en tiempo real, así que no todos los segundos factores ofrecen la misma resistencia.
+
+Cuando el servicio lo permita, una **passkey** es una alternativa relevante. La [FIDO Alliance explica que las passkeys](https://fidoalliance.org/passkeys/) usan pares de claves criptográficas asociados al sitio: el servidor no recibe un secreto compartido reutilizable y el inicio se aprueba desde el dispositivo. Están diseñadas para resistir el phishing, aunque debes revisar cómo se sincronizan, recuperan o vinculan a un dispositivo en el proveedor elegido.
+
+## Qué hacer si una contraseña aparece en una filtración
+
+No esperes al cambio periódico. Actúa cuando exista evidencia: aviso del servicio, acceso no reconocido, exposición confirmada o sospecha razonable de que alguien la ha visto.
+
+1. Entra escribiendo la dirección oficial o desde la aplicación, no desde el enlace del aviso.
+2. Cambia la contraseña afectada por una nueva, aleatoria y única.
+3. Si la reutilizaste, cambia también todas sus copias, empezando por correo y cuentas financieras.
+4. Cierra sesiones abiertas y revisa dispositivos, reglas de reenvío, métodos MFA y datos de recuperación.
+5. Guarda nuevos códigos de recuperación y elimina factores que no reconozcas.
+6. Comprueba movimientos o actividad y contacta con el proveedor si existe daño.
+
+Cambiar todas las claves cada pocos meses sin un incidente puede fomentar patrones incrementales. NIST establece que los servicios no deben exigir rotaciones periódicas arbitrarias, pero sí forzar el cambio cuando hay evidencia de compromiso. La diferencia es responder a riesgo real en lugar de cumplir un calendario.
+
+## Privacidad y límites del generador local
+
+La generación local evita enviar la clave a un servidor para calcularla. Al pulsar copiar, la contraseña pasa al portapapeles del sistema porque tú lo solicitas. Puede permanecer allí hasta que otra copia la sustituya, y otras aplicaciones con los permisos adecuados podrían leerlo. Pégala inmediatamente en tu gestor y usa su borrado temporizado si está disponible. Reemplazar después el contenido reduce la exposición activa, pero no elimina posibles historiales locales ni copias sincronizadas.
+
+«Local» tampoco significa invulnerable. Una extensión maliciosa, un equipo infectado, una grabación de pantalla o una persona mirando pueden acceder a lo que ves. No generes credenciales críticas en un dispositivo compartido o que no controles. La herramienta reduce exposición de red, pero no puede sanear el entorno desde el que se utiliza.
+
+## Errores frecuentes que debes evitar
+
+- Reutilizar una contraseña robusta en dos sitios.
+- Añadir el nombre del servicio al mismo patrón base.
+- Confundir una puntuación visual con una auditoría de seguridad.
+- Enviar la clave por correo, chat o un documento compartido.
+- Dejarla indefinidamente en el portapapeles.
+- Guardar contraseña y códigos de recuperación en el mismo lugar sin alternativa.
+- Ignorar avisos de acceso porque la clave «era muy compleja».
+- Aprobar una solicitud MFA que no has iniciado.
+
+## Checklist práctico para una cuenta importante
+
+1. Genera una contraseña aleatoria de al menos 16 caracteres si el servicio la admite.
+2. No la reutilices ni construyas una variante para otra cuenta.
+3. Guárdala en un gestor fiable y comprueba que el autocompletado apunta al dominio correcto.
+4. Activa MFA o una passkey; prioriza opciones resistentes al phishing.
+5. Conserva códigos de recuperación en una ubicación separada y protegida.
+6. Revisa sesiones y métodos de recuperación después de cualquier alerta.
+7. Cámbiala inmediatamente si existe evidencia de exposición, no por una fecha arbitraria.
+
+## Preguntas frecuentes sobre contraseñas largas
+
+### ¿Dieciséis caracteres garantizan que una contraseña sea segura?
+
+No. Es una referencia práctica para cadenas aleatorias, no una garantía. Dieciséis caracteres previsibles, reutilizados o robados mediante phishing pueden fallar. La fortaleza depende también del método de elección, almacenamiento, controles del servicio y segundo factor.
+
+### ¿Es obligatorio usar mayúsculas, números y símbolos?
+
+CajaUtil permite combinarlos para ampliar el conjunto y cumplir restricciones heredadas. Sin embargo, NIST desaconseja que los servicios impongan reglas de composición como defensa principal. Una clave larga, aleatoria y única importa más que colocar un signo en una posición previsible.
+
+### ¿Una frase de contraseña es segura?
+
+Puede serlo si es suficientemente larga y sus palabras no forman una cita, expresión conocida ni dato personal. Varias palabras realmente no relacionadas son más defendibles que una frase popular. Para credenciales que no necesitas memorizar, es preferible generar una cadena aleatoria y guardarla.
+
+### ¿Debo cambiar todas mis contraseñas cada seis meses?
+
+No como regla automática. Cámbialas ante compromiso, reutilización detectada, acceso no reconocido o indicación fundada del proveedor. Una rotación rutinaria puede producir variantes previsibles y no corrige phishing, malware ni almacenamiento inseguro.
+
+### ¿CajaUtil puede recuperar una contraseña generada?
+
+No. El generador no crea una cuenta ni guarda un historial de claves. Si cierras la página o generas otra sin almacenar la anterior, CajaUtil no puede recuperarla. Guárdala en el gestor antes de abandonar la pantalla.
+
+## Recomendación final
+
+Usa el [generador de contraseñas](/generador-contrasenas) para producir una clave larga y única, pero completa el proceso: guárdala en un gestor, activa una protección adicional y conserva una vía de recuperación segura. La longitud resuelve una parte del problema; la unicidad, el almacenamiento y la resistencia al phishing resuelven otras.
 `,
   },
   {

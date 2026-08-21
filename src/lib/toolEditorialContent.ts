@@ -1029,6 +1029,8 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     ],
     references: [
       { href: 'https://pages.nist.gov/800-63-4/sp800-63b.html#passwordver', label: 'NIST SP 800-63B: requisitos y buenas practicas para contrasenas' },
+      { href: 'https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues', label: 'MDN: valores aleatorios criptograficamente fuertes con Web Crypto' },
+      { href: 'https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#password-managers', label: 'OWASP: autenticacion y gestores de contrasenas' },
     ],
   }),
   'generador-enlace-whatsapp': buildEntry({

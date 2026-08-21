@@ -79,7 +79,7 @@ export default function GeneradorContrasenas() {
           Generador de <span className="text-rose-600">Contraseñas</span> Seguras
         </h1>
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto">
-          Generadas 100% localmente en tu navegador. Nunca se envían por internet.
+          Se generan localmente: el código no las envía a servidores ni las almacena de forma persistente.
         </p>
       </div>
 
@@ -164,6 +164,9 @@ export default function GeneradorContrasenas() {
           Nuestro <strong>generador de contraseñas</strong> crea claves aleatorias directamente en tu navegador usando la <code>Crypto API</code> del dispositivo.
           Esto ayuda a generar resultados más robustos que una aleatoriedad básica basada en <code>Math.random()</code>. Cada grupo de caracteres seleccionado aparece al menos una vez en el resultado.
         </p>
+        <p>
+          Consulta la guía sobre <Link href="/articulos/por-que-las-contrasenas-largas-suelen-ser-mejores-que-las-complejas">por qué la longitud, la aleatoriedad y la unicidad importan más que una complejidad aparente</Link>. Incluye los cálculos, los límites de la estimación y un protocolo para actuar ante filtraciones.
+        </p>
 
         <h2>Consejos para usar bien una contraseña segura</h2>
         <ul>
@@ -178,7 +181,7 @@ export default function GeneradorContrasenas() {
             <span>¿Las contraseñas generadas se guardan en algún servidor?</span>
             <Plus className="h-5 w-5 shrink-0 text-cyan-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
-          <p className="mt-4 mb-0 text-slate-600">No. Las contraseñas se generan 100% en tu navegador usando JavaScript. Nunca se envían, almacenan ni registran en ningún servidor de CajaUtil ni de terceros.</p>
+          <p className="mt-4 mb-0 text-slate-600">La función genera la contraseña en tu navegador y no realiza una petición para enviarla ni la guarda en CajaUtil. Al copiarla sí pasa al portapapeles; una extensión maliciosa o un dispositivo comprometido quedan fuera del control de la página.</p>
         </details>
         <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
           <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
