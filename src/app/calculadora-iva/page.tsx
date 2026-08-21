@@ -16,7 +16,8 @@ export default function CalculadoraIVA() {
         </p>
         <p>
           Puedes trabajar con los tipos más habituales del sistema español, como el <strong>21%</strong>, el <strong>10%</strong> y el <strong>4%</strong>,
-          o introducir un porcentaje personalizado si necesitas una simulación concreta.
+          o introducir un porcentaje personalizado entre 0% y 100% si necesitas una simulación aritmética concreta.
+          La herramienta no determina qué tipo legal corresponde a una operación: esa clasificación debe comprobarse con la normativa aplicable.
         </p>
 
         <h2>Qué resultado muestra</h2>
