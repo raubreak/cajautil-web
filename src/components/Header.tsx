@@ -7,6 +7,11 @@ import SearchModal from '@/components/SearchModal';
 import { isLowValueTool } from '@/lib/adsenseReadiness';
 
 const herramientasNav = [
+  { nombre: "Sueldo Neto", ruta: "/calculadora-sueldo-neto" },
+  { nombre: "Lector QR", ruta: "/lector-qr" },
+  { nombre: "Generador QR", ruta: "/generador-qr" },
+  { nombre: "Calculadora IVA", ruta: "/calculadora-iva" },
+  { nombre: "Guías", ruta: "/articulos" },
   { nombre: "Colores", ruta: "/extractor-colores" },
   { nombre: "Temporizador", ruta: "/temporizador" },
   { nombre: "Descuentos", ruta: "/calculadora-descuentos" },
@@ -22,16 +27,12 @@ const herramientasNav = [
   { nombre: "Link WhatsApp", ruta: "/generador-enlace-whatsapp" },
   { nombre: "IMC", ruta: "/calculadora-imc" },
   { nombre: "Calculadora %", ruta: "/calculadora-porcentajes" },
-  { nombre: "Sueldo Neto", ruta: "/calculadora-sueldo-neto" },
-  { nombre: "Calculadora IVA", ruta: "/calculadora-iva" },
   { nombre: "Validador IBAN", ruta: "/validador-iban" },
   { nombre: "Contraseñas", ruta: "/generador-contrasenas" },
   { nombre: "Generador Nombres", ruta: "/generador-nombres" },
   { nombre: "Contador Palabras", ruta: "/contador-de-palabras" },
   { nombre: "Letras Raras", ruta: "/generador-letras-raras" },
   { nombre: "Mayúsculas", ruta: "/mayusculas-minusculas" },
-  { nombre: "Generador QR", ruta: "/generador-qr" },
-  { nombre: "Lector QR", ruta: "/lector-qr" },
   { nombre: "Calculadora Días", ruta: "/calculadora-dias" },
   { nombre: "Lorem Ipsum", ruta: "/generador-lorem-ipsum" },
   { nombre: "Unidades", ruta: "/conversor-unidades" },
