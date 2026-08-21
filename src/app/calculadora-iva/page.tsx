@@ -37,6 +37,9 @@ export default function CalculadoraIVA() {
           También resulta útil cuando comparas precios entre profesionales o quieres estimar margen real. En ese contexto, la rapidez importa mucho,
           pero aún más no equivocarte por usar una regla mental mal aplicada.
         </p>
+        <p>
+          Si la factura incluye una cuenta bancaria, puedes comprobar la estructura y los dígitos de control con el <Link href="/validador-iban">validador de IBAN</Link>. Esta validación no confirma la titularidad ni la existencia de la cuenta.
+        </p>
 
         <h2>Situaciones donde más suele ayudar</h2>
         <ul>

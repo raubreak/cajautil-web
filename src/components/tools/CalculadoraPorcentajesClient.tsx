@@ -228,6 +228,9 @@ export default function CalculadoraPorcentajesClient() {
         <p>
           Si necesitas añadir o quitar IVA con desglose completo o calcular el precio final de unas rebajas, usa las herramientas especializadas enlazadas a continuación.
         </p>
+        <p>
+          Cuando dos magnitudes aumentan juntas o una disminuye al crecer la otra, resuelve la relación completa con la <Link href="/calculadora-regla-de-tres">calculadora de regla de tres directa e inversa</Link>.
+        </p>
 
         <h2>Preguntas frecuentes</h2>
         <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">

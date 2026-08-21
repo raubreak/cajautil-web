@@ -191,7 +191,9 @@ export default function GeneradorWhatsApp() {
         </ul>
 
         <p>La herramienta genera la URL en la propia página. Para medir resultados o atribución de campañas puedes combinarla después con UTM o con una landing específica.</p>
-        
+
+        <p>También puedes incluir el enlace en tu <Link href="/generador-firmas-email">firma de email profesional</Link> para que clientes y proveedores abran el chat desde cada correo sin guardar antes el número.</p>
+
       </section>
 
       {/* FAQ SECTION */}
