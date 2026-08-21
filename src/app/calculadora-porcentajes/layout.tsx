@@ -6,11 +6,12 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: "Calculadora de Porcentajes Online Gratis",
-  description: "Calcula cuánto es un porcentaje de una cantidad, qué porcentaje representa un valor y la variación porcentual entre dos cifras. Gratis y sin registro.",
+  description: "Calcula un porcentaje, qué proporción representa una parte, la cantidad total y la variación porcentual entre dos cifras. Gratis y sin registro.",
   keywords: [
     "calculadora de porcentajes",
     "calcular porcentaje",
     "porcentaje de una cantidad",
+    "hallar cantidad total porcentaje",
     "variacion porcentual",
     "calculadora porcentajes online gratis",
   ],
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Calculadora de Porcentajes Online Gratis",
-    description: "Calcula porcentajes, proporciones e incrementos al instante. 100% gratis.",
+    description: "Calcula porcentajes, proporciones, cantidades totales y variaciones al instante.",
     url: `${SITE_URL}/calculadora-porcentajes`,
     type: "website",
     images: ["https://cajautil.com/og-image.png"],
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["https://cajautil.com/og-image.png"],
     title: "Calculadora de Porcentajes Online Gratis",
-    description: "Calcula porcentajes, proporciones e incrementos al instante. 100% gratis.",
+    description: "Calcula porcentajes, proporciones, cantidades totales y variaciones al instante.",
   },
 };
 
@@ -37,7 +38,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de Porcentajes Online",
   url: `${SITE_URL}/calculadora-porcentajes`,
-  description: "Calculadora gratuita para obtener porcentajes, proporciones y variaciones entre cantidades.",
+  description: "Calculadora gratuita para obtener porcentajes, proporciones, cantidades totales y variaciones entre cifras.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Any",
   offers: {

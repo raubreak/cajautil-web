@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Percent, Plus } from "lucide-react";
 
-type CalculationMode = "percentageOf" | "proportion" | "change";
+type CalculationMode = "percentageOf" | "proportion" | "findBase" | "change";
 
 const modes: Array<{
   id: CalculationMode;
@@ -29,6 +29,14 @@ const modes: Array<{
     firstPlaceholder: "Ej: 25",
     secondLabel: "Cantidad total",
     secondPlaceholder: "Ej: 200",
+  },
+  {
+    id: "findBase",
+    label: "Hallar la cantidad total",
+    firstLabel: "Cantidad parcial",
+    firstPlaceholder: "Ej: 30",
+    secondLabel: "Porcentaje que representa",
+    secondPlaceholder: "Ej: 20",
   },
   {
     id: "change",
@@ -73,6 +81,9 @@ export default function CalculadoraPorcentajesClient() {
     if (mode === "proportion" && secondNumber === 0) {
       return "La cantidad total no puede ser cero.";
     }
+    if (mode === "findBase" && secondNumber === 0) {
+      return "El porcentaje no puede ser cero para hallar la cantidad total.";
+    }
     return null;
   })();
   const inputError = firstError ?? secondError;
@@ -83,7 +94,9 @@ export default function CalculadoraPorcentajesClient() {
       ? secondNumber * (firstNumber / 100)
       : mode === "proportion"
         ? (firstNumber / secondNumber) * 100
-        : ((secondNumber - firstNumber) / firstNumber) * 100;
+        : mode === "findBase"
+          ? (firstNumber / secondNumber) * 100
+          : ((secondNumber - firstNumber) / firstNumber) * 100;
     return Number.isFinite(calculated) ? calculated : null;
   })();
 
@@ -95,7 +108,7 @@ export default function CalculadoraPorcentajesClient() {
 
   const resultLabel = result === null
     ? calculationError ? "Sin resultado" : "Completa los dos valores"
-    : `${mode === "change" && result > 0 ? "+" : ""}${numberFormatter.format(result)}${mode === "percentageOf" ? "" : "%"}`;
+    : `${mode === "change" && result > 0 ? "+" : ""}${numberFormatter.format(result)}${mode === "proportion" || mode === "change" ? "%" : ""}`;
 
   const changeMode = (nextMode: CalculationMode) => {
     setMode(nextMode);
@@ -113,12 +126,12 @@ export default function CalculadoraPorcentajesClient() {
           Calculadora de <span className="text-blue-600">Porcentajes</span>
         </h1>
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto">
-          Calcula un porcentaje, descubre qué proporción representa un valor o mide una subida o bajada.
+          Calcula un porcentaje, descubre qué proporción representa un valor, halla el total o mide una variación.
         </p>
       </div>
 
       <div className="w-full max-w-3xl bg-white rounded-[40px] shadow-2xl p-8 sm:p-12 border border-slate-100 flex flex-col gap-6 mb-12">
-        <div role="group" aria-label="Tipo de cálculo" className="grid grid-cols-1 sm:grid-cols-3 gap-2 rounded-2xl bg-slate-100 p-2">
+        <div role="group" aria-label="Tipo de cálculo" className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-2">
           {modes.map((item) => (
             <button
               key={item.id}
@@ -178,6 +191,8 @@ export default function CalculadoraPorcentajesClient() {
                 ? "Fórmula: cantidad × porcentaje ÷ 100."
                 : mode === "proportion"
                   ? "Fórmula: cantidad parcial ÷ cantidad total × 100."
+                  : mode === "findBase"
+                    ? "Fórmula: cantidad parcial ÷ porcentaje × 100."
                   : "Fórmula: (valor final − valor inicial) ÷ valor inicial × 100."
             )}
           </p>
@@ -198,13 +213,14 @@ export default function CalculadoraPorcentajesClient() {
       <section className="w-full max-w-3xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-blue-600">
         <h2>Cómo calcular porcentajes</h2>
         <p>
-          Puedes calcular cuánto es un porcentaje de una cantidad, qué porcentaje representa una parte sobre el total y cuánto ha variado un valor entre dos momentos. Cada operación usa una base distinta, por eso conviene elegir primero el tipo de cálculo.
+          Puedes calcular cuánto es un porcentaje de una cantidad, qué porcentaje representa una parte sobre el total, hallar la cantidad total a partir de una parte y medir cuánto ha variado un valor entre dos momentos. Cada operación usa una base distinta, por eso conviene elegir primero el tipo de cálculo.
         </p>
 
         <h2>Casos prácticos en los que te puede ayudar</h2>
         <ul>
           <li><strong>Rebajas e IVA:</strong> calcula el importe correspondiente a un porcentaje sobre un precio.</li>
           <li><strong>Proporciones:</strong> descubre qué porcentaje representa 25 sobre un total de 200.</li>
+          <li><strong>Cantidad total:</strong> averigua de qué total es 30 el 20%.</li>
           <li><strong>Variaciones:</strong> mide la subida o bajada entre un valor inicial y otro final.</li>
           <li><strong>Trabajo y ventas:</strong> estima comisiones, márgenes o aumentos porcentuales.</li>
         </ul>
@@ -227,6 +243,13 @@ export default function CalculadoraPorcentajesClient() {
             <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
           <p className="mt-4 mb-0 text-slate-600">Resta el valor inicial al final, divide la diferencia entre el valor inicial y multiplica por 100. De 100 a 120 hay una subida del 20%.</p>
+        </details>
+        <details className="group open:bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 transition-colors">
+          <summary className="flex list-none items-center justify-between cursor-pointer font-bold text-slate-800 focus:outline-none [&::-webkit-details-marker]:hidden">
+            <span>¿Cómo hallo el total si conozco una parte y su porcentaje?</span>
+            <Plus className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mt-4 mb-0 text-slate-600">Divide la cantidad parcial entre el porcentaje y multiplica por 100. Si 30 representa el 20%, la cantidad total es 150.</p>
         </details>
 
         <h3>Herramientas relacionadas</h3>

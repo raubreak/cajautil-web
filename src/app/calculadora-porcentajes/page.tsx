@@ -8,7 +8,7 @@ export default function CalculadoraPorcentajes() {
     step: [
       {
         "@type": "HowToStep",
-        text: "Elige si quieres calcular un porcentaje de una cantidad, una proporción o una variación porcentual.",
+        text: "Elige si quieres calcular un porcentaje de una cantidad, una proporción, la cantidad total o una variación porcentual.",
       },
       {
         "@type": "HowToStep",
