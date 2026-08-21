@@ -366,69 +366,120 @@ Usa la [calculadora de prestamos](/calculadora-prestamos) para comparar escenari
     ],
     tags: ['iva', 'facturacion', 'autonomos'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:38:00.000Z',
-    content: `## IVA: lo que mas se confunde en el dia a dia
+    updatedAt: '2026-08-21T13:04:59.000Z',
+    content: `## IVA: lo que más se confunde en el día a día
 
-El IVA parece sencillo hasta que tienes que quitarlo de un precio final o revisar una factura antigua. En ese punto aparecen errores muy comunes: aplicar el porcentaje sobre una cantidad equivocada, confundir base imponible con total o no saber cuando corresponde un tipo reducido.
+El IVA parece sencillo hasta que tienes que quitarlo de un precio final, revisar una factura o separar conceptos con tipos distintos. En ese punto aparecen errores muy comunes: aplicar el porcentaje sobre una cantidad equivocada, confundir base imponible con total o asumir que un tipo reducido sirve para cualquier operación.
 
-En muchos negocios pequenos el problema no es la teoria, sino la velocidad. Cuando preparas varios presupuestos, corriges tickets o revisas facturas de proveedores, es facil cometer fallos por hacerlo mentalmente o por copiar una formula a medias.
+En muchos negocios pequeños el problema no es la teoría, sino la velocidad. Cuando preparas varios presupuestos, corriges tickets o revisas facturas de proveedores, es fácil cometer fallos por hacerlo mentalmente o por copiar una fórmula incompleta.
 
-## Los tres datos que debes distinguir
+## Los tres importes que debes distinguir
 
-- **Base imponible**: importe antes de impuestos.
-- **Cuota de IVA**: cantidad resultante de aplicar el porcentaje.
-- **Total**: base imponible mas cuota.
+- **Base imponible:** importe sobre el que se calcula el impuesto.
+- **Cuota de IVA:** resultado de aplicar el tipo a la base imponible.
+- **Total:** suma de la base imponible y la cuota.
 
-Si tienes base y porcentaje, calcular el total es directo. Si tienes el total final, quitar el IVA requiere dividir correctamente por el factor correspondiente y no limitarse a restar un porcentaje simple.
+La operación aritmética cambia según el dato de partida. Si conoces la base, añades el IVA. Si solo conoces el total con IVA incluido, debes extraer la base mediante una división; restar directamente el porcentaje no deshace la operación original.
 
-## El error mas habitual: restar 21 en lugar de dividir entre 1,21
+## Fórmulas para añadir y quitar IVA
 
-Cuando una factura totaliza 121 EUR, muchas personas restan 21 % y concluyen que la base es 95,59 EUR o una cifra parecida segun el calculo improvisado. Ese enfoque es incorrecto porque el porcentaje ya esta incluido en el total.
+Convierte primero el porcentaje en número decimal. Para un 21 %, t = 0,21; para un 10 %, t = 0,10.
 
-La manera correcta es dividir 121 entre 1,21. Solo asi recuperas la base real sobre la que se aplico el impuesto. Parece un matiz pequeno, pero es el fallo que mas se repite en presupuestos rapidos y comprobaciones de ultima hora.
+**Para añadir IVA a una base:**
 
-## Tipos mas habituales en Espana
+- Cuota de IVA = base × t
+- Total = base × (1 + t)
 
-- **21 %**: tipo general.
-- **10 %**: tipo reducido para determinados bienes y servicios.
-- **4 %**: tipo superreducido para supuestos concretos.
-- **0 %**: aplicable solo a determinadas operaciones previstas por la normativa.
+**Para quitar IVA de un total:**
 
-La [Agencia Tributaria detalla los tipos impositivos vigentes](https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes/tipos-impositivos-iva.html) y los supuestos a los que se aplica cada uno. Que exista un tipo reducido, superreducido o del 0 % no permite elegirlo libremente: depende del bien, el servicio y las condiciones de la operacion.
+- Base = total / (1 + t)
+- Cuota de IVA = total - base
 
-## Calculo y criterio fiscal son decisiones distintas
+La [calculadora de IVA](/calculadora-iva) utiliza estas operaciones con el porcentaje que introduzcas y muestra base, cuota y total con dos decimales.
 
-La formula puede ser correcta y la factura seguir estando mal si se ha elegido un tipo que no corresponde. La [Agencia Tributaria separa el calculo del IVA repercutido](https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes.html) de la identificacion del tipo aplicable: primero debes saber que tratamiento fiscal corresponde y despues calcular la cuota sobre la base imponible.
+## El error más habitual: restar el 21 % al total
 
-Esta distincion es especialmente importante en actividades con excepciones, operaciones exentas o ventas que combinan conceptos diferentes. La calculadora resuelve la operacion aritmetica; no clasifica fiscalmente lo que estas vendiendo.
+Si una factura totaliza 121 EUR con un IVA del 21 %, restar el 21 % al total produce 95,59 EUR. Esa cifra es incorrecta porque el 21 % se aplicó sobre la base, no sobre los 121 EUR finales.
 
-## Situaciones practicas donde mas ayuda una calculadora
+La operación inversa correcta es 121 / 1,21 = 100 EUR. La cuota es 121 - 100 = 21 EUR. Esta comprobación también permite detectar el error: si aplicas un 21 % a 95,59 EUR, el resultado no vuelve a ser 121 EUR.
 
-- Preparar un presupuesto para un cliente y querer ver base, cuota y total en segundos.
-- Revisar si un proveedor ha aplicado un tipo coherente.
-- Convertir rapidamente precios con IVA a importes sin IVA para estimar margen.
-- Comprobar tickets o gastos antes de registrarlos.
+## Casos de control para comprobar el cálculo
 
-## Ejemplo rapido
+Estos ejemplos se pueden reproducir introduciendo los mismos importes y tipos en la herramienta:
 
-Si una factura tiene una base de 100 EUR y un IVA del 21 %, la cuota sera 21 EUR y el total 121 EUR. Si lo unico que conoces es el total de 121 EUR, la base no se obtiene restando 21 %, sino dividiendo entre 1,21.
+| Operación | Importe introducido | Tipo | Base | Cuota | Total |
+|---|---:|---:|---:|---:|---:|
+| Añadir IVA | 100 EUR | 21 % | 100 EUR | 21 EUR | 121 EUR |
+| Quitar IVA | 121 EUR | 21 % | 100 EUR | 21 EUR | 121 EUR |
+| Añadir IVA | 250 EUR | 10 % | 250 EUR | 25 EUR | 275 EUR |
+| Quitar IVA | 104 EUR | 4 % | 100 EUR | 4 EUR | 104 EUR |
 
-Algo parecido ocurre con el 10 % y el 4 %. El truco practico es pensar siempre en el factor completo: 1,10 o 1,04. Eso reduce mucho los errores cuando vas con prisa.
+El método de ida y vuelta es útil para una revisión rápida: calcula el total desde la base y después vuelve a extraer la base desde ese total. Salvo pequeñas diferencias de redondeo, debes recuperar el importe inicial.
 
-## Errores frecuentes
+## Tipos de IVA vigentes y ámbito territorial
+
+La [Agencia Tributaria indica para 2026](https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes/tipos-impositivos-iva.html) un tipo general del 21 %, tipos reducidos del 10 % y el 4 %, y un 0 % aplicable a determinadas operaciones. Estos tipos corresponden al territorio de aplicación del IVA, formado por la Península y Baleares. El [artículo 3 de la Ley del IVA](https://www.boe.es/buscar/act.php?id=BOE-A-1992-28740#a3) excluye Canarias, Ceuta y Melilla, donde existen tributos indirectos propios.
+
+Que estos tipos existan no permite elegirlos libremente. El porcentaje depende del bien o servicio, del lugar, de las partes y de las condiciones de la operación. Además, una operación al 0 % no debe confundirse automáticamente con una operación exenta o no sujeta: son tratamientos fiscales distintos aunque el importe repercutido pueda ser cero.
+
+La calculadora admite un porcentaje personalizado porque también sirve para comprobar operaciones históricas o hacer simulaciones. Esa libertad matemática NO determina qué tipo legal corresponde.
+
+## Qué puede formar parte de la base imponible
+
+La base no siempre coincide con el precio principal escrito en una línea. La [Agencia Tributaria explica cómo calcular la base imponible](https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes/calculo-base-imponible.html) y señala que, con carácter general, pueden incluirse conceptos repercutidos al cliente como comisiones, transporte, envases, embalajes o seguros.
+
+También indica que los descuentos y bonificaciones concedidos antes o al realizar la operación pueden quedar fuera de la base cuando cumplen las condiciones aplicables. Los suplidos, que exigen requisitos concretos, tampoco se tratan igual que un gasto propio repercutido. Por eso no conviene introducir en la calculadora solo el precio principal si la operación incluye otros conceptos que legalmente forman parte de la contraprestación.
+
+## Una factura con varios tipos necesita un desglose separado
+
+Si una factura combina conceptos al 21 % y al 10 %, calcula cada grupo por separado:
+
+| Grupo | Base | Tipo | Cuota | Total |
+|---|---:|---:|---:|---:|
+| Conceptos al tipo general | 100 EUR | 21 % | 21 EUR | 121 EUR |
+| Conceptos al tipo reducido | 50 EUR | 10 % | 5 EUR | 55 EUR |
+| Suma | 150 EUR | — | 26 EUR | 176 EUR |
+
+Un tipo medio ponderado podría reproducir matemáticamente la cuota total: en este caso, 26 / 150 = 17,333... %. Sin embargo, no conserva el desglose de las bases y tipos que permite justificar y revisar cada operación. El [Reglamento de facturación exige especificar por separado la parte de base correspondiente a cada tipo](https://www.boe.es/buscar/act.php?id=BOE-A-2012-14696#a6). La herramienta calcula un tipo cada vez: para una operación mixta, realiza un cálculo por cada grupo y suma después bases, cuotas y totales.
+
+## IVA repercutido e IVA soportado no son lo mismo
+
+El IVA repercutido es el que un empresario o profesional cobra a sus clientes en operaciones sujetas. El IVA soportado es el que paga en sus compras. Esta calculadora desglosa un importe, pero no determina si una cuota soportada es deducible ni calcula el resultado de una autoliquidación.
+
+La deducibilidad depende de requisitos materiales y formales, de la afectación a la actividad y de las limitaciones aplicables. No restes automáticamente todo el IVA de tus gastos al IVA cobrado basándote solo en el resultado de esta página.
+
+## Redondeo: por qué puede aparecer un céntimo de diferencia
+
+La herramienta redondea base, cuota y total a céntimos y hace que los tres importes mostrados cuadren entre sí. En una factura con muchas líneas, redondear cada cuota por separado puede producir un total distinto al de aplicar el tipo sobre una base agrupada y redondear al final.
+
+Por ejemplo, tres líneas pequeñas pueden acumular fracciones de céntimo. No corrijas la diferencia cambiando el tipo o forzando una base sin entender el criterio utilizado. Para emitir una factura, aplica de forma coherente el sistema de redondeo de tu programa y revisa que base, cuota y total sean trazables.
+
+## Cálculo correcto no significa tratamiento fiscal correcto
+
+La fórmula puede ser exacta y la factura seguir estando mal si el tipo, la exención, el devengo o la base no corresponden. La [Agencia Tributaria organiza el cálculo del IVA repercutido](https://sede.agenciatributaria.gob.es/Sede/iva/calculo-iva-repercutido-clientes.html) en decisiones separadas sobre sujeción, tipo, base y momento de repercusión.
+
+Esta distinción importa en anticipos, operaciones exentas, inversión del sujeto pasivo, comercio exterior, ventas intracomunitarias y facturas rectificativas. La calculadora resuelve la aritmética; no clasifica fiscalmente la operación ni sustituye la normativa o el asesoramiento profesional.
+
+## Errores frecuentes al calcular el IVA
 
 1. Restar el porcentaje directamente al total para quitar el impuesto.
-2. Usar un tipo general cuando el servicio tiene uno reducido.
-3. No redondear de forma coherente entre lineas y total de factura.
-4. Confundir una estimacion rapida con un criterio fiscal definitivo.
+2. Aplicar el tipo sobre un importe que no contiene todos los conceptos de la base.
+3. Usar el tipo general o uno reducido sin comprobar el supuesto legal.
+4. Mezclar en un único cálculo conceptos sujetos a tipos diferentes.
+5. Confundir IVA repercutido con IVA soportado deducible.
+6. Cambiar importes para ocultar una diferencia de redondeo.
+7. Tratar una estimación rápida como criterio fiscal definitivo.
 
-## Una comprobacion rapida antes de enviar un documento
+## Lista de comprobación antes de enviar una factura
 
-Si trabajas con presupuestos o facturas, merece la pena revisar tres cosas antes de dar el importe por bueno: que el tipo aplicado sea el correcto, que la base cuadre con la cuota y que el redondeo no rompa el total final. Esa mini revision tarda menos de un minuto y evita correcciones posteriores.
+- Identifica primero la operación y confirma si está sujeta, exenta o no sujeta.
+- Comprueba qué conceptos forman parte de la base imponible.
+- Separa las bases cuando haya varios tipos de IVA.
+- Recalcula cuota y total con las fórmulas de ida y vuelta.
+- Revisa el redondeo y conserva un desglose que permita reconstruir el resultado.
+- Contrasta los casos dudosos con la Agencia Tributaria o con un profesional.
 
-## Recomendacion practica
-
-Usa la [calculadora de IVA](/calculadora-iva) para presupuestos rapidos, revision de tickets o comprobacion de importes. Para facturacion formal, revisa siempre el tipo aplicable, la normativa de tu operacion y el criterio de redondeo de tu software.
+Usa la calculadora para presupuestos rápidos, revisión de tickets o comprobación de importes. Para facturación formal, revisa siempre el tratamiento aplicable y la configuración de tu software.
 `,
   },
   {

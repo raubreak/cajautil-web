@@ -22,6 +22,28 @@ function parseDecimal(value: string) {
   return Number(value.replace(',', '.'));
 }
 
+function isPlainDecimal(value: string) {
+  return /^\d+(?:[.,]\d+)?$/.test(value);
+}
+
+function parseDecimalFraction(value: string) {
+  const normalized = value.replace(',', '.');
+  const [integerPart, decimalPart = ''] = normalized.split('.');
+
+  return {
+    numerator: BigInt(`${integerPart}${decimalPart}`),
+    denominator: 10n ** BigInt(decimalPart.length),
+  };
+}
+
+function divideAndRound(numerator: bigint, denominator: bigint) {
+  return (numerator * 2n + denominator) / (denominator * 2n);
+}
+
+function centsToNumber(cents: bigint) {
+  return Number(cents) / 100;
+}
+
 const CalculadoraIVAClient = ({ 
   title, 
   subtitle, 
@@ -38,22 +60,42 @@ const CalculadoraIVAClient = ({
     const vatRate = parseDecimal(porcentajeIva);
     const importeError = importe.trim() === ''
       ? null
-      : !Number.isFinite(amount) || amount <= 0 || amount > MAX_AMOUNT
-        ? 'Introduce un importe superior a 0 y no mayor de 1.000.000.000.000 €.'
+      : !isPlainDecimal(importe) || !Number.isFinite(amount) || amount < 0.01 || amount > MAX_AMOUNT
+        ? 'Introduce un importe entre 0,01 € y 1.000.000.000.000 €, sin notación científica.'
         : null;
     const ivaError = porcentajeIva.trim() === ''
       ? 'Introduce un porcentaje de IVA.'
-      : !Number.isFinite(vatRate) || vatRate < 0 || vatRate > MAX_VAT_RATE
-        ? 'El porcentaje de IVA debe estar entre 0% y 100%.'
+      : !isPlainDecimal(porcentajeIva) || !Number.isFinite(vatRate) || vatRate < 0 || vatRate > MAX_VAT_RATE
+        ? 'El porcentaje de IVA debe estar entre 0% y 100%, sin notación científica.'
         : null;
 
     if (importe.trim() === '' || importeError || ivaError) {
       return { result: null, importeError, ivaError, calculationError: null };
     }
 
-    const baseImponible = modo === 'sumar' ? amount : amount / (1 + vatRate / 100);
-    const total = modo === 'sumar' ? amount * (1 + vatRate / 100) : amount;
-    const cuotaIva = total - baseImponible;
+    const amountFraction = parseDecimalFraction(importe);
+    const rateFraction = parseDecimalFraction(porcentajeIva);
+    const inputCents = divideAndRound(
+      amountFraction.numerator * 100n,
+      amountFraction.denominator,
+    );
+    const percentDenominator = rateFraction.denominator * 100n;
+    const baseCents = modo === 'sumar'
+      ? inputCents
+      : divideAndRound(
+          inputCents * percentDenominator,
+          percentDenominator + rateFraction.numerator,
+        );
+    const vatCents = modo === 'sumar'
+      ? divideAndRound(
+          baseCents * rateFraction.numerator,
+          percentDenominator,
+        )
+      : inputCents - baseCents;
+    const totalCents = modo === 'sumar' ? baseCents + vatCents : inputCents;
+    const baseImponible = centsToNumber(baseCents);
+    const cuotaIva = centsToNumber(vatCents);
+    const total = centsToNumber(totalCents);
 
     if (![baseImponible, cuotaIva, total].every(Number.isFinite)) {
       return {

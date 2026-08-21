@@ -40,6 +40,15 @@ export default function CalculadoraIVA() {
         <p>
           Si la factura incluye una cuenta bancaria, puedes comprobar la estructura y los dígitos de control con el <Link href="/validador-iban">validador de IBAN</Link>. Esta validación no confirma la titularidad ni la existencia de la cuenta.
         </p>
+        <p>
+          Para ver las fórmulas, casos reproducibles y cómo tratar facturas con varios tipos, consulta la guía para <Link href="/articulos/como-calcular-el-iva-correctamente-en-facturas-y-presupuestos">calcular el IVA correctamente</Link>.
+        </p>
+
+        <h2>Comprobación reproducible</h2>
+        <p>
+          Introduce 121 € en el modo Quitar IVA y selecciona el 21 %. El resultado debe ser una base de 100 €, una cuota de 21 € y un total de 121 €.
+          Restar directamente el 21 % al total daría 95,59 €, que no reconstruye el importe original.
+        </p>
 
         <h2>Situaciones donde más suele ayudar</h2>
         <ul>
