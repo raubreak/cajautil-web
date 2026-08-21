@@ -6,6 +6,22 @@ import { Calculator, CornerDownRight, ArrowLeftRight, Type } from 'lucide-react'
 const numberFormatter = new Intl.NumberFormat('es-ES', {
   maximumSignificantDigits: 12,
 });
+const scientificNumberFormatter = new Intl.NumberFormat('es-ES', {
+  notation: 'scientific',
+  maximumSignificantDigits: 12,
+});
+
+function multiplyAndDivideSafely(first: number, second: number, divisor: number) {
+  const candidates = [
+    (first * second) / divisor,
+    (first / divisor) * second,
+    (second / divisor) * first,
+  ];
+
+  return candidates.find((value) => Number.isFinite(value) && value !== 0)
+    ?? candidates.find(Number.isFinite)
+    ?? null;
+}
 
 export default function ReglaDeTres() {
   const [a, setA] = useState<string>('');
@@ -24,13 +40,11 @@ export default function ReglaDeTres() {
     if (modo === 'directa') {
       // Directa: A -> B, C -> X  => X = (B * C) / A
       if (numA === 0) return null;
-      const result = (numB * numC) / numA;
-      return Number.isFinite(result) ? result : null;
+      return multiplyAndDivideSafely(numB, numC, numA);
     } else {
       // Inversa: A -> B, C -> X => X = (A * B) / C
       if (numC === 0) return null;
-      const result = (numA * numB) / numC;
-      return Number.isFinite(result) ? result : null;
+      return multiplyAndDivideSafely(numA, numB, numC);
     }
   };
 
@@ -38,6 +52,9 @@ export default function ReglaDeTres() {
   const hasCompleteInput = a !== '' && b !== '' && c !== '';
   const formatNum = (num: number | null) => {
     if (num === null) return 'X';
+    if (num !== 0 && (Math.abs(num) < 1e-6 || Math.abs(num) >= 1e12)) {
+      return scientificNumberFormatter.format(num);
+    }
     return numberFormatter.format(num);
   };
 
