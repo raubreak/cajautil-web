@@ -11,7 +11,7 @@ Objetivos:
 Flujo:
 1. Haz un preflight: confirma que existen los scripts requeridos, que produccion responde y que las APIs pueden consultarse sin mostrar credenciales. Si falla, termina pronto con un unico motivo claro.
 2. Revisa los scripts, integraciones y datos disponibles de analytics/search console en este proyecto.
-3. Mide por separado URLs indexadas, descubiertas sin indexar, rastreadas sin indexar y no reconocidas. Compara con el ultimo reporte disponible.
+3. Ejecuta `npm run seo:gsc-indexation` para medir por separado URLs indexadas, descubiertas sin indexar, rastreadas sin indexar y no reconocidas. Compara con el ultimo reporte disponible.
 4. Identifica las URLs y consultas con mayor oportunidad de mejora.
 5. Comprueba en produccion que no existan Moneytag, Monetag, popunders, interstitials ni scripts publicitarios de terceros no documentados.
 6. Lee `docs/editorial-workflow.md` y comprueba canibalizacion contra herramientas, articulos editoriales y borradores existentes.
