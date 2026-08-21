@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Binary, Radio, Key, Hash, Copy, Check, RefreshCcw, ArrowRightLeft } from 'lucide-react';
 
 type Mode = 'binario' | 'morse' | 'hex';
+
+const INVALID_INPUT_MESSAGE = 'Entrada no válida para el formato seleccionado.';
 
 const MORSE_MAP: Record<string, string> = {
   'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
@@ -17,48 +19,63 @@ const REVERSE_MORSE: Record<string, string> = Object.fromEntries(
   Object.entries(MORSE_MAP).map(([k, v]) => [v, k])
 );
 
+function translateInput(input: string, mode: Mode, direction: 'toCode' | 'fromCode') {
+  if (!input) return '';
+
+  if (direction === 'toCode') {
+    if (mode === 'binario') {
+      return input.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+    }
+    if (mode === 'hex') {
+      return input.split('').map(c => c.charCodeAt(0).toString(16).toUpperCase()).join(' ');
+    }
+    return input.toUpperCase().split('').map(c => MORSE_MAP[c] || c).join(' ');
+  }
+
+  if (mode === 'binario') {
+    const values = input.trim().split(/\s+/);
+    if (!values.every(value => /^[01]{1,16}$/.test(value))) {
+      return INVALID_INPUT_MESSAGE;
+    }
+    return values.map(value => String.fromCharCode(parseInt(value, 2))).join('');
+  }
+  if (mode === 'hex') {
+    const values = input.trim().split(/\s+/);
+    if (!values.every(value => /^[0-9a-f]{1,4}$/i.test(value))) {
+      return INVALID_INPUT_MESSAGE;
+    }
+    return values.map(value => String.fromCharCode(parseInt(value, 16))).join('');
+  }
+  return input.split(' ').map(m => REVERSE_MORSE[m] || m).join('').toLowerCase();
+}
+
 export default function TraductorTraducciones() {
   const [activeMode, setActiveMode] = useState<Mode>('binario');
   const [inputText, setInputText] = useState('');
-  const [outputText, setOutputText] = useState('');
   const [direction, setDirection] = useState<'toCode' | 'fromCode'>('toCode');
   const [copyStatus, setCopyStatus] = useState(false);
+  const [copyError, setCopyError] = useState<string | null>(null);
+  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const outputText = translateInput(inputText, activeMode, direction);
+  const hasTranslationError = outputText === INVALID_INPUT_MESSAGE;
 
-  // Conversion Logic
-  useEffect(() => {
-    if (!inputText) {
-      setOutputText('');
-      return;
+  useEffect(() => () => {
+    if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+  }, []);
+
+  const copyToClipboard = async () => {
+    setCopyError(null);
+
+    try {
+      if (!navigator.clipboard) throw new Error('Clipboard API no disponible');
+      await navigator.clipboard.writeText(outputText);
+      setCopyStatus(true);
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+      copyTimeoutRef.current = setTimeout(() => setCopyStatus(false), 2000);
+    } catch {
+      setCopyStatus(false);
+      setCopyError('No se pudo copiar automáticamente. Selecciona el resultado y cópialo manualmente.');
     }
-
-    if (direction === 'toCode') {
-      if (activeMode === 'binario') {
-         setOutputText(inputText.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' '));
-      } else if (activeMode === 'hex') {
-         setOutputText(inputText.split('').map(c => c.charCodeAt(0).toString(16).toUpperCase()).join(' '));
-      } else if (activeMode === 'morse') {
-         setOutputText(inputText.toUpperCase().split('').map(c => MORSE_MAP[c] || c).join(' '));
-      }
-    } else {
-        // From Code to Text
-        try {
-            if (activeMode === 'binario') {
-                setOutputText(inputText.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join(''));
-            } else if (activeMode === 'hex') {
-                setOutputText(inputText.split(' ').map(h => String.fromCharCode(parseInt(h, 16))).join(''));
-            } else if (activeMode === 'morse') {
-                setOutputText(inputText.split(' ').map(m => REVERSE_MORSE[m] || m).join('').toLowerCase());
-            }
-        } catch (e) {
-            setOutputText('Entrada no válida para el formato seleccionado.');
-        }
-    }
-  }, [inputText, activeMode, direction]);
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(outputText);
-    setCopyStatus(true);
-    setTimeout(() => setCopyStatus(false), 2000);
   };
 
   return (
@@ -135,9 +152,10 @@ export default function TraductorTraducciones() {
             
             <div className="flex items-center justify-between relative z-10">
                 <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest pl-2">Resultado traducido</h3>
-                {outputText && (
+                {outputText && !hasTranslationError && (
                     <button 
                         onClick={copyToClipboard}
+                        aria-describedby={copyError ? 'translator-copy-error' : undefined}
                         className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ring-1 ${copyStatus ? 'bg-emerald-500 ring-emerald-400 text-white' : 'bg-white/5 hover:bg-white/10 ring-white/10 text-slate-300'}`}
                     >
                         {copyStatus ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
@@ -146,9 +164,18 @@ export default function TraductorTraducciones() {
                 )}
             </div>
 
-            <div className="flex-1 min-h-[250px] p-8 bg-white/5 border border-white/5 rounded-[32px] font-mono text-lg break-all overflow-y-auto leading-relaxed scrollbar-thin scrollbar-thumb-white/10 relative z-10">
+            <div
+                role={hasTranslationError ? 'alert' : undefined}
+                className="flex-1 min-h-[250px] p-8 bg-white/5 border border-white/5 rounded-[32px] font-mono text-lg break-all overflow-y-auto leading-relaxed scrollbar-thin scrollbar-thumb-white/10 relative z-10"
+            >
                 {outputText || <span className="text-slate-600 block pt-4">El resultado aparecerá aquí automáticamente mientras escribes...</span>}
             </div>
+
+            {copyError && (
+                <p id="translator-copy-error" role="alert" className="relative z-10 text-sm text-rose-300">
+                    {copyError}
+                </p>
+            )}
 
             <div className="p-6 bg-white/5 rounded-[28px] border border-white/5 flex gap-4 items-center relative z-10">
                 <div className="p-3 bg-blue-600 rounded-2xl shadow-lg ring-4 ring-blue-600/20">
@@ -156,7 +183,7 @@ export default function TraductorTraducciones() {
                 </div>
                 <div>
                     <h4 className="text-sm font-bold text-white mb-0.5">Dato curioso</h4>
-                    <p className="text-xs text-slate-400 leading-tight">El código <span className="text-blue-400 font-mono">01001000 01001001</span> significa "HI" en binario internacional.</p>
+                    <p className="text-xs text-slate-400 leading-tight">El código <span className="text-blue-400 font-mono">01001000 01001001</span> significa &quot;HI&quot; en binario internacional.</p>
                 </div>
             </div>
         </section>
@@ -166,7 +193,7 @@ export default function TraductorTraducciones() {
           <h2>Mucho más que un Traductor a Binario</h2>
           <p>Nuestra herramienta gratuita agrupa los traductores de códigos más populares de internet en una sola interfaz premium y ligera.</p>
           <ul>
-              <li><strong>Traductor Binario a Texto:</strong> Traduce automáticamente el lenguaje de "ceros y unos" a formato legible. Ideal para estudiantes de informática y entusiastas del hardware.</li>
+              <li><strong>Traductor Binario a Texto:</strong> Traduce automáticamente el lenguaje de &quot;ceros y unos&quot; a formato legible. Ideal para estudiantes de informática y entusiastas del hardware.</li>
               <li><strong>Convertidor de Código Morse:</strong> Envía mensajes secretos convirtiendo letras en puntos y rayas internacionales. No solo usamos el alfabeto latino, sino también números y caracteres comunes.</li>
               <li><strong>Hexadecimal y Caracteres Especiales:</strong> Convierte tus nicks o nombres a códigos HEX para usar en el desarrollo de aplicaciones o juegos que requieran este formato.</li>
           </ul>
