@@ -49,7 +49,10 @@ export default function CalculadoraPrestamos() {
           <p>Calcula de forma gratuita y sin compromiso las cuotas mensuales de tu <strong>préstamo personal</strong>. La herramienta utiliza el <strong>sistema de amortización francés</strong>, que es el método más extendido por entidades bancarias en España y Europa, donde la cuota se mantiene constante durante toda la vida del préstamo (si el tipo de interés no varía).</p>
 
           <h3>¿Qué es el TIN y el TAE?</h3>
-          <p>En este simulador utilizamos el <strong>TIN (Tipo de Interés Nominal)</strong> para calcular la cuota bruta. Recuerda que el <strong>TAE (Tasa Anual Equivalente)</strong> es el indicador real del coste, ya que incluye comisiones de apertura, seguros obligatorios y otros gastos adicionales que tu banco podría aplicarte.</p>
+          <p>En este simulador utilizamos el <strong>TIN (Tipo de Interés Nominal)</strong> para estimar la cuota. La <strong>TAE (Tasa Anual Equivalente)</strong> expresa el coste efectivo anual bajo las condiciones y los costes incluidos en su cálculo, por lo que resulta más útil para comparar ofertas homogéneas.</p>
+          <p>
+            Para entender qué mide cada cifra, reproducir la fórmula y comparar el efecto del plazo, consulta la guía sobre <Link href="/articulos/tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad">TIN, TAE, cuota mensual y coste total</Link>.
+          </p>
           
           <h3>Cómo optimizar tu préstamo</h3>
           <ul>

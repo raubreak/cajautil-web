@@ -282,76 +282,152 @@ Si la subida tiene un objetivo concreto, traduce tambien la diferencia mensual a
     ],
     tags: ['prestamos', 'finanzas', 'tae'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:37:00.000Z',
-    content: `## La cuota mas baja no siempre es la mejor oferta
+    updatedAt: '2026-08-21T13:23:35.000Z',
+    content: `## La cuota más baja no siempre es la mejor oferta
 
-Muchas personas comparan prestamos mirando solo la cuota mensual. Es comprensible: la cuota es el dato que mas se nota en el presupuesto domestico. El problema es que una cuota mas baja puede esconder un plazo mas largo y, por tanto, un coste total mucho mayor.
+La cuota mensual indica cuánto saldrá de tu cuenta cada mes, pero no cuánto te costará financiarte. Una cuota baja puede proceder de un tipo menor, aunque también de alargar el préstamo durante más años. En ese segundo caso ganas margen mensual a cambio de permanecer endeudado más tiempo y pagar más intereses.
 
-## Diferencia entre TIN y TAE
+Para comparar préstamos de verdad necesitas leer juntas al menos cinco cifras: capital, plazo, TIN, TAE y total a devolver. La cuota sirve para comprobar si el pago cabe en tu presupuesto; la TAE y el total ayudan a medir el precio de la financiación. Ninguna cifra aislada responde a todas las preguntas.
 
-El **TIN** es el tipo de interes nominal que se aplica al capital. La **TAE**, en cambio, permite expresar el coste de la operacion en terminos anuales teniendo en cuenta el tipo, las comisiones y otros gastos incluidos en sus condiciones.
+## ¿Cuál es la diferencia entre TIN y TAE?
 
-El [simulador de TAE del Banco de Espana](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/calculo_tae_prestamo_personal.html) parte precisamente del importe, el plazo, el tipo de interes, las comisiones y otros gastos. Tambien advierte que el resultado puede diferir de la oferta de una entidad si existen condiciones adicionales. Por eso la TAE es util para comparar propuestas equivalentes, pero no sustituye la lectura del contrato ni explica por si sola todos los productos vinculados.
+El **TIN (tipo de interés nominal)** es el porcentaje nominal utilizado para calcular los intereses. No incorpora por sí solo todos los gastos de la operación. La **TAE (tasa anual equivalente)** expresa el coste o rendimiento efectivo en términos anuales a partir de los flujos y de los costes que deban incluirse en su cálculo.
 
-## Que incluye realmente la cuota
+Por eso, si dos préstamos tienen el mismo capital y plazo, el que anuncia un TIN menor no tiene por qué ser el más barato cuando exige una comisión de apertura u otros costes. Para comparar ofertas homogéneas, la TAE suele ser más informativa que el TIN. Aun así, debes comprobar qué condiciones se han usado para calcularla.
 
-El [Banco de Espana explica que el contrato de un prestamo personal](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/) recoge la cantidad concedida y las cuotas periodicas, que incluyen intereses, comisiones y gastos conforme a las condiciones pactadas. Antes de comparar, separa estos conceptos:
+El [simulador de TAE del Banco de España](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/simuladores/calculo_tae_prestamo_personal.html) utiliza importe, plazo, tipo de interés, comisiones y otros gastos. También advierte que su TAE teórica puede diferir de la ofertada por una entidad si existen condiciones distintas o adicionales. La TAE facilita la comparación, pero no reemplaza la documentación precontractual ni el contrato.
 
-| Dato | Que te permite evaluar |
-|---|---|
-| TIN | El tipo nominal aplicado al capital |
-| TAE | El coste anual de ofertas comparables bajo sus condiciones |
-| Cuota | La presion mensual sobre tu presupuesto |
-| Total devuelto | La suma que habras pagado al terminar |
-| Comisiones y vinculaciones | Costes o requisitos que pueden alterar la comparacion |
+## Qué responde cada cifra de una oferta
 
-Si dos propuestas no usan el mismo importe, plazo o frecuencia de pago, una diferencia de TAE no cuenta toda la historia. Igualar primero esos datos evita comparar productos distintos como si fueran equivalentes.
+El [Banco de España explica que un préstamo personal](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/) se formaliza mediante un contrato que recoge la cantidad concedida y las cuotas periódicas conforme a las condiciones pactadas. Antes de elegir, separa los datos:
 
-## Lo que cambia de verdad cuando alargas el plazo
+| Dato | Pregunta que responde | Lo que no te dice por sí solo |
+|---|---|---|
+| Capital | ¿Cuánto dinero recibo o financio? | Cuánto devolverás en total |
+| TIN | ¿Qué tipo nominal se aplica al capital? | El efecto completo de comisiones y gastos |
+| TAE | ¿Cuál es el coste anual equivalente bajo esas condiciones? | Si la cuota cabe con holgura en tu presupuesto |
+| Cuota | ¿Cuánto pagaré en cada vencimiento? | Cuánto costará alargar el plazo |
+| Total a devolver | ¿Cuánto habré pagado al final? | Cuándo se produce cada pago |
+| Comisión o vinculación | ¿Qué coste o requisito acompaña a la oferta? | Su impacto agregado si no lo cuantificas |
 
-El plazo es la palanca que mas facilmente maquilla una oferta. Si alargas meses o anos, la cuota se suaviza y parece mas asumible. El problema es que ese alivio casi siempre se compra pagando mas intereses durante mas tiempo.
+No compares una TAE de un préstamo a tres años con la cuota de otro a ocho como si fueran alternativas idénticas. Primero iguala capital, plazo, frecuencia de pago y servicios incluidos. Después contrasta TAE, cuota y total.
 
-Por eso dos prestamos con cuota parecida pueden ser radicalmente distintos en coste total. Uno puede terminarse antes y dejarte libre de deuda. El otro puede acompanarte muchos meses adicionales solo para reducir ligeramente la presion mensual.
+## Cómo calcula la cuota esta herramienta
 
-## Variables que mas cambian el resultado
+La [calculadora de préstamos](/calculadora-prestamos) aplica el sistema francés a un préstamo a tipo fijo y con cuotas mensuales constantes. Es la misma hipótesis general que declara el simulador de TAE del Banco de España: cada mes se pagan intereses sobre el capital pendiente y el resto de la cuota amortiza capital.
 
-- **Capital solicitado**: cuanto mas pides, mas interes total acabaras pagando.
-- **Plazo**: a mayor plazo, menor cuota, pero mas intereses acumulados.
-- **Tipo aplicado**: pequenas variaciones tienen impacto grande en prestamos largos.
-- **Comisiones**: apertura, cancelacion anticipada o estudio.
-- **Productos vinculados**: seguros, tarjetas o domiciliaciones que alteran el coste efectivo.
+Si llamamos **P** al capital, **i** al TIN anual expresado como decimal, **r = i / 12** al tipo mensual y **n** al número total de cuotas, la cuota estimada **C** es:
 
-## Ejemplo simple
+**C = P × [r × (1 + r)^n] / [(1 + r)^n − 1]**
 
-Un prestamo de 10.000 EUR a 5 anos con un tipo del 7 % puede parecer razonable por cuota. Pero si alargas el plazo a 8 anos, la cuota baja y el coste total sube. Esa diferencia es la que deberias mirar antes de firmar.
+Con un TIN del 0 %, la fórmula se simplifica a **C = P / n**. La herramienta calcula el total como **C × n** y los intereses como la suma de los intereses mensuales. En una entidad, la última cuota puede variar unos céntimos por su política de redondeo y calendario.
 
-La pregunta util no es solo "cuanto pago al mes", sino tambien "cuanto dinero extra pago por ganar esa comodidad". Cuando lo planteas asi, a veces descubres que bajar 35 o 40 EUR la cuota implica asumir cientos o miles de euros mas de coste financiero.
+La simulación no calcula la TAE ni añade comisiones, seguros, períodos de carencia, cambios de tipo o pagos extraordinarios. Si una oferta contiene alguno de esos elementos, debes incorporarlo al comparar el coste real o utilizar el cuadro facilitado por la entidad.
 
-## Senales de alerta al leer una oferta
+## Caso reproducible: 10.000 EUR al 7 % TIN
 
-1. La cuota parece sorprendentemente baja para el capital pedido.
-2. La TAE aparece, pero no te explican con claridad de donde sale.
-3. Hay comisiones pequenas que parecen irrelevantes por separado.
-4. El comercial insiste en la cuota y evita hablar del total devuelto.
-5. El ahorro por amortizacion anticipada no queda claro.
+Supongamos un préstamo de 10.000 EUR, un TIN fijo del 7 %, pagos mensuales, sin comisiones, sin seguros y sin carencia. Solo cambiamos el plazo. Los importes se obtienen con la fórmula anterior y se muestran redondeados a céntimos:
 
-## Errores comunes al comparar financiacion
+| Plazo | Cuota mensual | Total de cuotas | Intereses estimados |
+|---|---:|---:|---:|
+| 3 años (36 cuotas) | 308,77 EUR | 11.115,75 EUR | 1.115,75 EUR |
+| 5 años (60 cuotas) | 198,01 EUR | 11.880,72 EUR | 1.880,72 EUR |
+| 8 años (96 cuotas) | 136,34 EUR | 13.088,37 EUR | 3.088,37 EUR |
 
-1. Elegir solo por cuota mensual.
-2. Ignorar comisiones y productos vinculados.
-3. No revisar si conviene amortizar antes de tiempo.
-4. No comparar el coste total devuelto.
-5. Firmar sin probar al menos dos plazos distintos con el mismo capital.
+Puedes reproducir cada fila en la calculadora introduciendo 10.000 EUR, 7 % y el plazo correspondiente. Al pasar de cinco a ocho años, la cuota baja unos **61,67 EUR al mes**, pero los intereses estimados aumentan en **1.207,65 EUR**. Frente al plazo de tres años, la cuota de ocho años es 172,43 EUR menor, pero el coste financiero aumenta en 1.972,62 EUR.
 
-## Un metodo rapido para comparar dos propuestas
+Este ejemplo no demuestra que el plazo corto sea siempre correcto: una cuota demasiado alta también puede provocar impagos o dejarte sin margen para imprevistos. Demuestra algo más útil: el alivio mensual tiene un precio cuantificable y debes decidir si ese intercambio encaja en tu situación.
 
-Cuando tengas dos ofertas delante, intenta ponerlas en una tabla con estas columnas: capital, plazo, TIN, TAE, cuota, total devuelto y coste por cancelar antes. Si uno de esos datos no esta claro, todavia no tienes una comparacion real.
+## Cómo cambia una comisión de apertura la comparación
 
-Ese ejercicio suele revelar algo importante: la mejor oferta no siempre es la de la entidad mas conocida, sino la que mantiene un equilibrio razonable entre cuota, flexibilidad y coste total.
+Una comisión de apertura puede hacer que dos ofertas con el mismo TIN tengan distinto coste efectivo. El [Banco de España indica que esta comisión](https://clientebancario.bde.es/pcb/es/menu-horizontal/podemosayudarte/comisiones/comisionesproductosbancarios/comision-de-apertura-de-un-prestamo.html) suele expresarse como porcentaje del importe y que la entidad debe informar de ella antes de formalizar la operación.
 
-## Que hacer antes de firmar
+Por ejemplo, un 1 % sobre 10.000 EUR equivale a 100 EUR. Si la comisión se paga al inicio y solo recibes económicamente 9.900 EUR aunque debas devolver las cuotas calculadas sobre 10.000 EUR, el coste efectivo es mayor que el sugerido por el TIN. No sumes esa comisión a los intereses y la llames TAE: la TAE se obtiene considerando importes y fechas de los flujos, no con una suma directa de porcentajes.
 
-Usa la [calculadora de prestamos](/calculadora-prestamos) para comparar escenarios con el mismo capital y distintos plazos. Despues revisa la documentacion precontractual, confirma que has incluido las comisiones y verifica si la TAE publicada corresponde a las condiciones de tu caso real.
+Cuantifica también seguros o cuentas vinculadas cuando sean necesarios para obtener las condiciones anunciadas. Si son opcionales, compara al menos dos escenarios: préstamo sin el producto y préstamo con el producto, incluyendo su coste durante todo el período relevante.
+
+## Qué ocurre al amortizar antes de tiempo
+
+Una amortización parcial reduce capital pendiente. Según cómo se recalcule el préstamo, puede bajar la cuota manteniendo el plazo o acortar el plazo manteniendo una cuota similar. Reducir plazo suele ahorrar más intereses que reducir cuota si el importe amortizado, el momento y el resto de condiciones son iguales, porque el capital permanece menos tiempo generando intereses.
+
+Pero el resultado no se decide solo con esa regla. Revisa la compensación aplicable, la liquidez que conservarás y las condiciones del contrato. El [Banco de España explica la amortización parcial anticipada](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/guia-textual/vidaprestamo/Amortizacion_pa_305d2c7f2dd7d51.html) y señala que en créditos al consumo puede existir compensación bajo determinadas condiciones; en otros préstamos personales dependerá de lo previsto en el contrato o del acuerdo con la entidad.
+
+Nuestra calculadora no modela amortizaciones anticipadas. Para evaluarlas necesitas el capital pendiente en la fecha prevista, el importe extra, la posible compensación y el nuevo cuadro de amortización.
+
+## Método para comparar dos préstamos paso a paso
+
+1. **Iguala el capital** que necesitas financiar. No infles una oferta con servicios que no comprarías al contado.
+2. **Compara el mismo plazo** para aislar el efecto del tipo y los costes.
+3. **Anota TIN y TAE** sin sustituir una por otra: responden a preguntas distintas.
+4. **Registra cuota y total a devolver** según la documentación de cada entidad.
+5. **Añade comisiones y vinculaciones** con su importe y calendario, sin contar dos veces lo ya incorporado a la TAE o al total informado.
+6. **Prueba otro plazo** para medir cuánto cuesta reducir la cuota.
+7. **Revisa la salida anticipada**: compensación, amortización parcial y cancelación total.
+8. **Comprueba tu margen mensual** con ingresos prudentes y gastos reales, no con el mejor mes del año.
+
+Una tabla sencilla evita que el argumento comercial marque la comparación:
+
+| Concepto | Oferta A | Oferta B |
+|---|---:|---:|
+| Capital financiado |  |  |
+| Plazo y número de cuotas |  |  |
+| TIN |  |  |
+| TAE |  |  |
+| Cuota |  |  |
+| Total a devolver |  |  |
+| Comisión inicial |  |  |
+| Coste de productos vinculados |  |  |
+| Compensación por amortizar |  |  |
+
+Si falta un dato, no inventes una equivalencia. Solicita la documentación y confirma si el total a devolver ya incorpora cada coste antes de sumarlo.
+
+## Señales de alerta al leer una oferta
+
+- La publicidad destaca la cuota, pero oculta el número total de pagos.
+- El TIN aparece en grande y la TAE resulta difícil de localizar.
+- Una rebaja del tipo exige productos cuyo coste no se cuantifica.
+- La comisión se descuenta del dinero recibido, pero el préstamo se calcula sobre el importe completo.
+- No queda claro si el tipo es fijo, variable o promocional durante una parte del plazo.
+- La posibilidad y el coste de amortizar anticipadamente no están explicados.
+- El total a devolver solo aparece bajo supuestos que no coinciden con tu caso.
+
+Una señal de alerta no prueba que la oferta sea irregular. Indica que necesitas una explicación escrita y cifras comparables antes de decidir.
+
+## Errores frecuentes al comparar financiación
+
+El error más común es elegir la cuota menor sin observar el plazo. También es frecuente comparar TIN entre ofertas con comisiones distintas, interpretar la TAE como una comisión que se suma al capital o asumir que cualquier seguro está siempre incluido en ella.
+
+Otro fallo consiste en duplicar costes: por ejemplo, sumar una comisión al total a devolver cuando la documentación ya la incorpora. En sentido contrario, también puedes infravalorar la operación si ignoras un pago inicial descontado del importe recibido o un producto vinculado que pagarás aparte.
+
+Finalmente, no uses una cuota simulada como promesa contractual. Una calculadora permite aislar variables y detectar órdenes de magnitud; la cifra que obliga a las partes procede de la documentación y las condiciones de la oferta real.
+
+## Preguntas frecuentes sobre TIN, TAE y cuota
+
+### ¿Un préstamo con menor TAE siempre es mejor?
+
+Una TAE menor suele indicar un menor coste anual equivalente cuando comparas ofertas realmente homogéneas. No basta si cambian capital, plazo, frecuencia, riesgos o condiciones, ni responde a si puedes asumir la cuota. Contrasta también total a devolver, flexibilidad y requisitos.
+
+### ¿La calculadora usa TIN o TAE?
+
+Usa el TIN anual para estimar la cuota del sistema francés. No calcula la TAE porque no solicita comisiones, gastos ni sus fechas de pago. Introducir la TAE en el campo TIN produciría una simulación conceptualmente incorrecta.
+
+### ¿Por qué al principio pago más intereses que capital?
+
+Cada mes el interés se calcula sobre el saldo pendiente. Al inicio ese saldo es mayor, por lo que una parte más grande de la cuota corresponde a intereses. A medida que amortizas capital, baja el interés mensual y aumenta la parte destinada a devolver principal.
+
+### ¿Conviene reducir cuota o plazo al amortizar?
+
+Acortar plazo suele reducir más intereses si el resto de variables se mantiene, mientras que bajar cuota libera más presupuesto mensual. La decisión depende de tu liquidez, de posibles compensaciones y del cuadro que ofrezca la entidad.
+
+### ¿Qué debo mirar antes de firmar?
+
+Revisa la documentación precontractual y contractual, capital neto recibido, número e importe de cuotas, TIN, TAE, total a devolver, comisiones, productos vinculados, consecuencias de impago y condiciones de amortización anticipada. Si una cifra no se explica, pide el cálculo por escrito.
+
+## Límites de esta guía y siguiente paso
+
+Los ejemplos presuponen tipo fijo, mensualidades iguales, meses equivalentes, primer pago al mes siguiente y ausencia de carencia, comisiones o seguros. No cubren préstamos a tipo variable, cuotas finales elevadas, períodos sin amortización, cambios de condiciones ni efectos jurídicos individuales.
+
+Usa la [calculadora de préstamos](/calculadora-prestamos) para reproducir el caso y comparar el mismo capital con varios plazos. Después sustituye la simulación por los datos de la oferta real y verifica que cada coste esté contabilizado una sola vez. La meta no es encontrar la cuota más baja: es elegir un coste asumible sin perder de vista cuánto pagarás, durante cuánto tiempo y bajo qué condiciones.
 `,
   },
   {
