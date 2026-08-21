@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Heart, Star, ArrowRight, Music, Sparkles, Shapes, MousePointer2 } from 'lucide-react';
 
 const SYMBOLS_DATA = [
@@ -12,7 +12,7 @@ const SYMBOLS_DATA = [
   {
     category: 'Estrellas',
     icon: <Star className="w-4 h-4" />,
-    items: ['⭐', '🌟', '✨', '🌠', '☄', '⭐', '✡', '✴', '✳', '🌌', '🌃', '★', '☆', '✧', '✡', '✦', '✥', '✺', '❂', '✵', '✷', '✸', '✹']
+    items: ['⭐', '🌟', '✨', '🌠', '☄', '✡', '✴', '✳', '🌌', '🌃', '★', '☆', '✧', '✦', '✥', '✺', '❂', '✵', '✷', '✸', '✹']
   },
   {
     category: 'Flechas',
@@ -27,7 +27,7 @@ const SYMBOLS_DATA = [
   {
     category: 'Varios / Nicks',
     icon: <Sparkles className="w-4 h-4" />,
-    items: ['⚛', '☸', '❣', '☯', '☮', '✝', '☪', '☸', '☬', '⊕', '⊖', '⊗', '⊘', '⊙', '⊚', '⊛', '⊜', '⊝', '⊞', '⊟', '⊠', '⊡', '⊿', '◬', '◭', '◮', '✂', '✁', '✃', '✄', '✆', '✇', '✈', '✍', '✎', '✏', '✐', '✑', '✒', '✓', '✔', '✕', '✖', '✗', '✘', '✙', '✚', '✛', '✜', '✝']
+    items: ['⚛', '☸', '☯', '☮', '✝', '☪', '☬', '⊕', '⊖', '⊗', '⊘', '⊙', '⊚', '⊛', '⊜', '⊝', '⊞', '⊟', '⊠', '⊡', '⊿', '◬', '◭', '◮', '✂', '✁', '✃', '✄', '✆', '✇', '✈', '✍', '✎', '✏', '✐', '✑', '✒', '✓', '✔', '✕', '✖', '✗', '✘', '✙', '✚', '✛', '✜']
   },
   {
     category: 'Matemáticos',
@@ -37,12 +37,48 @@ const SYMBOLS_DATA = [
 ];
 
 export default function SimbolosCopiar() {
-  const [copiedSymbol, setCopiedSymbol] = useState<string | null>(null);
+  const [copiedItem, setCopiedItem] = useState<{ id: string; symbol: string } | null>(null);
+  const [copyError, setCopyError] = useState<string | null>(null);
+  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const copyToClipboard = (symbol: string) => {
-    navigator.clipboard.writeText(symbol);
-    setCopiedSymbol(symbol);
-    setTimeout(() => setCopiedSymbol(null), 1500);
+  useEffect(() => () => {
+    if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+  }, []);
+
+  const copyToClipboard = async (symbol: string, id: string) => {
+    setCopyError(null);
+    let copied = false;
+
+    try {
+      if (!navigator.clipboard) throw new Error('Clipboard API no disponible');
+      await navigator.clipboard.writeText(symbol);
+      copied = true;
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = symbol;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        copied = document.execCommand('copy');
+      } catch {
+        copied = false;
+      } finally {
+        textarea.remove();
+      }
+    }
+
+    if (!copied) {
+      setCopiedItem(null);
+      setCopyError(symbol);
+      return;
+    }
+
+    setCopiedItem({ id, symbol });
+    if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+    copyTimeoutRef.current = setTimeout(() => setCopiedItem(null), 1500);
   };
 
   return (
@@ -71,49 +107,64 @@ export default function SimbolosCopiar() {
              </div>
              
              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">
-                 {group.items.map((symbol, sIdx) => (
-                    <button
+                  {group.items.map((symbol, sIdx) => {
+                    const itemId = `${group.category}-${sIdx}`;
+
+                    return (
+                      <button
                         key={sIdx}
-                        onClick={() => copyToClipboard(symbol)}
-                        className={`group relative h-14 rounded-2xl border-2 transition-all flex items-center justify-center text-2xl hover:scale-105 active:scale-95 ${copiedSymbol === symbol ? 'bg-emerald-500 border-emerald-400 text-white shadow-lg' : 'bg-slate-50 border-slate-100 text-slate-700 hover:bg-white hover:border-rose-400 hover:shadow-md'}`}
-                    >
+                        type="button"
+                        onClick={() => copyToClipboard(symbol, itemId)}
+                        aria-label={`Copiar símbolo ${symbol} de ${group.category}`}
+                        className={`group relative h-14 rounded-2xl border-2 transition-all flex items-center justify-center text-2xl hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200 ${copiedItem?.id === itemId ? 'bg-emerald-500 border-emerald-400 text-white shadow-lg' : 'bg-slate-50 border-slate-100 text-slate-700 hover:bg-white hover:border-rose-400 hover:shadow-md'}`}
+                      >
                         {symbol}
                         
                         {/* Tooltip Copiado */}
-                        {copiedSymbol === symbol && (
-                            <div className="absolute -top-10 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded-lg animate-in fade-in zoom-in slide-in-from-bottom-1 uppercase tracking-widest pointer-events-none">
-                                ¡Copiado!
-                            </div>
+                        {copiedItem?.id === itemId && (
+                          <div className="absolute -top-10 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded-lg animate-in fade-in zoom-in slide-in-from-bottom-1 uppercase tracking-widest pointer-events-none">
+                            ¡Copiado!
+                          </div>
                         )}
 
                         <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <MousePointer2 className="w-4 h-4 text-rose-400/50" />
+                          <MousePointer2 className="w-4 h-4 text-rose-400/50" />
                         </div>
-                    </button>
-                 ))}
-             </div>
+                      </button>
+                    );
+                  })}
+              </div>
           </section>
         ))}
       </div>
 
+      <p className="sr-only" role="status" aria-live="polite">
+        {copiedItem ? `Símbolo ${copiedItem.symbol} copiado al portapapeles.` : ''}
+      </p>
+      {copyError && (
+        <p className="w-full max-w-4xl rounded-2xl border border-rose-200 bg-rose-50 p-4 text-center text-sm font-semibold text-rose-800" role="alert">
+          No se pudo copiar automáticamente. Selecciona y copia este símbolo: <code className="select-all rounded bg-white px-2 py-1 text-lg">{copyError}</code>
+        </p>
+      )}
+
       <section className="w-full max-w-4xl prose prose-slate text-slate-600 px-2 lg:px-0">
-          <h2>La Colección de Caracteres más Estética de Internet</h2>
-          <p>Nuestra biblioteca de **símbolos especiales** es la herramienta favorita de influencers y gamers que buscan destacar en plataformas como Instagram, TikTok, Discord o Free Fire. No son emojis estándar, sino glifos Unicode que funcionan en casi cualquier sistema.</p>
+          <h2>Más de 200 símbolos Unicode organizados por categorías</h2>
+          <p>Nuestra biblioteca de <strong>símbolos especiales</strong> reúne corazones, estrellas, flechas, notas musicales y signos matemáticos para perfiles, listas y mensajes. Son caracteres Unicode, y su aspecto puede variar según la fuente, la aplicación y el dispositivo.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-8">
               <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                  <h4 className="font-black text-rose-500 mb-2 uppercase tracking-wide">Para Bios</h4>
+                  <h3 className="font-black text-rose-500 mb-2 uppercase tracking-wide">Para bios</h3>
                   <p className="text-xs">Usa nuestros corazones y estrellas para decorar tu biografía de Instagram sin aplicaciones externas.</p>
               </div>
               <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                  <h4 className="font-black text-blue-500 mb-2 uppercase tracking-wide">Para Juegos</h4>
+                  <h3 className="font-black text-blue-500 mb-2 uppercase tracking-wide">Para juegos</h3>
                   <p className="text-xs">Crea nicks con símbolos matemáticos y flechas que tus oponentes nunca habrán visto.</p>
               </div>
               <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                  <h4 className="font-black text-emerald-500 mb-2 uppercase tracking-wide">Sin Registro</h4>
+                  <h3 className="font-black text-emerald-700 mb-2 uppercase tracking-wide">Sin registro</h3>
                   <p className="text-xs">Uso ilimitado y gratuito. Sin anuncios invasivos. Haz clic, copia y disfruta.</p>
               </div>
           </div>
-          <p>¿Buscas una flecha específica o un signo musical? Navega por nuestras categorías organizadas para encontrar el **signo Unicode** perfecto en segundos. Recuerda que todos estos símbolos son compatibles con el estándar universal, por lo que se verán bien en la mayoría de dispositivos móviles actuales.</p>
+          <p>¿Buscas una flecha específica o un signo musical? Navega por las categorías para encontrar el <strong>signo Unicode</strong> adecuado y prueba siempre el resultado en la aplicación donde vayas a publicarlo.</p>
       </section>
 
     </main>

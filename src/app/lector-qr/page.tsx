@@ -163,13 +163,13 @@ export default function LectorQR() {
       <div className="w-full max-w-3xl bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 flex flex-col gap-6 mb-12">
         <div className="flex flex-col items-center space-y-6">
           
-          <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-slate-300 border-dashed rounded-3xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors focus-within:ring-4 focus-within:ring-indigo-100 focus-within:border-indigo-400">
+          <label htmlFor="qr-image-upload" className="flex flex-col items-center justify-center w-full h-48 border-2 border-slate-300 border-dashed rounded-3xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors focus-within:ring-4 focus-within:ring-indigo-100 focus-within:border-indigo-400">
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <ScanSearch className="w-12 h-12 mb-3 text-slate-400" />
-              <p className="mb-2 text-slate-700 font-bold text-lg">Haz clic o toca para subir la foto del QR</p>
+              <p className="mb-2 text-slate-700 font-bold text-lg">Haz clic, toca o pulsa Enter para subir la foto del QR</p>
               <p className="text-sm text-slate-600">JPG, PNG o WebP (máximo 10 MB)</p>
             </div>
-            <input type="file" className="hidden" accept="image/jpeg,image/png,image/webp" onChange={manejarSubida} aria-label="Subir imagen con código QR" />
+            <input id="qr-image-upload" type="file" className="sr-only" accept="image/jpeg,image/png,image/webp" onChange={manejarSubida} aria-label="Subir imagen con código QR" />
           </label>
 
           {nombreArchivo && <p className="text-sm font-bold bg-indigo-50 items-center justify-center py-2 px-4 rounded-full text-indigo-600">Archivo seleccionado: {nombreArchivo}</p>}

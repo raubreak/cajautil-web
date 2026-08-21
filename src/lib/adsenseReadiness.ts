@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 
 export const LOW_VALUE_TOOL_SLUGS = [
   'texto-invisible',
-  'simbolos-copiar',
   'cps-test',
   'generador-lorem-ipsum',
   'generador-nombres',

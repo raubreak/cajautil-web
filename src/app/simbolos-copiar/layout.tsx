@@ -1,13 +1,12 @@
 import type { Metadata } from 'next';
 
 import ToolEditorialSection from '@/components/ToolEditorialSection';
-import { LOW_VALUE_TOOL_ROBOTS } from '@/lib/adsenseReadiness';
 
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: 'Símbolos para Copiar y Pegar | Corazones, Estrellas y Signos',
-  description: 'Miles de símbolos especiales, flechas, signos y emojis para copiar y pegar en Instagram, TikTok o Facebook. Colección organizada de caracteres estéticos y nicks.',
+  description: 'Más de 200 símbolos Unicode, flechas, corazones, estrellas y signos para copiar y pegar. Colección gratuita organizada por categorías.',
   keywords: [
     "simbolos para copiar",
     "corazones para copiar",
@@ -22,10 +21,21 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Colección de Símbolos y Signos para Copiar y Pegar',
-    description: 'Encuentra todos los símbolos que necesites para tus perfiles sociales en un solo lugar.',
+    description: 'Explora más de 200 símbolos Unicode organizados y copia el que necesites con un clic.',
     url: `${SITE_URL}/simbolos-copiar`,
+    type: 'website',
+    images: ['https://cajautil.com/og-image.png'],
   },
-  robots: LOW_VALUE_TOOL_ROBOTS,
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Símbolos para Copiar y Pegar | CajaUtil',
+    description: 'Más de 200 corazones, estrellas, flechas, notas y signos Unicode organizados por categorías.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const jsonLd = {

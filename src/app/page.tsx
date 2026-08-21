@@ -321,7 +321,7 @@ export default function Home() {
     },
     {
       titulo: 'Símbolos para Copiar',
-      descripcion: 'Miles de símbolos estéticos: corazones, estrellas y signos para destacar en tus redes sociales.',
+      descripcion: 'Más de 200 símbolos Unicode: corazones, estrellas, flechas, notas y signos para copiar al instante.',
       ruta: '/simbolos-copiar',
       Icono: Heart,
       color: 'from-rose-400 to-pink-500',
