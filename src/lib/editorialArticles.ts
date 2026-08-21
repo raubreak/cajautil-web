@@ -846,7 +846,7 @@ Usa el [generador de contrasenas](/generador-contrasenas) para crear una clave u
     slug: 'iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero',
     title: 'IBAN y BIC: evita errores antes de una transferencia',
     description:
-      'Aprende qué validan el IBAN y el BIC, qué no comprueban y qué datos revisar antes de confirmar una transferencia para reducir errores y fraudes.',
+      'Aprende a comprobar un IBAN, distinguirlo del BIC y revisar el beneficiario antes de confirmar una transferencia para reducir errores y fraudes.',
     targetToolUrl: '/validador-iban',
     relatedArticleSlugs: [
       'tin-tae-cuota-mensual-como-comparar-prestamos-de-verdad',
@@ -854,56 +854,179 @@ Usa el [generador de contrasenas](/generador-contrasenas) para crear una clave u
     ],
     tags: ['iban', 'banca', 'transferencias'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:39:00.000Z',
+    updatedAt: '2026-08-21T13:37:48.000Z',
     content: `## Validar no es lo mismo que confirmar titularidad
 
-Un validador de IBAN sirve para detectar errores de formato y de digitos de control. Eso ya evita muchos fallos tipicos al copiar o transcribir una cuenta bancaria. Sin embargo, la herramienta no confirma por si sola que el titular sea correcto ni que la cuenta este operativa.
+Un validador de IBAN sirve para detectar muchos errores de formato y de dígitos de control. Eso reduce fallos al copiar una cuenta desde una factura, un correo o un PDF. Sin embargo, superar una comprobación matemática no demuestra que la cuenta exista, esté activa o pertenezca a la persona a la que quieres pagar.
 
-Esa distincion es importante porque muchas personas interpretan "IBAN valido" como "destinatario correcto". No es asi. La validacion reduce errores mecanicos, pero no sustituye una comprobacion de identidad cuando hay dinero de por medio. El [Banco de Espana define el IBAN como identificador unico](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/serviciospago/traspasostransfe/guia-textual/conceptocaracter/Identificador_unico.html) de la cuenta en Espana y en la zona SEPA.
+La diferencia es crítica: **IBAN formalmente válido** no significa **beneficiario confirmado**. El [Banco de España define el IBAN como identificador único](https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/serviciospago/traspasostransfe/guia-textual/conceptocaracter/Identificador_unico.html) de la cuenta en España y en la zona SEPA, y explica que la entidad ejecuta la transferencia basándose en ese identificador. Por eso debes comprobar tanto la sintaxis como el destinatario.
 
-## Que comprueba realmente un IBAN
+Esta guía explica qué hace exactamente el [validador de IBAN español](/validador-iban), cómo reproducir sus cálculos y qué controles adicionales aplicar antes de enviar dinero. La herramienta procesa el dato localmente en tu navegador y no consulta bases de datos bancarias.
 
-- Longitud adecuada segun el pais.
-- Estructura valida.
-- Digitos de control correctos mediante el algoritmo MOD 97.
+## Cómo se compone un IBAN español
 
-## Que no comprueba
+Un IBAN español tiene siempre 24 caracteres. Los espacios se añaden para facilitar la lectura, pero no forman parte del identificador:
 
-- Nombre del titular.
-- Si la cuenta esta activa.
-- Si pertenece al destinatario que crees.
-- Si el pago solicitado forma parte de un fraude o una suplantacion.
+| Posición | Longitud | Contenido | Ejemplo |
+|---|---:|---|---|
+| 1-2 | 2 | Código de país | ES |
+| 3-4 | 2 | Control internacional del IBAN | 91 |
+| 5-8 | 4 | Código de entidad | 2100 |
+| 9-12 | 4 | Código de oficina | 0418 |
+| 13-14 | 2 | Controles internos del CCC | 45 |
+| 15-24 | 10 | Número de cuenta | 0200051332 |
 
-## Errores comunes al enviar transferencias
+La parte formada por entidad, oficina, controles internos y número de cuenta corresponde al antiguo Código Cuenta Cliente o CCC. Nuestro validador realiza dos verificaciones distintas: el control internacional MOD-97 sobre el IBAN completo y el control nacional de los dos dígitos del CCC.
 
-1. Copiar espacios o caracteres extra.
-2. Confundir un cero con una O o un uno con una I.
-3. Dar por valida una cuenta solo porque el banco no da error inmediato.
-4. No contrastar el IBAN con una fuente independiente.
-5. Aceptar un cambio de cuenta por email sin verificacion adicional.
+No deduzcas el nombre del banco únicamente del código de entidad mostrado por una herramienta. Las entidades pueden cambiar, fusionarse o gestionar numeraciones heredadas. Para identificar la entidad actual o confirmar una cuenta debes consultar documentación bancaria vigente.
 
-## Buenas practicas
+## Qué comprueba exactamente el validador
 
-- Valida el formato antes de confirmar el pago.
-- Si es una transferencia importante, confirma el IBAN por segundo canal.
-- Guarda plantillas seguras solo cuando ya has verificado al destinatario.
-- Si recibes un IBAN nuevo para un proveedor habitual, verificalo antes de pagar.
+La herramienta aplica estas reglas, en este orden:
 
-## Verificacion del beneficiario: que ha cambiado
+1. Elimina espacios y guiones usados para presentar el número.
+2. Convierte las letras a mayúsculas y rechaza caracteres no admitidos.
+3. Exige el prefijo ES y los 24 caracteres del formato español.
+4. Comprueba que los 22 caracteres posteriores a ES sean dígitos.
+5. Ejecuta el algoritmo internacional MOD-97-10.
+6. Recalcula los dos controles internos del CCC español.
 
-Desde el 9 de octubre de 2025, los proveedores de servicios de pago deben ofrecer gratuitamente la [verificacion del beneficiario](https://clientebancario.bde.es/pcb/es/blog/nuevo-servicio-gratuito-de-verificacion-del-beneficiario-a-partir-del-9-de-octubre-de-2025-.html) para transferencias bancarias en euros, tanto ordinarias como inmediatas. El banco comprueba si el nombre indicado coincide con el titular de la cuenta de destino y puede responder que es coincidente, casi coincidente, no coincidente o que no ha podido verificarlo.
+Si todas las pruebas son correctas, el resultado indica que la estructura y los controles son coherentes. Es una conclusión matemática, no una consulta a la entidad. La herramienta tampoco valida IBAN de otros países, porque cada país define su propia longitud y estructura nacional dentro del estándar.
 
-Esta comprobacion mejora la seguridad, pero no convierte cualquier IBAN valido en un destinatario fiable. Si el resultado no coincide y decides continuar, la transferencia se ejecutara hacia el IBAN introducido. Lee el aviso de tu banco, detente ante una discrepancia y confirma el dato por un canal independiente antes de autorizar el envio.
+## Cómo funciona MOD-97 paso a paso
 
-## Cuando mas valor aporta un validador
+El control internacional permite detectar muchos errores de transcripción sin manejar una lista de cuentas. El proceso puede reproducirse así:
 
-Este tipo de herramienta es especialmente util cuando copias un IBAN largo desde una factura, un PDF o una cadena reenviada por mensajeria. En esos casos basta un caracter mal escrito para enviar dinero a una cuenta errada o provocar una devolucion evitable.
+1. Quita espacios y guiones.
+2. Mueve los cuatro primeros caracteres al final.
+3. Sustituye cada letra por su valor: A = 10, B = 11, hasta Z = 35.
+4. Divide la secuencia numérica entre 97.
+5. El IBAN supera este control si el resto es 1.
 
-Tambien ayuda mucho en procesos internos: alta de proveedores, controles manuales antes de pagar y revisiones rapidas cuando no quieres depender solo del formulario del banco.
+Para evitar problemas con números demasiado largos, una implementación puede calcular el resto por bloques o dígito a dígito. No hace falta convertir toda la secuencia a un número de JavaScript de precisión limitada. El validador de CajaUtil procesa bloques cortos y arrastra el resto hasta terminar.
 
-## Idea clave
+## Prueba reproducible con un IBAN de ejemplo
 
-El [validador de IBAN](/validador-iban) te ayuda a evitar fallos mecanicos antes de iniciar la operacion. La verificacion bancaria del beneficiario y tus comprobaciones por un segundo canal cubren riesgos distintos y siguen siendo necesarias cuando el pago es importante o el numero de cuenta ha cambiado.
+Usaremos el IBAN de ejemplo **ES91 2100 0418 4502 0005 1332**. No lo utilices como destino de una transferencia: aquí solo sirve para reproducir los controles matemáticos.
+
+Al quitar los espacios y mover ES91 al final obtenemos:
+
+**21000418450200051332ES91**
+
+Como E = 14 y S = 28, la secuencia termina en **142891**. Al calcular el módulo 97 de la secuencia completa, el resto es **1**. Los controles internos del CCC también producen **45**, que coincide con los caracteres situados después de entidad y oficina. Por tanto, el ejemplo supera las dos comprobaciones.
+
+Ahora cambia solo el último dígito y prueba **ES91 2100 0418 4502 0005 1333**. El resto MOD-97 pasa a ser **28** y los controles internos esperados dejan de coincidir. El validador debe marcarlo como incorrecto. Esta comparación demuestra qué detecta la herramienta sin usar datos personales ni una cuenta real del lector.
+
+Un matiz importante: los dígitos de control detectan muchos cambios accidentales, pero no todos los posibles. También es posible construir deliberadamente otra secuencia que supere las reglas matemáticas. Por eso una validación correcta nunca acredita legitimidad ni titularidad.
+
+## IBAN y BIC o SWIFT no son lo mismo
+
+El IBAN identifica una cuenta dentro de una estructura normalizada. El **BIC**, también llamado **código SWIFT**, identifica a la entidad financiera que participa en la operación. Según la explicación del [Banco de España sobre el código SWIFT](https://clientebancario.bde.es/pcb/es/blog/codigoswift.html), suele tener 8 u 11 caracteres:
+
+| Parte | Longitud | Función |
+|---|---:|---|
+| Entidad | 4 letras | Identifica la institución |
+| País | 2 letras | Indica el país |
+| Localidad | 2 caracteres | Identifica la ubicación |
+| Sucursal | 3 caracteres opcionales | Identifica oficina o servicio concreto |
+
+El BIC no sustituye al IBAN ni confirma el titular. En las operaciones SEPA normalmente basta el IBAN; en determinadas transferencias internacionales la entidad puede solicitar además un BIC/SWIFT u otros datos. Obtén ese código de la documentación oficial o del banco, no lo deduzcas ni lo copies de una fuente no verificada.
+
+Nuestro validador no comprueba códigos BIC. Su alcance se limita a la estructura y controles de un IBAN español. Esta separación evita mostrar como verificado un dato que la herramienta realmente no ha analizado.
+
+## Qué no puede confirmar un IBAN válido
+
+Aunque el resultado sea correcto, todavía no sabes:
+
+- si la cuenta existe o admite transferencias,
+- si está abierta o bloqueada,
+- quién es su titular,
+- si el nombre que te han facilitado coincide con el registrado,
+- si la factura o el mensaje han sido manipulados,
+- si el pago corresponde a una operación legítima,
+- si recuperarás el dinero en caso de error.
+
+La privacidad local también tiene un límite claro. CajaUtil no recibe el IBAN introducido, pero el navegador, el dispositivo, el portapapeles o una extensión maliciosa quedan fuera del control de la página. Utiliza un equipo de confianza y no compartas capturas con datos bancarios completos.
+
+## Verificación del beneficiario: el control que falta al validador
+
+Desde el 9 de octubre de 2025, los proveedores de servicios de pago deben ofrecer gratuitamente la [verificación del beneficiario](https://clientebancario.bde.es/pcb/es/blog/nuevo-servicio-gratuito-de-verificacion-del-beneficiario-a-partir-del-9-de-octubre-de-2025-.html) para transferencias en euros, tanto ordinarias como inmediatas. El banco consulta si el nombre indicado coincide con el asociado al IBAN y puede responder: coincidente, casi coincidente, no coincidente o no verificable.
+
+El [European Payments Council describe este servicio](https://www.europeanpaymentscouncil.eu/what-we-do/other-schemes/verification-payee) como un intercambio inmediato entre los proveedores del pagador y del beneficiario. También aclara que permite verificar determinados datos, pero no identifica por sí mismo a una persona física o jurídica.
+
+Estos controles son complementarios:
+
+| Control | Quién lo hace | Qué aporta |
+|---|---|---|
+| Formato, MOD-97 y CCC | Validador local | Detecta incoherencias matemáticas y estructurales |
+| Verificación del beneficiario | Proveedores bancarios | Compara nombre e IBAN con los datos registrados |
+| Segundo canal | Pagador y destinatario | Confirma que la instrucción procede del contacto esperado |
+
+Si tu banco muestra una discrepancia y decides continuar, los fondos se enviarán al IBAN escrito. No ignores el aviso por presión, urgencia o porque el remitente afirme que se trata de una diferencia menor. Detén el proceso y confirma el dato por un canal que ya conocieras antes del mensaje.
+
+## Protocolo seguro ante un cambio de cuenta
+
+El escenario de mayor riesgo no suele ser un dígito escrito al azar, sino una instrucción aparentemente legítima para cambiar el IBAN de un proveedor, una inmobiliaria o un profesional. Aplica este protocolo:
+
+1. No respondas al mismo correo para verificarlo: la cuenta podría estar comprometida.
+2. Busca un teléfono previamente guardado, un contrato anterior o la web oficial.
+3. Contrasta el IBAN completo con el contacto mediante ese canal independiente; no basta con verificar solo el inicio o los últimos dígitos.
+4. Compara el titular esperado con el resultado de verificación que muestre tu banco.
+5. Si el importe es elevado, realiza primero una transferencia pequeña solo cuando el procedimiento interno lo permita.
+6. No aceptes prisas, amenazas de penalización ni cambios de última hora sin documentación.
+7. Conserva la factura, la confirmación y el justificante de la operación.
+
+Una transferencia de prueba reduce el importe expuesto, pero no demuestra por sí sola que el interlocutor sea legítimo. La confirmación independiente del cambio sigue siendo el paso principal.
+
+## Qué hacer si detectas un error después de enviar
+
+Contacta inmediatamente con tu entidad por sus canales oficiales y facilita los datos de la operación. No esperes a que el destinatario responda si sospechas fraude o has escrito una cuenta equivocada. La posibilidad de detener o recuperar los fondos depende del estado de la transferencia y de la colaboración necesaria; una solicitud rápida mejora las opciones, pero no garantiza la devolución.
+
+Guarda mensajes, facturas, justificantes y cualquier aviso de verificación. Si sospechas una estafa, sigue además las indicaciones de tu entidad y de las autoridades competentes. No envíes un segundo pago para “desbloquear” o recuperar el primero.
+
+## Errores frecuentes al comprobar una cuenta
+
+- Validar un IBAN y asumir que el nombre también está verificado.
+- Copiar el número desde el mismo mensaje sospechoso que se intenta confirmar.
+- Confundir BIC con número de cuenta.
+- Usar un validador de España para un formato extranjero.
+- Compartir el IBAN completo en una captura o conversación pública.
+- Ignorar un resultado “casi coincidente” sin revisar la diferencia.
+- Autorizar el pago porque el importe de prueba llegó, sin confirmar quién controla la cuenta.
+
+## Preguntas frecuentes sobre IBAN, BIC y transferencias
+
+### ¿Un IBAN válido pertenece necesariamente a una cuenta real?
+
+No. Significa que la cadena cumple las reglas comprobadas. Una secuencia puede ser matemáticamente coherente sin que CajaUtil pueda acreditar existencia, estado o titularidad. Esa información requiere controles de la entidad.
+
+### ¿Los espacios hacen que un IBAN sea incorrecto?
+
+No cuando se usan solo para agrupar caracteres. El validador elimina espacios y guiones antes de calcular. No admite otros signos, porque podrían ocultar un error de copia.
+
+### ¿Puedo validar un IBAN de otro país?
+
+No con esta herramienta. CajaUtil exige la estructura española ES más 22 dígitos. Un IBAN extranjero puede ser legítimo y tener otra longitud; debe comprobarse con una herramienta que conozca la estructura de ese país.
+
+### ¿Necesito el BIC para una transferencia SEPA?
+
+Normalmente el IBAN es suficiente en operaciones SEPA. Para otros destinos o circuitos, tu entidad puede pedir BIC/SWIFT y datos adicionales. Sigue las instrucciones del banco para esa operación concreta.
+
+### ¿Qué significa “casi coincidente” en mi banco?
+
+Indica que el nombre introducido no coincide exactamente con el registrado y la entidad puede mostrar el nombre asociado para que revises la diferencia. No corrijas ni continúes automáticamente: confirma que se trata del beneficiario esperado.
+
+## Checklist antes de autorizar la transferencia
+
+1. Copia el IBAN desde una fuente fiable y comprueba sus controles.
+2. Confirma importe, moneda, concepto y fecha.
+3. Revisa el resultado de verificación del beneficiario.
+4. Ante un cambio de cuenta, usa un segundo canal conocido.
+5. Comprueba BIC/SWIFT solo cuando la operación lo requiera.
+6. Lee todos los avisos del banco antes de autorizar.
+7. Guarda el justificante y revisa el estado de la operación.
+
+El [validador de IBAN](/validador-iban) cubre el primer paso y permite reproducir la comprobación con el ejemplo de esta guía. La verificación bancaria y el segundo canal cubren riesgos distintos. Usarlos juntos reduce errores y fraudes, aunque ningún control aislado puede garantizar que una transferencia sea segura.
 `,
   },
   {

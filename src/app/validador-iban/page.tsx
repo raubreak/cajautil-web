@@ -208,6 +208,8 @@ export default function ValidadorIBAN() {
 
         <p>Nuestro <strong>validador de IBAN español</strong> comprueba sus 24 caracteres, el cálculo internacional <strong>MOD-97-10</strong> y los dos dígitos de control internos del CCC español. El resultado detecta muchos errores de formato o transcripción, pero no consulta registros bancarios ni comprueba titularidad, estado de la cuenta o identidad del receptor.</p>
 
+        <p>Consulta la guía de <Link href="/articulos/iban-bic-y-transferencias-como-evitar-errores-antes-de-enviar-dinero">IBAN, BIC y transferencias</Link> para reproducir el algoritmo con un ejemplo, distinguir los controles matemáticos de la verificación del beneficiario y revisar un cambio de cuenta con más seguridad.</p>
+
         <article className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mt-8 mb-8">
           <h3 className="text-xl font-bold mt-0 flex items-center gap-2 text-indigo-600">
             <ShieldCheck className="w-5 h-5" /> Privacidad de la comprobación
