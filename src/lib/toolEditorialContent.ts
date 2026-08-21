@@ -857,6 +857,12 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     relatedArticles: [
       { href: '/articulos/como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo', label: 'Como crear codigos QR utiles y evitar errores de escaneo' },
     ],
+    references: [
+      { href: 'https://github.com/cozmo/jsQR', label: 'jsQR: lector de códigos QR usado en el navegador' },
+      { href: 'https://www.qrcode.com/en/howto/code.html', label: 'DENSO WAVE: estructura y margen del código QR' },
+    ],
+    disclaimer:
+      'La imagen se analiza localmente en el navegador. Revisa siempre el dominio y el contenido extraído antes de abrir un enlace o facilitar datos personales.',
   }),
   'extractor-colores': buildEntry({
     summary: [

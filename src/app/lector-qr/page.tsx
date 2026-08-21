@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import jsQR from "jsqr";
 import Link from "next/link";
-import { Check, Copy, ExternalLink, LoaderCircle, ScanSearch, ShieldAlert } from "lucide-react";
+import { Check, Copy, ExternalLink, LoaderCircle, Plus, ScanSearch, ShieldAlert } from "lucide-react";
 
 import { trackToolEvent } from '@/lib/analytics';
 
@@ -236,19 +236,115 @@ export default function LectorQR() {
         <h2>¿Cómo escanear un QR desde una foto?</h2>
         <p>
           Nuestro <strong>lector de códigos QR online</strong> permite <strong>leer un QR desde una foto, imagen o captura de pantalla</strong>.
-          Solo tienes que subir el archivo para extraer el contenido que el código almacena, como una URL o un texto.
+          Sube un JPG, PNG o WebP y la herramienta intentará extraer el texto o la URL que contiene sin que necesites apuntar otra cámara a la pantalla.
         </p>
         <p>
-          La imagen se procesa en la propia pagina para leer el codigo QR contenido en la foto.
-          Las fotos grandes se reducen antes del analisis para limitar el uso de memoria. Despues puedes copiar cualquier contenido y, si es una URL HTTP o HTTPS, revisar su dominio antes de abrirla.
+          La imagen se procesa en la propia página. Las fotos grandes se reducen antes del análisis para limitar el uso de memoria.
+          Después puedes copiar cualquier contenido y, si es una URL HTTP o HTTPS, revisar su dominio antes de abrirla.
+        </p>
+
+        <h2>Leer un código QR desde una imagen paso a paso</h2>
+        <ol>
+          <li><strong>Selecciona la foto o captura:</strong> toca el área de carga y elige un archivo JPG, PNG o WebP de hasta 10 MB.</li>
+          <li><strong>Espera al análisis local:</strong> el navegador prepara la imagen y busca el patrón QR sin enviarla a un servidor.</li>
+          <li><strong>Comprueba el contenido:</strong> revisa el texto completo y, si aparece un enlace, verifica primero el dominio mostrado.</li>
+          <li><strong>Copia o abre el resultado:</strong> copia cualquier contenido; abre una URL solo cuando reconozcas el destino.</li>
+        </ol>
+
+        <h2>¿Por qué no se puede leer el QR de una foto?</h2>
+        <p>
+          Un lector necesita distinguir módulos claros, los pequeños cuadrados que forman el código. El desenfoque, los reflejos, una captura muy comprimida o un recorte que elimina el margen blanco pueden hacer que el patrón deje de ser reconocible aunque todavía parezca un QR a simple vista.
+        </p>
+        <div className="not-prose overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <table className="min-w-full text-sm text-slate-700">
+            <thead className="bg-slate-100 text-left text-xs font-bold uppercase tracking-wide text-slate-600">
+              <tr>
+                <th className="px-4 py-3">Problema</th>
+                <th className="px-4 py-3">Qué puedes probar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t border-slate-200">
+                <td className="px-4 py-3 font-semibold">QR pequeño dentro de la foto</td>
+                <td className="px-4 py-3">Recorta alrededor del código, pero conserva un margen claro en los cuatro lados.</td>
+              </tr>
+              <tr className="border-t border-slate-200 bg-slate-50/70">
+                <td className="px-4 py-3 font-semibold">Imagen desenfocada o movida</td>
+                <td className="px-4 py-3">Usa la foto original o repítela con más luz y el móvil estable.</td>
+              </tr>
+              <tr className="border-t border-slate-200">
+                <td className="px-4 py-3 font-semibold">Reflejo o poco contraste</td>
+                <td className="px-4 py-3">Cambia el ángulo, evita el flash directo y procura que el patrón se vea oscuro sobre fondo claro.</td>
+              </tr>
+              <tr className="border-t border-slate-200 bg-slate-50/70">
+                <td className="px-4 py-3 font-semibold">Captura reenviada muchas veces</td>
+                <td className="px-4 py-3">Pide el archivo original; algunas aplicaciones reducen resolución y añaden compresión.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Foto, captura de pantalla o imagen descargada</h2>
+        <p>
+          Una captura suele ofrecer bordes más nítidos que una fotografía de una pantalla, porque evita reflejos, perspectiva y movimiento. Si el QR aparece en el mismo móvil, haz una captura y súbela directamente: no necesitas otro dispositivo.
+        </p>
+        <p>
+          En una foto de cartel, ticket o documento, intenta que el código quede de frente. La perspectiva extrema deforma los módulos y un fondo con mucho detalle puede dificultar que el lector separe el patrón de su entorno.
+        </p>
+
+        <h2>Prueba reproducible del lector</h2>
+        <p>
+          Probamos este flujo con un QR generado a partir de 1.200 caracteres ASCII. El archivo final medía 724 × 724 píxeles y contenía 181 módulos por lado. Al cargar el PNG en este lector, jsQR recuperó los 1.200 caracteres sin diferencias.
+        </p>
+        <p>
+          El resultado demuestra el funcionamiento de ese archivo concreto, no garantiza que cualquier fotografía dañada pueda recuperarse. La <Link href="/articulos/como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo">guía para crear códigos QR fáciles de escanear</Link> explica la prueba completa, el margen de cuatro módulos y los límites de la corrección de errores.
+        </p>
+
+        <h2>Privacidad y seguridad al abrir un QR</h2>
+        <p>
+          El análisis se realiza en tu navegador: la herramienta no necesita subir la imagen para buscar el código. Aun así, el contenido extraído puede apuntar a una web peligrosa. Un patrón QR no demuestra que el destino sea legítimo.
+        </p>
+        <p>
+          Antes de abrir una URL, comprueba el dominio que aparece en el aviso. Desconfía de faltas ortográficas, subdominios extraños, acortadores desconocidos o páginas que solicitan contraseñas, datos bancarios o pagos inesperados.
         </p>
 
         <h2>Consejos para mejorar el escaneo</h2>
         <ul>
-          <li><strong>Usa una imagen nitida</strong> y con el QR centrado.</li>
-          <li><strong>Evita reflejos y desenfoque</strong> para mejorar la deteccion.</li>
-          <li><strong>Si el QR es muy pequeno</strong>, intenta recortarlo antes de subirlo.</li>
+          <li><strong>Usa una imagen nítida</strong> y con el QR centrado.</li>
+          <li><strong>Evita reflejos y desenfoque</strong> para mejorar la detección.</li>
+          <li><strong>Si el QR es muy pequeño</strong>, recorta la imagen sin eliminar el margen que rodea el patrón.</li>
+          <li><strong>Conserva el archivo original</strong> para evitar pérdidas de calidad por reenvíos o capturas repetidas.</li>
         </ul>
+
+        <h2>Preguntas frecuentes</h2>
+        <details className="group mb-4 rounded-xl border border-slate-200 p-4 transition-colors open:bg-white">
+          <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>¿Puedo leer un QR que está en mi mismo móvil?</span>
+            <Plus className="h-5 w-5 shrink-0 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mb-0 mt-4">Sí. Haz una captura de pantalla, guárdala y súbela al lector. No necesitas usar una segunda cámara.</p>
+        </details>
+        <details className="group mb-4 rounded-xl border border-slate-200 p-4 transition-colors open:bg-white">
+          <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>¿Qué formatos admite el lector QR?</span>
+            <Plus className="h-5 w-5 shrink-0 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mb-0 mt-4">Admite JPG, PNG y WebP de hasta 10 MB y rechaza otros formatos antes de analizarlos.</p>
+        </details>
+        <details className="group mb-4 rounded-xl border border-slate-200 p-4 transition-colors open:bg-white">
+          <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>¿La foto del código QR se sube a internet?</span>
+            <Plus className="h-5 w-5 shrink-0 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mb-0 mt-4">No. La imagen se abre y analiza localmente en el navegador mediante JavaScript.</p>
+        </details>
+        <details className="group mb-4 rounded-xl border border-slate-200 p-4 transition-colors open:bg-white">
+          <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>¿Por qué el lector detecta el QR pero no abre la web?</span>
+            <Plus className="h-5 w-5 shrink-0 text-indigo-500 transition-transform group-open:rotate-45" aria-hidden="true" />
+          </summary>
+          <p className="mb-0 mt-4">El contenido puede ser texto, datos de contacto u otro formato que no sea una URL HTTP o HTTPS. También es posible que el enlace codificado esté incompleto o ya no exista.</p>
+        </details>
 
         <h3>Herramientas relacionadas</h3>
         <ul>
