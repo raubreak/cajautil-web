@@ -35,7 +35,7 @@ const toolDefinitions = [
   ['cps-test', 'monthly', 0.9],
   ['generador-lorem-ipsum', 'monthly', 0.8],
   ['conversor-unidades', 'monthly', 0.9, '2026-08-21T00:11:03.000Z'],
-  ['calculadora-calorias', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
+  ['calculadora-calorias', 'monthly', 0.9, '2026-08-21T00:48:11.000Z'],
   ['generador-hashtags', 'monthly', 0.9],
   ['calculadora-prestamos', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
   ['generador-firmas-email', 'monthly', 0.9, '2026-08-20T21:25:29.000Z'],
