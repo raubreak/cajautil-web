@@ -1248,59 +1248,178 @@ El interés compuesto no convierte una aportación en riqueza de forma automáti
     relatedArticleSlugs: [],
     tags: ['salud', 'imc', 'calorias'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:52:00.000Z',
-    content: `## Estas calculadoras sirven para orientarte, no para diagnosticarte
+    updatedAt: '2026-08-21T14:38:37.000Z',
+    content: `## Tres cifras útiles si sabes qué pregunta responde cada una
 
-Las herramientas de IMC, metabolismo basal y gasto calorico diario pueden ser utiles para tener una referencia rapida, pero no sustituyen una valoracion clinica ni un plan nutricional personalizado.
+El IMC, el gasto energético en reposo y el TDEE son estimaciones distintas. El **IMC** relaciona peso y altura; la ecuación de **Mifflin-St Jeor** estima energía utilizada en reposo; el **TDEE** multiplica esa estimación por un nivel de actividad. Ninguna de las tres mide directamente tu composición corporal, metabolismo o ingesta necesaria.
 
-Eso no significa que no sirvan. Significa que funcionan mejor cuando se usan como punto de partida y no como sentencia. Una cifra aislada puede orientar; una interpretacion precipitada puede confundir.
+Estas herramientas pueden ayudarte a comprobar una operación y comparar escenarios, pero no diagnostican una enfermedad ni prescriben una dieta. Su valor está en mostrar un punto de partida transparente, con fórmulas y supuestos visibles. Su riesgo aparece cuando una cifra orientativa se interpreta como objetivo obligatorio.
 
-## Que mide cada una
+Esta guía reproduce exactamente los cálculos de CajaUtil, explica dónde entra la incertidumbre y señala cuándo no deberías tomar decisiones solo con una calculadora. El contenido es informativo y se apoya en fuentes sanitarias y en el estudio original de Mifflin-St Jeor; no ha sido presentado como una revisión médica individual.
 
-- **IMC**: relacion entre peso y altura. Sirve como indicador poblacional basico, pero no distingue masa muscular, grasa ni distribucion corporal.
-- **BMR**: energia minima estimada que tu cuerpo necesita en reposo.
-- **TDEE**: gasto diario total segun nivel de actividad.
+## Qué mide el IMC y cómo se calcula
 
-La [Organizacion Mundial de la Salud describe el IMC como un marcador indirecto](https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight) y senala que medidas adicionales, como el perimetro de cintura, pueden ayudar a valorar el contexto. En adultos usa 25 como umbral de sobrepeso y 30 para obesidad, pero en menores los criterios dependen de edad y sexo.
+El índice de masa corporal se obtiene dividiendo el peso en kilogramos entre la altura en metros al cuadrado:
 
-## Por que BMR y TDEE no son una prescripcion
+**IMC = peso (kg) / altura² (m²)**
 
-La formula de Mifflin-St Jeor estima el gasto en reposo a partir de variables como peso, altura, edad y sexo. El TDEE aplica despues un factor de actividad. Cada paso introduce incertidumbre: una persona puede describir su actividad de forma optimista, cambiar su entrenamiento o tener necesidades distintas a la media usada por la ecuacion.
+La [Organización Mundial de la Salud](https://www.who.int/es/news-room/fact-sheets/detail/obesity-and-overweight) describe el IMC como un marcador indirecto de la grasa. Para adultos establece sobrepeso a partir de 25 y obesidad a partir de 30, mientras que en niños y adolescentes deben utilizarse referencias específicas según edad y sexo. La propia OMS señala que otras mediciones, como el perímetro de cintura, pueden aportar contexto adicional.
 
-Por eso el resultado no indica automaticamente cuanto debes comer. Es un punto de partida matematico que necesita observacion y, cuando hay una condicion clinica o un objetivo exigente, valoracion profesional.
+La [calculadora de IMC](/calculadora-imc) utiliza estos rangos generales para personas adultas:
 
-| Resultado | Uso razonable | Lo que no demuestra |
-|---|---|---|
-| IMC | Detectar un rango orientativo en adultos | Composicion corporal o diagnostico individual |
-| BMR | Estimar energia en reposo | Consumo diario total exacto |
-| TDEE | Preparar un punto inicial segun actividad | Necesidad calorica constante o garantizada |
+| IMC sin redondear | Categoría orientativa |
+|---:|---|
+| Menor de 18,5 | Bajo peso |
+| Desde 18,5 hasta menos de 25 | Rango de referencia |
+| Desde 25 hasta menos de 30 | Sobrepeso |
+| Desde 30 hasta menos de 35 | Obesidad I |
+| Desde 35 hasta menos de 40 | Obesidad II |
+| Desde 40 | Obesidad III |
 
-## Donde se suele fallar al interpretarlas
+La categoría describe el resultado matemático, no la salud completa de una persona. No debe utilizarse para diagnosticar síntomas ni para decidir por sí sola un objetivo de peso.
 
-1. Tomar el IMC como conclusion definitiva.
-2. Usar un nivel de actividad irreal.
-3. Ajustar calorias de forma agresiva sin seguimiento.
-4. Ignorar contexto: edad, sexo, entrenamiento, salud metabolica.
-5. Cambiar objetivos cada pocos dias por reaccionar a un dato puntual.
+## Caso reproducible de IMC: 75 kg y 1,75 m
 
-## Como sacarles partido de forma sensata
+Para una persona adulta que pesa 75 kg y mide 175 cm:
 
-Utilizalas para definir un punto de partida. Si quieres perder grasa, ganar masa o mejorar rendimiento, lo razonable es observar tendencia, adherencia y sensaciones durante varias semanas en lugar de reaccionar a un numero aislado.
+1. Convierte 175 cm a 1,75 m.
+2. Eleva la altura al cuadrado: 1,75 × 1,75 = 3,0625.
+3. Divide el peso: 75 / 3,0625 = 24,4897.
+4. Redondea a dos cifras decimales: **IMC 24,49**.
 
-Tambien conviene recordar que las formulas son estimaciones. Dos personas con la misma altura, peso y actividad declarada pueden tener necesidades reales distintas. Por eso el seguimiento en el tiempo suele aportar mas valor que la primera cifra calculada. El [NHS recuerda que el IMC no distingue musculo y grasa](https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/calculate-bmi-for-adults) y recomienda no usar estas herramientas para diagnosticar sintomas.
+La herramienta mostrará «Rango de referencia». También traduce los umbrales 18,5 y 25 a peso para esa altura:
 
-## Cuando conviene ser especialmente prudente
+- límite inferior: 18,5 × 3,0625 = 56,65625 kg, mostrado como **56,66 kg** aproximadamente;
+- umbral superior exclusivo: 25 × 3,0625 = 76,5625 kg, mostrado como **76,56 kg** aproximadamente. El valor exacto de 76,5625 kg ya produce IMC 25 y queda fuera del rango de referencia.
 
-- Si tienes antecedentes medicos relevantes.
-- Si estas en una etapa de crecimiento, embarazo o recuperacion.
-- Si entrenas con mucha intensidad y el IMC no refleja tu composicion corporal.
-- Si la relacion con la comida o el peso te genera ansiedad.
+Ese intervalo solo invierte la fórmula del IMC. NO es una recomendación para adelgazar, engordar o mantener un peso concreto. Dos personas con la misma altura y peso pueden tener diferente masa muscular, distribución de grasa, antecedentes y riesgo metabólico.
 
-En estos casos, una calculadora puede seguir siendo util, pero necesita mucho mas contexto para no inducir decisiones equivocadas.
+## Por qué el IMC no equivale a porcentaje de grasa
 
-## Recomendacion final
+El cálculo solo conoce dos datos. No puede separar músculo, grasa, hueso o agua, ni indicar dónde se distribuye la grasa. El [NHS explica que el IMC no distingue músculo y grasa](https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/calculate-bmi-for-adults) y propone considerar también la cintura para interpretar mejor el contexto.
 
-Usa la [calculadora de IMC](/calculadora-imc) para obtener una referencia de peso y altura, y la [calculadora de calorias y TDEE](/calculadora-calorias) para comparar escenarios de actividad. Si necesitas una interpretacion clinica, estas embarazada, eres menor, tienes una condicion medica o la relacion con el peso y la comida te genera ansiedad, consulta con un profesional sanitario antes de modificar tu alimentacion.
+El NHS también advierte que algunas personas de origen asiático, africano negro, afrocaribeño o de Oriente Medio pueden presentar mayor riesgo de problemas de salud con valores de IMC más bajos. CajaUtil aplica los umbrales generales de adultos y no solicita origen étnico, cintura, analíticas ni antecedentes. Por tanto, el resultado no personaliza riesgo clínico.
+
+El IMC puede resultar especialmente poco representativo en personas con mucha masa muscular. En el extremo contrario, un valor dentro del rango general no garantiza una composición corporal, presión arterial, glucosa o perfil lipídico saludables. Sirve como cribado sencillo, no como examen completo.
+
+## Mifflin-St Jeor estima gasto en reposo, no lo mide
+
+La ecuación publicada por Mifflin, St Jeor y colaboradores en 1990 se tituló [«A new predictive equation for resting energy expenditure in healthy individuals»](https://pubmed.ncbi.nlm.nih.gov/2305711/). Es decir, predice **gasto energético en reposo** o REE. Muchas calculadoras lo etiquetan como BMR o metabolismo basal, pero una medición basal clínica exige condiciones estandarizadas y no es lo mismo que una predicción realizada con cuatro datos.
+
+CajaUtil aplica estas expresiones para personas adultas:
+
+- coeficiente masculino: **REE = 10 × peso + 6,25 × altura − 5 × edad + 5**;
+- coeficiente femenino: **REE = 10 × peso + 6,25 × altura − 5 × edad − 161**.
+
+El peso se introduce en kilogramos, la altura en centímetros y la edad en años. La selección de sexo solo determina cuál de los dos coeficientes publicados usa la fórmula. La calculadora no puede representar por sí sola todas las diferencias individuales de composición corporal, estado hormonal, medicación o enfermedad.
+
+## Cómo pasa CajaUtil del reposo al TDEE
+
+Después de estimar REE, la [calculadora de calorías y TDEE](/calculadora-calorias) lo multiplica por uno de estos factores:
+
+| Nivel seleccionado | Descripción mostrada | Factor aplicado |
+|---|---|---:|
+| Sedentario | Trabajo sentado y poco ejercicio | 1,2 |
+| Ligero | Actividad cotidiana y ejercicio 1-3 días | 1,375 |
+| Moderado | Actividad cotidiana y ejercicio 3-5 días | 1,55 |
+| Intenso | Trabajo activo o ejercicio 6-7 días | 1,725 |
+| Muy intenso | Trabajo físico y ejercicio intenso frecuente | 1,9 |
+
+La operación es **TDEE estimado = REE estimado × factor de actividad**. CajaUtil ofrece estos multiplicadores convencionales como una heurística no validada por el estudio original de Mifflin-St Jeor ni por el modelo del NIDDK. Clasificar toda una semana en una sola etiqueta introduce incertidumbre: dos personas que entrenan cuatro días pueden tener trabajos, desplazamientos, pasos diarios, duración e intensidad muy diferentes.
+
+Por eso el nombre de una categoría no debe elegirse por aspiración. Selecciona el nivel que mejor describa tu actividad real y compara escenarios si dudas. Un factor más alto no significa que estés «mejor» ni autoriza automáticamente una ingesta concreta.
+
+## Caso reproducible de REE y TDEE
+
+Supongamos 35 años, 75 kg, 175 cm y actividad moderada, cuyo factor es 1,55.
+
+Con el coeficiente masculino:
+
+**REE = 10 × 75 + 6,25 × 175 − 5 × 35 + 5 = 1.673,75 kcal/día**
+
+**TDEE = 1.673,75 × 1,55 = 2.594,31 kcal/día**
+
+La herramienta redondea los resultados finales y muestra **1.674 kcal/día en reposo** y **2.594 kcal/día de TDEE**.
+
+Con los mismos datos y el coeficiente femenino:
+
+**REE = 10 × 75 + 6,25 × 175 − 5 × 35 − 161 = 1.507,75 kcal/día**
+
+**TDEE = 1.507,75 × 1,55 = 2.337,01 kcal/día**
+
+La pantalla mostrará **1.508** y **2.337 kcal/día** respectivamente. Puedes reproducir ambos casos cambiando solo el selector de sexo. La diferencia procede del coeficiente de la fórmula, no de una medición individual del metabolismo.
+
+## Qué significa realmente el TDEE calculado
+
+TDEE significa gasto energético diario total. En una estimación ideal intenta reunir energía en reposo, actividad cotidiana, ejercicio y otros componentes del gasto. CajaUtil no mide cada componente: aplica un multiplicador fijo al REE estimado.
+
+El resultado tampoco predice exactamente qué ocurrirá si consumes esa cantidad. El registro de alimentos tiene errores, la actividad cambia y el cuerpo no responde como una cuenta lineal invariable. El [Body Weight Planner del NIDDK](https://www.niddk.nih.gov/bwp), una herramienta de los Institutos Nacionales de Salud de Estados Unidos, utiliza un modelo dinámico más complejo para proyectar cambios de peso y aun así declara incertidumbre, límites de población y la necesidad de consejo profesional.
+
+Usa el TDEE de CajaUtil para responder preguntas comparativas: cuánto cambia la estimación al modificar el nivel de actividad, qué parte procede de la fórmula de reposo y qué orden de magnitud resulta. No lo conviertas automáticamente en una dieta ni en una meta diaria rígida.
+
+## Método para auditar una estimación
+
+1. **Comprueba las unidades**: kilogramos, centímetros y años completos.
+2. **Identifica el supuesto de actividad**: cada factor resume trabajo, desplazamientos, actividad cotidiana y ejercicio.
+3. **Guarda el supuesto**: anota qué datos y factor utilizaste para poder reproducirlo.
+4. **Compara solo escenarios hipotéticos**: cambiar el factor muestra cómo responde la fórmula, no cómo responderá una persona.
+5. **Separa gasto estimado e ingesta**: el resultado no determina cuánto debes comer ni qué ajuste sería adecuado.
+6. **Busca valoración profesional** cuando haya síntomas, medicación, enfermedad, embarazo, lactancia, crecimiento o un objetivo que requiera intervención nutricional.
+
+Este método no convierte la calculadora en una medición metabólica. Evita algo más básico: tratar una cifra sin contexto como una verdad exacta.
+
+## Cuándo no deberías usar estas cifras para actuar por tu cuenta
+
+El NHS limita su calculadora de IMC para adultos y desaconseja usarla durante embarazo, en menores, ante un trastorno de la conducta alimentaria diagnosticado o sospechado y cuando existe una condición que afecta a la altura. El Body Weight Planner del NIDDK también excluye menores, embarazo y lactancia.
+
+Aplica especial prudencia si:
+
+- tienes menos de 18 años;
+- estás embarazada, en lactancia o en recuperación;
+- existe una enfermedad, medicación o condición que pueda afectar al peso o al gasto;
+- entrenas a un nivel que hace poco representativo el IMC;
+- tienes un trastorno de la conducta alimentaria o sospechas que puede existir;
+- contar calorías, pesarte o comparar cifras te genera ansiedad o conductas compulsivas.
+
+En estos casos, no necesitas una cifra más precisa de una web: necesitas una evaluación adecuada al contexto. Si hay síntomas o preocupación por tu salud, consulta a un profesional sanitario.
+
+## Cómo evitar que el seguimiento se convierta en obsesión
+
+Una calculadora es una herramienta, no una puntuación personal. Repetir el cálculo varias veces al día no añade información porque edad, altura y fórmula no han cambiado. Tampoco tiene sentido reaccionar a cada variación de peso, que puede deberse a hidratación, contenido digestivo y otros cambios normales.
+
+Define antes qué pregunta quieres responder. Si solo deseas comprobar la fórmula, basta con un cálculo. Si un profesional te ha indicado observar una tendencia, acuerda la frecuencia y las variables relevantes. Si el seguimiento empeora tu relación con la comida, el cuerpo o el ejercicio, detén el uso y busca ayuda cualificada.
+
+## Privacidad y límites técnicos
+
+Ambas calculadoras realizan la operación en la página con los datos introducidos. No requieren cuenta ni crean un historial clínico en CajaUtil. La analítica general del sitio solo se activa si la aceptas, pero eso no convierte el dispositivo en un entorno clínico protegido: evita introducir información que no sea necesaria y no compartas capturas con datos personales.
+
+La precisión decimal de la pantalla tampoco elimina la incertidumbre del modelo. Mostrar 2.594 kcal no significa que la necesidad real se conozca con una precisión de una kilocaloría; significa que el código redondeó el resultado de la fórmula al entero más cercano.
+
+## Preguntas frecuentes sobre IMC, REE y TDEE
+
+### ¿Un IMC normal significa que estoy sano?
+
+No. Solo indica que peso y altura producen un valor dentro del rango general. No mide composición corporal, analíticas, presión arterial, alimentación, actividad ni salud mental. Interprétalo como una referencia, no como un certificado.
+
+### ¿BMR y REE son exactamente lo mismo?
+
+No en una medición clínica estricta. La ecuación de Mifflin-St Jeor se publicó para predecir gasto energético en reposo. Muchas herramientas usan BMR como término popular, pero CajaUtil aclara que el resultado es una estimación de reposo y no una calorimetría.
+
+### ¿El TDEE indica cuántas calorías debo comer?
+
+No automáticamente. Es una estimación del gasto basada en un factor de actividad. Una recomendación de ingesta requiere considerar objetivo, salud, evolución, composición de la dieta y contexto personal.
+
+### ¿Por qué el resultado cambia tanto con la actividad?
+
+Porque el TDEE se obtiene multiplicando por un factor. Pasar de 1,2 a 1,55 incrementa matemáticamente el resultado un 29,2 % respecto al escenario sedentario, aunque tus datos físicos no cambien. Esa sensibilidad es una razón para elegir el nivel de forma conservadora.
+
+### ¿Puedo usar estas calculadoras si soy menor?
+
+No con los rangos y ecuaciones presentados como guía individual. El IMC infantil se interpreta por edad y sexo, y las necesidades energéticas durante el crecimiento requieren referencias específicas.
+
+## Recomendación final
+
+Usa la [calculadora de IMC](/calculadora-imc) para comprobar la relación entre peso y altura y la [calculadora de calorías y TDEE](/calculadora-calorias) para reproducir Mifflin-St Jeor y comparar factores de actividad. Conserva los supuestos, interpreta el resultado como intervalo orientativo y no transformes una estimación matemática en diagnóstico o prescripción.
 `,
   },
   {

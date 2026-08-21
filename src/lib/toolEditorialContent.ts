@@ -467,37 +467,37 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
   }),
   'calculadora-calorias': buildEntry({
     summary: [
-      'Calcular metabolismo basal y gasto energetico diario ayuda a fijar un punto de partida para mantenimiento, perdida de peso o ganancia de masa, siempre como estimacion.',
-      'El valor mas util no es la cifra perfecta, sino entender como cambian tus necesidades segun actividad, peso, altura y constancia en el tiempo.',
+      'Estimar gasto energetico en reposo y gasto diario permite reproducir una formula y comparar escenarios de actividad, siempre como referencia y no como prescripcion.',
+      'El resultado muestra como cambia la estimacion segun actividad, peso, altura y edad; no determina necesidades individuales.',
     ],
     sections: [
       {
-        title: 'Que es BMR y que es TDEE',
+        title: 'Que son REE, BMR y TDEE',
         paragraphs: [
-          'El BMR o metabolismo basal estima la energia minima que el cuerpo necesita en reposo. El TDEE o gasto diario total anade el efecto de la actividad cotidiana y el ejercicio.',
+          'Mifflin-St Jeor predice gasto energetico en reposo (REE). Aunque muchas calculadoras lo llaman BMR o metabolismo basal, no equivale a una medicion clinica en condiciones basales. El TDEE aplica despues un factor de actividad.',
           'Por eso dos personas con peso similar pueden necesitar calorias distintas si su nivel de movimiento es muy diferente.',
         ],
       },
       {
-        title: 'Como usar el resultado con sentido practico',
+        title: 'Como interpretar el resultado sin convertirlo en una pauta',
         bullets: [
-          'Usa el TDEE como punto de partida y revisa la evolucion durante varias semanas.',
-          'No elijas un nivel de actividad mas alto de lo real por optimismo.',
-          'Pequenos ajustes sostenidos suelen funcionar mejor que recortes extremos.',
-          'La adherencia y la calidad del plan importan tanto como el numero inicial.',
+          'Comprueba los datos, las unidades y el factor utilizados para poder reproducir el calculo.',
+          'Compara factores solo como escenarios hipoteticos de la formula.',
+          'La calculadora no determina que deficit, superavit o ajuste seria adecuado para una persona.',
+          'Una diferencia entre el resultado y el gasto real no permite deducir por si sola una pauta nutricional.',
         ],
       },
       {
         title: 'Errores comunes',
         paragraphs: [
-          'Se falla mucho al sobrestimar actividad y al buscar cambios rapidos. Tambien es frecuente ignorar que las formulas son estimaciones y que el cuerpo humano no responde como una calculadora exacta.',
-          'La observacion de tendencia, energia, hambre y rendimiento sigue siendo clave para ajustar cualquier estrategia nutricional.',
+          'Es frecuente sobrestimar la actividad o ignorar que las formulas son aproximaciones poblacionales y no mediciones individuales.',
+          'El resultado tampoco prescribe ingesta ni permite evaluar por si solo una estrategia nutricional.',
         ],
       },
     ],
     faqs: [
       { question: 'La formula acierta siempre', answer: 'No. Ofrece una aproximacion util, pero cada persona puede desviarse respecto al valor estimado.' },
-      { question: 'Si quiero perder peso debo bajar mucho las calorias desde el primer dia', answer: 'No suele ser lo mas recomendable. Ajustes moderados y sostenibles suelen facilitar mejor adherencia y mejores resultados.' },
+      { question: 'Si quiero perder peso cuanto debo bajar las calorias', answer: 'La calculadora no puede prescribir un deficit. El ajuste depende del contexto, la salud y el seguimiento individual; consulta a un profesional cualificado si necesitas una pauta.' },
       { question: 'El TDEE cambia con el tiempo', answer: 'Si. Puede variar por peso, composicion corporal, actividad, descanso y otros factores.' },
     ],
     relatedTools: [
@@ -509,11 +509,11 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/articulos/imc-calorias-y-tdee-como-leer-estas-metricas-sin-obsesionarte', label: 'IMC, calorias y TDEE: como leer estas metricas sin obsesionarte' },
     ],
     references: [
-      { href: 'https://pubmed.ncbi.nlm.nih.gov/2305711/', label: 'PubMed: ecuacion de Mifflin-St Jeor' },
-      { href: 'https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight', label: 'OMS: interpretacion del IMC y contexto de salud' },
+      { href: 'https://pubmed.ncbi.nlm.nih.gov/2305711/', label: 'PubMed: ecuacion de Mifflin-St Jeor para gasto en reposo' },
+      { href: 'https://www.niddk.nih.gov/bwp', label: 'NIDDK: modelo dinamico Body Weight Planner y limites de uso' },
     ],
     disclaimer:
-      'Estimacion orientativa para planificacion personal. No sustituye consejo nutricional o medico individual.',
+      'Estimacion orientativa para comparacion matematica general. No sustituye consejo nutricional o medico individual.',
   }),
   'calculadora-interes-compuesto': buildEntry({
     summary: [

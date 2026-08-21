@@ -16,7 +16,7 @@ const toolDefinitions = [
   ['compresor-webp', 'monthly', 0.9, '2026-08-21T11:11:30.000Z'],
   ['calculadora-hipotecas', 'monthly', 0.9, '2026-08-20T23:53:43.000Z'],
   ['generador-enlace-whatsapp', 'monthly', 0.9, '2026-08-21T10:39:14.000Z'],
-  ['calculadora-imc', 'monthly', 0.9, '2026-08-21T11:11:30.000Z'],
+  ['calculadora-imc', 'monthly', 0.9, '2026-08-21T14:38:37.000Z'],
   ['calculadora-porcentajes', 'monthly', 0.9, '2026-08-21T10:39:14.000Z'],
   ['calculadora-iva', 'monthly', 0.9, '2026-08-21T13:04:59.000Z'],
   ['calculadora-sueldo-neto', 'monthly', 0.9, '2026-08-21T12:05:35.000Z'],
@@ -35,7 +35,7 @@ const toolDefinitions = [
   ['cps-test', 'monthly', 0.9],
   ['generador-lorem-ipsum', 'monthly', 0.8],
   ['conversor-unidades', 'monthly', 0.9, '2026-08-21T00:11:03.000Z'],
-  ['calculadora-calorias', 'monthly', 0.9, '2026-08-21T10:33:42.000Z'],
+  ['calculadora-calorias', 'monthly', 0.9, '2026-08-21T14:38:37.000Z'],
   ['generador-hashtags', 'monthly', 0.9],
   ['calculadora-prestamos', 'monthly', 0.9, '2026-08-21T13:23:35.000Z'],
   ['generador-firmas-email', 'monthly', 0.9, '2026-08-21T10:55:31.000Z'],
@@ -56,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
 
   return [
-    { url: SITE_URL, lastModified: new Date('2026-08-21T10:46:33.000Z'), changeFrequency: 'weekly', priority: 1 },
+    { url: SITE_URL, lastModified: new Date('2026-08-21T14:38:37.000Z'), changeFrequency: 'weekly', priority: 1 },
     { url: `${SITE_URL}/articulos`, lastModified: latestArticleUpdate, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE_URL}/sobre-nosotros`, lastModified: new Date('2026-08-21T11:42:59.000Z'), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/contacto`, lastModified: new Date('2026-08-21T10:46:33.000Z'), changeFrequency: 'monthly', priority: 0.6 },

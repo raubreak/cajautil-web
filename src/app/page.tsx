@@ -361,7 +361,7 @@ export default function Home() {
     },
     {
       titulo: 'Calculadora de Calorías',
-      descripcion: 'Calcula tu metabolismo basal (BMR) y gasto diario (TDEE) con la fórmula Mifflin-St Jeor.',
+      descripcion: 'Estima gasto energético en reposo (REE) y gasto diario (TDEE) con Mifflin-St Jeor y un factor orientativo.',
       ruta: '/calculadora-calorias',
       Icono: Flame,
       color: 'from-orange-400 to-red-500',

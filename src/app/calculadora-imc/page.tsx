@@ -21,7 +21,7 @@ const BMI_CATEGORIES = [
     valueClass: 'text-emerald-600',
     badgeClass: 'bg-emerald-700 ring-emerald-200',
     textClass: 'text-emerald-700',
-    desc: 'El IMC está entre 18,5 y 24,9; esto no equivale por sí solo a un diagnóstico de salud.',
+    desc: 'El IMC está desde 18,5 hasta menos de 25; esto no equivale por sí solo a un diagnóstico de salud.',
   },
   {
     max: 30,
@@ -61,6 +61,22 @@ const BMI_CATEGORIES = [
   },
 ] as const;
 
+function formatBmi(rawBmi: number): string {
+  const roundedBmi = Math.round(rawBmi * 100) / 100;
+  const crossedUpperThreshold = BMI_CATEGORIES.find(
+    ({ max }) => Number.isFinite(max) && rawBmi < max && roundedBmi >= max,
+  )?.max;
+
+  if (crossedUpperThreshold !== undefined) {
+    return `<${crossedUpperThreshold.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
+  }
+
+  return roundedBmi.toLocaleString('es-ES', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
 export default function CalculadoraIMC() {
   const [peso, setPeso] = useState('75');
   const [altura, setAltura] = useState('175');
@@ -79,14 +95,12 @@ export default function CalculadoraIMC() {
     const rawBmi = pesoValue / (alturaMetros * alturaMetros);
     if (!Number.isFinite(rawBmi) || rawBmi <= 0) return null;
 
-    const bmi = Math.round(rawBmi * 10) / 10;
-
     return {
-      bmi,
-      category: BMI_CATEGORIES.find(({ max }) => bmi < max) ?? BMI_CATEGORIES.at(-1)!,
+      bmiDisplay: formatBmi(rawBmi),
+      category: BMI_CATEGORIES.find(({ max }) => rawBmi < max) ?? BMI_CATEGORIES.at(-1)!,
       referenceWeight: {
         min: 18.5 * alturaMetros * alturaMetros,
-        max: 24.9 * alturaMetros * alturaMetros,
+        maxExclusive: 25 * alturaMetros * alturaMetros,
       },
     };
   })();
@@ -164,7 +178,7 @@ export default function CalculadoraIMC() {
               <h2 className="text-slate-700 text-sm font-bold uppercase tracking-widest mb-4 z-10">IMC estimado</h2>
               <div className="z-10 bg-white/60 p-6 rounded-full w-40 h-40 flex items-center justify-center mb-6 shadow-inner border border-white">
                 <output htmlFor="bmi-weight bmi-height" className={`text-5xl font-black tracking-tighter tabular-nums ${calculation.category.valueClass}`}>
-                  {calculation.bmi.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
+                  {calculation.bmiDisplay}
                 </output>
               </div>
               <div className="z-10 mb-2">
@@ -176,7 +190,7 @@ export default function CalculadoraIMC() {
                 {calculation.category.desc}
               </p>
               <p className="mt-4 text-sm font-semibold text-slate-600">
-                Para esta altura, un IMC entre 18,5 y 24,9 corresponde aproximadamente a {calculation.referenceWeight.min.toLocaleString('es-ES', { maximumFractionDigits: 1 })}-{calculation.referenceWeight.max.toLocaleString('es-ES', { maximumFractionDigits: 1 })} kg.
+                 Para esta altura, el intervalo matemático comienza aproximadamente en {calculation.referenceWeight.min.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kg. El umbral superior se obtiene con IMC 25 y es aproximadamente {calculation.referenceWeight.maxExclusive.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kg; la categoría se calcula antes de redondearlo.
               </p>
             </>
           ) : (
@@ -204,7 +218,8 @@ export default function CalculadoraIMC() {
          <p>El IMC no distingue entre masa grasa y masa muscular. Deportistas, personas mayores o perfiles con condiciones concretas pueden obtener un resultado poco representativo. Los menores de 18 años necesitan percentiles por edad y sexo, por lo que no deben interpretar este cálculo con rangos de adultos.</p>
 
          <h3 className="text-lg font-bold">Cómo usar bien el resultado</h3>
-         <p>Puede servirte como punto de partida para seguir tu evolución o detectar si conviene revisar hábitos. El rango de peso mostrado solo traduce matemáticamente los límites de IMC para la altura indicada: no es un objetivo personal ni una recomendación. Si tienes dudas sobre composición corporal, salud metabólica o nutrición, lo ideal es complementarlo con otras mediciones y con el criterio de un profesional.</p>
+          <p>Puede servirte como punto de partida para seguir tu evolución o detectar si conviene revisar hábitos. El rango de peso mostrado solo traduce matemáticamente los límites de IMC para la altura indicada: no es un objetivo personal ni una recomendación. Si tienes dudas sobre composición corporal, salud metabólica o nutrición, lo ideal es complementarlo con otras mediciones y con el criterio de un profesional.</p>
+         <p>Consulta la guía de <Link href="/articulos/imc-calorias-y-tdee-como-leer-estas-metricas-sin-obsesionarte">IMC, gasto energético en reposo y TDEE</Link> para reproducir un caso completo, entender los límites y evitar convertir un rango poblacional en un diagnóstico individual.</p>
        </section>
 
       {/* FAQ SECTION */}
