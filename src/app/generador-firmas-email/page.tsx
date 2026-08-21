@@ -13,6 +13,8 @@ const COLORS = [
   { name: 'Oro', hex: '#b45309' },
   { name: 'Púrpura', hex: '#7c3aed' },
 ];
+const MAX_LOGO_SIZE = 2 * 1024 * 1024;
+const ALLOWED_LOGO_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
 const normalizeWebsite = (website: string) => {
   const trimmedWebsite = website.trim();
@@ -28,6 +30,8 @@ export default function GeneradorFirmasEmail() {
   const [website, setWebsite] = useState('www.cajautil.com');
   const [email, setEmail] = useState('');
   const [logo, setLogo] = useState<string | null>(null);
+  const [logoFileName, setLogoFileName] = useState('');
+  const [logoError, setLogoError] = useState<string | null>(null);
   const [themeColor, setThemeColor] = useState('#2563eb');
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState<string | null>(null);
@@ -35,11 +39,42 @@ export default function GeneradorFirmasEmail() {
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (ev) => setLogo(ev.target?.result as string);
-      reader.readAsDataURL(file);
+    setLogoError(null);
+
+    if (!file) return;
+
+    if (!ALLOWED_LOGO_TYPES.has(file.type)) {
+      setLogo(null);
+      setLogoFileName('');
+      setLogoError('Selecciona una imagen PNG, JPG o WebP.');
+      e.target.value = '';
+      return;
     }
+
+    if (file.size > MAX_LOGO_SIZE) {
+      setLogo(null);
+      setLogoFileName('');
+      setLogoError('La imagen no puede superar los 2 MB.');
+      e.target.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onerror = () => {
+      setLogo(null);
+      setLogoFileName('');
+      setLogoError('No se pudo leer la imagen. Prueba con otro archivo.');
+    };
+    reader.onload = (event) => {
+      if (typeof event.target?.result !== 'string') {
+        setLogoError('No se pudo leer la imagen. Prueba con otro archivo.');
+        return;
+      }
+
+      setLogo(event.target.result);
+      setLogoFileName(file.name);
+    };
+    reader.readAsDataURL(file);
   };
 
   const copyWithSelection = () => {
@@ -164,43 +199,43 @@ export default function GeneradorFirmasEmail() {
         <section className="lg:col-span-5 bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 space-y-5">
           <div className="grid grid-cols-2 gap-4">
               <div>
-                 <label htmlFor="signature-name" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Nombre Completo</label>
+                 <label htmlFor="signature-name" className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1 block">Nombre Completo</label>
                  <div className="relative"><UserCircle className="absolute left-3 top-3 w-4 h-4 text-slate-300" />
                  <input id="signature-name" type="text" autoComplete="name" value={name} onChange={e => setName(e.target.value)} className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-400" /></div>
                </div>
                <div>
-                 <label htmlFor="signature-job" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Cargo / Puesto</label>
+                 <label htmlFor="signature-job" className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1 block">Cargo / Puesto</label>
                  <div className="relative"><Briefcase className="absolute left-3 top-3 w-4 h-4 text-slate-300" />
                  <input id="signature-job" type="text" autoComplete="organization-title" value={job} onChange={e => setJob(e.target.value)} className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-400" /></div>
                </div>
           </div>
 
           <div>
-            <label htmlFor="signature-company" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Empresa</label>
+             <label htmlFor="signature-company" className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1 block">Empresa</label>
             <input id="signature-company" type="text" autoComplete="organization" value={company} onChange={e => setCompany(e.target.value)} className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-400" />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="signature-phone" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Teléfono</label>
+                 <label htmlFor="signature-phone" className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1 block">Teléfono</label>
                 <div className="relative"><Phone className="absolute left-3 top-3 w-4 h-4 text-slate-300" />
                 <input id="signature-phone" type="tel" autoComplete="tel" value={phone} onChange={e => setPhone(e.target.value)} className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-400" /></div>
               </div>
               <div>
-                <label htmlFor="signature-website" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Web</label>
+                 <label htmlFor="signature-website" className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1 block">Web</label>
                 <div className="relative"><Globe className="absolute left-3 top-3 w-4 h-4 text-slate-300" />
                 <input id="signature-website" type="text" inputMode="url" autoComplete="url" value={website} onChange={e => setWebsite(e.target.value)} className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-400" /></div>
               </div>
           </div>
 
           <div>
-            <label htmlFor="signature-email" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Correo electrónico</label>
+             <label htmlFor="signature-email" className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1 block">Correo electrónico</label>
             <div className="relative"><Mail className="absolute left-3 top-3 w-4 h-4 text-slate-300" />
             <input id="signature-email" type="email" inputMode="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="nombre@empresa.com (opcional)" className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-400" /></div>
           </div>
 
           <fieldset>
-             <legend className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 block">Color Corporativo</legend>
+             <legend className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 block">Color Corporativo</legend>
              <div className="flex gap-2">
                 {COLORS.map(c => (
                   <button
@@ -217,12 +252,16 @@ export default function GeneradorFirmasEmail() {
           </fieldset>
 
           <div>
-            <label htmlFor="signature-logo" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Foto / Logo</label>
-            <label htmlFor="signature-logo" className="flex items-center gap-3 p-4 bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:bg-emerald-50 hover:border-emerald-200 transition group">
-                <Upload className="w-5 h-5 text-slate-300 group-hover:text-emerald-500" />
-                <span className="text-xs font-bold text-slate-500">Subir imagen...</span>
-                <input id="signature-logo" type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" />
-            </label>
+             <label htmlFor="signature-logo" className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1 block">Foto / Logo</label>
+             <label htmlFor="signature-logo" className="flex items-center gap-3 p-4 bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:bg-emerald-50 hover:border-emerald-200 focus-within:ring-4 focus-within:ring-emerald-100 focus-within:border-emerald-400 transition group">
+                 <Upload className="w-5 h-5 text-slate-300 group-hover:text-emerald-500" />
+                 <span className="text-xs font-bold text-slate-500">Subir PNG, JPG o WebP</span>
+                 <input id="signature-logo" type="file" accept="image/jpeg,image/png,image/webp" onChange={handleLogoUpload} aria-describedby="signature-logo-help signature-logo-status" className="sr-only" />
+             </label>
+             <p id="signature-logo-help" className="mt-2 text-xs text-slate-500">Máximo 2 MB. La imagen se procesa únicamente en tu navegador.</p>
+             <p id="signature-logo-status" className={`mt-2 text-xs font-semibold ${logoError ? 'text-rose-700' : 'text-emerald-700'}`} role={logoError ? 'alert' : 'status'} aria-live="polite">
+               {logoError ?? (logoFileName ? `Imagen seleccionada: ${logoFileName}` : '')}
+             </p>
           </div>
         </section>
 
@@ -230,7 +269,7 @@ export default function GeneradorFirmasEmail() {
         <section className="lg:col-span-7 flex flex-col gap-6">
            <div className="bg-white rounded-[40px] shadow-2xl p-10 border border-slate-100 flex flex-col items-center min-h-[400px]">
               <div className="w-full flex items-center justify-between mb-8">
-                 <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest">Vista Previa</h2>
+                 <h2 className="text-xs font-black text-slate-600 uppercase tracking-widest">Vista Previa</h2>
                  <button
                     type="button"
                     onClick={copySignatureHTML}
