@@ -51,9 +51,8 @@ export default function ExtractorColores() {
   const extractMainColors = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     const imageData = ctx.getImageData(0, 0, width, height).data;
     const colorCounts: Record<string, number> = {};
-    const step = 8;
 
-    for (let i = 0; i < imageData.length; i += 4 * step) {
+    for (let i = 0; i < imageData.length; i += 4) {
       const r = imageData[i];
       const g = imageData[i + 1];
       const b = imageData[i + 2];
