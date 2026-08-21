@@ -28,22 +28,13 @@ export const metadata: Metadata = {
 
 const aboutJsonLd = {
   "@context": "https://schema.org",
+  "@id": "https://cajautil.com/sobre-nosotros/#about",
   "@type": "AboutPage",
+  url: "https://cajautil.com/sobre-nosotros",
   name: "Sobre nosotros - CajaUtil.com",
   description: "Información sobre el equipo, la misión y la metodología editorial de CajaUtil.com",
   mainEntity: {
-    "@type": "Organization",
-    name: "CajaUtil.com",
-    url: "https://cajautil.com",
-    logo: "https://cajautil.com/og-image.png",
-    description: "CajaUtil.com ofrece herramientas web gratuitas: calculadoras financieras, generadores, conversores y utilidades digitales con procesamiento local.",
-    foundingDate: "2024",
-    contactPoint: {
-      "@type": "ContactPoint",
-      email: "hola@cajautil.com",
-      contactType: "customer service",
-      availableLanguage: "Spanish",
-    },
+    "@id": "https://cajautil.com/#organization",
   },
 };
 

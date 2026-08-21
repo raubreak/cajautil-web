@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     "herramientas web gratuitas",
     "utilidades online"
   ],
-  authors: [{ name: SITE_NAME }],
-  creator: SITE_NAME,
+  authors: [{ name: AUTHOR_PROFILE.fullName, url: `${SITE_URL}/sobre-nosotros` }],
+  creator: AUTHOR_PROFILE.fullName,
   publisher: SITE_NAME,
   robots: {
     index: true,
@@ -83,6 +83,9 @@ const websiteJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: "Herramientas online gratuitas: calculadoras, generadores y conversores.",
+  publisher: {
+    "@id": `${SITE_URL}/#organization`,
+  },
 };
 
 const organizationJsonLd = {
@@ -91,8 +94,19 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
+  description: 'CajaUtil.com ofrece herramientas web gratuitas: calculadoras, generadores, conversores y utilidades digitales con procesamiento local.',
+  foundingDate: '2024',
   logo: `${SITE_URL}/og-image.png`,
-  sameAs: [AUTHOR_PROFILE.githubUrl],
+  email: 'hola@cajautil.com',
+  founder: {
+    '@id': `${SITE_URL}/#person`,
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'hola@cajautil.com',
+    contactType: 'customer service',
+    availableLanguage: 'Spanish',
+  },
 };
 
 const personJsonLd = {

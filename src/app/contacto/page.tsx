@@ -24,20 +24,13 @@ export const metadata: Metadata = {
 
 const contactJsonLd = {
   "@context": "https://schema.org",
+  "@id": "https://cajautil.com/contacto/#contact",
   "@type": "ContactPage",
+  url: "https://cajautil.com/contacto",
   name: "Contacto - CajaUtil.com",
   description: "Pagina de contacto de CajaUtil.com",
   mainEntity: {
-    "@type": "Organization",
-    name: "CajaUtil.com",
-    url: "https://cajautil.com",
-    email: "hola@cajautil.com",
-    contactPoint: {
-      "@type": "ContactPoint",
-      email: "hola@cajautil.com",
-      contactType: "customer service",
-      availableLanguage: "Spanish",
-    },
+    "@id": "https://cajautil.com/#organization",
   },
 };
 

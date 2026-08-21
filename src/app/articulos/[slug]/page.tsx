@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CalendarDays, Clock3, ExternalLink, RefreshCw, Tag } from 'lucide-react';
 import AuthorSection from '@/components/AuthorSection';
-import { AUTHOR_PROFILE } from '@/lib/authorProfile';
 import { editorialArticles, getEditorialArticleBySlug } from '@/lib/editorialArticles';
 import type { EditorialArticle } from '@/lib/editorialArticles';
 import {
@@ -230,19 +229,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     keywords: tags,
     articleBody: stripMarkdownToText(cleanContent),
     author: {
-      '@type': 'Person',
-      name: AUTHOR_PROFILE.fullName,
-      image: AUTHOR_PROFILE.avatarUrl,
-      sameAs: AUTHOR_PROFILE.githubUrl,
+      '@id': 'https://cajautil.com/#person',
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'CajaUtil.com',
-      url: 'https://cajautil.com',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://cajautil.com/og-image.png',
-      },
+      '@id': 'https://cajautil.com/#organization',
     },
     image: article.coverImageUrl || 'https://cajautil.com/og-image.png',
     isAccessibleForFree: true,
