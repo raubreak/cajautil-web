@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Calculator, CornerDownRight, ArrowLeftRight, Type } from 'lucide-react';
 
 const numberFormatter = new Intl.NumberFormat('es-ES', {
@@ -273,7 +274,11 @@ export default function ReglaDeTres() {
             <li><strong>Ejemplo de Vida Real (Obreros / Tiempo):</strong> Si para pintar una casa, 2 albañiles (A) tardan 6 días (B)... ¿Cuántos días (X) tardarán si contratas a 3 albañiles (C)?</li>
             <li>Teórica y lógicamente tardarán menos tiempo en acabarlo porque hay más trabajadores. <strong>En este caso debes seleccionar la pestaña Regla Inversa.</strong></li>
         </ul>
-        
+
+        <p>
+          Antes de comparar magnitudes, exprésalas en la misma unidad. Si tienes kilos y libras, metros y pies o litros y galones, unifica primero los valores con el <Link href="/conversor-unidades">conversor de unidades</Link> y después aplica la regla de tres.
+        </p>
+
       </section>
 
     </main>

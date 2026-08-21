@@ -221,6 +221,10 @@ export default function CalculadoraCalorias() {
           No sustituye el consejo de un dietista-nutricionista o médico.
         </p>
 
+        <p>
+          Si conoces tu peso en libras o tu altura en pies y pulgadas, pásalos primero a kilogramos y centímetros con el <Link href="/conversor-unidades">conversor de unidades</Link>. La fórmula necesita esas unidades métricas para calcular la estimación correctamente.
+        </p>
+
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/calculadora-imc">Calculadora de IMC</Link></li>
