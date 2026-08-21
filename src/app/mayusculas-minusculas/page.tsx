@@ -132,6 +132,7 @@ export default function ConvertidorTexto() {
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/contador-de-palabras">Contador de Palabras y Caracteres</Link></li>
+          <li><Link href="/simbolos-copiar">Símbolos para copiar y pegar</Link></li>
           <li><Link href="/generador-contrasenas">Generador de Contraseñas Seguras</Link></li>
         </ul>
       </section>

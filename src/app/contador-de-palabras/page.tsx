@@ -130,6 +130,7 @@ export default function ContadorPalabras() {
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/mayusculas-minusculas">Convertidor de mayúsculas y minúsculas</Link></li>
+          <li><Link href="/simbolos-copiar">Símbolos para copiar y pegar</Link></li>
           <li><Link href="/generador-contrasenas">Generador de Contraseñas Seguras</Link></li>
         </ul>
       </section>

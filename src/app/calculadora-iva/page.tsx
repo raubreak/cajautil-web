@@ -90,6 +90,7 @@ export default function CalculadoraIVA() {
         <h3>Herramientas relacionadas</h3>
         <ul>
           <li><Link href="/calculadora-porcentajes">Calculadora de porcentajes</Link></li>
+          <li><Link href="/calculadora-descuentos">Calculadora de descuentos y precio final</Link></li>
           <li><Link href="/calculadora-prestamos">Simulador de préstamos</Link></li>
         </ul>
       </section>
