@@ -356,7 +356,7 @@ export default function CalculadoraInteresCompuesto() {
            <ul>
                <li><strong>Compara plazos:</strong> un horizonte mayor da más periodos de composición, pero no elimina el riesgo ni garantiza una rentabilidad.</li>
                <li><strong>Usa aportaciones sostenibles:</strong> prueba cantidades que puedas mantener sin comprometer gastos esenciales ni tu fondo de emergencia.</li>
-               <li><strong>Incluye costes:</strong> contrasta el resultado con escenarios de menor rentabilidad para representar comisiones, impuestos e inflación.</li>
+               <li><strong>Separa costes e inflación:</strong> usa escenarios de menor rentabilidad para aproximar costes conocidos; para expresar el saldo en euros de hoy, descuenta la inflación acumulada por separado.</li>
            </ul>
 
           <h3>Cómo usar la simulación sin engañarte</h3>

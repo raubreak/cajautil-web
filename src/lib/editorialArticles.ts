@@ -791,73 +791,121 @@ El [validador de IBAN](/validador-iban) te ayuda a evitar fallos mecanicos antes
     ],
     tags: ['ahorro', 'inversion', 'interes compuesto'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T15:15:00.000Z',
-    content: `## Por que empezar antes puede pesar mas que aportar mas
+    updatedAt: '2026-08-21T12:54:28.000Z',
+    content: `## Por qué empezar antes puede pesar más que aportar más
 
-En el interes compuesto, empezar antes añade periodos en los que los rendimientos pueden generar nuevos rendimientos. Por eso una aportacion modesta mantenida durante mas anos puede alcanzar un resultado parecido, o incluso superior, al de una aportacion mayor iniciada tarde. No es una garantia de rentabilidad: es el efecto matematico de disponer de mas tiempo.
+En el interés compuesto, empezar antes añade periodos en los que los rendimientos pueden generar nuevos rendimientos. Por eso una aportación modesta mantenida durante más años puede alcanzar un resultado parecido, o incluso superior, al de una aportación mayor iniciada tarde. No es una garantía de rentabilidad: es el efecto matemático de disponer de más tiempo.
 
-La forma mas clara de entenderlo es comparar escenarios con los mismos supuestos. La [calculadora de interes compuesto](/calculadora-interes-compuesto) permite cambiar aportacion, plazo y rentabilidad para comprobar cuanto depende el resultado de cada variable.
+La forma más clara de entenderlo es comparar escenarios con los mismos supuestos. La [calculadora de interés compuesto](/calculadora-interes-compuesto) permite cambiar aportación, plazo y rentabilidad para comprobar cuánto depende el resultado de cada variable.
 
-## Ejemplo: 100 EUR ahora frente a 200 EUR dentro de diez anos
+## Ejemplo: 100 EUR al mes desde ahora frente a 200 EUR al mes dentro de diez años
 
-Supongamos una rentabilidad anual constante del 5 %, capitalizacion mensual y aportaciones realizadas al final de cada mes:
+Supongamos una tasa nominal anual constante del 5 %, dividida entre 12 para la capitalización mensual, y aportaciones realizadas al final de cada mes:
 
-| Escenario | Periodo aportando | Aportacion mensual | Dinero aportado | Capital final estimado |
+| Escenario | Periodo aportando | Aportación mensual | Dinero aportado | Capital final estimado |
 |---|---:|---:|---:|---:|
-| Empezar ahora | 30 anos | 100 EUR | 36.000 EUR | 83.226 EUR |
-| Esperar 10 anos | 20 anos | 200 EUR | 48.000 EUR | 82.207 EUR |
+| Empezar ahora | 30 años | 100 EUR | 36.000 EUR | 83.226 EUR |
+| Esperar 10 años | 20 años | 200 EUR | 48.000 EUR | 82.207 EUR |
 
-En este ejemplo, quien empieza antes aporta 12.000 EUR menos y termina con una cifra ligeramente superior. La diferencia no procede de una rentabilidad mejor, sino de conceder diez anos adicionales a las primeras aportaciones.
+En este ejemplo, quien empieza antes aporta 12.000 EUR menos y termina con una cifra ligeramente superior. La diferencia no procede de una rentabilidad mejor, sino de conceder diez años adicionales a las primeras aportaciones.
 
-Los importes estan redondeados y no descuentan comisiones, impuestos ni inflacion. Tampoco suponen que vaya a existir una rentabilidad estable del 5 %. Sirven para entender la relacion entre tiempo y capitalizacion, no para anticipar el resultado de un producto real.
+Los importes están redondeados y no descuentan comisiones, impuestos ni inflación. Tampoco suponen que vaya a existir una rentabilidad estable del 5 %. Sirven para entender la relación entre tiempo y capitalización, no para anticipar el resultado de un producto real.
 
-## Como evoluciona una aportacion de 100 EUR al mes
+## Cómo evoluciona una aportación de 100 EUR al mes
 
-Con el mismo supuesto teorico del 5 % anual, el crecimiento no avanza a velocidad constante:
+Con el mismo supuesto teórico del 5 % nominal anual, el crecimiento no avanza a velocidad constante:
 
 | Plazo | Total aportado | Capital final estimado | Rendimiento acumulado estimado |
 |---|---:|---:|---:|
-| 10 anos | 12.000 EUR | 15.528 EUR | 3.528 EUR |
-| 20 anos | 24.000 EUR | 41.103 EUR | 17.103 EUR |
-| 30 anos | 36.000 EUR | 83.226 EUR | 47.226 EUR |
+| 10 años | 12.000 EUR | 15.528 EUR | 3.528 EUR |
+| 20 años | 24.000 EUR | 41.103 EUR | 17.103 EUR |
+| 30 años | 36.000 EUR | 83.226 EUR | 47.226 EUR |
 
-Durante los primeros anos, la mayor parte del saldo procede de tus aportaciones. Conforme aumenta el capital, el rendimiento hipotetico se aplica sobre una base mayor. Esa es la razon por la que la distancia entre los escenarios de 20 y 30 anos es mucho mayor que entre los de 10 y 20.
+Durante los primeros años, la mayor parte del saldo procede de tus aportaciones. Conforme aumenta el capital, el rendimiento hipotético se aplica sobre una base mayor. Esa es la razón por la que la distancia entre los escenarios de 20 y 30 años es mucho mayor que entre los de 10 y 20.
+
+## Cómo reproducir los cálculos paso a paso
+
+Para comprobar los ejemplos usamos capitalización mensual y aportaciones al final de cada mes. Si el capital inicial es C, la aportación mensual es A, la tasa nominal anual es r y el plazo tiene n meses, primero convertimos la tasa anual en una tasa mensual: i = r / 12. Después sumamos el crecimiento del capital inicial y el valor futuro de las aportaciones:
+
+**Valor futuro = C × (1 + i)^n + A × ((1 + i)^n - 1) / i**
+
+Cuando la rentabilidad es 0 %, la fórmula cerrada se simplifica a C + A × n. La calculadora llega al mismo resultado mediante su simulación mes a mes, sin realizar esa división.
+
+Caso reproducible: 5.000 EUR iniciales, 200 EUR al mes, diez años y una tasa nominal anual constante del 7 %. Las aportaciones totales son 29.000 EUR: 5.000 EUR iniciales más 24.000 EUR en aportaciones mensuales. Aplicando la fórmula, el saldo final teórico es 44.665,27 EUR y el crecimiento acumulado es 15.665,27 EUR. Puedes introducir exactamente esos cuatro datos en la calculadora y contrastar el resultado.
+
+## Tabla de sensibilidad: el resultado no es una promesa
+
+Una sola tasa puede dar una falsa sensación de certeza. Esta comparación mantiene constantes una aportación de 100 EUR al final de cada mes y un plazo de 30 años, sin capital inicial, impuestos ni comisiones. Solo cambia la rentabilidad anual supuesta.
+
+| Tasa nominal anual | Aportado | Saldo final teórico | Crecimiento teórico |
+|---:|---:|---:|---:|
+| 3 % | 36.000 EUR | 58.273,69 EUR | 22.273,69 EUR |
+| 4 % | 36.000 EUR | 69.404,94 EUR | 33.404,94 EUR |
+| 5 % | 36.000 EUR | 83.225,86 EUR | 47.225,86 EUR |
+| 7 % | 36.000 EUR | 121.997,10 EUR | 85.997,10 EUR |
+
+La distancia entre el escenario del 3 % y el del 7 % supera los 63.700 EUR. Eso no convierte al 7 % en una previsión fiable: demuestra cuánto depende una proyección larga de una hipótesis que nadie conoce de antemano. Para tomar decisiones prudentes conviene comparar al menos un escenario conservador, uno central y otro favorable.
 
 ## Las cinco variables que cambian el resultado
 
 1. **Capital inicial:** empieza a generar rendimientos desde el primer periodo.
-2. **Aportacion periodica:** aumenta de forma constante la base sobre la que se calcula el crecimiento.
-3. **Rentabilidad:** pequenas diferencias se amplifican con plazos largos, pero una cifra mas alta suele implicar tambien mas riesgo.
-4. **Tiempo:** determina cuantos ciclos de capitalizacion puede completar el capital.
+2. **Aportación periódica:** aumenta de forma constante la base sobre la que se calcula el crecimiento.
+3. **Rentabilidad:** pequeñas diferencias se amplifican con plazos largos, pero una cifra más alta suele implicar también más riesgo.
+4. **Tiempo:** determina cuántos ciclos de capitalización puede completar el capital.
 5. **Costes e impuestos:** reducen el rendimiento que realmente permanece invertido.
 
-La frecuencia de capitalizacion tambien influye, aunque en una decision real suelen importar mas el plazo, la constancia, el riesgo y los costes totales del producto.
+La frecuencia de capitalización también influye, aunque en una decisión real suelen importar más el plazo, la constancia, el riesgo y los costes totales del producto.
 
-## Rentabilidad nominal no es rentabilidad real
+## Rentabilidad nominal, inflación y poder adquisitivo
 
-Una simulacion puede mostrar crecimiento en euros y, aun asi, exagerar el aumento de poder adquisitivo si ignora la inflacion. Tambien puede omitir comisiones de gestion, custodia, compraventa o cambio de divisa.
+El saldo de una proyección está expresado en euros futuros. No indica directamente cuánto podrás comprar con ellos. Como el 5 % nominal de esta calculadora se capitaliza cada mes, equivale a un 5,12 % efectivo anual. Con una inflación media del 2 %, la rentabilidad real aproximada sería (1 + 5,12 %) / (1 + 2 %) - 1 = 3,06 %, antes de costes e impuestos.
 
-Antes de contratar un producto conviene revisar su documentacion y entender riesgos y costes. La [CNMV publica guias para inversores](https://www.cnmv.es/Portal/Inversor/Guias.aspx) sobre conceptos, productos y precauciones que ayudan a interpretar mejor una simulacion.
+Para expresar un saldo futuro en euros de hoy hay que descontar la inflación acumulada: valor actual = saldo futuro / (1 + inflación)^años. Reducir la tasa de rentabilidad no produce el mismo resultado cuando realizas aportaciones nominales periódicas, porque cada aportación permanece invertida durante un plazo distinto.
 
-## Como comparar escenarios sin enganarte
+El [Banco Central Europeo explica la inflación](https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.es.html) como un aumento general de los precios y mantiene un objetivo del 2 % a medio plazo. Un objetivo no es una garantía para cada año. Por eso es mejor probar varias tasas de inflación y no descontar siempre un 2 % como si fuera fijo.
 
-- Usa una hipotesis conservadora, otra central y otra optimista.
-- Mantén iguales las demas variables cuando quieras medir el efecto de una sola.
-- Introduce costes aproximados si conoces las comisiones del producto.
-- Compara tambien el dinero aportado, no solo el capital final.
-- Revisa el resultado en euros de hoy si el plazo es muy largo y la inflacion importa.
+## El efecto silencioso de costes e impuestos
 
-No busques una cifra que confirme lo que quieres creer. La utilidad de la simulacion está en descubrir que variables pueden romper el plan y cuanto margen existe si la rentabilidad es menor de la esperada.
+Las comisiones reducen la tasa que realmente se capitaliza. En el ejemplo de 100 EUR mensuales durante 30 años, pasar de un 5 % bruto a un 4 % neto reduce el saldo teórico de 83.225,86 EUR a 69.404,94 EUR: 13.820,92 EUR menos. No significa que todos los productos cobren un punto porcentual; es una prueba de sensibilidad para visualizar el efecto acumulado de cualquier diferencia anual persistente.
 
-## Que pasa si interrumpes las aportaciones
+La fiscalidad depende del producto, del momento del reembolso y de la situación personal. Una calculadora educativa no puede estimar una rentabilidad neta universal. Antes de comparar alternativas, revisa al menos la comisión total, los costes de compraventa o custodia, la tributación aplicable y si existen penalizaciones o restricciones de liquidez. La [CNMV publica guías para inversores](https://www.cnmv.es/portal/publicaciones/guias.aspx) sobre conceptos, productos y precauciones que ayudan a interpretar mejor una simulación.
 
-Dejar de aportar no borra el capital acumulado, pero reduce la cantidad nueva que puede beneficiarse de los periodos restantes. El efecto es mayor cuando la interrupcion ocurre al principio, porque cada aportacion omitida pierde muchos anos potenciales de capitalizacion.
+## Cómo comparar escenarios sin engañarte
 
-Si tus ingresos cambian, una aportacion menor pero sostenible puede ser mas realista que abandonar el plan por completo. La constancia no significa mantener una cifra a cualquier precio: significa adaptar el ahorro sin comprometer gastos esenciales ni el fondo de emergencia.
+- Usa una hipótesis conservadora, otra central y otra optimista.
+- Mantén iguales las demás variables cuando quieras medir el efecto de una sola.
+- Reduce la tasa introducida si quieres crear una aproximación que descuente los costes conocidos del producto.
+- Compara también el dinero aportado, no solo el capital final.
+- Revisa el resultado en euros de hoy si el plazo es muy largo y la inflación importa.
 
-## Conclusion
+No busques una cifra que confirme lo que quieres creer. La utilidad de la simulación está en descubrir qué variables pueden romper el plan y cuánto margen existe si la rentabilidad es menor de la esperada.
 
-El interes compuesto no convierte una aportacion en riqueza de forma automatica. Muestra como el tiempo puede amplificar una estrategia constante cuando existen rendimientos positivos. Empezar antes aporta una ventaja matematica, pero el resultado real seguira dependiendo de riesgo, costes, impuestos, inflacion y disciplina.
+## Qué no representa esta simulación
+
+- No modela años positivos y negativos: aplica una tasa constante para facilitar la comparación.
+- No incorpora inflación, impuestos ni comisiones. Una tasa menor solo puede aproximar costes conocidos; la inflación acumulada debe descontarse por separado y la fiscalidad depende del caso.
+- No contempla retiradas, pausas en las aportaciones ni cambios de importe a lo largo del tiempo.
+- No mide riesgo, volatilidad ni probabilidad de pérdida, y no recomienda ningún producto financiero.
+
+La utilidad del cálculo no está en adivinar el saldo exacto, sino en comparar decisiones con las mismas reglas. Para estudiar una pausa, una subida de aportaciones o una retirada, divide el plan en etapas y utiliza el saldo final de una etapa como capital inicial de la siguiente.
+
+## Qué pasa si interrumpes las aportaciones
+
+Dejar de aportar no borra el capital acumulado, pero reduce la cantidad nueva que puede beneficiarse de los periodos restantes. El efecto es mayor cuando la interrupción ocurre al principio, porque cada aportación omitida pierde muchos años potenciales de capitalización.
+
+Si tus ingresos cambian, una aportación menor pero sostenible puede ser más realista que abandonar el plan por completo. La constancia no significa mantener una cifra a cualquier precio: significa adaptar el ahorro sin comprometer gastos esenciales ni el fondo de emergencia.
+
+## Lista de comprobación antes de decidir
+
+1. Separa primero un colchón para imprevistos y no proyectes dinero que puedas necesitar a corto plazo.
+2. Compara tres rentabilidades y anota por qué consideras razonable cada una.
+3. Reduce la tasa para aproximar costes conocidos y descuenta por separado la inflación acumulada si necesitas expresar el saldo en euros de hoy.
+4. Distingue capital aportado, crecimiento teórico y saldo final.
+5. Revisa el plan una vez al año o cuando cambien tus ingresos, plazo o tolerancia al riesgo.
+
+## Conclusión
+
+El interés compuesto no convierte una aportación en riqueza de forma automática. Muestra cómo el tiempo puede amplificar una estrategia constante cuando existen rendimientos positivos. Empezar antes aporta una ventaja matemática, pero el resultado real seguirá dependiendo de riesgo, costes, impuestos, inflación y disciplina.
 `,
   },
   {
