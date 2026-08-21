@@ -11,7 +11,7 @@ const toolDefinitions = [
   ['temporizador', 'monthly', 0.9, '2026-08-21T09:19:29.000Z'],
   ['calculadora-descuentos', 'monthly', 0.9, '2026-08-21T08:22:34.000Z'],
   ['ruleta-aleatoria', 'monthly', 0.9],
-  ['calculadora-regla-de-tres', 'monthly', 0.9, '2026-08-20T20:58:50.000Z'],
+  ['calculadora-regla-de-tres', 'monthly', 0.9, '2026-08-21T09:27:34.000Z'],
   ['generador-letras-raras', 'monthly', 0.9],
   ['compresor-webp', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
   ['calculadora-hipotecas', 'monthly', 0.9, '2026-08-20T23:53:43.000Z'],
