@@ -24,7 +24,13 @@ export const metadata: Metadata = {
     description: 'Genera una paleta de colores profesional a partir de cualquier imagen de forma instantánea y privada.',
     url: `${SITE_URL}/extractor-colores`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Extractor de Colores de Imagen Online Gratis',
+    description: 'Genera una paleta HEX y RGB desde una imagen directamente en tu navegador.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {

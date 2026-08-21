@@ -27,6 +27,12 @@ export const metadata: Metadata = {
     type: "website",
     images: ["https://cajautil.com/og-image.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Calculadora de Días entre Fechas",
+    description: "Calcula días, semanas, meses y años entre dos fechas.",
+    images: ["https://cajautil.com/og-image.png"],
+  },
 };
 
 const jsonLd = {

@@ -24,7 +24,13 @@ export const metadata: Metadata = {
     description: 'Convierte tu número de teléfono en un enlace dinámico hacia tu chat de WhatsApp con un solo clic.',
     url: `${SITE_URL}/generador-enlace-whatsapp`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Generador Link WhatsApp | Crea Tu Enlace Personalizado',
+    description: 'Convierte tu número en un enlace hacia tu chat de WhatsApp con un mensaje opcional.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {

@@ -21,7 +21,13 @@ export const metadata: Metadata = {
     description: 'Diseña una firma HTML sencilla, copia el resultado y pruébalo en tu cliente de correo.',
     url: `${SITE_URL}/generador-firmas-email`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Generador de Firmas de Email Profesionales Gratis — CajaUtil',
+    description: 'Diseña una firma HTML sencilla, copia el resultado y pruébalo en tu cliente de correo.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {

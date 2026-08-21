@@ -23,7 +23,13 @@ export const metadata: Metadata = {
     description: 'Configura una cuenta atrás con sonido para estudiar, cocinar o entrenar.',
     url: `${SITE_URL}/temporizador`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Temporizador Online Gratis con Alarma',
+    description: 'Configura una cuenta atrás con sonido para estudiar, cocinar o entrenar.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {
