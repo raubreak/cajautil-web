@@ -33,6 +33,7 @@ const aboutJsonLd = {
   url: "https://cajautil.com/sobre-nosotros",
   name: "Sobre nosotros - CajaUtil.com",
   description: "Información sobre el equipo, la misión y la metodología editorial de CajaUtil.com",
+  dateModified: "2026-08-21T11:42:59.000Z",
   mainEntity: {
     "@id": "https://cajautil.com/#organization",
   },
@@ -137,6 +138,57 @@ const AboutUsPage = () => {
               Si detectas un error, puedes comunicarlo desde la <Link href="/contacto" className="text-blue-600 font-semibold hover:underline">página de contacto</Link>.
               Revisamos el cálculo, el texto y las fuentes afectadas; si el aviso es correcto, publicamos la corrección y actualizamos la fecha de revisión correspondiente.
               No ocultamos relaciones comerciales ni presentamos estimaciones como asesoramiento profesional.
+            </p>
+          </div>
+        </section>
+
+        <section className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-100 shadow-sm mb-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Cómo probamos las herramientas</h2>
+          <div className="prose prose-slate max-w-none text-slate-600 space-y-4">
+            <p>
+              No damos una herramienta por revisada solo porque la interfaz cargue. Probamos valores límite, errores de entrada,
+              navegación por teclado y resultados que puedan contrastarse de forma independiente. Estos son algunos casos reales
+              ejecutados durante la revisión del 21 de agosto de 2026:
+            </p>
+            <div className="not-prose overflow-x-auto rounded-2xl border border-slate-200">
+              <table className="w-full min-w-[640px] text-left text-sm">
+                <caption className="sr-only">Ejemplos reproducibles de controles de calidad aplicados en CajaUtil</caption>
+                <thead className="bg-slate-100 text-slate-700">
+                  <tr>
+                    <th className="px-4 py-3 font-bold">Herramienta</th>
+                    <th className="px-4 py-3 font-bold">Caso probado</th>
+                    <th className="px-4 py-3 font-bold">Resultado comprobado</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 text-slate-600">
+                  <tr>
+                    <td className="px-4 py-3"><Link href="/generador-qr" className="font-semibold text-blue-700 hover:underline">Generador QR</Link></td>
+                    <td className="px-4 py-3">1.200 caracteres con un tamaño mínimo solicitado de 100 px</td>
+                    <td className="px-4 py-3">PNG de 724 x 724 px, cuatro píxeles por módulo y contenido recuperado completo</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3"><Link href="/compresor-webp" className="font-semibold text-blue-700 hover:underline">Compresor WebP</Link></td>
+                    <td className="px-4 py-3">Imagen PNG de 640 x 640 px y 545,3 KB, calidad 80</td>
+                    <td className="px-4 py-3">Archivo WebP de 37,3 KB; el ahorro se informa sin prometerlo para otras imágenes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3"><Link href="/calculadora-prestamos" className="font-semibold text-blue-700 hover:underline">Préstamos</Link></td>
+                    <td className="px-4 py-3">10.000 EUR al 0 % durante cinco años</td>
+                    <td className="px-4 py-3">60 cuotas de 166,67 EUR, total de 10.000 EUR y cero intereses</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3"><Link href="/calculadora-imc" className="font-semibold text-blue-700 hover:underline">IMC</Link></td>
+                    <td className="px-4 py-3">Resultado bruto de 24,9975 en el límite de categoría</td>
+                    <td className="px-4 py-3">Se muestra 25,0 y se clasifica de forma coherente como sobrepeso</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Estos controles documentan el comportamiento de casos concretos, no certifican todos los usos posibles. Cuando
+              encontramos un fallo, corregimos la implementación, repetimos el caso en producción y actualizamos la fecha de
+              revisión. Puedes consultar más detalle en las guías sobre <Link href="/articulos/como-crear-codigos-qr-utiles-y-evitar-errores-de-escaneo" className="text-blue-700 font-semibold hover:underline">pruebas de QR</Link> y
+              {' '}<Link href="/articulos/webp-cuando-conviene-convertir-imagenes-y-cuando-no" className="text-blue-700 font-semibold hover:underline">conversión WebP</Link>.
             </p>
           </div>
         </section>

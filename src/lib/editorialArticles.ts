@@ -273,7 +273,7 @@ Usa la [calculadora de IVA](/calculadora-iva) para presupuestos rapidos, revisio
     ],
     tags: ['imagenes', 'webp', 'rendimiento'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T17:50:00.000Z',
+    updatedAt: '2026-08-21T11:42:58.000Z',
     content: `## Por que WebP se ha vuelto el formato por defecto en muchas webs
 
 Reducir el peso de las imagenes es una de las mejoras mas rentables en cualquier sitio web. Menos peso significa menos tiempo de descarga, mejor experiencia movil y, en muchos casos, mejores metricas de rendimiento. WebP se ha consolidado porque admite compresion con y sin perdida, transparencia y animacion.
@@ -310,6 +310,19 @@ La eleccion correcta depende de lo que contiene la imagen y de como se utilizara
 | Animacion compleja | Video antes que GIF | Peso, controles, accesibilidad y reproduccion |
 
 La guia de rendimiento de web.dev recomienda [elegir el formato segun las propiedades visuales y funcionales](https://web.dev/articles/choose-the-right-image-format), y servir imagenes rasterizadas con dimensiones adecuadas. Convertir una fotografia enorme a WebP sin ajustar sus pixeles puede seguir dejando una descarga excesiva.
+
+## Prueba reproducible con una imagen real de CajaUtil
+
+Para no basar esta guia solo en porcentajes ajenos, convertimos la imagen social de CajaUtil en la version de produccion del compresor. El archivo original og-image.png mide 640 x 640 px y ocupa 545,3 KB. Con calidad 80, el navegador genero og-image_q80.webp con 37,3 KB, una reduccion aproximada del 93 %.
+
+| Paso | Valor observado |
+|---|---|
+| Entrada | PNG, 640 x 640 px, 545,3 KB |
+| Ajuste | WebP con calidad 80 |
+| Salida | WebP, 37,3 KB |
+| Procesamiento | Local en el navegador, sin subida del archivo |
+
+El resultado demuestra que esta imagen concreta se beneficia mucho de la conversion, no que cualquier PNG vaya a reducirse en la misma proporcion. Una captura con texto fino, un archivo ya optimizado o una fotografia distinta pueden producir un ahorro menor, crecer o perder detalle visible. Para repetir la prueba, descarga la imagen social de CajaUtil, cargala en el [compresor WebP](/compresor-webp), conserva la calidad 80 y compara ambos archivos a tamano real.
 
 ## Un criterio util antes de convertir una carpeta entera
 
@@ -354,7 +367,7 @@ Convierte una muestra con el [compresor WebP](/compresor-webp), compara el archi
     ],
     tags: ['qr', 'marketing', 'movil'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-20T18:09:35.000Z',
+    updatedAt: '2026-08-21T11:42:57.000Z',
     content: `## Un QR no sirve si nadie puede escanearlo
 
 Los codigos QR parecen trivialmente faciles de crear, pero en la practica fallan mucho por decisiones de diseno: poco contraste, tamano insuficiente, enlaces rotos o exceso de elementos decorativos.
@@ -380,6 +393,22 @@ No recortes ese margen al exportar ni coloques un marco, un logotipo o una frase
 No existe un unico tamaño correcto en centimetros para todos los casos. Depende de cuantos modulos tenga el codigo, de la resolucion de impresion, de la distancia y de la camara que lo lee. DENSO WAVE recomienda [imprimir los modulos tan grandes como permita el espacio disponible](https://www.qrcode.com/en/howto/cell.html) y usar al menos cuatro puntos de impresora por modulo para una operacion estable.
 
 Esto explica por que aumentar solo el lienzo no siempre salva un QR complejo. Una URL larga genera un patron mas denso: cada modulo termina siendo mas pequeno dentro del mismo tamaño fisico. Si el codigo va a verse desde lejos, simplifica el contenido, aumenta el tamaño final y prueba una copia a escala real antes de producir todo el material.
+
+## Prueba reproducible con un QR denso
+
+Probamos el generador de CajaUtil con 1.200 caracteres ASCII y un tamano minimo solicitado de 100 px. El contenido obliga a usar un patron de 181 modulos por lado. Para no dibujar fracciones de modulo, la descarga ajusto el resultado a 724 x 724 px: exactamente cuatro pixeles enteros por modulo.
+
+Despues volvimos a leer el PNG descargado con jsQR. El lector recupero los 1.200 caracteres sin diferencias. Esta comprobacion valida el archivo de ese caso concreto y el ajuste de escala; no garantiza que un QR impreso, desenfocado o modificado despues conserve la misma legibilidad.
+
+| Dato de la prueba | Resultado |
+|---|---:|
+| Contenido | 1.200 caracteres ASCII |
+| Modulos por lado | 181 |
+| Pixeles por modulo | 4 |
+| Tamano final | 724 x 724 px |
+| Lectura posterior | 1.200 caracteres recuperados |
+
+Puedes reproducir el flujo generando un texto largo, descargando el PNG y abriendolo despues en el [lector de QR desde imagen](/lector-qr). Si cambias el contenido, el numero de modulos y el tamano final pueden variar.
 
 ## Correccion de errores: ayuda, pero no sustituye una buena impresion
 

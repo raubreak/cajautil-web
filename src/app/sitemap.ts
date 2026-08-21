@@ -58,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: SITE_URL, lastModified: new Date('2026-08-21T10:46:33.000Z'), changeFrequency: 'weekly', priority: 1 },
     { url: `${SITE_URL}/articulos`, lastModified: latestArticleUpdate, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${SITE_URL}/sobre-nosotros`, lastModified: new Date('2026-08-21T10:46:33.000Z'), changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/sobre-nosotros`, lastModified: new Date('2026-08-21T11:42:59.000Z'), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/contacto`, lastModified: new Date('2026-08-21T10:46:33.000Z'), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/politica-de-privacidad`, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${SITE_URL}/politica-de-cookies`, changeFrequency: 'yearly', priority: 0.4 },
