@@ -6,7 +6,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: 'Validador de IBAN Español Online',
-  description: 'Comprueba la estructura de un IBAN español y sus dígitos de control MOD-97 en tu navegador. No verifica titularidad ni existencia de la cuenta.',
+  description: 'Comprueba un IBAN español con MOD-97 y los dígitos internos del CCC en tu navegador. No verifica titularidad ni existencia de la cuenta.',
   keywords: [
     "validador iban",
     "comprobar iban",
@@ -20,10 +20,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Validador de IBAN Español | Comprobación MOD-97',
-    description: 'Comprueba localmente la estructura española y los dígitos de control de un IBAN antes de revisar los datos con tu banco.',
+    description: 'Comprueba localmente MOD-97 y los dígitos internos del CCC antes de revisar los datos con tu banco.',
     url: `${SITE_URL}/validador-iban`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Validador de IBAN Español | MOD-97 y CCC',
+    description: 'Comprueba localmente los controles matemáticos de un IBAN español sin verificar titularidad ni existencia.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {
@@ -31,7 +37,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Validador de IBAN",
   url: `${SITE_URL}/validador-iban`,
-  description: "Herramienta online para comprobar la estructura española y los dígitos de control MOD 97-10 de un IBAN en el navegador.",
+  description: "Herramienta online para comprobar la estructura, MOD 97-10 y los dígitos internos del CCC de un IBAN español en el navegador.",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Any",
   offers: {

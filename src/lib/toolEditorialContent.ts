@@ -371,10 +371,10 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
     ],
     sections: [
       {
-        title: 'Que comprueba el algoritmo MOD 97',
+        title: 'Que comprueban MOD 97 y los controles del CCC',
         paragraphs: [
           'El estandar IBAN usa digitos de control que permiten detectar muchos errores de transcripcion. El algoritmo convierte la cuenta a una secuencia numerica y comprueba el resto sobre 97.',
-          'Si el resultado no cuadra, la cuenta se considera invalida desde el punto de vista formal.',
+          'En un IBAN español, la herramienta tambien verifica los dos digitos de control internos del antiguo Codigo Cuenta Cliente. Si alguno de estos controles no cuadra, la cuenta se considera invalida desde el punto de vista formal.',
         ],
       },
       {
@@ -412,7 +412,7 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: 'https://clientebancario.bde.es/pcb/es/blog/nuevo-servicio-gratuito-de-verificacion-del-beneficiario-a-partir-del-9-de-octubre-de-2025-.html', label: 'Banco de Espana: verificacion del beneficiario' },
     ],
     disclaimer:
-      'La validacion comprueba la estructura del IBAN, no la identidad del titular, la existencia de la cuenta ni la legitimidad del pago.',
+      'La validacion comprueba la estructura, MOD 97 y los controles internos del CCC; no confirma la identidad del titular, la existencia de la cuenta ni la legitimidad del pago.',
   }),
   'calculadora-imc': buildEntry({
     summary: [

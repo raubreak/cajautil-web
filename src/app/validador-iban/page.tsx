@@ -6,8 +6,31 @@ import Link from 'next/link';
 
 interface ValidationResult {
   status: 'idle' | 'valid' | 'invalid' | 'unsupported';
-  banksCode?: string;
+  bankCode?: string;
+  branchCode?: string;
   message?: string;
+}
+
+const FIRST_CCC_WEIGHTS = [4, 8, 5, 10, 9, 7, 3, 6] as const;
+const SECOND_CCC_WEIGHTS = [1, 2, 4, 8, 5, 10, 9, 7, 3, 6] as const;
+
+function calculateCccControlDigit(digits: string, weights: readonly number[]): number {
+  const sum = digits.split('').reduce(
+    (total, digit, index) => total + Number(digit) * weights[index],
+    0,
+  );
+  const result = 11 - (sum % 11);
+
+  if (result === 11) return 0;
+  if (result === 10) return 1;
+  return result;
+}
+
+function hasValidSpanishCcc(iban: string): boolean {
+  const ccc = iban.slice(4);
+  const expectedControl = `${calculateCccControlDigit(ccc.slice(0, 8), FIRST_CCC_WEIGHTS)}${calculateCccControlDigit(ccc.slice(10), SECOND_CCC_WEIGHTS)}`;
+
+  return ccc.slice(8, 10) === expectedControl;
 }
 
 export default function ValidadorIBAN() {
@@ -15,9 +38,15 @@ export default function ValidadorIBAN() {
   const [result, setResult] = useState<ValidationResult>({ status: 'idle' });
 
   const validateIBAN = (value: string) => {
-    const iban = value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    const normalizedInput = value.trim().toUpperCase();
+    const iban = normalizedInput.replace(/[\s-]/g, '');
     if (!iban) {
       setResult({ status: 'idle', message: 'Introduce un IBAN para validar' });
+      return;
+    }
+
+    if (/[^A-Z0-9\s-]/.test(normalizedInput)) {
+      setResult({ status: 'invalid', message: 'El IBAN solo puede contener letras, números, espacios o guiones.' });
       return;
     }
 
@@ -58,12 +87,24 @@ export default function ValidadorIBAN() {
     }
     const isValid = parseInt(remainder, 10) % 97 === 1;
 
+    if (!isValid) {
+      setResult({ status: 'invalid', message: 'El IBAN no pasa la comprobación internacional MOD-97.' });
+      return;
+    }
+
+    if (!hasValidSpanishCcc(iban)) {
+      setResult({
+        status: 'invalid',
+        message: 'El IBAN supera MOD-97, pero los dos dígitos de control internos del CCC no son coherentes.',
+      });
+      return;
+    }
+
     setResult({
-      status: isValid ? 'valid' : 'invalid',
-      banksCode: iban.substring(4, 8),
-      message: isValid
-        ? 'La estructura española y los dígitos de control MOD-97 son coherentes.'
-        : 'El IBAN no pasa la comprobación de los dígitos de control.'
+      status: 'valid',
+      bankCode: iban.slice(4, 8),
+      branchCode: iban.slice(8, 12),
+      message: 'La estructura española, el control internacional MOD-97 y los dígitos internos del CCC son coherentes.',
     });
   };
 
@@ -89,7 +130,7 @@ export default function ValidadorIBAN() {
           Validador de <span className="text-indigo-600">IBAN español</span>
         </h1>
         <p className="text-base sm:text-lg text-slate-500 font-medium max-w-xl mx-auto leading-relaxed px-2">
-          Comprueba la estructura española y los dígitos de control MOD-97 de forma local en tu navegador.
+          Comprueba MOD-97 y los dígitos internos del CCC español de forma local en tu navegador.
         </p>
       </div>
 
@@ -107,20 +148,23 @@ export default function ValidadorIBAN() {
             value={ibanInput}
             onChange={handleInputChange}
             autoComplete="off"
+            autoCapitalize="characters"
             spellCheck="false"
+            aria-invalid={result.status === 'invalid'}
+            aria-describedby={result.status === 'idle' ? 'iban-privacy' : 'iban-result'}
           />
         </div>
 
         {/* RESULTS BOX */}
         {ibanInput && (
-          <div className="mt-6">
+          <div id="iban-result" className="mt-6" aria-live="polite" aria-atomic="true">
             {result.status === 'valid' ? (
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-emerald-800 shadow-sm transition-all duration-300">
+              <div role="status" className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-emerald-800 shadow-sm transition-all duration-300">
                 <CheckCircle className="w-10 h-10 text-emerald-500 flex-shrink-0" />
                 <div className="text-center sm:text-left">
                   <p className="font-bold text-lg mb-1">La comprobación matemática es correcta</p>
                   <p className="text-emerald-700 font-medium text-sm sm:text-base">
-                    {result.message} El código de entidad declarado es {result.banksCode}.
+                    {result.message} Entidad: {result.bankCode}. Oficina: {result.branchCode}.
                   </p>
                   <p className="mt-2 text-xs font-medium text-emerald-800">
                     Este resultado no confirma que la cuenta exista, esté activa o pertenezca al destinatario esperado.
@@ -128,7 +172,7 @@ export default function ValidadorIBAN() {
                 </div>
               </div>
             ) : result.status === 'invalid' ? (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-red-800 shadow-sm transition-all duration-300">
+              <div role="alert" className="bg-red-50 border border-red-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-red-800 shadow-sm transition-all duration-300">
                 <AlertTriangle className="w-10 h-10 text-red-500 flex-shrink-0" />
                 <div className="text-center sm:text-left">
                   <p className="font-bold text-lg mb-1">El IBAN no pasa la comprobación</p>
@@ -136,7 +180,7 @@ export default function ValidadorIBAN() {
                 </div>
               </div>
             ) : result.status === 'unsupported' ? (
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-amber-900 shadow-sm transition-all duration-300">
+              <div role="status" className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 text-amber-900 shadow-sm transition-all duration-300">
                 <AlertTriangle className="w-10 h-10 text-amber-500 flex-shrink-0" />
                 <div className="text-center sm:text-left">
                   <p className="font-bold text-lg mb-1">País no compatible</p>
@@ -147,7 +191,7 @@ export default function ValidadorIBAN() {
           </div>
         )}
 
-        <div className="mt-8 flex items-center justify-center gap-2 text-slate-400 bg-slate-50 border border-slate-100 rounded-lg py-3 px-4 shadow-sm">
+        <div id="iban-privacy" className="mt-8 flex items-center justify-center gap-2 text-slate-400 bg-slate-50 border border-slate-100 rounded-lg py-3 px-4 shadow-sm">
           <ShieldCheck className="w-5 h-5 text-indigo-400" />
           <span className="text-xs sm:text-sm font-medium">Comprobación local: el IBAN introducido no se envía a CajaUtil.</span>
         </div>
@@ -162,7 +206,7 @@ export default function ValidadorIBAN() {
         
         <p>El <strong>IBAN (International Bank Account Number)</strong> es el estándar internacional para identificar cuentas bancarias y reducir errores de transcripción en transferencias. Un checksum correcto no garantiza por sí solo que el destinatario o la cuenta sean los esperados.</p>
 
-        <p>Nuestro <strong>validador de IBAN español</strong> comprueba sus 24 caracteres, la estructura numérica del CCC y el cálculo estandarizado <strong>MOD-97-10</strong>. El resultado detecta muchos errores de formato o transcripción, pero no consulta registros bancarios ni comprueba titularidad, estado de la cuenta o identidad del receptor.</p>
+        <p>Nuestro <strong>validador de IBAN español</strong> comprueba sus 24 caracteres, el cálculo internacional <strong>MOD-97-10</strong> y los dos dígitos de control internos del CCC español. El resultado detecta muchos errores de formato o transcripción, pero no consulta registros bancarios ni comprueba titularidad, estado de la cuenta o identidad del receptor.</p>
 
         <article className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mt-8 mb-8">
           <h3 className="text-xl font-bold mt-0 flex items-center gap-2 text-indigo-600">
