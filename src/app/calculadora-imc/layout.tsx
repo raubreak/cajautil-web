@@ -20,11 +20,17 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/calculadora-imc`,
   },
   openGraph: {
-    title: 'Evalúa tu Índice de Masa Corporal | Calculadora IMC Saludable',
-    description: 'Comprueba en qué rango de peso de la OMS te encuentras introduciendo tu altura y peso. Descubre tu IMC al instante.',
+    title: 'Calculadora de IMC para Adultos | Resultado Orientativo',
+    description: 'Estima el IMC con peso y altura, consulta su rango de referencia y conoce las limitaciones de este indicador.',
     url: `${SITE_URL}/calculadora-imc`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Calculadora de IMC para Adultos',
+    description: 'Estima el IMC con valores decimales y consulta su rango de referencia sin tratarlo como diagnóstico.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {
