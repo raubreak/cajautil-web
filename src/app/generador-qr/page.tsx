@@ -6,6 +6,15 @@ import { QRCodeSVG } from "qrcode.react";
 
 const DEFAULT_QR_CONTENT = "https://cajautil.com";
 const MAX_QR_BYTES = 1200;
+const MIN_PIXELS_PER_MODULE = 4;
+
+function getSafeExportSize(svg: SVGSVGElement, requestedSize: number) {
+  const moduleCount = Math.round(svg.viewBox.baseVal.width);
+  if (!Number.isFinite(moduleCount) || moduleCount <= 0) return null;
+
+  const pixelsPerModule = Math.max(MIN_PIXELS_PER_MODULE, Math.ceil(requestedSize / moduleCount));
+  return { moduleCount, pixelsPerModule, exportSize: moduleCount * pixelsPerModule };
+}
 
 export default function GeneradorQR() {
   const [texto, setTexto] = useState(DEFAULT_QR_CONTENT);
@@ -13,6 +22,7 @@ export default function GeneradorQR() {
   const [bgColor, setBgColor] = useState("#ffffff");
   const [fgColor, setFgColor] = useState("#000000");
   const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [moduleCount, setModuleCount] = useState<number | null>(null);
 
   useEffect(() => {
     const sharedContent = new URLSearchParams(window.location.search).get("text");
@@ -29,13 +39,40 @@ export default function GeneradorQR() {
       ? `El contenido ocupa ${contentBytes.toLocaleString("es-ES")} bytes. Reduce el texto a ${MAX_QR_BYTES.toLocaleString("es-ES")} bytes o menos.`
       : null;
 
+  useEffect(() => {
+    const animationFrame = window.requestAnimationFrame(() => {
+      if (qrError) {
+        setModuleCount(null);
+        return;
+      }
+
+      const svg = document.getElementById("qr-code-svg");
+      if (!(svg instanceof SVGSVGElement)) return;
+
+      const nextModuleCount = Math.round(svg.viewBox.baseVal.width);
+      setModuleCount(Number.isFinite(nextModuleCount) && nextModuleCount > 0 ? nextModuleCount : null);
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [qrError, texto]);
+
+  const pixelsPerModule = moduleCount
+    ? Math.max(MIN_PIXELS_PER_MODULE, Math.ceil(size / moduleCount))
+    : null;
+  const exportSize = moduleCount && pixelsPerModule ? moduleCount * pixelsPerModule : size;
+
   const downloadQR = () => {
     setDownloadError(null);
     if (qrError) return;
 
     const svg = document.getElementById("qr-code-svg");
-    if (!svg) {
+    if (!(svg instanceof SVGSVGElement)) {
       setDownloadError("No se pudo preparar el código QR para descargar.");
+      return;
+    }
+    const safeExport = getSafeExportSize(svg, size);
+    if (!safeExport) {
+      setDownloadError("No se pudo calcular un tamaño de descarga seguro.");
       return;
     }
     const svgData = new XMLSerializer().serializeToString(svg);
@@ -49,11 +86,12 @@ export default function GeneradorQR() {
     }
 
     img.onload = () => {
-      canvas.width = size;
-      canvas.height = size;
+      canvas.width = safeExport.exportSize;
+      canvas.height = safeExport.exportSize;
+      ctx.imageSmoothingEnabled = false;
       ctx.fillStyle = bgColor;
-      ctx.fillRect(0, 0, size, size);
-      ctx.drawImage(img, 0, 0, size, size);
+      ctx.fillRect(0, 0, safeExport.exportSize, safeExport.exportSize);
+      ctx.drawImage(img, 0, 0, safeExport.exportSize, safeExport.exportSize);
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.download = "mi_codigo_qr.png";
@@ -113,8 +151,11 @@ export default function GeneradorQR() {
           </div>
           
           <div>
-              <label htmlFor="qr-size" className="block text-sm font-bold text-slate-700 mb-2">Tamaño de descarga: {size}px</label>
-              <input id="qr-size" type="range" min="100" max="600" step="50" value={size} onChange={(e) => setSize(Number(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-500" />
+              <label htmlFor="qr-size" className="block text-sm font-bold text-slate-700 mb-2">Tamaño mínimo de descarga: {size}px</label>
+              <input id="qr-size" type="range" min="100" max="600" step="50" value={size} onChange={(e) => setSize(Number(e.target.value))} aria-describedby="qr-export-help" className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-500" />
+              <p id="qr-export-help" className="mt-2 text-xs font-medium text-slate-500">
+                PNG final: {exportSize} x {exportSize}px{pixelsPerModule ? `, ${pixelsPerModule} píxeles por módulo.` : "."}
+              </p>
           </div>
         </div>
 
@@ -141,7 +182,7 @@ export default function GeneradorQR() {
              disabled={Boolean(qrError)}
              className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-300 text-white font-bold rounded-xl shadow-sm transition-all active:scale-95 w-full max-w-[200px]"
              aria-label="Descargar código QR como imagen PNG"
-             aria-describedby={downloadError ? "qr-download-error" : undefined}
+             aria-describedby={downloadError ? "qr-export-help qr-download-error" : "qr-export-help"}
           >
              Descargar PNG
           </button>
@@ -156,7 +197,7 @@ export default function GeneradorQR() {
         <div className="text-slate-600 text-sm leading-relaxed space-y-3">
           <p>
             Con nuestro <strong>generador de códigos QR online</strong>, puedes convertir una <strong>URL, texto o enlace compatible</strong> en
-            un código QR personalizable en segundos. Elige los <strong>colores</strong>, ajusta el <strong>tamaño</strong> y 
+            un código QR personalizable en segundos. Elige los <strong>colores</strong>, indica el <strong>tamaño mínimo</strong> y
             descarga tu QR en <strong>PNG de alta resolución</strong>.
           </p>
           <p>
