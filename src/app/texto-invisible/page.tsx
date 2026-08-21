@@ -99,7 +99,7 @@ export default function TextoInvisible() {
 
       <section className="w-full max-w-4xl prose prose-slate text-slate-600 px-2">
           <h2>¿Cómo funciona el Texto Invisible?</h2>
-          <p>No es magia, es programación. En internet, lo que conocemos como **"espacio vacío"** suele ser ignorado por las aplicaciones si se introduce solo. Sin embargo, el estándar Unicode alberga caracteres como el **U+3164 (Hangul Filler)**, que los programas interpretan como una letra física pero de apariencia completamente transparente e invisible.</p>
+          <p>No es magia, es programación. En internet, lo que conocemos como <strong>&quot;espacio vacío&quot;</strong> suele ser ignorado por las aplicaciones si se introduce solo. Sin embargo, el estándar Unicode alberga caracteres como <strong>U+3164 (Hangul Filler)</strong>, que los programas interpretan como una letra física pero de apariencia completamente transparente e invisible.</p>
           
           <h3>Ventajas de usar U+3164 en lugar de un espacio común</h3>
           <ul>

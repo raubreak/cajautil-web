@@ -1,5 +1,6 @@
 
 import { PrismaClient } from '@prisma/client';
+import type { Article } from '@prisma/client';
 import { AIProvider } from '../src/lib/ai-provider';
 import dotenv from 'dotenv';
 
@@ -12,7 +13,7 @@ if (!process.env.POSTGRES_URL) {
 const prisma = new PrismaClient();
 const ai = AIProvider.getInstance();
 
-async function deepenArticle(article: any) {
+async function deepenArticle(article: Article) {
   console.log(`\n🚀 Ampliando: [${article.title}]...`);
   
   const prompt = `Eres un experto redactor SEO. Tengo este artículo que es un poco corto (~${article.content.split(/\s+/).length} palabras) y quiero convertirlo en una GUÍA DE EXPERTO de más de 1500 palabras.

@@ -10,7 +10,7 @@ const EXTRA_WORDS = "ac accumsan adipisicing aliquam amet ante aptent arcu at au
 const ALL_WORDS = [...LOREM_WORDS, ...EXTRA_WORDS];
 
 function generateWords(count: number): string {
-  let words: string[] = [];
+  const words: string[] = [];
   for (let i = 0; i < count; i++) {
     words.push(ALL_WORDS[Math.floor(Math.random() * ALL_WORDS.length)]);
   }
@@ -118,7 +118,7 @@ export default function GeneradorLoremIpsum() {
             {mode === 'paragraphs' && (
               <label className="flex items-center gap-3 mt-6 cursor-pointer">
                 <input type="checkbox" checked={startClassic} onChange={(e) => setStartClassic(e.target.checked)} className="w-5 h-5 rounded text-violet-600 focus:ring-violet-300" />
-                <span className="text-sm font-medium text-slate-500">Empezar con "Lorem ipsum..."</span>
+                <span className="text-sm font-medium text-slate-500">Empezar con &quot;Lorem ipsum...&quot;</span>
               </label>
             )}
 

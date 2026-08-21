@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Heart, Star, ArrowRight, Music, Sparkles, Shapes, Copy, Check, MousePointer2 } from 'lucide-react';
+import { Heart, Star, ArrowRight, Music, Sparkles, Shapes, MousePointer2 } from 'lucide-react';
 
 const SYMBOLS_DATA = [
   {
