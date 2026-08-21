@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { RefreshCcw, Hand, Trophy, Trash2, Wand2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -11,17 +11,15 @@ const COLORS = [
 
 export default function RuletaAleatoria() {
   const [inputText, setInputText] = useState("Ana\nJuan\nMaría\nCarlos\nLaura\nPedro");
-  const [items, setItems] = useState<string[]>([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [winner, setWinner] = useState<string | null>(null);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Parse items from textarea
-  useEffect(() => {
-    const lines = inputText.split('\n').map(i => i.trim()).filter(i => i.length > 0);
-    setItems(lines.length > 0 ? lines : ['Agrega', 'Nombres']);
+  const items = useMemo(() => {
+    const parsedItems = inputText.split('\n').map(i => i.trim()).filter(Boolean);
+    return parsedItems.length > 0 ? parsedItems : ['Agrega', 'Nombres'];
   }, [inputText]);
 
   // Draw wheel
