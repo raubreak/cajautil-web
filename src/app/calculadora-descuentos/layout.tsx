@@ -5,8 +5,8 @@ import ToolEditorialSection from '@/components/ToolEditorialSection';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de Descuentos Online | Precio Final Rebajado',
-  description: 'Calcula cuánto te ahorras y el precio final de cualquier producto con descuento. Ideal para rebajas, Black Friday y compras diarias. Rápida y precisa.',
+  title: 'Calculadora de Descuentos y Rebajas | Precio Final',
+  description: 'Calcula el precio final, el ahorro y dos descuentos sucesivos sin sumarlos por error. Útil para rebajas, cupones y Black Friday.',
   keywords: [
     "calculadora de descuentos",
     "calcular rebajas online",
@@ -14,22 +14,23 @@ export const metadata: Metadata = {
     "calculadora black friday",
     "ahorro en rebajas",
     "porcentaje de descuento",
-    "calcular cuanto ahorro"
+    "calcular cuanto ahorro",
+    "descuentos sucesivos"
   ],
   alternates: {
     canonical: `${SITE_URL}/calculadora-descuentos`,
   },
   openGraph: {
-    title: 'Calculadora de Descuentos Online gratis',
-    description: 'Descubre el precio final de tus compras tras aplicar el porcentaje de rebaja de forma instantánea.',
+    title: 'Calculadora de Descuentos y Rebajas Online',
+    description: 'Calcula el precio final, el ahorro y el efecto acumulado de dos descuentos sucesivos.',
     url: `${SITE_URL}/calculadora-descuentos`,
     images: ['https://cajautil.com/og-image.png'],
   },
   twitter: {
     card: 'summary_large_image',
     images: ['https://cajautil.com/og-image.png'],
-    title: 'Calculadora de Descuentos Online gratis',
-    description: 'Descubre el precio final de tus compras tras aplicar el porcentaje de rebaja de forma instantánea.',
+    title: 'Calculadora de Descuentos y Rebajas Online',
+    description: 'Calcula el precio final, el ahorro y el efecto acumulado de dos descuentos sucesivos.',
   }
 };
 
@@ -38,7 +39,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de Descuentos",
   url: `${SITE_URL}/calculadora-descuentos`,
-  description: "Herramienta financiera para calcular reducciones de precio basadas en porcentajes de descuento, mostrando el ahorro total y el importe final.",
+  description: "Herramienta para calcular el precio final, el ahorro y el efecto acumulado de uno o dos descuentos sucesivos.",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Any",
   offers: {

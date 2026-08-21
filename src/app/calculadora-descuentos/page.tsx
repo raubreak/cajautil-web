@@ -28,7 +28,7 @@ export default function DescuentosApp() {
         name: "¿Cómo calculo dos descuentos seguidos?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Aplica el primer descuento y usa el precio resultante como precio original para el segundo. Por ejemplo, un 20% y después un 10% equivalen a un 28% acumulado, no a un 30%.",
+          text: "Introduce el primer porcentaje y añade el segundo descuento opcional. La calculadora aplica cada rebaja sobre el precio anterior. Por ejemplo, un 20% y después un 10% equivalen a un 28% acumulado, no a un 30%.",
         },
       },
     ],
@@ -83,7 +83,7 @@ export default function DescuentosApp() {
             <Plus className="h-5 w-5 shrink-0 text-rose-500 transition-transform group-open:rotate-45" aria-hidden="true" />
           </summary>
           <p className="mt-4 mb-0">
-            Aplica el primer descuento y usa el precio resultante como precio original para el segundo. Por ejemplo, un 20% y después un 10% equivalen a un 28% acumulado, no a un 30%.
+            Introduce el primer porcentaje y añade el segundo descuento opcional. La calculadora aplica cada rebaja sobre el precio anterior. Por ejemplo, un 20% y después un 10% equivalen a un 28% acumulado, no a un 30%.
           </p>
         </details>
 

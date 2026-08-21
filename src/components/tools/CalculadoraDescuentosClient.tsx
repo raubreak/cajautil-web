@@ -8,19 +8,28 @@ const MAX_PRICE = 100_000_000;
 export default function CalculadoraDescuentosClient() {
   const [precioOriginal, setPrecioOriginal] = useState<string>("100");
   const [descuento, setDescuento] = useState<string>("20");
+  const [descuentoAdicional, setDescuentoAdicional] = useState<string>("");
 
   const original = Number(precioOriginal);
   const desc = Number(descuento);
-  const priceError = precioOriginal && (!Number.isFinite(original) || original <= 0 || original > MAX_PRICE)
+  const descAdicional = Number(descuentoAdicional);
+  const priceError = precioOriginal && (!Number.isFinite(original) || original < 0.01 || original > MAX_PRICE)
     ? "El precio debe estar entre 0,01 EUR y 100.000.000 EUR."
     : null;
   const discountError = descuento && (!Number.isFinite(desc) || desc < 0 || desc > 100)
     ? "El descuento debe estar entre 0% y 100%."
     : null;
-  const inputError = priceError ?? discountError;
+  const additionalDiscountError = descuentoAdicional && (!Number.isFinite(descAdicional) || descAdicional < 0 || descAdicional > 100)
+    ? "El segundo descuento debe estar entre 0% y 100%."
+    : null;
+  const inputError = priceError ?? discountError ?? additionalDiscountError;
   const hasResult = Boolean(precioOriginal && descuento && !inputError);
-  const ahorro = hasResult ? (original * desc) / 100 : 0;
-  const precioFinal = hasResult ? original - ahorro : 0;
+  const hasAdditionalDiscount = Boolean(descuentoAdicional && !additionalDiscountError);
+  const precioFinal = hasResult
+    ? original * (1 - desc / 100) * (hasAdditionalDiscount ? 1 - descAdicional / 100 : 1)
+    : 0;
+  const ahorro = hasResult ? original - precioFinal : 0;
+  const descuentoAcumulado = hasResult ? (ahorro / original) * 100 : 0;
 
   const formatMoney = (n: number) =>
     n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -91,6 +100,27 @@ export default function CalculadoraDescuentosClient() {
             ))}
           </div>
 
+          <div className="relative group">
+            <label htmlFor="discount-additional" className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 block pl-2">Segundo descuento opcional (%)</label>
+            <div className="relative">
+              <input
+                id="discount-additional"
+                type="number"
+                min="0"
+                max="100"
+                step="0.01"
+                value={descuentoAdicional}
+                onChange={(e) => setDescuentoAdicional(e.target.value)}
+                aria-describedby={additionalDiscountError ? "discount-error" : "additional-discount-help"}
+                aria-invalid={Boolean(additionalDiscountError)}
+                className="w-full bg-slate-50 border-2 border-slate-100 p-5 rounded-3xl text-3xl font-black text-rose-500 focus:outline-none focus:border-rose-300 focus:ring-4 focus:ring-rose-50 transition appearance-none"
+                placeholder="Ej: 10"
+              />
+              <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300 font-bold text-2xl">%</div>
+            </div>
+            <p id="additional-discount-help" className="mt-2 pl-2 text-xs text-slate-400">Se aplica sobre el precio ya rebajado, no se suma al primer porcentaje.</p>
+          </div>
+
           <p id="discount-error" role={inputError ? "alert" : undefined} className={`text-sm font-semibold ${inputError ? "text-rose-600" : "text-slate-400"}`}>
             {inputError ?? "Introduce un precio positivo y un descuento entre 0% y 100%."}
           </p>
@@ -100,6 +130,7 @@ export default function CalculadoraDescuentosClient() {
             onClick={() => {
               setPrecioOriginal("");
               setDescuento("");
+              setDescuentoAdicional("");
             }}
             className="flex items-center justify-center gap-2 text-slate-300 hover:text-slate-500 transition text-sm font-bold"
           >
@@ -111,7 +142,7 @@ export default function CalculadoraDescuentosClient() {
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-rose-600/20 rounded-full blur-[100px] pointer-events-none"></div>
 
           <div className="relative z-10">
-            <h3 className="text-lg font-bold text-slate-400 mb-10 flex items-center gap-2 uppercase tracking-widest">Resumen del ahorro</h3>
+            <h2 className="text-lg font-bold text-slate-400 mb-10 flex items-center gap-2 uppercase tracking-widest">Resumen del ahorro</h2>
 
             <div className="space-y-10">
               <div className="flex items-start gap-4">
@@ -141,6 +172,12 @@ export default function CalculadoraDescuentosClient() {
               <span>Precio original</span>
               <span className="font-mono text-right break-words">{hasResult ? `${formatMoney(original)} EUR` : "--"}</span>
             </div>
+            {hasAdditionalDiscount && hasResult && (
+              <div className="flex items-center justify-between gap-4 text-sm text-slate-400">
+                <span>Descuento acumulado</span>
+                <span className="font-mono text-right break-words">{formatMoney(descuentoAcumulado)}%</span>
+              </div>
+            )}
             <div className="flex items-center justify-between gap-4 text-sm text-emerald-400 font-bold bg-emerald-500/10 p-4 rounded-2xl">
               <div className="flex items-center gap-1.5"><Sparkles className="w-4 h-4" /> Ahorro calculado</div>
               <span className="text-right break-words">{hasResult ? `${formatMoney(ahorro)} EUR menos` : "Completa los datos"}</span>
@@ -156,6 +193,7 @@ export default function CalculadoraDescuentosClient() {
           <CornerRightDown className="w-8 h-8 text-rose-500 shrink-0" />
           <p className="text-sm font-medium italic">Ejemplo: una chaqueta de 60 EUR con un 15% de descuento se calcula así: (60 x 15) / 100 = 9 EUR. Su precio final sería de 51 EUR.</p>
         </div>
+        <p className="mt-8">Si hay dos descuentos sucesivos, aplica cada uno sobre el importe anterior. Por ejemplo, un 20% seguido de un 10% deja el precio en el 72% del original: el descuento acumulado es del 28%, no del 30%.</p>
         <p className="mt-8">Nuestra herramienta agiliza este proceso para que no cometas errores matemáticos y puedas comparar rápidamente entre varios artículos en periodos como Navidad o Black Friday.</p>
       </section>
     </>
