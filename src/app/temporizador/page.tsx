@@ -19,6 +19,7 @@ export default function TemporizadorApp() {
   const alarmIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const alarmTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const isMutedRef = useRef(false);
 
   const minutes = Number(inputMinutes);
   const seconds = Number(inputSeconds);
@@ -52,7 +53,7 @@ export default function TemporizadorApp() {
   };
 
   const playBeep = () => {
-    if (isMuted) return;
+    if (isMutedRef.current) return;
     try {
         initAudio();
         const ctx = audioContextRef.current!;
@@ -169,6 +170,13 @@ export default function TemporizadorApp() {
     setTimerRunning(false);
   };
 
+  const toggleMute = () => {
+    initAudio();
+    const nextMuted = !isMutedRef.current;
+    isMutedRef.current = nextMuted;
+    setIsMuted(nextMuted);
+  };
+
   return (
     <main className={`min-h-screen transition-colors duration-1000 ${isAlarmActive ? 'bg-rose-50' : 'bg-slate-50'} flex flex-col items-center pt-8 pb-16 px-4`}>
       
@@ -191,7 +199,7 @@ export default function TemporizadorApp() {
             <div className="absolute top-6 right-6">
                 <button
                     type="button"
-                    onClick={() => { initAudio(); setIsMuted(!isMuted); }}
+                    onClick={toggleMute}
                     className="p-3 text-slate-300 hover:text-slate-600 rounded-full hover:bg-slate-50"
                     aria-label={isMuted ? 'Activar sonido de alarma' : 'Silenciar alarma'}
                     aria-pressed={isMuted}
