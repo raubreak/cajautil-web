@@ -178,16 +178,17 @@ export default function CompresorWebPClient() {
 
           {/* Upload area */}
           <label
+            htmlFor="webp-image-upload"
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className={`border-2 border-dashed bg-sky-50 hover:bg-sky-100/50 transition-colors w-full rounded-2xl flex flex-col items-center justify-center cursor-pointer group ${images.length > 0 ? 'h-[120px] border-sky-200 hover:border-sky-400' : 'h-[280px] border-sky-200 hover:border-sky-400'}`}
+            className={`border-2 border-dashed bg-sky-50 hover:bg-sky-100/50 focus-within:border-sky-500 focus-within:ring-4 focus-within:ring-sky-100 transition-colors w-full rounded-2xl flex flex-col items-center justify-center cursor-pointer group ${images.length > 0 ? 'h-[120px] border-sky-200 hover:border-sky-400' : 'h-[280px] border-sky-200 hover:border-sky-400'}`}
           >
             <UploadCloud className={`text-sky-400 group-hover:text-sky-500 mb-2 transition-transform group-hover:-translate-y-1 ${images.length > 0 ? 'w-8 h-8' : 'w-16 h-16 mb-4'}`} />
             <span className={`font-bold text-slate-700 ${images.length > 0 ? 'text-sm' : 'text-lg'}`}>
               {images.length > 0 ? 'Añadir más imágenes' : 'Haz clic o arrastra tus fotos aquí'}
             </span>
-            {images.length === 0 && <span className="text-sm font-medium text-slate-400 mt-2">JPG, PNG y otros formatos compatibles con tu navegador - Múltiples archivos</span>}
-            <input type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
+            {images.length === 0 && <span id="webp-upload-help" className="text-sm font-medium text-slate-600 mt-2">JPG, PNG y otros formatos compatibles con tu navegador - Múltiples archivos</span>}
+            <input id="webp-image-upload" type="file" accept="image/*" multiple className="sr-only" aria-describedby={images.length === 0 ? 'webp-upload-help' : undefined} onChange={handleUpload} />
           </label>
 
           {/* Image list */}

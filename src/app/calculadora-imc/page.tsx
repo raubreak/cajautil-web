@@ -10,7 +10,7 @@ const BMI_CATEGORIES = [
     label: 'Bajo peso',
     panelClass: 'border-blue-200 bg-blue-50 shadow-blue-500/10',
     valueClass: 'text-blue-600',
-    badgeClass: 'bg-blue-500 ring-blue-200',
+    badgeClass: 'bg-blue-700 ring-blue-200',
     textClass: 'text-blue-700',
     desc: 'El IMC está por debajo del rango de referencia para adultos.',
   },
@@ -19,7 +19,7 @@ const BMI_CATEGORIES = [
     label: 'Rango de referencia',
     panelClass: 'border-emerald-200 bg-emerald-50 shadow-emerald-500/10',
     valueClass: 'text-emerald-600',
-    badgeClass: 'bg-emerald-500 ring-emerald-200',
+    badgeClass: 'bg-emerald-700 ring-emerald-200',
     textClass: 'text-emerald-700',
     desc: 'El IMC está entre 18,5 y 24,9; esto no equivale por sí solo a un diagnóstico de salud.',
   },
@@ -28,7 +28,7 @@ const BMI_CATEGORIES = [
     label: 'Sobrepeso',
     panelClass: 'border-amber-200 bg-amber-50 shadow-amber-500/10',
     valueClass: 'text-amber-600',
-    badgeClass: 'bg-amber-500 ring-amber-200',
+    badgeClass: 'bg-amber-700 ring-amber-200',
     textClass: 'text-amber-700',
     desc: 'El IMC está en el rango de sobrepeso para adultos.',
   },
@@ -37,7 +37,7 @@ const BMI_CATEGORIES = [
     label: 'Obesidad I',
     panelClass: 'border-orange-200 bg-orange-50 shadow-orange-500/10',
     valueClass: 'text-orange-600',
-    badgeClass: 'bg-orange-500 ring-orange-200',
+    badgeClass: 'bg-orange-700 ring-orange-200',
     textClass: 'text-orange-700',
     desc: 'El IMC está en el rango de obesidad de clase I; conviene interpretarlo con contexto profesional.',
   },
@@ -46,7 +46,7 @@ const BMI_CATEGORIES = [
     label: 'Obesidad II',
     panelClass: 'border-rose-200 bg-rose-50 shadow-rose-500/10',
     valueClass: 'text-rose-600',
-    badgeClass: 'bg-rose-500 ring-rose-200',
+    badgeClass: 'bg-rose-700 ring-rose-200',
     textClass: 'text-rose-700',
     desc: 'El IMC está en el rango de obesidad de clase II; solicita valoración individual si te preocupa.',
   },
@@ -55,7 +55,7 @@ const BMI_CATEGORIES = [
     label: 'Obesidad III',
     panelClass: 'border-rose-200 bg-rose-50 shadow-rose-500/10',
     valueClass: 'text-rose-600',
-    badgeClass: 'bg-rose-500 ring-rose-200',
+    badgeClass: 'bg-rose-700 ring-rose-200',
     textClass: 'text-rose-700',
     desc: 'El IMC está en el rango de obesidad de clase III; solicita valoración médica individual.',
   },
@@ -79,9 +79,11 @@ export default function CalculadoraIMC() {
     const rawBmi = pesoValue / (alturaMetros * alturaMetros);
     if (!Number.isFinite(rawBmi) || rawBmi <= 0) return null;
 
+    const bmi = Math.round(rawBmi * 10) / 10;
+
     return {
-      bmi: Math.round(rawBmi * 100) / 100,
-      category: BMI_CATEGORIES.find(({ max }) => rawBmi < max) ?? BMI_CATEGORIES.at(-1)!,
+      bmi,
+      category: BMI_CATEGORIES.find(({ max }) => bmi < max) ?? BMI_CATEGORIES.at(-1)!,
       referenceWeight: {
         min: 18.5 * alturaMetros * alturaMetros,
         max: 24.9 * alturaMetros * alturaMetros,
@@ -162,7 +164,7 @@ export default function CalculadoraIMC() {
               <h2 className="text-slate-700 text-sm font-bold uppercase tracking-widest mb-4 z-10">IMC estimado</h2>
               <div className="z-10 bg-white/60 p-6 rounded-full w-40 h-40 flex items-center justify-center mb-6 shadow-inner border border-white">
                 <output htmlFor="bmi-weight bmi-height" className={`text-5xl font-black tracking-tighter tabular-nums ${calculation.category.valueClass}`}>
-                  {calculation.bmi.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 2 })}
+                  {calculation.bmi.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
                 </output>
               </div>
               <div className="z-10 mb-2">

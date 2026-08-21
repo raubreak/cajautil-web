@@ -6,7 +6,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: "Calculadora de Días entre Fechas Online — Calcula Diferencias",
-  description: "Calcula la diferencia exacta en días, semanas, meses y años entre dos fechas. Ideal para plazos, proyectos, embarazos, eventos y vacaciones. Gratis y al instante.",
+  description: "Calcula la diferencia exacta en días entre dos fechas y consulta equivalencias en semanas, meses y años. Ideal para plazos, proyectos, eventos y vacaciones.",
   keywords: [
     "calculadora de días",
     "calcular días entre fechas",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Calculadora de Días entre Fechas",
-    description: "Calcula días, semanas, meses y años entre dos fechas. Gratis.",
+    description: "Calcula días exactos y equivalencias en semanas, meses y años entre dos fechas.",
     url: `${SITE_URL}/calculadora-dias`,
     type: "website",
     images: ["https://cajautil.com/og-image.png"],
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Calculadora de Días entre Fechas",
-    description: "Calcula días, semanas, meses y años entre dos fechas.",
+    description: "Calcula días exactos y equivalencias en semanas, meses y años entre dos fechas.",
     images: ["https://cajautil.com/og-image.png"],
   },
 };
@@ -40,7 +40,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Calculadora de Días entre Fechas",
   url: `${SITE_URL}/calculadora-dias`,
-  description: "Calcula la diferencia exacta entre dos fechas en días, semanas, meses y años.",
+  description: "Calcula la diferencia exacta en días entre dos fechas y muestra equivalencias aproximadas en meses y años.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "All",
   offers: {

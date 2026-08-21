@@ -109,7 +109,7 @@ export default function CalculadoraEdad() {
           <Cake className="w-10 h-10 text-amber-500" />
         </div>
         <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight mb-4">
-          Calculadora de <span className="text-amber-500">Edad</span>
+          Calculadora de <span className="text-amber-700">Edad</span>
         </h1>
         <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-lg mx-auto">Selecciona tu fecha de nacimiento y descubre detalles fascinantes sobre el tiempo que has vivido.</p>
       </div>
@@ -122,7 +122,7 @@ export default function CalculadoraEdad() {
                  <Calendar className="w-8 h-8 text-amber-600" />
             </div>
             <div className="w-full">
-                <label htmlFor="birth-date" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block text-center">Tu fecha de nacimiento</label>
+                <label htmlFor="birth-date" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 block text-center">Tu fecha de nacimiento</label>
                 <input 
                     id="birth-date"
                     type="date"
@@ -142,7 +142,7 @@ export default function CalculadoraEdad() {
             </div>
             {error && <p id="birth-date-error" className="text-sm font-semibold text-red-600 text-center" role="alert">{error}</p>}
             {!stats && !error && (
-                <p id="birth-date-help" className="text-xs text-slate-400 italic text-center leading-relaxed">Introduce tu fecha de nacimiento para calcular la edad por calendario.</p>
+                <p id="birth-date-help" className="text-xs text-slate-600 italic text-center leading-relaxed">Introduce tu fecha de nacimiento para calcular la edad por calendario.</p>
             )}
         </section>
 
@@ -159,21 +159,21 @@ export default function CalculadoraEdad() {
                     <div className="relative z-10 flex flex-col sm:flex-row items-center gap-10">
                         <div className="text-center">
                             <span className="text-7xl font-black text-slate-800 tabular-nums">{stats.years}</span>
-                            <span className="block text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Años</span>
+                            <span className="block text-sm font-bold text-slate-600 uppercase tracking-widest mt-1">Años</span>
                         </div>
                         <div className="h-20 w-[1px] bg-slate-100 hidden sm:block"></div>
                         <div className="text-center">
-                            <span className="text-5xl font-black text-amber-500 tabular-nums">{stats.months}</span>
-                            <span className="block text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Meses</span>
+                            <span className="text-5xl font-black text-amber-700 tabular-nums">{stats.months}</span>
+                            <span className="block text-sm font-bold text-slate-600 uppercase tracking-widest mt-1">Meses</span>
                         </div>
                         <div className="h-10 w-[1px] bg-slate-100 hidden sm:block"></div>
                         <div className="text-center">
-                            <span className="text-5xl font-black text-amber-500 tabular-nums">{stats.days}</span>
-                            <span className="block text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Días</span>
+                            <span className="text-5xl font-black text-amber-700 tabular-nums">{stats.days}</span>
+                            <span className="block text-sm font-bold text-slate-600 uppercase tracking-widest mt-1">Días</span>
                         </div>
                     </div>
                 ) : (
-                    <div className="relative z-10 h-full flex items-center justify-center text-slate-300 gap-3 italic">
+                    <div className="relative z-10 h-full flex items-center justify-center text-slate-600 gap-3 italic">
                          <Hourglass className="w-8 h-8 animate-spin duration-1000 pr-1" /> Esperando fecha...
                     </div>
                 )}
@@ -185,23 +185,23 @@ export default function CalculadoraEdad() {
                 {/* Cuánto falta para el cumple */}
                 <div className="bg-slate-900 rounded-[32px] p-8 text-white relative overflow-hidden group">
                      {stats?.nextBirthday.isToday && <PartyPopper className="absolute -bottom-4 -right-4 w-32 h-32 text-amber-500/20 rotate-12" />}
-                     <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
-                        <Cake className="w-4 h-4 text-amber-500" /> Próximo Cumpleaños
-                     </h3>
+                      <h2 className="text-xs font-bold text-slate-300 uppercase tracking-widest mb-6 flex items-center gap-2">
+                         <Cake className="w-4 h-4 text-amber-500" /> Próximo Cumpleaños
+                      </h2>
                      {stats ? (
                          <div className="space-y-4">
                               {stats.nextBirthday.isToday ? (
                                 <div className="space-y-2">
                                   <div className="text-3xl font-black text-white leading-none">¡Es hoy!</div>
-                                  <p className="text-xs text-slate-400">{formatBirthday(stats.nextBirthday.date)}</p>
+                                  <p className="text-xs text-slate-300">{formatBirthday(stats.nextBirthday.date)}</p>
                                 </div>
                               ) : (
                                 <>
-                                  <p className="text-xs text-slate-400">{formatBirthday(stats.nextBirthday.date)}</p>
+                                  <p className="text-xs text-slate-300">{formatBirthday(stats.nextBirthday.date)}</p>
                                   <div className="text-3xl font-black text-white tabular-nums leading-none">
-                                     {stats.nextBirthday.days} <span className="text-sm font-normal text-slate-400">días restantes</span>
+                                     {stats.nextBirthday.days} <span className="text-sm font-normal text-slate-300">días restantes</span>
                                  </div>
-                                 <div className="flex items-center gap-4 text-xs font-mono text-slate-500">
+                                 <div className="flex items-center gap-4 text-xs font-mono text-slate-300">
                                      <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.hours}h</span>
                                      <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.minutes}m</span>
                                      <span className="px-2 py-1 bg-white/5 rounded-lg border border-white/10">{stats.nextBirthday.seconds}s</span>
@@ -216,24 +216,24 @@ export default function CalculadoraEdad() {
 
                 {/* Días Vividos */}
                 <div className="bg-white rounded-[32px] p-8 border border-slate-100 shadow-xl group">
-                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-                        <Infinity className="w-4 h-4 text-blue-500" /> Trayectoria de vida
-                     </h3>
+                      <h2 className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-6 flex items-center gap-2">
+                         <Infinity className="w-4 h-4 text-blue-500" /> Trayectoria de vida
+                      </h2>
                      {stats ? (
                          <div className="space-y-2">
                             <div className="text-3xl font-black text-slate-800 tabular-nums leading-none">
                                 {stats.totalDays.toLocaleString()}
                             </div>
-                             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Días transcurridos (aprox.)</p>
+                              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider">Días transcurridos (aprox.)</p>
                             
                             <div className="pt-4 flex flex-col gap-1.5 border-t border-slate-50 mt-4">
-                                 <span className="text-[10px] text-slate-400 font-mono">Horas aprox.: {stats.totalHours.toLocaleString()}</span>
-                                 <span className="text-[10px] text-slate-400 font-mono">Minutos aprox.: {stats.totalMinutes.toLocaleString()}</span>
-                                 <span className="text-[10px] text-slate-400 font-mono">Segundos aprox.: {stats.totalSeconds.toLocaleString()}</span>
+                                  <span className="text-[10px] text-slate-600 font-mono">Horas aprox.: {stats.totalHours.toLocaleString()}</span>
+                                  <span className="text-[10px] text-slate-600 font-mono">Minutos aprox.: {stats.totalMinutes.toLocaleString()}</span>
+                                  <span className="text-[10px] text-slate-600 font-mono">Segundos aprox.: {stats.totalSeconds.toLocaleString()}</span>
                             </div>
                          </div>
                      ) : (
-                         <div className="text-slate-100 italic text-sm">--</div>
+                          <div className="text-slate-600 italic text-sm">--</div>
                      )}
                 </div>
             </div>
@@ -245,7 +245,7 @@ export default function CalculadoraEdad() {
           <p>Esta herramienta muestra tu edad en años, meses y días, además de una estimación del tiempo transcurrido desde la fecha indicada.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                    <h3 className="font-black text-amber-500 mb-2 uppercase tracking-wide">Cálculo por calendario</h3>
+                    <h3 className="font-black text-amber-700 mb-2 uppercase tracking-wide">Cálculo por calendario</h3>
                    <p className="text-sm">La edad en años, meses y días se calcula con el calendario gregoriano y contempla la distinta duración de los meses y los años bisiestos. Los totales de horas y días son estimaciones basadas en el tiempo transcurrido y pueden variar por la zona horaria.</p>
               </div>
               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Type } from "lucide-react";
 
 const wordSegmenter = new Intl.Segmenter("es", { granularity: "word" });
+const graphemeSegmenter = new Intl.Segmenter("es", { granularity: "grapheme" });
 
 function countWords(text: string) {
   let count = 0;
@@ -15,13 +16,23 @@ function countWords(text: string) {
   return count;
 }
 
+function countCharacters(text: string) {
+  let count = 0;
+
+  for (const segment of graphemeSegmenter.segment(text)) {
+    if (segment.segment) count += 1;
+  }
+
+  return count;
+}
+
 export default function ContadorPalabras() {
   const [texto, setTexto] = useState("");
   const textoAnalizado = useDeferredValue(texto);
 
   const palabras = countWords(textoAnalizado);
-  const caracteres = textoAnalizado.length;
-  const sinEspacios = textoAnalizado.replace(/\s/gu, "").length;
+  const caracteres = countCharacters(textoAnalizado);
+  const sinEspacios = countCharacters(textoAnalizado.replace(/\s/gu, ""));
   const tiempoLectura = palabras === 0 ? "0" : palabras < 200 ? "< 1" : String(Math.ceil(palabras / 200));
 
   return (
@@ -79,7 +90,7 @@ export default function ContadorPalabras() {
       </div>
 
       {/* Contenido SEO */}
-      <section className="w-full max-w-4xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-emerald-600">
+      <section className="w-full max-w-4xl prose prose-slate prose-p:leading-relaxed prose-headings:font-black prose-headings:text-slate-800 px-4 text-slate-600 prose-a:text-emerald-700">
         <h2>¿Para qué sirve un contador de palabras?</h2>
         <p>
           Un <strong>contador de palabras online</strong> es esencial para escritores, estudiantes, periodistas, community managers y 
@@ -107,8 +118,9 @@ export default function ContadorPalabras() {
         <h2>Qué considera la herramienta una palabra</h2>
         <p>
           El contador identifica segmentos con letras o números según las reglas de separación de palabras del idioma español.
-          Los signos de puntuación y los emojis aislados no aumentan el recuento. Los caracteres incluyen todos los símbolos,
-          saltos de línea y espacios introducidos; la métrica sin espacios excluye los caracteres de separación.
+          Los signos de puntuación y los emojis aislados no aumentan el recuento de palabras. Los caracteres se cuentan como
+          símbolos visibles, por lo que un emoji compuesto se considera una unidad; la métrica sin espacios excluye los
+          caracteres de separación.
         </p>
         <p>
           El tiempo de lectura es orientativo y usa una velocidad de 200 palabras por minuto. Un texto vacío muestra cero minutos,

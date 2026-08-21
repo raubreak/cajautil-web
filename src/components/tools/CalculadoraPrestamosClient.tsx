@@ -130,7 +130,7 @@ export default function CalculadoraPrestamosClient({
         <section className="lg:col-span-5 bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 flex flex-col gap-6">
           
           <div>
-            <label htmlFor="loan-amount" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Importe solicitado</label>
+            <label htmlFor="loan-amount" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 block">Importe solicitado</label>
             <div className="relative">
               <Wallet className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
               <input 
@@ -148,7 +148,7 @@ export default function CalculadoraPrestamosClient({
           </div>
 
           <div>
-             <label htmlFor="loan-interest" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">TIN (Interés Anual)</label>
+             <label htmlFor="loan-interest" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 block">TIN (Interés Anual)</label>
              <div className="relative">
                <TrendingUp className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                <input 
@@ -166,7 +166,7 @@ export default function CalculadoraPrestamosClient({
           </div>
 
           <div>
-             <label htmlFor="loan-years" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Plazo (años)</label>
+             <label htmlFor="loan-years" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 block">Plazo (años)</label>
              <div className="relative">
                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                <input 
@@ -190,7 +190,7 @@ export default function CalculadoraPrestamosClient({
           )}
 
           <div className="pt-4 border-t border-slate-100 flex flex-col items-center">
-             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter mb-2 text-center">Coste total del préstamo (Capital + Intereses):</p>
+             <p className="text-[10px] text-slate-600 font-bold uppercase tracking-tighter mb-2 text-center">Coste total del préstamo (Capital + Intereses):</p>
              <p className="text-2xl font-black text-slate-800 tabular-nums">
                 {simulation ? formatCurrency(simulation.totalPaid) : '€0,00'}
              </p>
@@ -207,25 +207,25 @@ export default function CalculadoraPrestamosClient({
                  <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:rotate-12 transition-transform duration-700">
                     <PieChart className="w-48 h-48" />
                  </div>
-                 <p className="text-xs font-bold text-blue-200 uppercase tracking-widest mb-2 relative z-10">Cuota Mensual Estimada</p>
+                 <p className="text-xs font-bold text-white uppercase tracking-widest mb-2 relative z-10">Cuota Mensual Estimada</p>
                  <p className="text-4xl sm:text-6xl font-black tabular-nums transition-transform relative z-10 break-all">{formatCurrency(simulation.cuota)}</p>
-                 <div className="mt-6 px-4 py-2 bg-white/10 rounded-full border border-white/20 relative z-10">
+                  <div className="mt-6 px-4 py-2 bg-blue-800 rounded-full border border-blue-700 relative z-10">
                     <p className="text-[10px] font-bold uppercase tracking-widest">Total Intereses: {formatCurrency(simulation.totalInterest)}</p>
                  </div>
               </div>
 
               {/* TABLE PREVIEW */}
               <div className="bg-white rounded-[32px] p-8 border border-slate-100 shadow-xl overflow-hidden">
-                <h3 className="text-sm font-bold text-slate-600 uppercase tracking-widest mb-6 flex items-center gap-2">
+                 <h2 className="text-sm font-bold text-slate-600 uppercase tracking-widest mb-6 flex items-center gap-2">
                    Tabla de amortización {showFullTable ? `(${simulation.nTotal} meses)` : '(primeros 12 meses)'}
-                </h3>
+                 </h2>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
                         <caption className="sr-only">
                           Desglose mensual de cuota, intereses, capital amortizado y capital pendiente
                         </caption>
                         <thead>
-                            <tr className="text-slate-400 font-bold border-b border-slate-50">
+                            <tr className="text-slate-600 font-bold border-b border-slate-50">
                                 <th className="pb-3 px-2">Mes</th>
                                 <th className="pb-3 px-2">Cuota</th>
                                 <th className="pb-3 px-2">Interés</th>
@@ -238,8 +238,8 @@ export default function CalculadoraPrestamosClient({
                                 <tr key={row.month} className="border-b border-slate-50 hover:bg-blue-50 transition-colors">
                                     <td className="py-3 px-2 font-bold">{row.month}</td>
                                     <td className="py-3 px-2">{formatCurrency(row.payment)}</td>
-                                    <td className="py-3 px-2 text-rose-500">{row.interest > 0 ? '-' : ''}{formatCurrency(row.interest)}</td>
-                                    <td className="py-3 px-2 text-emerald-600">+{formatCurrency(row.principal)}</td>
+                                    <td className="py-3 px-2 text-rose-700">{row.interest > 0 ? '-' : ''}{formatCurrency(row.interest)}</td>
+                                    <td className="py-3 px-2 text-emerald-700">+{formatCurrency(row.principal)}</td>
                                     <td className="py-3 px-2 font-mono">{formatCurrency(row.remaining)}</td>
                                 </tr>
                             ))}

@@ -139,7 +139,7 @@ export default function CalculadoraInteresCompuesto() {
         <section className="lg:col-span-4 bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 flex flex-col gap-6">
           
           <div>
-            <label htmlFor="compound-initial" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Inversión Inicial</label>
+            <label htmlFor="compound-initial" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 block">Inversión Inicial</label>
             <div className="relative">
               <Wallet className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
               <input 
@@ -161,7 +161,7 @@ export default function CalculadoraInteresCompuesto() {
           </div>
 
           <div>
-             <label htmlFor="compound-monthly" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Aportación Mensual</label>
+             <label htmlFor="compound-monthly" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 block">Aportación Mensual</label>
              <div className="relative">
                <PiggyBank className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                 <input
@@ -183,7 +183,7 @@ export default function CalculadoraInteresCompuesto() {
           </div>
 
           <div>
-             <label htmlFor="compound-rate" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1 group relative">
+             <label htmlFor="compound-rate" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 flex items-center gap-1 group relative">
                Tasa de Interés Anual
                <Info className="w-4 h-4 text-emerald-400 cursor-help" />
                  <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block w-64 bg-slate-800 text-white text-xs p-3 rounded-xl shadow-lg z-50 normal-case tracking-normal">
@@ -211,7 +211,7 @@ export default function CalculadoraInteresCompuesto() {
           </div>
 
           <div>
-             <label htmlFor="compound-years" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Años de Inversión</label>
+             <label htmlFor="compound-years" className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3 block">Años de Inversión</label>
              <div className="relative">
                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                 <input
@@ -227,7 +227,7 @@ export default function CalculadoraInteresCompuesto() {
                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xl font-black text-slate-800 focus:outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-50 transition"
                  placeholder="10"
                />
-                <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 font-bold shrink-0">Años</span>
+                 <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-600 font-bold shrink-0">Años</span>
               </div>
               {errors.years && <p id="compound-years-error" role="alert" className="mt-2 text-xs font-semibold text-rose-600">{errors.years}</p>}
              
@@ -251,11 +251,11 @@ export default function CalculadoraInteresCompuesto() {
             <>
               {/* TOP CARDS */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-emerald-600 rounded-[32px] p-8 text-white shadow-xl flex flex-col justify-center relative overflow-hidden group">
+                 <div className="bg-emerald-700 rounded-[32px] p-8 text-white shadow-xl flex flex-col justify-center relative overflow-hidden group">
                    <div className="absolute right-[-20px] top-[-20px] opacity-10 group-hover:scale-110 transition-transform duration-700">
                       <TrendingUp className="w-48 h-48" />
                    </div>
-                    <p className="text-xs font-bold text-emerald-200 uppercase tracking-widest mb-2 relative z-10">Capital final simulado</p>
+                    <p className="text-xs font-bold text-white uppercase tracking-widest mb-2 relative z-10">Capital final simulado</p>
                    <p className="text-4xl sm:text-5xl font-black tabular-nums transition-transform relative z-10 leading-none py-1">
                      {formatCurrency(simulation.finalBalance)}
                    </p>
@@ -263,22 +263,22 @@ export default function CalculadoraInteresCompuesto() {
                 
                 <div className="bg-white border text-center sm:text-left border-slate-100 rounded-[32px] p-8 shadow-xl flex justify-between flex-col">
                    <div>
-                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Total Aportado</p>
+                     <p className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-1">Total Aportado</p>
                      <p className="text-2xl font-black text-slate-700">{formatCurrency(simulation.totalContributions)}</p>
                    </div>
                    
                    <div className="mt-4 sm:mt-0">
-                      <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Rendimiento simulado</p>
-                      <p className={`text-2xl font-black ${simulation.totalInterest >= 0 ? 'text-emerald-500' : 'text-rose-600'}`}>{formatSignedCurrency(simulation.totalInterest)}</p>
+                      <p className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-1">Rendimiento simulado</p>
+                      <p className={`text-2xl font-black ${simulation.totalInterest >= 0 ? 'text-emerald-700' : 'text-rose-600'}`}>{formatSignedCurrency(simulation.totalInterest)}</p>
                    </div>
                 </div>
               </div>
 
               {/* CHART */}
               <div className="bg-white rounded-[32px] p-4 sm:p-8 border border-slate-100 shadow-xl overflow-hidden mt-2">
-                <h3 className="text-sm font-bold text-slate-600 uppercase tracking-widest mb-6 flex items-center px-4 pt-2">
+                 <h2 className="text-sm font-bold text-slate-600 uppercase tracking-widest mb-6 flex items-center px-4 pt-2">
                    Evolución de tu Inversión (Años)
-                </h3>
+                 </h2>
                 <div className="w-full h-72 sm:h-96">
                   <AreaChart
                     responsive
