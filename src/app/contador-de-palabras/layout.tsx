@@ -6,7 +6,7 @@ const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
   title: "Contador de Palabras y Caracteres Online Gratis",
-  description: "Cuenta palabras, caracteres y estima el tiempo de lectura de cualquier texto al instante. Ideal para ensayos, artículos, posts de redes sociales y SEO. Funciona offline.",
+  description: "Cuenta palabras y caracteres con segmentación Unicode y estima el tiempo de lectura. Para ensayos, artículos, redes sociales y SEO, sin enviar el texto.",
   keywords: [
     "contador de palabras",
     "contar palabras online",
@@ -26,6 +26,12 @@ export const metadata: Metadata = {
     type: "website",
     images: ["https://cajautil.com/og-image.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contador de Palabras y Caracteres Online",
+    description: "Cuenta palabras y caracteres con segmentación Unicode y estima el tiempo de lectura sin enviar el texto.",
+    images: ["https://cajautil.com/og-image.png"],
+  },
 };
 
 const jsonLd = {
@@ -33,7 +39,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Contador de Palabras Online",
   url: `${SITE_URL}/contador-de-palabras`,
-  description: "Herramienta gratuita para contar palabras, caracteres y estimar tiempo de lectura.",
+  description: "Herramienta gratuita para contar palabras y caracteres con segmentación Unicode y estimar el tiempo de lectura.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "All",
   offers: {

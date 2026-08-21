@@ -1,15 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useDeferredValue, useState } from "react";
 import Link from "next/link";
 import { Type } from "lucide-react";
 
+const wordSegmenter = new Intl.Segmenter("es", { granularity: "word" });
+
+function countWords(text: string) {
+  let count = 0;
+
+  for (const segment of wordSegmenter.segment(text)) {
+    if (segment.isWordLike) count += 1;
+  }
+
+  return count;
+}
+
 export default function ContadorPalabras() {
   const [texto, setTexto] = useState("");
+  const textoAnalizado = useDeferredValue(texto);
 
-  const palabras = texto.trim() ? texto.trim().split(/\s+/).length : 0;
-  const caracteres = texto.length;
-  const sinEspacios = texto.replace(/\s+/g, "").length;
-  const tiempoLecturaMin = (palabras / 200);
+  const palabras = countWords(textoAnalizado);
+  const caracteres = textoAnalizado.length;
+  const sinEspacios = textoAnalizado.replace(/\s/gu, "").length;
+  const tiempoLectura = palabras === 0 ? "0" : palabras < 200 ? "< 1" : String(Math.ceil(palabras / 200));
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
@@ -26,8 +39,8 @@ export default function ContadorPalabras() {
         </p>
       </div>
 
-      <div className="w-full max-w-4xl bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 flex flex-col gap-6 mb-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2" role="status" aria-live="polite" aria-label="Estadísticas del texto">
+      <div className="w-full max-w-4xl bg-white rounded-3xl sm:rounded-[40px] shadow-2xl p-5 sm:p-8 border border-slate-100 flex flex-col gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2" role="status" aria-live="polite" aria-busy={texto !== textoAnalizado} aria-label="Estadísticas del texto">
           <div className="bg-emerald-50 py-6 rounded-2xl text-center border border-emerald-100 flex flex-col items-center justify-center">
             <span className="block text-4xl font-black text-emerald-600 mb-1">{palabras}</span>
             <span className="text-xs font-bold uppercase tracking-widest text-emerald-800">Palabras</span>
@@ -41,7 +54,7 @@ export default function ContadorPalabras() {
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Sin espacios</span>
           </div>
           <div className="bg-emerald-50 py-6 rounded-2xl text-center border border-emerald-100 flex flex-col items-center justify-center">
-            <span className="block text-4xl font-black text-emerald-600 mb-1">{tiempoLecturaMin < 1 ? "< 1" : Math.ceil(tiempoLecturaMin)}</span>
+            <span className="block text-4xl font-black text-emerald-600 mb-1">{tiempoLectura}</span>
             <span className="text-xs font-bold uppercase tracking-widest text-emerald-800">Min. Lectura</span>
           </div>
         </div>
@@ -59,7 +72,7 @@ export default function ContadorPalabras() {
         </div>
         
         <div className="flex justify-end">
-          <button onClick={() => setTexto("")} className="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors font-bold text-sm">
+          <button type="button" onClick={() => setTexto("")} disabled={!texto} className="px-6 py-3 bg-slate-100 hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 text-slate-700 rounded-xl transition-colors font-bold text-sm">
             Limpiar texto
           </button>
         </div>
@@ -89,6 +102,17 @@ export default function ContadorPalabras() {
         <p>
           El recuento se realiza directamente en la página y se actualiza al instante mientras escribes o pegas contenido,
           lo que facilita revisiones rapidas sin depender de editores externos.
+        </p>
+
+        <h2>Qué considera la herramienta una palabra</h2>
+        <p>
+          El contador identifica segmentos con letras o números según las reglas de separación de palabras del idioma español.
+          Los signos de puntuación y los emojis aislados no aumentan el recuento. Los caracteres incluyen todos los símbolos,
+          saltos de línea y espacios introducidos; la métrica sin espacios excluye los caracteres de separación.
+        </p>
+        <p>
+          El tiempo de lectura es orientativo y usa una velocidad de 200 palabras por minuto. Un texto vacío muestra cero minutos,
+          mientras que los textos de menos de 200 palabras se indican como una lectura inferior a un minuto.
         </p>
 
         <h3>Herramientas relacionadas</h3>
