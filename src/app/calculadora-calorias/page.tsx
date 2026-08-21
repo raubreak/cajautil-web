@@ -29,26 +29,57 @@ export default function CalculadoraCalorias() {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [activity, setActivity] = useState<Activity>(1.55);
-  const [result, setResult] = useState<{ bmr: number; tdee: number } | null>(null);
-  const [error, setError] = useState('');
+  const [hasCalculated, setHasCalculated] = useState(false);
 
-  const calculate = () => {
-    const a = parseInt(age), w = parseFloat(weight), h = parseFloat(height);
-    if (isNaN(a) || isNaN(w) || isNaN(h)) {
-      setResult(null);
-      setError('Completa edad, peso y altura para realizar la estimación.');
-      return;
+  const calculation = (() => {
+    if (!hasCalculated) {
+      return { result: null, ageError: null, weightError: null, heightError: null, calculationError: null };
     }
-    if (a < 18 || a > 100 || w < 30 || w > 300 || h < 120 || h > 230) {
-      setResult(null);
-      setError('Usa valores para adultos dentro de estos rangos: 18-100 años, 30-300 kg y 120-230 cm.');
-      return;
+
+    const ageValue = Number(age);
+    const weightValue = Number(weight);
+    const heightValue = Number(height);
+    const ageError = age.trim() === ''
+      ? 'Introduce tu edad.'
+      : !Number.isInteger(ageValue) || ageValue < 18 || ageValue > 100
+        ? 'La edad debe ser un número entero entre 18 y 100 años.'
+        : null;
+    const weightError = weight.trim() === ''
+      ? 'Introduce tu peso.'
+      : !Number.isFinite(weightValue) || weightValue < 30 || weightValue > 300
+        ? 'El peso debe estar entre 30 y 300 kg.'
+        : null;
+    const heightError = height.trim() === ''
+      ? 'Introduce tu altura.'
+      : !Number.isFinite(heightValue) || heightValue < 120 || heightValue > 230
+        ? 'La altura debe estar entre 120 y 230 cm.'
+        : null;
+
+    if (ageError || weightError || heightError) {
+      return { result: null, ageError, weightError, heightError, calculationError: null };
     }
-    const bmr = calcBMR(gender, w, h, a);
+
+    const bmr = calcBMR(gender, weightValue, heightValue, ageValue);
     const tdee = bmr * activity;
-    setError('');
-    setResult({ bmr: Math.round(bmr), tdee: Math.round(tdee) });
-  };
+
+    if (![bmr, tdee].every(Number.isFinite) || bmr <= 0 || tdee <= 0) {
+      return {
+        result: null,
+        ageError: null,
+        weightError: null,
+        heightError: null,
+        calculationError: 'No se pudo obtener una estimación válida con estos datos.',
+      };
+    }
+
+    return {
+      result: { bmr: Math.round(bmr), tdee: Math.round(tdee) },
+      ageError: null,
+      weightError: null,
+      heightError: null,
+      calculationError: null,
+    };
+  })();
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col items-center pt-8 pb-16 px-4">
@@ -60,7 +91,7 @@ export default function CalculadoraCalorias() {
           Calculadora de <span className="text-orange-500">Calorías</span>
         </h1>
         <p className="text-lg text-slate-500 font-medium max-w-lg mx-auto leading-relaxed">
-          Calcula tu metabolismo basal (BMR) y gasto calórico diario (TDEE) con la fórmula Mifflin-St Jeor.
+          Estima tu metabolismo basal (BMR) con Mifflin-St Jeor y el gasto diario (TDEE) mediante un factor de actividad.
         </p>
       </div>
 
@@ -69,10 +100,10 @@ export default function CalculadoraCalorias() {
         <section className="lg:col-span-5 bg-white rounded-[40px] shadow-2xl p-8 border border-slate-100 space-y-6">
           {/* Género */}
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Sexo</label>
-            <div className="grid grid-cols-2 gap-3">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Sexo usado por la fórmula</span>
+            <div className="grid grid-cols-2 gap-3" role="group" aria-label="Sexo usado por la fórmula">
               {(['male', 'female'] as Gender[]).map(g => (
-                <button key={g} onClick={() => setGender(g)} className={`py-4 rounded-2xl font-bold text-sm transition-all ${gender === g ? 'bg-orange-500 text-white shadow-lg' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'}`}>
+                <button type="button" key={g} onClick={() => setGender(g)} aria-pressed={gender === g} className={`py-4 rounded-2xl font-bold text-sm transition-all ${gender === g ? 'bg-orange-500 text-white shadow-lg' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'}`}>
                   {g === 'male' ? '♂ Hombre' : '♀ Mujer'}
                 </button>
               ))}
@@ -83,28 +114,38 @@ export default function CalculadoraCalorias() {
           <div className="grid grid-cols-3 gap-3">
             <div>
               <label htmlFor="calorie-age" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Edad</label>
-              <input id="calorie-age" type="number" min="18" max="100" value={age} onChange={(e) => setAge(e.target.value)} placeholder="25" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              <input id="calorie-age" type="number" min="18" max="100" step="1" value={age} onChange={(e) => setAge(e.target.value)} placeholder="25" aria-invalid={Boolean(calculation.ageError)} aria-describedby={calculation.ageError ? 'calorie-age-error' : undefined} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              {calculation.ageError && <p id="calorie-age-error" className="sr-only">{calculation.ageError}</p>}
             </div>
             <div>
               <label htmlFor="calorie-weight" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Peso (kg)</label>
-              <input id="calorie-weight" type="number" min="30" max="300" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="70" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              <input id="calorie-weight" type="number" min="30" max="300" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="70" aria-invalid={Boolean(calculation.weightError)} aria-describedby={calculation.weightError ? 'calorie-weight-error' : undefined} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              {calculation.weightError && <p id="calorie-weight-error" className="sr-only">{calculation.weightError}</p>}
             </div>
             <div>
               <label htmlFor="calorie-height" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Altura (cm)</label>
-              <input id="calorie-height" type="number" min="120" max="230" step="0.1" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="175" className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              <input id="calorie-height" type="number" min="120" max="230" step="0.1" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="175" aria-invalid={Boolean(calculation.heightError)} aria-describedby={calculation.heightError ? 'calorie-height-error' : undefined} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl p-3 text-center text-lg font-black text-slate-700 focus:outline-none focus:border-orange-300" />
+              {calculation.heightError && <p id="calorie-height-error" className="sr-only">{calculation.heightError}</p>}
             </div>
           </div>
 
-          {error && <p role="alert" className="text-sm font-semibold leading-relaxed text-rose-600">{error}</p>}
+          {(calculation.ageError || calculation.weightError || calculation.heightError) && (
+            <p role="alert" className="text-sm font-semibold leading-relaxed text-rose-600">
+              {[calculation.ageError, calculation.weightError, calculation.heightError].filter(Boolean).join(' ')}
+            </p>
+          )}
+          {calculation.calculationError && <p role="alert" className="text-sm font-semibold leading-relaxed text-rose-600">{calculation.calculationError}</p>}
 
           {/* Actividad */}
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Nivel de actividad</label>
-            <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Nivel de actividad</span>
+            <div className="space-y-2" role="group" aria-label="Nivel de actividad">
               {ACTIVITIES.map(a => (
                 <button
                   key={a.factor}
+                  type="button"
                   onClick={() => setActivity(a.factor)}
+                  aria-pressed={activity === a.factor}
                   className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all flex items-center gap-3 ${activity === a.factor ? 'border-orange-400 bg-orange-50' : 'border-slate-100 bg-slate-50 hover:border-slate-200'}`}
                 >
                   <Dumbbell className={`w-4 h-4 ${activity === a.factor ? 'text-orange-500' : 'text-slate-300'}`} />
@@ -117,25 +158,25 @@ export default function CalculadoraCalorias() {
             </div>
           </div>
 
-          <button onClick={calculate} className="w-full py-5 bg-orange-500 text-white rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-orange-600 transition shadow-xl active:scale-95">
+          <button type="button" onClick={() => setHasCalculated(true)} className="w-full py-5 bg-orange-500 text-white rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-orange-600 transition shadow-xl active:scale-95">
             Calcular Calorías
           </button>
         </section>
 
         {/* Results */}
-        <section className="lg:col-span-7 space-y-6">
-          {result ? (
+        <section className="lg:col-span-7 space-y-6" role="status" aria-live="polite" aria-atomic="true">
+          {calculation.result ? (
             <>
               {/* BMR y TDEE */}
               <div className="grid grid-cols-2 gap-6">
                 <div className="bg-white rounded-[32px] p-8 border border-slate-100 shadow-xl text-center">
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Metabolismo Basal (BMR)</p>
-                  <p className="text-4xl font-black text-slate-800 tabular-nums">{result.bmr}</p>
+                  <p className="text-4xl font-black text-slate-800 tabular-nums">{calculation.result.bmr}</p>
                   <p className="text-xs text-slate-400 mt-1">kcal/día en reposo</p>
                 </div>
                 <div className="bg-orange-500 rounded-[32px] p-8 text-white text-center shadow-xl">
                   <p className="text-xs font-bold text-orange-200 uppercase tracking-widest mb-2">Gasto Diario (TDEE)</p>
-                  <p className="text-4xl font-black tabular-nums">{result.tdee}</p>
+                  <p className="text-4xl font-black tabular-nums">{calculation.result.tdee}</p>
                   <p className="text-xs text-orange-200 mt-1">kcal/día con actividad</p>
                 </div>
               </div>
@@ -151,8 +192,8 @@ export default function CalculadoraCalorias() {
           ) : (
             <div className="bg-white rounded-[40px] shadow-xl border border-slate-100 p-16 flex flex-col items-center justify-center text-center min-h-[400px]">
               <Flame className="w-16 h-16 text-slate-100 mb-6" />
-              <p className="text-slate-300 font-bold text-lg">Completa tus datos y pulsa Calcular</p>
-              <p className="text-slate-200 text-sm mt-2">Verás tu metabolismo basal y gasto diario al instante.</p>
+              <p className="text-slate-300 font-bold text-lg">{hasCalculated ? 'Corrige los datos indicados' : 'Completa tus datos y pulsa Calcular'}</p>
+              <p className="text-slate-200 text-sm mt-2">La estimación se actualizará si después cambias cualquier dato.</p>
             </div>
           )}
         </section>
@@ -160,7 +201,7 @@ export default function CalculadoraCalorias() {
 
       <section className="w-full max-w-4xl prose prose-slate text-slate-600">
         <h2>¿Qué es el TDEE y cómo se calcula?</h2>
-        <p>El <strong>TDEE (Total Daily Energy Expenditure)</strong> estima la energía total utilizada en un día. Se calcula multiplicando el <strong>metabolismo basal (BMR)</strong> por un factor de actividad física. Esta herramienta utiliza la <a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener noreferrer">ecuación de Mifflin-St Jeor</a>, una fórmula de estimación desarrollada para personas adultas.</p>
+        <p>El <strong>TDEE (Total Daily Energy Expenditure)</strong> estima la energía total utilizada en un día. Primero se estima el <strong>metabolismo basal (BMR)</strong> con la <a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener noreferrer">ecuación de Mifflin-St Jeor</a> para personas adultas y después se aplica un factor orientativo según el nivel de actividad seleccionado.</p>
         <h3>¿Cómo usar estos resultados?</h3>
         <ul>
           <li><strong>Para observar mantenimiento:</strong> usa el TDEE como referencia inicial y compara la evolución durante varias semanas.</li>
