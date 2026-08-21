@@ -1,0 +1,44 @@
+name: Notify IndexNow after production deploy
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: read
+
+concurrency:
+  group: indexnow-${{ github.event.deployment.id || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out deployed revision
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.deployment.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Submit updated production URLs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_DEPLOYMENT_ID: ${{ github.event.deployment.id }}
+        run: npm run seo:indexnow -- --github-deployment "${GITHUB_DEPLOYMENT_ID:-latest}"
