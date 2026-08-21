@@ -14,8 +14,10 @@ export default function ExtractorColores() {
   const [colors, setColors] = useState<ColorInfo[]>([]);
   const [hoverColor, setHoverColor] = useState<ColorInfo | null>(null);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
+  const [copyError, setCopyError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -121,10 +123,22 @@ export default function ExtractorColores() {
     }
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopyStatus(text);
-    setTimeout(() => setCopyStatus(null), 2000);
+  const copyToClipboard = async (text: string) => {
+    setCopyError(null);
+    if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API unavailable');
+      }
+
+      await navigator.clipboard.writeText(text);
+      setCopyStatus(text);
+      copyTimeoutRef.current = setTimeout(() => setCopyStatus(null), 2000);
+    } catch {
+      setCopyStatus(null);
+      setCopyError(`No se pudo copiar ${text}. Selecciona el codigo y copialo manualmente.`);
+    }
   };
 
   return (
@@ -233,6 +247,14 @@ export default function ExtractorColores() {
                         </div>
                     )}
                 </div>
+                <p className="sr-only" role="status" aria-live="polite">
+                  {copyStatus ? `${copyStatus} copiado al portapapeles.` : ''}
+                </p>
+                {copyError && (
+                  <p className="mt-4 text-sm font-semibold text-red-700" role="alert">
+                    {copyError}
+                  </p>
+                )}
             </div>
         </section>
       </div>
