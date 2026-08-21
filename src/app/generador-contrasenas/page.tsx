@@ -9,7 +9,7 @@ export default function GeneradorContrasenas() {
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
 
   const secureRandomIndex = (max: number) => {
     const values = new Uint32Array(1);
@@ -46,7 +46,7 @@ export default function GeneradorContrasenas() {
     }
 
     setPassword(passwordChars.join(''));
-    setCopied(false);
+    setCopyStatus("idle");
   };
 
   useEffect(() => {
@@ -54,11 +54,17 @@ export default function GeneradorContrasenas() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [length, includeUppercase, includeNumbers, includeSymbols]);
 
-  const copyToClipboard = () => {
-    if(navigator.clipboard) {
-      navigator.clipboard.writeText(password);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+  const copyToClipboard = async () => {
+    try {
+      if (!navigator.clipboard) {
+        throw new Error("Clipboard API unavailable");
+      }
+
+      await navigator.clipboard.writeText(password);
+      setCopyStatus("copied");
+      setTimeout(() => setCopyStatus("idle"), 2000);
+    } catch {
+      setCopyStatus("error");
     }
   };
 
@@ -90,15 +96,24 @@ export default function GeneradorContrasenas() {
           <button 
             onClick={copyToClipboard}
             className={`absolute -bottom-5 left-1/2 transform -translate-x-1/2 px-6 py-2.5 rounded-full text-sm font-bold shadow-lg transition-all ${
-              copied 
+              copyStatus === "copied"
                 ? 'bg-emerald-500 hover:bg-emerald-600 text-white translate-y-0 scale-105' 
                 : 'bg-slate-800 hover:bg-slate-700 text-white hover:-translate-y-1'
             }`}
-            aria-label={copied ? 'Contraseña copiada' : 'Copiar contraseña al portapapeles'}
+            aria-label={copyStatus === "copied" ? 'Contraseña copiada' : 'Copiar contraseña al portapapeles'}
           >
-            {copied ? '¡Copiado!' : 'Copiar Contraseña'}
+            {copyStatus === "copied" ? '¡Copiado!' : 'Copiar Contraseña'}
           </button>
         </div>
+
+        <p
+          className={copyStatus === "error" ? "text-center text-sm font-semibold text-red-700" : "sr-only"}
+          role="status"
+          aria-live="polite"
+        >
+          {copyStatus === "copied" && "Contraseña copiada al portapapeles."}
+          {copyStatus === "error" && "No se pudo copiar. Selecciona la contraseña y cópiala manualmente."}
+        </p>
 
         <div className="space-y-8 mt-4">
           <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100">

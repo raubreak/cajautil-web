@@ -5,7 +5,7 @@ import ToolEditorialSection from '@/components/ToolEditorialSection';
 const SITE_URL = "https://cajautil.com";
 
 export const metadata: Metadata = {
-  title: "Generador de Contraseñas Seguras | Aleatorias y Offline",
+  title: "Generador de Contraseñas Seguras y Aleatorias Online",
   description: "Genera contraseñas robustas y aleatorias. Configura longitud, mayúsculas, números y símbolos. Se crean localmente y nunca salen de tu navegador.",
   keywords: [
     "generador de contraseñas",
@@ -22,9 +22,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Generador de Contraseñas Seguras Online",
-    description: "Crea contraseñas robustas y difíciles de adivinar. 100% offline y gratis.",
+    description: "Crea contraseñas aleatorias en tu navegador con longitud, mayúsculas, números y símbolos configurables.",
     url: `${SITE_URL}/generador-contrasenas`,
     type: "website",
+    images: ["https://cajautil.com/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Generador de Contraseñas Seguras y Aleatorias",
+    description: "Crea una contraseña configurable directamente en tu navegador.",
     images: ["https://cajautil.com/og-image.png"],
   },
 };
