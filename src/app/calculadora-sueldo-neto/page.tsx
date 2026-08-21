@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
+import { Suspense } from 'react';
 
-import CalculadoraSueldoNetoClient from '@/components/tools/CalculadoraSueldoNetoClient';
+import CalculadoraSueldoNetoClient, {
+  CalculadoraSueldoNetoWithSearchParams,
+} from '@/components/tools/CalculadoraSueldoNetoClient';
 
 export default function CalculadoraSueldo() {
   const howToJsonLd = {
@@ -90,7 +93,9 @@ export default function CalculadoraSueldo() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
 
-      <CalculadoraSueldoNetoClient />
+      <Suspense fallback={<CalculadoraSueldoNetoClient />}>
+        <CalculadoraSueldoNetoWithSearchParams />
+      </Suspense>
 
       <section className="w-full max-w-4xl prose prose-slate prose-headings:text-slate-800 px-2 text-slate-600">
         <h2>Cómo interpretar tu sueldo neto</h2>
@@ -238,22 +243,22 @@ export default function CalculadoraSueldo() {
                 <td className="px-4 py-3">1.570 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200 bg-slate-50/70">
-                <td className="px-4 py-3 font-semibold">2000 brutos a netos</td>
-                <td className="px-4 py-3">24.000 EUR al año si son 12 pagas</td>
+                <td className="px-4 py-3 font-semibold">2.000 brutos por paga</td>
+                <td className="px-4 py-3">24.000 EUR (12) o 28.000 EUR (14) al año</td>
                 <td className="px-4 py-3">1.570 EUR aprox.</td>
-                <td className="px-4 py-3">1.346 EUR aprox.</td>
+                <td className="px-4 py-3">1.570 EUR aprox.</td>
               </tr>
               <tr className="border-t border-slate-200">
-                <td className="px-4 py-3 font-semibold">2400 brutos a netos</td>
-                <td className="px-4 py-3">28.800 EUR al año si son 12 pagas</td>
+                <td className="px-4 py-3 font-semibold">2.400 brutos por paga</td>
+                <td className="px-4 py-3">28.800 EUR (12) o 33.600 EUR (14) al año</td>
                 <td className="px-4 py-3">1.884 EUR aprox.</td>
-                <td className="px-4 py-3">1.615 EUR aprox.</td>
+                <td className="px-4 py-3">1.884 EUR aprox.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p>
-          Estas referencias usan un IRPF del 15% y una cotización del 6,50%. Ajusta ambos porcentajes con los datos de tu nómina para evitar tomar una cifra genérica como resultado personal.
+          Estas referencias usan un IRPF del 15% y una cotización del 6,50%. En las filas por paga, el bruto anual cambia al multiplicar por 12 o 14, pero el neto de cada paga permanece igual porque se aplican los mismos porcentajes. Ajusta ambos porcentajes con los datos de tu nómina para evitar tomar una cifra genérica como resultado personal.
         </p>
 
         <h2>Cómo pasar de sueldo neto a bruto</h2>

@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { Coins } from "lucide-react";
+import { useSearchParams } from 'next/navigation';
 
 import { trackToolEvent } from '@/lib/analytics';
 
@@ -22,20 +23,28 @@ interface Props {
   subtitle?: string;
   initialBruto?: number | "";
   initialPagas?: 12 | 14;
+  initialDireccion?: ConversionDirection;
+  initialPeriodo?: InputPeriod;
+  initialIrpf?: number;
+  initialRetencionSS?: number;
 }
 
 export default function CalculadoraSueldoNetoClient({ 
   title, 
   subtitle, 
   initialBruto = "", 
-  initialPagas = 12
+  initialPagas = 12,
+  initialDireccion = 'bruto-neto',
+  initialPeriodo = 'anual',
+  initialIrpf = 15,
+  initialRetencionSS = 6.5,
 }: Props) {
   const [importe, setImporte] = useState<number | "">(initialBruto);
-  const [direccion, setDireccion] = useState<ConversionDirection>('bruto-neto');
-  const [periodo, setPeriodo] = useState<InputPeriod>('anual');
+  const [direccion, setDireccion] = useState<ConversionDirection>(initialDireccion);
+  const [periodo, setPeriodo] = useState<InputPeriod>(initialPeriodo);
   const [pagas, setPagas] = useState<12 | 14>(initialPagas);
-  const [irpf, setIrpf] = useState(15);
-  const [retencionSS, setRetencionSS] = useState(6.5);
+  const [irpf, setIrpf] = useState(initialIrpf);
+  const [retencionSS, setRetencionSS] = useState(initialRetencionSS);
   const startedTracked = useRef(false);
   const completedTracked = useRef(false);
 
@@ -83,7 +92,16 @@ export default function CalculadoraSueldoNetoClient({
   const promedioNetoMensual = netoAnual / 12;
   const irpfAnual = brutoAnual * irpf / 100;
   const cotizacionAnual = brutoAnual * retencionSS / 100;
-  const resultadoPrincipal = direccion === 'bruto-neto' ? netoPorPaga : brutoAnual;
+  const resultadoPrincipal = direccion === 'bruto-neto'
+    ? netoPorPaga
+    : periodo === 'anual'
+      ? brutoAnual
+      : brutoPorPaga;
+  const resultadoLabel = direccion === 'bruto-neto'
+    ? 'Sueldo neto por paga'
+    : periodo === 'anual'
+      ? 'Sueldo bruto anual estimado'
+      : 'Sueldo bruto por paga estimado';
   const importeLabel = `Sueldo ${direccion === 'bruto-neto' ? 'bruto' : 'neto'} ${periodo === 'anual' ? 'anual' : 'por paga'} (€)`;
   const maxImporte = periodo === 'anual' ? MAX_ANNUAL_SALARY : MAX_ANNUAL_SALARY / pagas;
 
@@ -174,8 +192,8 @@ export default function CalculadoraSueldoNetoClient({
                 {error && <p id="error-importe" className="mt-2 text-sm font-semibold text-rose-700">{error}</p>}
               </div>
 
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">Número de Pagas</label>
+            <fieldset>
+              <legend className="block text-sm font-bold text-slate-700 mb-2">Número de Pagas</legend>
               <div className="flex bg-slate-100 p-2 rounded-2xl border-2 border-slate-100" role="group" aria-label="Seleccionar número de pagas">
                 <button 
                   type="button"
@@ -194,7 +212,7 @@ export default function CalculadoraSueldoNetoClient({
                   14 Pagas
                 </button>
               </div>
-            </div>
+            </fieldset>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -224,13 +242,13 @@ export default function CalculadoraSueldoNetoClient({
                 onChange={(event) => setRetencionSS(Math.min(15, Math.max(0, Number(event.target.value))))}
                 className="w-full border-2 border-slate-200 rounded-2xl p-4 text-xl font-bold bg-white focus:ring-4 focus:ring-amber-100 focus:border-amber-400 outline-none transition-all text-slate-900"
               />
-              <p className="mt-2 text-xs text-slate-500">Valor inicial editable: comprueba el porcentaje aplicado en tu nómina.</p>
+              <p className="mt-2 text-xs text-slate-500">Valor orientativo inicial, no universal. Comprueba el porcentaje total de tu nómina. Referencias revisadas en agosto de 2026.</p>
             </div>
           </div>
 
           <div className="mt-8 p-8 bg-amber-50 rounded-[32px] border border-amber-100 shadow-inner" role="status" aria-live="polite">
             <p className="text-sm font-extrabold text-amber-900 uppercase tracking-widest text-center mb-4">
-              {direccion === 'bruto-neto' ? 'Sueldo neto por paga' : 'Sueldo bruto anual estimado'}
+              {resultadoLabel}
             </p>
             <p className="text-5xl sm:text-6xl font-black text-amber-600 text-center mb-8 drop-shadow-sm break-words">
               {hasResult ? formatCurrency(resultadoPrincipal) : '0,00 €'}
@@ -285,5 +303,41 @@ export default function CalculadoraSueldoNetoClient({
       </div>
       
     </div>
+  );
+}
+
+function readBoundedNumber(
+  rawValue: string | null,
+  min: number,
+  max: number,
+  fallback: number,
+): number {
+  if (rawValue === null || rawValue.trim() === '') return fallback;
+
+  const value = Number(rawValue);
+  return Number.isFinite(value) && value >= min && value <= max ? value : fallback;
+}
+
+export function CalculadoraSueldoNetoWithSearchParams() {
+  const searchParams = useSearchParams();
+  const direccion: ConversionDirection = searchParams.get('direccion') === 'neto-bruto'
+    ? 'neto-bruto'
+    : 'bruto-neto';
+  const periodo: InputPeriod = searchParams.get('periodo') === 'paga' ? 'paga' : 'anual';
+  const pagas: 12 | 14 = searchParams.get('pagas') === '14' ? 14 : 12;
+  const maxImporte = periodo === 'anual' ? MAX_ANNUAL_SALARY : MAX_ANNUAL_SALARY / pagas;
+  const importe = readBoundedNumber(searchParams.get('importe'), 0.01, maxImporte, 0);
+  const irpf = readBoundedNumber(searchParams.get('irpf'), 0, 55, 15);
+  const retencionSS = readBoundedNumber(searchParams.get('ss'), 0, 15, 6.5);
+
+  return (
+    <CalculadoraSueldoNetoClient
+      initialBruto={importe || ''}
+      initialPagas={pagas}
+      initialDireccion={direccion}
+      initialPeriodo={periodo}
+      initialIrpf={irpf}
+      initialRetencionSS={retencionSS}
+    />
   );
 }

@@ -20,9 +20,11 @@ function escapeXml(value: string): string {
 
 export function GET() {
   const articles = [...editorialArticles].sort(
-    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
-  const lastBuildDate = new Date(articles[0].updatedAt).toUTCString();
+  const lastBuildDate = new Date(
+    Math.max(...editorialArticles.map((article) => new Date(article.updatedAt).getTime())),
+  ).toUTCString();
   const items = articles.map((article) => {
     const url = `${SITE_URL}/articulos/${article.slug}`;
 
@@ -31,7 +33,7 @@ export function GET() {
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <description>${escapeXml(article.description)}</description>
-      <pubDate>${new Date(article.updatedAt).toUTCString()}</pubDate>
+      <pubDate>${new Date(article.publishedAt).toUTCString()}</pubDate>
     </item>`;
   });
 

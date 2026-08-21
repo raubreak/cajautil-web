@@ -23,7 +23,7 @@ export const editorialArticles: EditorialArticle[] = [
     ],
     tags: ['nomina', 'salario', 'irpf'],
     publishedAt: '2026-08-21T12:05:35.000Z',
-    updatedAt: '2026-08-21T12:05:35.000Z',
+    updatedAt: '2026-08-21T14:54:37.000Z',
     content: `## ¿Qué es una nómina y qué deberías comprobar primero?
 
 Una nómina es el documento que explica cómo se pasa de tu salario bruto al dinero que finalmente recibes. No es solo un justificante de pago: reúne los datos de la empresa y del trabajador, el período liquidado, los conceptos que suman, las cantidades que se descuentan y las bases utilizadas para cotizar y calcular retenciones.
@@ -97,7 +97,7 @@ Supongamos un caso deliberadamente simplificado: 2.500 EUR brutos por paga, 12 p
 | Total deducciones | 162,50 + 375,00 | 537,50 EUR |
 | Líquido | 2.500 − 537,50 | 1.962,50 EUR |
 
-En términos anuales, el bruto sería 30.000 EUR, la cotización simulada 1.950 EUR, la retención 4.500 EUR y el neto 23.550 EUR. Puedes reproducir el escenario en la [calculadora de sueldo neto](/calculadora-sueldo-neto) introduciendo 30.000 EUR, 12 pagas, un 15 % de IRPF y un 6,50 % de cotización. El resultado debe coincidir salvo diferencias de redondeo.
+En términos anuales, el bruto sería 30.000 EUR, la cotización simulada 1.950 EUR, la retención 4.500 EUR y el neto 23.550 EUR. Puedes [abrir este escenario en la calculadora de sueldo neto](/calculadora-sueldo-neto?importe=30000&direccion=bruto-neto&periodo=anual&pagas=12&irpf=15&ss=6.5) con 30.000 EUR, 12 pagas, un 15 % de IRPF y un 6,50 % de cotización ya cargados. El resultado debe coincidir salvo diferencias de redondeo.
 
 La comprobación importante no es memorizar 1.962,50 EUR. Es entender que, si cambias cualquiera de las bases o porcentajes, cambia el resultado. En una nómina real debes utilizar los valores que aparecen en el documento o en una simulación oficial, no adoptar automáticamente los de este ejemplo.
 
@@ -188,7 +188,7 @@ Cuando tengas claros los datos de tu recibo, usa la [calculadora de sueldo neto]
     ],
     tags: ['salario', 'nomina', 'empleo'],
     publishedAt: '2026-04-11T09:00:00.000Z',
-    updatedAt: '2026-08-21T12:05:35.000Z',
+    updatedAt: '2026-08-21T14:54:37.000Z',
     content: `## Por que no basta con mirar el bruto
 
 Cuando una empresa te habla de salario anual, casi siempre te esta dando una cifra en bruto. Esa cantidad es util para comparar bandas salariales, pero no te dice cuanto dinero real entrara en tu cuenta cada mes. Entre el bruto y el neto intervienen las cotizaciones a la Seguridad Social, la retencion de IRPF, el numero de pagas y, en algunos casos, bonus, dietas o retribucion flexible.
@@ -261,7 +261,7 @@ Antes de contestar, intenta resumir cada oferta en una hoja simple con cinco fil
 
 ## Recomendacion final
 
-Antes de responder a una empresa, simula varios escenarios con la [calculadora de sueldo neto](/calculadora-sueldo-neto). Por ejemplo, introduce una oferta de 32.000 EUR en 12 pagas y ajusta los porcentajes a tu caso. Te servira para llegar a la conversacion con una base clara, detectar si la mejora es real y evitar negociar a ciegas.
+Antes de responder a una empresa, simula varios escenarios con la [calculadora de sueldo neto](/calculadora-sueldo-neto?importe=32000&direccion=bruto-neto&periodo=anual&pagas=12&irpf=15&ss=6.5). El enlace abre una oferta de 32.000 EUR en 12 pagas con porcentajes orientativos que debes ajustar a tu caso. Te servira para llegar a la conversacion con una base clara, detectar si la mejora es real y evitar negociar a ciegas.
 
 Si antes necesitas comprobar de donde salen el bruto, las bases y las deducciones, revisa la guia para [leer una nomina paso a paso](/articulos/como-leer-una-nomina-paso-a-paso). Entender esos conceptos evita trasladar a la simulacion un porcentaje o una base incorrectos.
 
