@@ -78,7 +78,11 @@ export function stripMarkdownToText(value: string | null | undefined): string {
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/^\s{0,3}#{1,6}\s+/gm, '')
-    .replace(/[*_>~-]/g, ' ')
+    .replace(/^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*$/gm, ' ')
+    .replace(/^\s*\||\|\s*$/gm, '')
+    .replace(/\s*\|\s*/g, '; ')
+    .replace(/^\s{0,3}(?:[-*+]\s+|\d+[.)]\s+)/gm, '')
+    .replace(/[*>~]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
