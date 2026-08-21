@@ -15,12 +15,24 @@ interface AgeStats {
   totalSeconds: number;
   nextBirthday: {
     isToday: boolean;
+    date: Date;
     days: number;
     hours: number;
     minutes: number;
     seconds: number;
   }
 }
+
+const birthdayFormatter = new Intl.DateTimeFormat('es-ES', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+const formatBirthday = (date: Date) => {
+  const label = birthdayFormatter.format(date);
+  return label.charAt(0).toUpperCase() + label.slice(1);
+};
 
 export default function CalculadoraEdad() {
   const [birthDate, setBirthDate] = useState<string>('');
@@ -178,11 +190,15 @@ export default function CalculadoraEdad() {
                      </h3>
                      {stats ? (
                          <div className="space-y-4">
-                             {stats.nextBirthday.isToday ? (
-                               <div className="text-3xl font-black text-white leading-none">¡Es hoy!</div>
-                             ) : (
-                               <>
-                                 <div className="text-3xl font-black text-white tabular-nums leading-none">
+                              {stats.nextBirthday.isToday ? (
+                                <div className="space-y-2">
+                                  <div className="text-3xl font-black text-white leading-none">¡Es hoy!</div>
+                                  <p className="text-xs text-slate-400">{formatBirthday(stats.nextBirthday.date)}</p>
+                                </div>
+                              ) : (
+                                <>
+                                  <p className="text-xs text-slate-400">{formatBirthday(stats.nextBirthday.date)}</p>
+                                  <div className="text-3xl font-black text-white tabular-nums leading-none">
                                      {stats.nextBirthday.days} <span className="text-sm font-normal text-slate-400">días restantes</span>
                                  </div>
                                  <div className="flex items-center gap-4 text-xs font-mono text-slate-500">
@@ -208,12 +224,12 @@ export default function CalculadoraEdad() {
                             <div className="text-3xl font-black text-slate-800 tabular-nums leading-none">
                                 {stats.totalDays.toLocaleString()}
                             </div>
-                            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Días totales vividos</p>
+                             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Días transcurridos (aprox.)</p>
                             
                             <div className="pt-4 flex flex-col gap-1.5 border-t border-slate-50 mt-4">
-                                <span className="text-[10px] text-slate-400 font-mono">Total Horas: {stats.totalHours.toLocaleString()}</span>
-                                <span className="text-[10px] text-slate-400 font-mono">Total Minutos: {stats.totalMinutes.toLocaleString()}</span>
-                                <span className="text-[10px] text-slate-400 font-mono">Total Segundos: {stats.totalSeconds.toLocaleString()}</span>
+                                 <span className="text-[10px] text-slate-400 font-mono">Horas aprox.: {stats.totalHours.toLocaleString()}</span>
+                                 <span className="text-[10px] text-slate-400 font-mono">Minutos aprox.: {stats.totalMinutes.toLocaleString()}</span>
+                                 <span className="text-[10px] text-slate-400 font-mono">Segundos aprox.: {stats.totalSeconds.toLocaleString()}</span>
                             </div>
                          </div>
                      ) : (
@@ -229,15 +245,15 @@ export default function CalculadoraEdad() {
           <p>Esta herramienta muestra tu edad en años, meses y días, además de una estimación del tiempo transcurrido desde la fecha indicada.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                   <h4 className="font-black text-amber-500 mb-2 uppercase tracking-wide">Cálculo por calendario</h4>
+                    <h3 className="font-black text-amber-500 mb-2 uppercase tracking-wide">Cálculo por calendario</h3>
                    <p className="text-sm">La edad en años, meses y días se calcula con el calendario gregoriano y contempla la distinta duración de los meses y los años bisiestos. Los totales de horas y días son estimaciones basadas en el tiempo transcurrido y pueden variar por la zona horaria.</p>
               </div>
               <div className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm">
-                  <h4 className="font-black text-indigo-600 mb-2 uppercase tracking-wide">Próximo Aniversario</h4>
+                   <h3 className="font-black text-indigo-600 mb-2 uppercase tracking-wide">Próximo Aniversario</h3>
                    <p className="text-sm">El temporizador estima cuánto falta para el próximo cumpleaños y se actualiza cada segundo. Para fechas del 29 de febrero, usa el último día de febrero en años no bisiestos.</p>
               </div>
           </div>
-          <p>¿Vas a celebrar un <strong>aniversario de oro</strong> o quieres saber cuántas horas has trabajado en tu vida? Conocer tu edad en días es una métrica sorprendente que a menudo nos ayuda a valorar más cada jornada.</p>
+          <p>¿Vas a celebrar un <strong>aniversario de oro</strong> o quieres estimar cuántas horas han transcurrido desde que naciste? Conocer tu edad en días puede ofrecer otra perspectiva sobre el paso del tiempo.</p>
       </section>
 
     </main>

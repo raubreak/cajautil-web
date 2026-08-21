@@ -651,13 +651,13 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
         title: 'Para que sirve calcular la edad por calendario',
         paragraphs: [
           'Ademas de la curiosidad, puede ayudarte en formularios, seguimiento de hitos personales, comparativas de tiempo o simples calculos de antiguedad vital.',
-          'Expresar la edad en dias, horas o semanas tambien puede tener interes educativo o divulgativo.',
+          'Expresar la edad en dias u horas tambien puede tener interes educativo o divulgativo.',
         ],
       },
       {
         title: 'Como se calcula',
         paragraphs: [
-          'Se parte de la fecha de nacimiento y se compara con la fecha actual o una fecha objetivo, teniendo en cuenta la longitud real de meses y anos.',
+          'Se parte de la fecha de nacimiento y se compara con la fecha actual, teniendo en cuenta la longitud real de meses y anos.',
           'Eso evita errores tipicos cuando se simplifica el calculo como si todos los meses tuvieran la misma duracion.',
         ],
       },

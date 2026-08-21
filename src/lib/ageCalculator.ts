@@ -72,6 +72,7 @@ export function calculateNextBirthday(birthDate: Date, now: Date) {
 
   return {
     isToday,
+    date: nextBirthday,
     days: Math.floor(difference / DAY_MS),
     hours: Math.floor((difference % DAY_MS) / (60 * 60 * 1000)),
     minutes: Math.floor((difference % (60 * 60 * 1000)) / (60 * 1000)),
