@@ -23,7 +23,7 @@ const toolDefinitions = [
   ['validador-iban', 'monthly', 0.9, '2026-08-21T01:00:00.000Z'],
   ['generador-nombres', 'monthly', 0.8],
   ['contador-de-palabras', 'monthly', 0.8, '2026-08-21T00:25:43.000Z'],
-  ['generador-contrasenas', 'monthly', 0.8, '2026-08-20T23:40:10.000Z'],
+  ['generador-contrasenas', 'monthly', 0.8, '2026-08-21T08:15:31.000Z'],
   ['mayusculas-minusculas', 'monthly', 0.7, '2026-08-20T22:10:06.000Z'],
   ['generador-qr', 'monthly', 0.8, '2026-08-20T23:40:10.000Z'],
   ['lector-qr', 'monthly', 0.7, '2026-08-20T23:40:10.000Z'],
