@@ -720,6 +720,10 @@ export const toolEditorialContent: Record<string, ToolEditorialEntry> = {
       { href: '/calculadora-porcentajes', label: 'Calculadora de porcentajes' },
       { href: '/contador-de-palabras', label: 'Contador de palabras' },
     ],
+    references: [
+      { href: 'https://www.bipm.org/en/publications/si-brochure', label: 'BIPM: Sistema Internacional de Unidades (SI)' },
+      { href: 'https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors', label: 'NIST: factores de conversión de unidades' },
+    ],
   }),
   'compresor-webp': buildEntry({
     summary: [

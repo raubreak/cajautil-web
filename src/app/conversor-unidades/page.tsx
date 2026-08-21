@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { ArrowRightLeft, Ruler, Weight, Thermometer, Droplets, Gauge, Clock } from 'lucide-react';
 
 interface UnitCategory {
@@ -8,6 +8,20 @@ interface UnitCategory {
   icon: React.ReactNode;
   units: { name: string; toBase: (v: number) => number; fromBase: (v: number) => number }[];
 }
+
+const ABSOLUTE_ZERO_CELSIUS = -273.15;
+
+const formatResult = (value: number) => {
+  const absoluteValue = Math.abs(value);
+  const notation = absoluteValue !== 0 && (absoluteValue < 1e-9 || absoluteValue >= 1e12)
+    ? 'scientific'
+    : 'standard';
+
+  return value.toLocaleString('es-ES', {
+    maximumSignificantDigits: 12,
+    notation,
+  });
+};
 
 const CATEGORIES: UnitCategory[] = [
   {
@@ -32,8 +46,8 @@ const CATEGORIES: UnitCategory[] = [
       { name: 'Gramos (g)', toBase: v => v / 1000, fromBase: v => v * 1000 },
       { name: 'Miligramos (mg)', toBase: v => v / 1e6, fromBase: v => v * 1e6 },
       { name: 'Toneladas', toBase: v => v * 1000, fromBase: v => v / 1000 },
-      { name: 'Libras (lb)', toBase: v => v * 0.453592, fromBase: v => v / 0.453592 },
-      { name: 'Onzas (oz)', toBase: v => v * 0.0283495, fromBase: v => v / 0.0283495 },
+      { name: 'Libras (lb)', toBase: v => v * 0.45359237, fromBase: v => v / 0.45359237 },
+      { name: 'Onzas (oz)', toBase: v => v * 0.028349523125, fromBase: v => v / 0.028349523125 },
     ]
   },
   {
@@ -51,9 +65,9 @@ const CATEGORIES: UnitCategory[] = [
     units: [
       { name: 'Litros (L)', toBase: v => v, fromBase: v => v },
       { name: 'Mililitros (mL)', toBase: v => v / 1000, fromBase: v => v * 1000 },
-      { name: 'Galones (US)', toBase: v => v * 3.78541, fromBase: v => v / 3.78541 },
+      { name: 'Galones (US)', toBase: v => v * 3.785411784, fromBase: v => v / 3.785411784 },
       { name: 'Metros cúbicos', toBase: v => v * 1000, fromBase: v => v / 1000 },
-      { name: 'Tazas (US)', toBase: v => v * 0.236588, fromBase: v => v / 0.236588 },
+      { name: 'Tazas (US)', toBase: v => v * 0.2365882365, fromBase: v => v / 0.2365882365 },
     ]
   },
   {
@@ -62,7 +76,7 @@ const CATEGORIES: UnitCategory[] = [
     units: [
       { name: 'km/h', toBase: v => v, fromBase: v => v },
       { name: 'm/s', toBase: v => v * 3.6, fromBase: v => v / 3.6 },
-      { name: 'Millas/h (mph)', toBase: v => v * 1.60934, fromBase: v => v / 1.60934 },
+      { name: 'Millas/h (mph)', toBase: v => v * 1.609344, fromBase: v => v / 1.609344 },
       { name: 'Nudos', toBase: v => v * 1.852, fromBase: v => v / 1.852 },
     ]
   },
@@ -89,14 +103,32 @@ export default function ConversorUnidades() {
   const fromUnit = category.units[fromIdx];
   const toUnit = category.units[toIdx];
 
-  const result = useMemo(() => {
-    const v = parseFloat(value);
-    if (isNaN(v)) return '';
-    const base = fromUnit.toBase(v);
-    const converted = toUnit.fromBase(base);
-    const decimals = Math.abs(converted) < 0.01 ? 8 : Math.abs(converted) < 1 ? 6 : 4;
-    return parseFloat(converted.toFixed(decimals)).toString();
-  }, [value, fromUnit, toUnit]);
+  const conversion = (() => {
+    if (value.trim() === '') {
+      return { result: '', error: 'Introduce un valor para convertir.' };
+    }
+
+    const numericValue = Number(value);
+    if (!Number.isFinite(numericValue)) {
+      return { result: '', error: 'Introduce un número finito dentro del rango admitido.' };
+    }
+
+    const baseValue = fromUnit.toBase(numericValue);
+    if (!Number.isFinite(baseValue)) {
+      return { result: '', error: 'El valor es demasiado grande para realizar la conversión.' };
+    }
+
+    if (category.name === 'Temperatura' && baseValue < ABSOLUTE_ZERO_CELSIUS - 1e-9) {
+      return { result: '', error: 'La temperatura no puede ser inferior al cero absoluto (-273,15 °C).' };
+    }
+
+    const convertedValue = toUnit.fromBase(baseValue);
+    if (!Number.isFinite(convertedValue)) {
+      return { result: '', error: 'El resultado queda fuera del rango numérico admitido.' };
+    }
+
+    return { result: formatResult(convertedValue), error: null };
+  })();
 
   const swap = () => {
     setFromIdx(toIdx);
@@ -119,11 +151,13 @@ export default function ConversorUnidades() {
 
       <div className="w-full max-w-4xl">
         {/* Tabs de categoría */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
+        <div className="flex flex-wrap gap-2 mb-8 justify-center" role="group" aria-label="Categoría de unidades">
           {CATEGORIES.map((cat, i) => (
             <button
+              type="button"
               key={cat.name}
               onClick={() => { setCatIdx(i); setFromIdx(0); setToIdx(1); }}
+              aria-pressed={catIdx === i}
               className={`flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-sm transition-all ${catIdx === i ? 'bg-sky-600 text-white shadow-lg shadow-sky-500/20' : 'bg-white text-slate-400 hover:bg-sky-50 hover:text-sky-600 border border-slate-100'}`}
             >
               {cat.icon}
@@ -133,22 +167,28 @@ export default function ConversorUnidades() {
         </div>
 
         {/* Converter Card */}
-        <div className="bg-white rounded-[40px] shadow-2xl p-10 border border-slate-100">
+        <div className="bg-white rounded-3xl sm:rounded-[40px] shadow-2xl p-6 sm:p-10 border border-slate-100">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 items-end">
             {/* FROM */}
             <div>
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">De:</label>
+              <label htmlFor="conversion-from" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">De:</label>
               <select
+                id="conversion-from"
                 value={fromIdx}
                 onChange={(e) => setFromIdx(Number(e.target.value))}
                 className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold text-slate-700 focus:outline-none focus:border-sky-300 mb-3"
               >
                 {category.units.map((u, i) => <option key={i} value={i}>{u.name}</option>)}
               </select>
+              <label htmlFor="conversion-value" className="sr-only">Valor en {fromUnit.name}</label>
               <input
+                id="conversion-value"
                 type="number"
+                step="any"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
+                aria-describedby={conversion.error ? 'conversion-error' : undefined}
+                aria-invalid={Boolean(conversion.error)}
                 className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 text-3xl font-black text-slate-800 focus:outline-none focus:border-sky-300 focus:ring-4 focus:ring-sky-50 tabular-nums"
                 placeholder="0"
               />
@@ -157,7 +197,9 @@ export default function ConversorUnidades() {
             {/* Swap */}
             <div className="flex justify-center">
               <button
+                type="button"
                 onClick={swap}
+                aria-label={`Intercambiar ${fromUnit.name} y ${toUnit.name}`}
                 className="w-14 h-14 bg-sky-100 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-600 hover:text-white transition-all active:scale-90 shadow-sm"
               >
                 <ArrowRightLeft className="w-6 h-6" />
@@ -166,25 +208,38 @@ export default function ConversorUnidades() {
 
             {/* TO */}
             <div>
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">A:</label>
+              <label htmlFor="conversion-to" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">A:</label>
               <select
+                id="conversion-to"
                 value={toIdx}
                 onChange={(e) => setToIdx(Number(e.target.value))}
                 className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold text-slate-700 focus:outline-none focus:border-sky-300 mb-3"
               >
                 {category.units.map((u, i) => <option key={i} value={i}>{u.name}</option>)}
               </select>
-              <div className="w-full bg-sky-50 border-2 border-sky-100 rounded-2xl p-5 text-3xl font-black text-sky-700 tabular-nums min-h-[76px] flex items-center">
-                {result || '—'}
+              <div
+                className="w-full min-w-0 break-all bg-sky-50 border-2 border-sky-100 rounded-2xl p-5 text-2xl sm:text-3xl font-black text-sky-700 tabular-nums min-h-[76px] flex items-center"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                aria-label={`Resultado en ${toUnit.name}`}
+              >
+                {conversion.result || '—'}
               </div>
             </div>
           </div>
 
+          {conversion.error && (
+            <p id="conversion-error" className="mt-5 text-center text-sm font-semibold text-rose-700">
+              {conversion.error}
+            </p>
+          )}
+
           {/* Fórmula */}
-          {result && (
+          {conversion.result && (
             <div className="mt-8 text-center p-4 bg-slate-50 rounded-2xl border border-slate-100">
               <p className="text-sm text-slate-500 font-medium">
-                <span className="font-black text-slate-700">{value} {fromUnit.name}</span> = <span className="font-black text-sky-600">{result} {toUnit.name}</span>
+                <span className="font-black text-slate-700">{value} {fromUnit.name}</span> = <span className="font-black text-sky-600">{conversion.result} {toUnit.name}</span>
               </p>
             </div>
           )}
@@ -203,14 +258,13 @@ export default function ConversorUnidades() {
 
         <h2>Cómo funciona la conversión</h2>
         <p>
-          Cada unidad se convierte primero a una unidad base del Sistema Internacional (metros para longitud, 
-          kilogramos para peso, etc.) y después se transforma a la unidad de destino. Este método de dos pasos
-          garantiza precision matematica y permite anadrir nuevas unidades facilmente.
+          Cada categoría usa una unidad de referencia interna antes de transformar el valor a la unidad de destino.
+          Así se mantienen equivalencias coherentes sin encadenar varios redondeos intermedios.
         </p>
         <p>
           Un caso especial es la <strong>temperatura</strong>, donde la conversion no es proporcional: la formula
           de Celsius a Fahrenheit es <code>F = C x 9/5 + 32</code>, mientras que para Kelvin es <code>K = C + 273,15</code>.
-          Nuestro conversor aplica las formulas exactas en cada caso.
+          El conversor aplica la fórmula correspondiente y rechaza temperaturas inferiores al cero absoluto.
         </p>
 
         <h2>Casos de uso habituales</h2>
@@ -223,9 +277,10 @@ export default function ConversorUnidades() {
 
         <h2>Precision y limitaciones</h2>
         <p>
-          Los resultados se muestran con hasta 8 decimales para valores muy pequenos y 4 decimales para valores
-          grandes, lo que cubre la gran mayoria de necesidades practicas. Para calculos cientificos de alta
-          precision, es recomendable verificar los resultados con software especializado.
+          Los resultados conservan hasta 12 cifras significativas y usan notación científica cuando el valor es
+          demasiado pequeño o grande para leerse con claridad. Algunas equivalencias no pertenecientes al SI se
+          representan mediante factores definidos o aproximaciones publicadas; para cálculos críticos conviene
+          verificar la tolerancia y el redondeo exigidos.
         </p>
         <p>
           Todo el procesamiento se realiza localmente en tu navegador. No se envia ningun dato a servidores externos.

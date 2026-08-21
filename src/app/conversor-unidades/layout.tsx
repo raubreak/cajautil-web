@@ -22,7 +22,13 @@ export const metadata: Metadata = {
     description: 'Convierte entre unidades de medida al instante. Todo en tu navegador, sin instalar nada.',
     url: `${SITE_URL}/conversor-unidades`,
     images: ['https://cajautil.com/og-image.png'],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Conversor de Unidades Online | Medidas y Temperatura',
+    description: 'Convierte longitud, peso, temperatura, volumen, velocidad y tiempo con validación de límites y resultados claros.',
+    images: ['https://cajautil.com/og-image.png'],
+  },
 };
 
 const jsonLd = {
@@ -30,7 +36,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "Conversor de Unidades",
   url: `${SITE_URL}/conversor-unidades`,
-  description: "Herramienta online gratuita para convertir entre diferentes unidades de medida: peso, longitud, temperatura, volumen, velocidad y más.",
+  description: "Herramienta online gratuita para convertir longitud, peso, temperatura, volumen, velocidad y tiempo con resultados validados.",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Any",
   offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" }
