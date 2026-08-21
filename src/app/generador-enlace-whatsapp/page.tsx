@@ -9,6 +9,7 @@ export default function GeneradorWhatsApp() {
   const [prefijo, setPrefijo] = useState<string>('+34');
   const [mensaje, setMensaje] = useState<string>('');
   const [copiado, setCopiado] = useState(false);
+  const [copyError, setCopyError] = useState<string | null>(null);
 
   // Limpia espacios y guiones
   const formatPhone = telefono.replace(/[^0-9]/g, '');
@@ -18,11 +19,23 @@ export default function GeneradorWhatsApp() {
   const linkGeneral = `https://wa.me/${formatPrefix}${formatPhone}${mensaje ? `?text=${encodeURIComponent(mensaje)}` : ''}`;
   const isValid = formatPhone.length >= 6;
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (!isValid) return;
-    navigator.clipboard.writeText(linkGeneral);
-    setCopiado(true);
-    setTimeout(() => setCopiado(false), 2000);
+
+    setCopyError(null);
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API unavailable');
+      }
+
+      await navigator.clipboard.writeText(linkGeneral);
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2000);
+    } catch {
+      setCopiado(false);
+      setCopyError('No se pudo copiar automáticamente. Selecciona el enlace y cópialo manualmente.');
+    }
   };
 
   const handleOpenDesktop = () => {
@@ -123,12 +136,20 @@ export default function GeneradorWhatsApp() {
             <button 
               onClick={handleCopy}
               disabled={!isValid}
+              aria-label={copiado ? 'Enlace copiado' : 'Copiar enlace de WhatsApp'}
+              aria-describedby={copyError ? 'whatsapp-copy-error' : undefined}
               className={`px-4 sm:px-6 font-bold flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-colors border-l border-slate-200 ${copiado ? 'bg-slate-800 text-white' : 'bg-green-600 hover:bg-green-700 text-white disabled:bg-slate-300 disabled:text-slate-500'}`}
             >
-              {copiado ? <CheckCircle className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+              {copiado ? <CheckCircle className="w-5 h-5" aria-hidden="true" /> : <Copy className="w-5 h-5" aria-hidden="true" />}
               <span className="hidden sm:inline">{copiado ? 'Copiado' : 'Copiar'}</span>
             </button>
           </div>
+
+          {copyError && (
+            <p id="whatsapp-copy-error" role="alert" className="w-full -mt-3 mb-6 text-sm font-medium text-red-700">
+              {copyError}
+            </p>
+          )}
 
           {/* Tools de WhatsApp */}
           <div className="grid grid-cols-2 gap-3 w-full">
