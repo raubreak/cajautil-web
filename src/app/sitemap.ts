@@ -18,7 +18,7 @@ const toolDefinitions = [
   ['generador-enlace-whatsapp', 'monthly', 0.9, '2026-08-20T22:38:27.000Z'],
   ['calculadora-imc', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
   ['calculadora-porcentajes', 'monthly', 0.9, '2026-08-20T22:23:43.000Z'],
-  ['calculadora-iva', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
+  ['calculadora-iva', 'monthly', 0.9, '2026-08-21T00:36:37.000Z'],
   ['calculadora-sueldo-neto', 'yearly', 0.9, '2026-08-20T23:40:10.000Z'],
   ['validador-iban', 'monthly', 0.9, '2026-08-20T23:40:10.000Z'],
   ['generador-nombres', 'monthly', 0.8],
