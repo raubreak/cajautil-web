@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
+import { getTrafficMarker, type TrafficMarker } from '@/lib/analytics';
 
 declare global {
   interface Window {
@@ -17,12 +18,14 @@ type ConsentStatus = 'accepted' | 'rejected' | null;
 export default function CookieConsent() {
   const [consent, setConsent] = useState<ConsentStatus>(null);
   const [visible, setVisible] = useState(true);
+  const [trafficMarker, setTrafficMarker] = useState<TrafficMarker | null>(null);
   const rejectButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_KEY);
     const savedConsent = stored === 'accepted' || stored === 'rejected' ? stored : null;
     const timer = setTimeout(() => {
+      setTrafficMarker(getTrafficMarker());
       setConsent(savedConsent);
       setVisible(!savedConsent);
       document.documentElement.removeAttribute('data-caja-consent');
@@ -92,7 +95,9 @@ export default function CookieConsent() {
               gtag('js', new Date());
               gtag('config', 'G-3Q52JTD2XN', {
                 anonymize_ip: true,
-                allow_google_signals: false
+                allow_google_signals: false${trafficMarker ? `,
+                traffic_type: 'internal',
+                caja_traffic_segment: '${trafficMarker}'` : ''}
               });
             `}
           </Script>

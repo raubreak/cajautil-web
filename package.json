@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "editorial:audit": "tsx scripts/editorial-workflow.ts",
+    "analytics:weekly": "tsx scripts/ga4-weekly-panel.ts",
     "seo:gsc-indexation": "tsx scripts/gsc-indexation-audit.ts",
     "seo:indexnow": "tsx scripts/submit-indexnow.ts",
     "postinstall": "prisma generate"
